@@ -23,6 +23,11 @@
 
 部署文档及说明参见项目中的 `doc` 目录
 
+[Mblog-部署说明](http://mtons.com/content/6613)
+[Mblog-系统配置说明](http://mtons.com/content/6612)
+[Mblog-图片存储说明](http://mtons.com/content/6615)
+
+
 
 ### 开源协议 (Apache License)
 
