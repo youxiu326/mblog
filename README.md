@@ -1,4 +1,4 @@
-﻿### Mblog (mtons blog)开源免费的Java多人博客系统
+﻿### Mblog 开源Java多人博客系统
 
 ### 技术选型：
 
@@ -19,24 +19,4 @@
 
 ![Mblog演示](https://gitee.com/uploads/images/2017/1106/172609_2e0b22a6_330414.jpeg "2017-11-06_172325.jpg")
 
-### 相关文档
-
-部署文档及说明参见项目中的 `doc` 目录
-
-[Mblog-部署说明](http://mtons.com/content/6613)
-[Mblog-系统配置说明](http://mtons.com/content/6612)
-[Mblog-图片存储说明](http://mtons.com/content/6615)
-
-
-
-### 开源协议 (Apache License)
-
-如果您的网站使用了 Mblog, 请在网站页面页脚处保留 Mtons相关版权信息链接
-
-QQ交流群：378433412
-
-官网: [http://mtons.com/](http://mtons.com/)
-
-### 感谢这些代码贡献者
-
-[@ORZ豆丁](http://git.oschina.net/traxex)、[@Beldon](http://git.oschina.net/beldon)、 [@M豆丁](http://git.oschina.net/danke)、 [@朋也](http://git.oschina.net/20110516)
+Mblog改版分支项目
