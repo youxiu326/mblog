@@ -1,5 +1,7 @@
 ﻿### Mblog 开源Java多人博客系统
 
+### Mblog 改版分支项目
+
 ### 技术选型：
 
 * JDK8
@@ -18,5 +20,3 @@
 ###图片演示 改版中....
 
 ![Mblog演示](https://gitee.com/uploads/images/2017/1106/172609_2e0b22a6_330414.jpeg "2017-11-06_172325.jpg")
-
-Mblog改版分支项目
