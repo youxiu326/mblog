@@ -59,7 +59,14 @@
 								<strong id="favors">${ret.favors}</strong> 喜欢
 							</li>
 						</ul>
-						#parse("/default/inc/right.vm")
+						<div class="widget-box shadow-box">
+							<div class="title">
+								<h3><i class=""></i> 热门文章</h3>								
+							</div>
+							<ul class="box-list" id="hots">
+								<li class="text-center"><img src="$base/assets/images/spinner.gif"></li>
+							</ul>
+						</div>
 					</div>
 					<script type="text/javascript">
                         seajs.use('view');
@@ -72,4 +79,22 @@
 	#parse("/default/inc/footer.vm")
 
 </body>
+
+<script type="text/javascript">
+var hot_li_template = '<li><div class="li-out"><span class="last"><i>{0}</i></span><span class="name"><a  href="{1}">{2}</a></span><span class="nums">{3}</span></div></li>'
+
+seajs.use('sidebox', function (sidebox) {
+	sidebox.init({
+    	hotUrl : '$base/api/hots.json',
+    	maxResults :10,
+        // callback
+        onLoadHot : function (i, data) {
+        	var url = '$base/view/' + data.id;
+      		var item = jQuery.format(hot_li_template, i + 1, url, data.title, numberScale(data.views));
+      		return item;
+        }
+	});
+});
+</script>
+
 </html>

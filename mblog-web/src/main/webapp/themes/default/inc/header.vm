@@ -54,7 +54,7 @@
     			<ul class="nav navbar-nav">
 					#if($profile)
     				<li data="home">
-    					<a href="$base/home" nav="home">主页</a>
+    					<a href="$base/home" nav="home">我的主页</a>
     				</li>
 					#end
 					
@@ -67,7 +67,7 @@
     			</ul>
     			<div id="_search_box" class="search-box navbar-left hidden-xs hidden-sm">
     				<form class="navbar-form" method="get" action="$base/search">
-    					<input type="text" class="form-control" name="q" placeholder="搜索..." required>
+    					<input type="text" class="form-control" name="q" placeholder="搜索...">
 						<button class="search-btn" type="submit"><i class="fa fa-search"></i></button>
     				</form>
     			</div>
@@ -99,7 +99,7 @@
     				</li>
     				#else
     				<li><a href="$base/login" class="signin">登录</a></li>
-                    <li class="hidden-xs"><span class="or">or</span></li>
+                    
                     <li><a href="$base/reg" class="signup">注册</a></li>
     				#end
     			</ul>

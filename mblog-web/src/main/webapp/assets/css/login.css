@@ -50,10 +50,7 @@ input[type=text],input[type=password],textarea {
 
 .sign {
 	padding-bottom: 40px;
-	background: url(../images/first/party.1040.jpg) #000 no-repeat top right;
-	filter: progid:DXImageTransform.Microsoft.AlphaImageLoader(src='@searcherror-url',sizingMethod='scale');
-	-ms-filter: "progid:DXImageTransform.Microsoft.AlphaImageLoader(src='@searcherror-url',sizingMethod='scale')";
-	background-size: cover;
+
 }
 
 .sign .login {
@@ -61,8 +58,9 @@ input[type=text],input[type=password],textarea {
 	padding: 60px 60px 40px;
 	background: #fff;
 	text-align: center;
-	margin: 40px auto 20px;
+	margin: 90px auto 20px;
 	overflow: hidden;
+	border-radius:10px 10px 10px 10px;
 }
 
 .sign .login h1 {
@@ -101,7 +99,7 @@ input[type=text],input[type=password],textarea {
 .sign .small a {color: #ccc;}
 
 .sign .border {
-	border-radius: 0;
+	border-radius: 10;
 }
 
 .open {
