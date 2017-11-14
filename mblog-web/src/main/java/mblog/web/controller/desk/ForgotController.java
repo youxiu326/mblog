@@ -1,19 +1,20 @@
 package mblog.web.controller.desk;
 
 import mblog.base.data.Data;
-import mblog.base.email.EmailSender;
 import mblog.base.lang.Consts;
+import mblog.base.utils.MailHelper;
 import mblog.core.data.User;
 import mblog.core.persist.service.UserService;
 import mblog.core.persist.service.VerifyService;
 import mblog.web.controller.BaseController;
-import org.apache.commons.lang.StringUtils;
+import org.apache.commons.lang3.StringUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.ModelMap;
 import org.springframework.util.Assert;
 import org.springframework.web.bind.annotation.RequestMapping;
 
+import javax.mail.MessagingException;
 import java.util.HashMap;
 import java.util.Map;
 
@@ -28,7 +29,7 @@ public class ForgotController extends BaseController {
     @Autowired
     private VerifyService verifyService;
     @Autowired
-    private EmailSender emailSender;
+    private MailHelper mailHelper;
 
     @RequestMapping("/apply")
     public String apply(String username, ModelMap model) {
@@ -44,7 +45,7 @@ public class ForgotController extends BaseController {
                 context.put("code", code);
                 context.put("type", Consts.VERIFY_FORGOT);
 
-                emailSender.sendTemplete(user.getEmail(), "找回密码", Consts.EMAIL_TEMPLATE_FORGOT, context);
+                mailHelper.sendEmail(Consts.EMAIL_TEMPLATE_FORGOT, user.getEmail(), "找回密码", context);
 
                 data = Data.success("邮件发送成功", Data.NOOP);
 

@@ -8,6 +8,7 @@ import org.springframework.data.jpa.repository.JpaSpecificationExecutor;
 import org.springframework.data.jpa.repository.Modifying;
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.query.Param;
+import org.springframework.transaction.annotation.Transactional;
 
 /**
  * @author langhsu on 2015/8/31.
@@ -25,6 +26,7 @@ public interface NotifyDao extends JpaRepository<NotifyPO, Long>, JpaSpecificati
      * 标记我的消息为已读
      */
     @Modifying
+    @Transactional
     @Query("update NotifyPO n set n.status = 1 where n.status = 0 and n.ownId = :id")
     int updateReadedByOwnId(@Param("id") Long id);
 }

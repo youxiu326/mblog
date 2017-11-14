@@ -8,7 +8,7 @@
 */
 package mblog.web.formatter;
 
-import org.apache.commons.lang.StringEscapeUtils;
+import org.apache.commons.lang3.StringEscapeUtils;
 import org.apache.log4j.Logger;
 import org.springframework.web.util.HtmlUtils;
 import org.springframework.web.util.JavaScriptUtils;
@@ -50,7 +50,7 @@ public class StringEscapeEditor extends PropertyEditorSupport {
 //                logger.debug("value:" + value);
             }
             if (escapeJavaScript) {
-                value = StringEscapeUtils.escapeJavaScript(value);
+//                value = StringEscapeUtils.escapeJavaScript(value);
 //                logger.debug("value:" + value);
             }
             setValue(value);

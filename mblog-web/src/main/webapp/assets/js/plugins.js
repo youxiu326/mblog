@@ -100,7 +100,7 @@
 			$form.submit(function() {
 				$frame.load(function() {
 					var contents = $frame.contents().get(0);
-					var data = $(contents).find('body').html();
+					var data = $(contents).find('body').text();
 					data = (data ? $.parseJSON(data) : {});
 					$form.remove();
 					setTimeout( function() {

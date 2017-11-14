@@ -29,7 +29,7 @@ public class AppContext implements ServletContextAware {
 	/*
 	 * 文件存储-根目录
 	 */
-	@Value("#{configProperties['store.root']}")
+	@Value("${site.store.root}")
 	String root = "/data/mblog";
 	
 	/*

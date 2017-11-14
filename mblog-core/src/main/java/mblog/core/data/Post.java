@@ -13,7 +13,7 @@ import com.fasterxml.jackson.annotation.JsonIgnore;
 import mblog.base.lang.Consts;
 import mblog.core.persist.entity.PostAttribute;
 import mblog.core.persist.entity.PostPO;
-import org.apache.commons.lang.StringUtils;
+import org.apache.commons.lang3.StringUtils;
 
 import java.io.Serializable;
 import java.util.List;

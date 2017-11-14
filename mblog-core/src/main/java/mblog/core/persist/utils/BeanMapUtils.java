@@ -9,17 +9,12 @@
 */
 package mblog.core.persist.utils;
 
-import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.Collections;
-import java.util.List;
-
-import mblog.base.lang.Consts;
 import mblog.core.data.*;
 import mblog.core.persist.entity.*;
-
-import org.apache.commons.lang.StringUtils;
 import org.springframework.beans.BeanUtils;
+
+import java.util.ArrayList;
+import java.util.List;
 
 /**
  * @author langhsu

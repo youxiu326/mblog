@@ -1,8 +1,8 @@
 package mblog.web.controller.desk;
 
 import mblog.base.data.Data;
-import mblog.base.email.EmailSender;
 import mblog.base.lang.Consts;
+import mblog.base.utils.MailHelper;
 import mblog.core.data.AccountProfile;
 import mblog.core.data.User;
 import mblog.core.persist.service.UserService;
@@ -30,7 +30,7 @@ public class EmailController extends BaseController {
     @Autowired
     private VerifyService verifyService;
     @Autowired
-    private EmailSender emailSender;
+    private MailHelper mailHelper;
 
     @RequestMapping(value = "/retry/{userId}", method = RequestMethod.GET)
     public String retry(@PathVariable("userId") Long userId, Integer type, ModelMap model) {
@@ -52,7 +52,7 @@ public class EmailController extends BaseController {
         context.put("userId", user.getId());
         context.put("code", code);
 
-        emailSender.sendTemplete(user.getEmail(), subject, template, context);
+        mailHelper.sendEmail(template, user.getEmail(), subject, context);
 
         Data data = Data.success("邮件发送成功", Data.NOOP);
         model.put("data", data);

@@ -13,7 +13,7 @@ import mblog.core.data.Post;
 import mblog.core.persist.dao.custom.PostDaoCustom;
 import mblog.core.persist.entity.PostPO;
 import mblog.core.persist.utils.BeanMapUtils;
-import org.apache.commons.lang.StringUtils;
+import org.apache.commons.lang3.StringUtils;
 import org.apache.lucene.analysis.standard.StandardAnalyzer;
 import org.apache.lucene.search.Sort;
 import org.apache.lucene.search.SortField;

@@ -17,7 +17,6 @@ import mblog.core.persist.service.GroupService;
 import mblog.core.persist.service.PostService;
 import mblog.web.controller.BaseController;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.cache.ehcache.EhCacheCacheManager;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.ModelMap;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -25,7 +24,10 @@ import org.springframework.web.bind.annotation.ResponseBody;
 
 import javax.servlet.ServletContext;
 import javax.servlet.http.HttpServletRequest;
-import java.util.*;
+import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
 
 /**
  * 系统配置
@@ -37,8 +39,6 @@ import java.util.*;
 @RequestMapping("/admin/config")
 public class ConfigsController extends BaseController {
 	@Autowired
-	private EhCacheCacheManager ehcacheManager;
-	@Autowired
 	private ConfigService configService;
 	@Autowired
 	private GroupService groupService;
@@ -49,9 +49,6 @@ public class ConfigsController extends BaseController {
 
 	@RequestMapping("/")
 	public String list(ModelMap model) {
-		Collection<String> cacheNames = ehcacheManager.getCacheNames();
-
-		model.put("cacheNames", cacheNames);
 		model.put("configs", configService.findAll2Map());
 		return "/admin/configs/main";
 	}
@@ -74,13 +71,6 @@ public class ConfigsController extends BaseController {
 		return "redirect:/admin/config/";
 	}
 	
-	@RequestMapping("/flush_cache")
-	public @ResponseBody
-	Data flushCache() {
-		ehcacheManager.getCacheManager().clearAll();
-		return Data.success("操作成功", Data.NOOP);
-	}
-
 	@RequestMapping("/flush_conf")
 	public @ResponseBody Data flushFiledia() {
 		// 刷新系统变量

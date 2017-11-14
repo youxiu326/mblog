@@ -17,7 +17,7 @@ import org.springframework.stereotype.Service;
 public class FileRepoFactory {
 	private Map<String, FileRepo> fileRepos = new HashMap<>();
 	
-	@Value("#{configProperties['store.repo']}")
+	@Value("${site.store.repo}")
 	private String repo = "relative";
 	
 	public void addRepo(String key, FileRepo value) {

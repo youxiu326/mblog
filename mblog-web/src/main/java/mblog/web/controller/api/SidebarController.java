@@ -16,7 +16,7 @@ import mblog.core.data.Post;
 import mblog.core.data.User;
 import mblog.core.persist.service.UserService;
 import mblog.web.controller.BaseController;
-import org.apache.commons.lang.StringUtils;
+import org.apache.commons.lang3.StringUtils;
 import org.apache.shiro.SecurityUtils;
 import org.apache.shiro.authc.AuthenticationException;
 import org.apache.shiro.authc.AuthenticationToken;

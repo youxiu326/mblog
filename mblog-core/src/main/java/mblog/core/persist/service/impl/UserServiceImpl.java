@@ -21,7 +21,7 @@ import java.util.Set;
 import mblog.base.lang.EntityStatus;
 import mblog.base.lang.MtonsException;
 import mblog.base.utils.MD5;
-import org.apache.commons.lang.StringUtils;
+import org.apache.commons.lang3.StringUtils;
 import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.cache.annotation.CacheEvict;

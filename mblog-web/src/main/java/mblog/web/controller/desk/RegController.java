@@ -4,8 +4,8 @@
 package mblog.web.controller.desk;
 
 import mblog.base.data.Data;
-import mblog.base.email.EmailSender;
 import mblog.base.lang.Consts;
+import mblog.base.utils.MailHelper;
 import mblog.core.data.AccountProfile;
 import mblog.core.data.User;
 import mblog.core.persist.service.UserService;
@@ -17,6 +17,7 @@ import org.springframework.ui.ModelMap;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 
+import javax.mail.MessagingException;
 import java.util.HashMap;
 import java.util.Map;
 
@@ -31,7 +32,7 @@ public class RegController extends BaseController {
 	@Autowired
 	private VerifyService verifyService;
 	@Autowired
-	private EmailSender emailSender;
+	private MailHelper mailHelper;
 	
 	@RequestMapping(value = "/reg", method = RequestMethod.GET)
 	public String view() {
@@ -73,7 +74,7 @@ public class RegController extends BaseController {
 		data.put("code", code);
 		data.put("type", Consts.VERIFY_BIND);
 
-		emailSender.sendTemplete(user.getEmail(), "邮箱绑定验证", Consts.EMAIL_TEMPLATE_BIND, data);
+		mailHelper.sendEmail(Consts.EMAIL_TEMPLATE_BIND, user.getEmail(), "邮箱绑定验证", data);
 	}
 
 }

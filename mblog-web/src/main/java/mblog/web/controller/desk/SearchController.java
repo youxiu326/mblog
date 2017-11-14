@@ -12,7 +12,7 @@ package mblog.web.controller.desk;
 import mblog.core.data.Post;
 import mblog.core.persist.service.PostService;
 import mblog.web.controller.BaseController;
-import org.apache.commons.lang.StringUtils;
+import org.apache.commons.lang3.StringUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;

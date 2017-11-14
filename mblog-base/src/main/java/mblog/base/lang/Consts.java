@@ -21,6 +21,8 @@ public interface Consts {
 	 */
 	String SEPARATOR = ",";
 
+	String ROLE_ADMIN = "admin";
+
 	int IDENTITY_STEP = 1; // 自增步进
 
 	int TIME_MIN = 1000; // 最小时间单位, 1秒

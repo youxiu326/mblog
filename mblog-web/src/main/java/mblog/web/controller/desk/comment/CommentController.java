@@ -10,7 +10,7 @@ import mblog.core.data.Comment;
 import mblog.core.event.NotifyEvent;
 import mblog.core.persist.service.CommentService;
 import mblog.web.controller.BaseController;
-import org.apache.commons.lang.StringUtils;
+import org.apache.commons.lang3.StringUtils;
 import org.apache.shiro.SecurityUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.ApplicationContext;

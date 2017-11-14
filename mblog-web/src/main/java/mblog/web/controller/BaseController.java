@@ -17,7 +17,7 @@ import mblog.core.data.Attach;
 import mblog.core.data.Post;
 import mblog.shiro.authc.AccountSubject;
 import mblog.web.formatter.StringEscapeEditor;
-import org.apache.commons.lang.StringUtils;
+import org.apache.commons.lang3.StringUtils;
 import org.apache.shiro.SecurityUtils;
 import org.apache.shiro.authc.AuthenticationToken;
 import org.apache.shiro.authc.UsernamePasswordToken;

@@ -8,12 +8,11 @@
 */
 package mblog.base.utils;
 
-import org.apache.commons.lang.StringUtils;
+import org.apache.commons.lang3.StringUtils;
 import org.jsoup.Jsoup;
 import org.jsoup.nodes.Document;
 import org.jsoup.nodes.Element;
 import org.jsoup.safety.Whitelist;
-import org.springframework.web.util.HtmlUtils;
 
 /**
  * Created by langhsu on 2017/9/2.

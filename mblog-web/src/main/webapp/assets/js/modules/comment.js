@@ -85,7 +85,7 @@ define(function(require, exports, module) {
         	load_url : null,
         	post_url : null,
         	toId : 0,
-        	maxResults :6,
+			pageSize :6,
             // callback
             onLoad : function (i, data) {}
         },
@@ -110,7 +110,7 @@ define(function(require, exports, module) {
         	var $list = $("#chat_container");
         	var html = '';
 
-        	J.getJSON(opts.load_url, {maxResults : opts.maxResults, pn: pn}, function (ret) {
+        	J.getJSON(opts.load_url, {pageSize : opts.pageSize, pn: pn}, function (ret) {
         		
         		$('#chat_count').html(ret.totalElements);
         		

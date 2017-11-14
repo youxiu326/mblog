@@ -7,6 +7,7 @@ import java.util.HashMap;
 import java.util.Map;
 
 import mblog.base.data.Data;
+import mblog.base.utils.MailHelper;
 import mblog.core.data.AccountProfile;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -15,7 +16,6 @@ import org.springframework.util.Assert;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 
-import mblog.base.email.EmailSender;
 import mblog.base.lang.Consts;
 import mblog.core.data.User;
 import mblog.core.persist.service.UserService;
@@ -35,7 +35,7 @@ public class ProfileController extends BaseController {
 	@Autowired
 	private VerifyService verifyService;
 	@Autowired
-	private EmailSender emailSender;
+	private MailHelper mailHelper;
 
 	@RequestMapping(value = "/profile", method = RequestMethod.GET)
 	public String view(ModelMap model) {
@@ -93,7 +93,7 @@ public class ProfileController extends BaseController {
 			context.put("code", code);
 			context.put("type", Consts.VERIFY_BIND);
 
-			emailSender.sendTemplete(email, "邮箱绑定验证", Consts.EMAIL_TEMPLATE_BIND, context);
+			mailHelper.sendEmail(Consts.EMAIL_TEMPLATE_BIND, email, "邮箱绑定验证", context);
 
 			data = Data.success("操作成功，已经发送验证邮件，请前往邮箱验证", Data.NOOP);
 		} catch (Exception e) {

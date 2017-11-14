@@ -1,6 +1,6 @@
 package mblog.base.utils;
 
-import org.apache.commons.lang.StringUtils;
+import org.apache.commons.lang3.StringUtils;
 
 import java.util.HashSet;
 import java.util.Set;
@@ -22,7 +22,7 @@ public class NumberUtils {
         Set<Long> ret = new HashSet<>();
         if (StringUtils.isNotBlank(ids)) {
             for (String s : ids.split(",")) {
-                long id = org.apache.commons.lang.math.NumberUtils.toLong(s);
+                long id = org.apache.commons.lang3.math.NumberUtils.toLong(s);
                 if (id > 0) {
                     ret.add(id);
                 }
