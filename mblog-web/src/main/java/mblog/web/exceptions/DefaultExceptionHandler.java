@@ -32,6 +32,7 @@ import org.springframework.web.servlet.ModelAndView;
  * @author langhsu
  *
  */
+@Component
 public class DefaultExceptionHandler implements HandlerExceptionResolver {
 	private Logger log = Logger.getLogger(getClass());
 	
