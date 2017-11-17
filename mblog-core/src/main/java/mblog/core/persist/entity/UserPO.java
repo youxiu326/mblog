@@ -13,16 +13,7 @@ import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
-import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.FetchType;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
-import javax.persistence.JoinColumn;
-import javax.persistence.JoinTable;
-import javax.persistence.ManyToMany;
-import javax.persistence.Table;
+import javax.persistence.*;
 
 import org.hibernate.annotations.Cache;
 import org.hibernate.annotations.CacheConcurrencyStrategy;
@@ -79,10 +70,10 @@ public class UserPO {
 
 	private String signature; // 个性签名
 
-	@ManyToMany(fetch = FetchType.LAZY)
+	@ManyToMany(cascade = CascadeType.MERGE, fetch = FetchType.EAGER)
 	@JoinTable(name = "mto_user_role", joinColumns = { @JoinColumn(name = "user_id") }, inverseJoinColumns = { @JoinColumn(name = "role_id") })
 	@Cache(usage = CacheConcurrencyStrategy.READ_WRITE)
-	private List<RolePO> roles = new ArrayList<RolePO>();
+	private List<RolePO> roles = new ArrayList<>();
 
 	@Column(name = "active_email")
 	private int activeEmail; // 邮箱激活状态
