@@ -73,3 +73,12 @@
 		升级sql: UPDATE mto_posts SET last_image_id = 0 WHERE last_image_id IS NULL
 
 	5. mto_config 表 key 字段改名为 key_
+
+2017-12-18
+2.4版本更新
+    1. 框架更新为 spring-boot
+    2. 持久层更新为 spring-data-jpa, 去除原有的一些包依赖
+    3. 前端页面模板语音更新为 freemarker
+    4. 简化系统逻辑, 删除了Tag
+    5. 重新定义了Group概念, 即内容分组, 不再有原来复杂的模板定制等, 去除了原有的视频和问答定制, 可以在Group里面自行扩展
+

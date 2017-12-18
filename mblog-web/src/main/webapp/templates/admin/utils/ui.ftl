@@ -23,6 +23,7 @@
     <script src="${base}/assets/js/jquery.min.js"></script>
     <!-- Bootstrap -->
     <script src="${base}/assets/vendors/bootstrap/js/bootstrap.min.js"></script>
+    <script src='${base}/assets/vendors/validate/jquery-validate.js'></script>
     <!-- FastClick -->
     <script src="${base}/assets/vendors/fastclick/lib/fastclick.js"></script>
 

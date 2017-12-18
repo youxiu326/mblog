@@ -1,9 +1,11 @@
-#set($layout = "/admin/layout/default.vm")
-<link rel="stylesheet" href="$base/assets/vendors/zTree_v3/css/demo.css" type="text/css">
-<link rel="stylesheet" href="$base/assets/vendors/zTree_v3/css/zTreeStyle/zTreeStyle.css" type="text/css">
-<script type="text/javascript" src="$base/assets/vendors/zTree_v3/js/jquery-1.4.4.min.js"></script>
-<script type="text/javascript" src="$base/assets/vendors/zTree_v3/js/jquery.ztree.core-3.5.js"></script>
-<script type="text/javascript" src="$base/assets/vendors/zTree_v3/js/jquery.ztree.excheck-3.5.js"></script>
+<#include "/admin/utils/ui.ftl"/>
+<@layout>
+
+
+<link rel="stylesheet" href="${base}/assets/vendors/zTree_v3/css/demo.css" type="text/css">
+<link rel="stylesheet" href="${base}/assets/vendors/zTree_v3/css/zTreeStyle/zTreeStyle.css" type="text/css">
+<script type="text/javascript" src="${base}/assets/vendors/zTree_v3/js/jquery.ztree.core-3.5.js"></script>
+<script type="text/javascript" src="${base}/assets/vendors/zTree_v3/js/jquery.ztree.excheck-3.5.js"></script>
 <style>
     .ztree .line{
         height: auto;
@@ -29,7 +31,7 @@
 
     };
     $(document).ready(function(){
-        jQuery.ajax({url:"$base/admin/authMenus/tree?roleId=$!role.id",success:function(data){
+        jQuery.ajax({url:"${base}/admin/authMenus/tree?roleId=${role.id}",success:function(data){
             $.fn.zTree.init($("#treeDemo"), setting, data);
             console.log(data);
         },dataType:"json"});
@@ -48,23 +50,27 @@
         });
 
     });
-
-
 </SCRIPT>
 
+<div class="row">
+    <div class="col-md-12 col-sm-12 col-xs-12">
+        <div class="x_panel">
+            <div class="x_title">
+                <h2>角色管理</h2>
+                <div class="clearfix"></div>
+            </div>
+            <div class="x_content">
+                <br>
+                <#include "/admin/message.ftl">
+                <form id="qForm" class="form-horizontal form-label-left" method="post" action="save">
+                    <#if role?? && (role.id > 0)>
+                        <input type="hidden" name="id" value="${role.id}" />
+                    </#if>
 
-<div class="panel m-t-large m-b">
-    <header class="panel-heading">角色管理</header>
-
-    <div class="panel-body">
-        <div class="pull-out m-t-small">
-            <div class="form-wrapper">
-                <form action="save" method="POST" class="form-horizontal">
-                    <input type="hidden" name="id" value="$!role.id">
                     <div class="form-group">
                         <label for="name" class="col-lg-2 control-label">角色名称：</label>
                         <div class="col-lg-3">
-                            <input type="text" class="form-control" placeholder="请输入角色名称" name="name" value="$!role.name">
+                            <input type="text" class="form-control" placeholder="请输入角色名称" name="name" value="${role.name}">
                         </div>
                     </div>
                     <div class="form-group">
@@ -77,15 +83,15 @@
                         </div>
                     </div>
 
+                    <div class="ln_solid"></div>
                     <div class="form-group">
-                        <div class="col-lg-9 col-lg-offset-2">
-                            <button type="button" class="btn btn-default">提交</button>
+                        <div class="col-md-6 col-sm-6 col-xs-12 col-md-offset-3">
+                            <button type="submit" class="btn btn-success">提交</button>
                         </div>
                     </div>
-
                 </form>
             </div>
         </div>
     </div>
-
 </div>
+</@layout>

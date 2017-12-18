@@ -36,17 +36,21 @@
                         <td>${row.sort}</td>
                         <@shiro.hasPermission name="authMenus:edit">
                             <td class="text-center">
+                                <#if (row.id > 1)>
                                 <a href="${base}/admin/authMenus/view?id=${row.id}" class="btn btn-xs btn-primary">
                                     <i class="fa fa-check-square-o"></i> 修改
                                 </a>
+                                </#if>
 
                                 <a href="${base}/admin/authMenus/view?parentId=${row.id}"
                                    class="btn btn-xs btn-primary">
                                     <i class="fa fa-check-square-o"></i> 添加下级菜单
                                 </a>
 
+                                <#if (row.id > 1)>
                                 <a href="${base}/admin/authMenus/delete?id=${row.id}" class="btn btn-xs btn-default"><i
                                         class="fa fa-check-square-o"></i> 删除</a>
+                                </#if>
                             </td>
                         </@shiro.hasPermission>
                     </tr>

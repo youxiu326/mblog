@@ -26,7 +26,7 @@
                             <th width="300" class="col-lg-2">操作</th>
                         </@shiro.hasPermission>
                     </tr>
-                    <#list page.content as row>
+                    <#list list as row>
                         <td>${velocityCount}</td>
                         <td>${row.siteName}</td>
                         <td>${row.logo}</td>
