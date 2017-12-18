@@ -4,7 +4,7 @@
 
 * JDK8
 * 数据库MySQL
-* 主框架 (Spring、SpringMVC、Spring-data-jpa）
+* 主框架 (Spring-boot、Spring-data-jpa）
 * 安全权限 Shiro
 * 搜索工具 Lucene
 * 缓存 Ehcache
@@ -21,6 +21,7 @@
     3. 前端页面模板语音更新为 freemarker
     4. 简化系统逻辑, 删除了Tag
     5. 重新定义了Group概念, 即内容分组, 不再有原来复杂的模板定制等, 去除了原有的视频和问答定制, 可以在Group里面自行扩展
+    6. 全新的后台界面
     
 ### 图片演示 
 改版中....改版分支项目...
