@@ -127,7 +127,7 @@ public class PostServiceImpl implements PostService {
 	@Override
 	@Transactional(readOnly = true)
 	public List<Post> findAllFeatured() {
-		List<PostPO> list = postDao.findAllByFeaturedGreaterThanOrderByCreatedDesc(Consts.FEATURED_DEFAULT);
+		List<PostPO> list = postDao.findTop5ByFeaturedGreaterThanOrderByCreatedDesc(Consts.FEATURED_DEFAULT);
 		return toPosts(list, true);
 	}
 
