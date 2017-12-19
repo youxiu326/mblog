@@ -41,6 +41,8 @@ public interface PostService {
 	 * @param userId
 	 */
 	Page<Post> pagingByAuthorId(Pageable pageable, long userId);
+
+	List<Post> findAllFeatured();
 	
 	/**
 	 * 根据关键字搜索

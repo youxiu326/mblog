@@ -62,7 +62,7 @@
 
                             <#if (row.featured == 0)>
                             <a href="javascript:void(0);" class="btn btn-xs btn-danger" data-id="${row.id}" rel="featured">
-                                <i class="fa fa-edit"></i>置顶
+                                <i class="fa fa-edit"></i>推荐
                             </a>
                             <#elseif (row.featured > 0)>
                             <a href="javascript:void(0);" class="btn btn-xs btn-primary" data-id="${row.id}" rel="unfeatured">
@@ -99,11 +99,11 @@ function ajaxReload(json){
 }
 
 function doDelete(ids) {
-	J.getJSON('$base/admin/posts/delete.json', J.param({'id': ids}, true), ajaxReload);
+	J.getJSON('${base}/admin/posts/delete', J.param({'id': ids}, true), ajaxReload);
 }
 
 function doUpdateFeatured(id, featured) {
-    J.getJSON('$base/admin/posts/featured.json', J.param({'id': id, 'featured': featured}, true), ajaxReload);
+    J.getJSON('${base}/admin/posts/featured', J.param({'id': id, 'featured': featured}, true), ajaxReload);
 }
 
 $(function() {
@@ -123,7 +123,7 @@ $(function() {
     // 推荐
     $('#dataGrid a[rel="featured"]').bind('click', function(){
         var that = $(this);
-        layer.confirm('确定置顶吗?', {
+        layer.confirm('确定推荐吗?推荐后将显示在Banner位上', {
             btn: ['确定','取消'], //按钮
             shade: false //不显示遮罩
         }, function(){

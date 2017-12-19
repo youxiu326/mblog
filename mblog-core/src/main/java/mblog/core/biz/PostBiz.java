@@ -43,6 +43,8 @@ public interface PostBiz {
 	 * @return
 	 */
 	Page<Post> pagingByAuthorId(Pageable pageable, long uid);
+
+	List<Post> findAllFeatured();
 	
 	/**
 	 * 从缓存中获取文章

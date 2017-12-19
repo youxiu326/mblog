@@ -66,6 +66,12 @@ public class PostBizImpl implements PostBiz {
 	}
 
 	@Override
+	@Cacheable(value = "postsCaches")
+	public List<Post> findAllFeatured() {
+		return postService.findAllFeatured();
+	}
+
+	@Override
 	@Cacheable(value = "postsCaches", key = "'view_' + #id")
 	public Post getPost(long id) {
 		return postService.get(id);

@@ -60,7 +60,7 @@ public class PostServiceImpl implements PostService {
 		Page<PostPO> page = postDao.findAll((root, query, builder) -> {
 
 			List<Order> orders = new ArrayList<>();
-			orders.add(builder.desc(root.<Long>get("featured")));
+//			orders.add(builder.desc(root.<Long>get("featured")));
 			orders.add(builder.desc(root.<Long>get("created")));
 
 			Predicate predicate = builder.conjunction();
@@ -73,6 +73,9 @@ public class PostServiceImpl implements PostService {
 			if (Consts.order.HOTTEST.equals(ord)) {
 				orders.add(builder.desc(root.<Long>get("views")));
 			}
+
+			predicate.getExpressions().add(
+					builder.equal(root.get("featured").as(Integer.class), Consts.FEATURED_DEFAULT));
 
 			query.orderBy(orders);
 
@@ -120,7 +123,14 @@ public class PostServiceImpl implements PostService {
 		Page<PostPO> page = postDao.findAllByAuthorIdOrderByCreatedDesc(pageable, userId);
 		return new PageImpl<>(toPosts(page.getContent(), true), pageable, page.getTotalElements());
 	}
-	
+
+	@Override
+	@Transactional(readOnly = true)
+	public List<Post> findAllFeatured() {
+		List<PostPO> list = postDao.findAllByFeaturedGreaterThanOrderByCreatedDesc(Consts.FEATURED_DEFAULT);
+		return toPosts(list, true);
+	}
+
 	@Override
 	@Transactional(readOnly = true)
 	public Page<Post> search(Pageable pageable, String q) throws Exception {
@@ -354,6 +364,7 @@ public class PostServiceImpl implements PostService {
 				max = postDao.maxFeatured() + 1;
 			}
 			po.setFeatured(max);
+			postDao.save(po);
 		}
 	}
 
