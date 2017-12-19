@@ -10,13 +10,15 @@
 ###1. 数据库配置
 
  - 创建数据库, 在设置编码时请选择`UTF-8`
- - 修改配置文件 mblog-web/src/main/resources/init.properties, 将username和password替换成你自己的
- - 导入初始数据 mblog-web/sql/db_init.sql, 数据中的初始账号为 admin, 密码 12345。
+ - 修改配置文件 mblog-web/src/main/resources/application.yml, 将username和password替换成你自己的
+ - 导入初始数据 mblog-web/sql/db_mblog.sql, 数据中的初始账号为 admin, 密码 12345。
 
 ###2. 文件存放目录
- - 找到 mblog-web/src/main/resources/mtons.properties 文件
- - 修改 `store.root` 属性, windows 用户记得地址要带盘符, linux 用户不带
-
+ - 找到 mblog-web/src/main/resources/application.yml.properties 文件
+ - 修改 `site.store.root` 属性, windows 用户记得地址要带盘符, linux 用户不带 (如果不将图片存储到部署目录外使用默认配置即可)
+ - `site.store.repo` 存储模式 absolute (绝对路径存储, 系统将图片保存在{site.store.root}目录下}) / relative (相对路径存储,系统将图片存在部署目录下)
+ - 更多说明见[Mblog 图片存储说明]文档
+ 
 ###3. 第三方登录
 
 目前Mblog支持QQ、微博、豆瓣进行第三方登录。

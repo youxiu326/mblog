@@ -3,7 +3,7 @@
 1. 准备工作
    - 安装 Jdk8
    - 安装 Maven
-   - 准备 IDE (如果你不看源码，可以忽略下面的步骤，直接通过Maven编译war包)
+   - 准备 IDE (如果你不看源码，可以忽略下面的步骤，直接通过Maven编译war包:mvn clean package -DskipTests)
 
 2. IDE 需要配置的东西
    - 编码方式设为UTF-8
