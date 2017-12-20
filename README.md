@@ -23,8 +23,8 @@
     5. 重新定义了Group概念, 即内容分组, 不再有原来复杂的模板定制等, 去除了原有的视频和问答定制, 可以在Group里面自行扩展
     6. 全新的后台界面
 
-
-[配置教程](http://www.mtons.com/dock/mblog)
+### 配置教程
+[配置教程-点击入往通道](http://www.mtons.com/dock/mblog)
     
 ### 图片演示 
 
