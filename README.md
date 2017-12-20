@@ -22,6 +22,9 @@
     4. 简化系统逻辑, 删除了Tag
     5. 重新定义了Group概念, 即内容分组, 不再有原来复杂的模板定制等, 去除了原有的视频和问答定制, 可以在Group里面自行扩展
     6. 全新的后台界面
+
+
+[配置教程](http://www.mtons.com/dock/mblog)
     
 ### 图片演示 
 
@@ -30,5 +33,3 @@
 ![注册-登录](https://gitee.com/uploads/images/2017/1220/104804_832a7479_330414.jpeg "未标题-2.jpg")
 
 ![后端](https://gitee.com/uploads/images/2017/1220/104821_5728e84b_330414.jpeg "未标题-4.jpg")
-
-[配置教程](http://www.mtons.com/dock/mblog)
