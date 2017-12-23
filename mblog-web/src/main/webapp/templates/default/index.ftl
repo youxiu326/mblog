@@ -4,7 +4,7 @@
 <@ui_ltr site_name>
 <!--推荐展示-->
 <div class="content">
-    <div class="recommend">
+    <div class="recommend hidden-xs hidden-sm"">
         <ul>
 			<@banner>
 				<#list results as row>
