@@ -13,7 +13,7 @@
 * jQuery、Seajs
 * Bootstrap 前端框架
 * UEditor/Markdown编辑器
-* font-wesome 字体/图标
+* font-Awesome 字体/图标
 
 ### 最新版本(2.4)更新内容：
     1. 框架更新为 spring-boot
