@@ -42,12 +42,8 @@ public class DefaultExceptionHandler implements HandlerExceptionResolver {
 	public ModelAndView resolveException(HttpServletRequest request,
 			HttpServletResponse response, Object handler, Exception ex) {
 		
-		if (log.isDebugEnabled()) {
-			log.error("Catch Exception: ", ex);
-		} else {
-			log.error(ex.getMessage());
-		}
-		
+		log.error(ex.getMessage(), ex);
+
 		ModelAndView view = null;
 		String ret = ex.getMessage();
 		

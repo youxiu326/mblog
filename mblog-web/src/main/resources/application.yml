@@ -35,14 +35,11 @@ spring:
 
     mail:
         host: smtp.exmail.qq.com
-        username: example@mtons.com
+        username: example@qq.com
         password: {your password}
         port: 25
         properties:
             mail.smtp.auth: true
-            mail.smtp.ssl.enable: true
-            mail.smtp.starttls.enable: true
-            mail.smtp.starttls.required: true
 
 site.store.root: /data/mblog
 # 存储模式, 可选值 absolute / relative
