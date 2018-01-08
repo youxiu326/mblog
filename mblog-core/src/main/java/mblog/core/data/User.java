@@ -9,6 +9,8 @@
 */
 package mblog.core.data;
 
+import com.alibaba.fastjson.annotation.JSONField;
+
 import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.Date;
@@ -19,6 +21,8 @@ public class User implements Serializable {
 
 	private long id;
 	private String username;
+
+	@JSONField(serialize = false)
 	private String password;
 	private String avatar;
 	private String name;

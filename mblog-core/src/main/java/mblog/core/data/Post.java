@@ -9,6 +9,7 @@
 */
 package mblog.core.data;
 
+import com.alibaba.fastjson.annotation.JSONField;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import mblog.base.lang.Consts;
 import mblog.core.persist.entity.PostAttribute;
@@ -32,7 +33,7 @@ public class Post extends PostPO implements Serializable {
 	private Attach album;
 	private User author;
 	
-	@JsonIgnore
+	@JSONField(serialize = false)
 	private PostAttribute attribute;
 	
 	public String[] getTagsArray() {
