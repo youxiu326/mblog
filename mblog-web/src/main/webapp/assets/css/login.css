@@ -60,7 +60,7 @@ input[type=text],input[type=password],textarea {
 	text-align: center;
 	margin: 90px auto 20px;
 	overflow: hidden;
-	border-radius:10px 10px 10px 10px;
+	border-radius:3px;
 }
 
 .sign .login h1 {

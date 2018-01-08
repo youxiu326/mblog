@@ -33,7 +33,8 @@ public class PostPO implements Serializable {
 
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
-	@DocumentId
+	@SortableField
+	@NumericField
 	private long id;
 
 	/**

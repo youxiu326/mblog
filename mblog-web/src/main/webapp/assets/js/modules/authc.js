@@ -26,7 +26,7 @@ define(function(require, exports, module) {
         doPostLogin: function () {
             var un = $('#alt_un').val();
             var pw = $('#alt_pw').val();
-            jQuery.post(app.base + '/api/login.json', {'username': un, 'password': pw}, function (ret) {
+            jQuery.post(app.base + '/api/login', {'username': un, 'password': pw}, function (ret) {
                 if (ret && ret.code == 0) {
                     //$('#loginalert').modal('hide');
                     //window.app.login = ret.data.id;

@@ -82,7 +82,6 @@
 
 <#macro pager url p spans>
     <#local span = (spans - 3)/2 />
-    <#local pageNo = p.number + 1 />
     <#if (url?index_of("?") != -1)>
         <#local cURL = (url + "&pn=") />
     <#else>
@@ -90,25 +89,28 @@
     </#if>
 
 <ul class="pagination">
+    <#assign pageNo = p.number + 1/>
+    <#assign pageCount = p.totalPages />
     <#if (pageNo > 1)>
-        <#local prev = pageNo - 1 />
-        <li><a class="prev" href="${cURL}${prev}" pageNo="1">&nbsp;<i class="fa fa-angle-left"></i>&nbsp;</a></li>
+        <li><a href="${cURL}${pageNo - 1}" pageNo="${pageNo - 1}" class="prev">上一页</a></li>
+    <#else>
+        <li class="disabled"><span>上一页</span></li>
     </#if>
 
     <#local totalNo = span * 2 + 3 />
     <#local totalNo1 = totalNo - 1 />
-    <#if (p.totalPages > totalNo)>
+    <#if (pageCount > totalNo)>
         <#if (pageNo <= span + 2)>
             <#list 1..totalNo1 as i>
                 <@pagelink pageNo, i, cURL/>
             </#list>
             <@pagelink 0, 0, "#"/>
-            <@pagelink pageNo, p.totalPages, cURL />
-        <#elseif (pageNo > (p.totalPages - (span + 2)))>
+            <@pagelink pageNo, pageCount, cURL />
+        <#elseif (pageNo > (pageCount - (span + 2)))>
             <@pagelink pageNo, 1, cURL />
             <@pagelink 0, 0, "#"/>
-            <#local num = p.totalPages - totalNo + 2 />
-            <#list num..p.totalPages as i>
+            <#local num = pageCount - totalNo + 2 />
+            <#list num..pageCount as i>
                 <@pagelink pageNo, i, cURL/>
             </#list>
         <#else>
@@ -120,19 +122,20 @@
                 <@pagelink pageNo, i, cURL />
             </#list>
             <@pagelink 0, 0, "#"/>
-            <@pagelink pageNo, p.totalPages, cURL />
+            <@pagelink pageNo, pageCount, cURL />
         </#if>
-    <#elseif (p.totalPages > 1)>
-        <#list 1..p.totalPages as i>
+    <#elseif (pageCount > 1)>
+        <#list 1..pageCount as i>
             <@pagelink pageNo, i, cURL />
         </#list>
     <#else>
         <@pagelink 1, 1, cURL/>
     </#if>
 
-    <#if (pageNo lt p.totalPages)>
-        <#local next = pageNo + 1/>
-        <li><a href="${cURL}${next}" pageNo="${next}">&nbsp;<i class="fa fa-angle-right"></i>&nbsp;</a></li>
+    <#if (pageNo < pageCount)>
+        <li><a href="${cURL}${pageNo + 1}" pageNo="${pageNo + 1}" class="next">下一页</a></li>
+    <#else>
+        <li class="disabled"><span>下一页</span></li>
     </#if>
 </ul>
 </#macro>
@@ -141,7 +144,7 @@
     <#if (idx == 0)>
     <li><span>...</span></li>
     <#elseif (pageNo == idx)>
-    <li class="active"><a href="javascript:void(0);"><span>${idx}</span></a></li>
+    <li class="active"><span>${idx}</span></li>
     <#else>
     <li><a href="${url}${idx}">${idx}</a></li>
     </#if>
