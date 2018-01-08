@@ -17,12 +17,7 @@ import org.springframework.stereotype.Component;
 import java.util.List;
 
 /**
- * 文章内容查询
- *
- * 示例：
- * 	请求：http://mtons.com/index?ord=newest&pn=2
- *  使用：#contents(groupId, 'paging')
- *  解析： ord, pn 等参数从request中获取 , groupId 从标签中获取
+ * 推荐内容查询
  *
  * @author langhsu
  *

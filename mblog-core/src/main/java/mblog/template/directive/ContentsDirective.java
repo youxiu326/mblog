@@ -19,8 +19,7 @@ import org.springframework.stereotype.Component;
  *
  * 示例：
  * 	请求：http://mtons.com/index?ord=newest&pn=2
- *  使用：#contents(groupId, 'paging')
- *  解析： ord, pn 等参数从request中获取 , groupId 从标签中获取
+ *  使用：@contents group=x pn=pn ord=ord
  *
  * @author langhsu
  *
