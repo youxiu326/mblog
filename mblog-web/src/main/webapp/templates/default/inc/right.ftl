@@ -13,7 +13,7 @@
 	<div class="title">
 		<h3>
 		<i class="fa fa-area-chart"></i> 热门文章
-			<a href="" class="rrh-refresh"><i class="fa fa-refresh"></i>换一批</a>
+			<#--<a href="" class="rrh-refresh"><i class="fa fa-refresh"></i>换一批</a>-->
 		</h3>
 		
 	</div>
@@ -25,7 +25,7 @@
 <div class="widget-box shadow-box">
 	<div class="title">
 		<h3><i class="fa fa-bars"></i> 最新发布
-		<a href="" class="rrh-refresh">查看更多</a></h3>
+		<#--<a href="" class="rrh-refresh">查看更多</a></h3>-->
 	</div>
 	<ul class="box-list" id="latests">
         <li class="text-center"><img src="${base}/assets/images/spinner.gif"></li>
