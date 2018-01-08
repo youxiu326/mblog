@@ -18,7 +18,7 @@ function setContent(content) {
 
 $(function () {
 	var ueditor = UE.getEditor('view_content', {
-		fastUpload: "${base}/aj_um_upload.json",
+		fastUpload: "${base}/aj_um_upload",
 		fastFileName: 'upfile',
 		fastUrlPrefix: '${base}',
 		imageAllowFiles: [".png", ".jpg", ".jpeg", ".gif", ".bmp"], /* 上传图片格式显示 */
