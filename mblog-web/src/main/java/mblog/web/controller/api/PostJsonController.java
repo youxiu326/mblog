@@ -27,7 +27,7 @@ public class PostJsonController extends BaseController {
 	@Autowired
 	private PostBiz postBiz;
 	
-	@RequestMapping("/posts.json")
+	@RequestMapping("/posts")
 	public @ResponseBody
 	Page<Post> posts(HttpServletRequest request) {
 		String order = ServletRequestUtils.getStringParameter(request, "ord", Consts.order.NEWEST);

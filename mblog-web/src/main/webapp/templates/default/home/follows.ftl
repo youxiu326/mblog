@@ -57,7 +57,7 @@ $(function() {
             btn: ['确定','取消'], //按钮
             shade: false //不显示遮罩
         }, function(){
-			jQuery.getJSON('${base}/account/unfollow.json',{'id': id},  function (ret) {
+			jQuery.getJSON('${base}/account/unfollow',{'id': id},  function (ret) {
 				layer.msg(ret.message, {icon: 1});
 				if (ret.code >=0) {
 					$('#loop-' + id).fadeOut();

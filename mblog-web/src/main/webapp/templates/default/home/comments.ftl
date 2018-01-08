@@ -56,7 +56,7 @@ $(function() {
             btn: ['确定','取消'], //按钮
             shade: false //不显示遮罩
         }, function(){
-			jQuery.getJSON('${base}/comment/delete.json', {'id':id }, function (ret) {
+			jQuery.getJSON('${base}/comment/delete', {'id':id }, function (ret) {
 				layer.msg(ret.message, {icon: 1});
 				if (ret.code >=0) {
 					var el = $('div[el=loop-' + id + ']');

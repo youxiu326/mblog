@@ -41,10 +41,10 @@ var hotUser_li_template = '<li class=""><a  href="{1}"><img src="${base}{0}" cla
 
 seajs.use('sidebox', function (sidebox) {
 	sidebox.init({
-        latestUrl : '${base}/api/latests.json',
-    	hotUrl : '${base}/api/hots.json',
-		hotTagUrl : '${base}/api/hot_tags.json',
-		hotUserUrl:'${base}/api/hotusers.json',
+        latestUrl : '${base}/api/latests',
+    	hotUrl : '${base}/api/hots',
+		hotTagUrl : '${base}/api/hot_tags',
+		hotUserUrl:'${base}/api/hotusers',
 
     	maxResults :10,
         // callback

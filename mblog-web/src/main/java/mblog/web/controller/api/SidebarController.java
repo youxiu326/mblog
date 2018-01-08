@@ -76,7 +76,7 @@ public class SidebarController extends BaseController {
 		return data;
 	}
 
-	@RequestMapping("/latests.json")
+	@RequestMapping("/latests")
 	public @ResponseBody List<Post> latests() {
 		AccountProfile up = getSubject().getProfile();
 		long ignoreUserId = 0;
@@ -87,7 +87,7 @@ public class SidebarController extends BaseController {
 		return rets;
 	}
 	
-	@RequestMapping("/hots.json")
+	@RequestMapping("/hots")
 	public @ResponseBody List<Post> hots() {
 		AccountProfile up = getSubject().getProfile();
 		long ignoreUserId = 0;
@@ -103,7 +103,7 @@ public class SidebarController extends BaseController {
 	 * @param pn
 	 * @return
 	 */
-	@RequestMapping(value="/hotusers.json")
+	@RequestMapping(value="/hotusers")
 	public @ResponseBody List<User> hotusers(Integer pn) {
 		List<User> rets = userService.findHotUserByfans();
          return rets;
