@@ -57,7 +57,7 @@ $(function() {
 	// 刷新缓存
     $('a[data-action="flush_cache"]').bind('click', function(){
         if(confirm('确定要刷新Ehcache的缓存吗？')){
-            J.getJSON('${base}/admin/config/flush_cache.json', ajaxReload);
+            J.getJSON('${base}/admin/config/flush_cache', ajaxReload);
         }
         return false;
     });
@@ -65,7 +65,7 @@ $(function() {
     // 刷新系统变量
     $('a[data-action="flush_conf"]').bind('click', function(){
         if(confirm('确定要刷新系统变量的缓存吗？')){
-            J.getJSON('${base}/admin/config/flush_conf.json', ajaxReload);
+            J.getJSON('${base}/admin/config/flush_conf', ajaxReload);
         }
         return false;
     });
@@ -73,7 +73,7 @@ $(function() {
     // 重建索引
     $('a[data-action="flush_indexs"]').bind('click', function(){
         if(confirm('确定要重建文章索引吗？')){
-            J.getJSON('${base}/admin/config/flush_indexs.json', ajaxReload);
+            J.getJSON('${base}/admin/config/flush_indexs', ajaxReload);
         }
         return false;
     });

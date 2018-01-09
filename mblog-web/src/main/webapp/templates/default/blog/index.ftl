@@ -1,7 +1,7 @@
 <#include "/default/utils/layout.ftl"/>
 <@ui_ltr group.name>
 
-<@contents group=group.id>
+<@contents group=group.id pn=pn ord=ord>
 <div class="shadow-box">
 	<!-- tab -->
 	<div class="filter">

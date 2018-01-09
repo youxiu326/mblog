@@ -2,9 +2,9 @@ package mblog.web.controller.desk.account;
 
 import mblog.base.data.Data;
 import mblog.base.lang.Consts;
-import mblog.core.biz.PostBiz;
 import mblog.core.data.AccountProfile;
 import mblog.core.event.NotifyEvent;
+import mblog.core.persist.service.PostService;
 import mblog.web.controller.BaseController;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.ApplicationContext;
@@ -21,7 +21,7 @@ import javax.servlet.http.HttpServletRequest;
 @RequestMapping("/account")
 public class FavorController extends BaseController {
     @Autowired
-    private PostBiz postBiz;
+    private PostService postService;
     @Autowired
     private ApplicationContext applicationContext;
 
@@ -38,7 +38,7 @@ public class FavorController extends BaseController {
         if (id != null) {
             try {
                 AccountProfile up = getSubject().getProfile();
-                postBiz.favor(up.getId(), id);
+                postService.favor(up.getId(), id);
 
                 sendNotify(up.getId(), id);
 
@@ -62,7 +62,7 @@ public class FavorController extends BaseController {
         if (id != null) {
             try {
                 AccountProfile up = getSubject().getProfile();
-                postBiz.unfavor(up.getId(), id);
+                postService.unfavor(up.getId(), id);
                 data = Data.success("操作成功!", Data.NOOP);
             } catch (Exception e) {
                 data = Data.failure(e.getMessage());

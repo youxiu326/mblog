@@ -4,8 +4,8 @@
 package mblog.template.directive;
 
 import mblog.base.lang.Consts;
-import mblog.core.biz.PostBiz;
 import mblog.core.data.Post;
+import mblog.core.persist.service.PostService;
 import mblog.template.DirectiveHandler;
 import mblog.template.TemplateDirective;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -19,8 +19,7 @@ import org.springframework.stereotype.Component;
  *
  * 示例：
  * 	请求：http://mtons.com/index?ord=newest&pn=2
- *  使用：#contents(groupId, 'paging')
- *  解析： ord, pn 等参数从request中获取 , groupId 从标签中获取
+ *  使用：@contents group=x pn=pn ord=ord
  *
  * @author langhsu
  *
@@ -28,7 +27,7 @@ import org.springframework.stereotype.Component;
 @Component
 public class ContentsDirective extends TemplateDirective {
 	@Autowired
-    private PostBiz postPlanet;
+    private PostService postService;
 
     @Override
     public String getName() {
@@ -42,7 +41,7 @@ public class ContentsDirective extends TemplateDirective {
         String order = handler.getString("ord", Consts.order.NEWEST);
 
         Pageable pageable = new PageRequest(pn - 1, 10);
-        Page<Post> result = postPlanet.paging(pageable, group, order);
+        Page<Post> result = postService.paging(pageable, group, order, true);
 
         handler.put(RESULTS, result).render();
     }

@@ -24,8 +24,8 @@
 .navbar .nav .signin, .navbar .nav .signup {
 	padding: 7px 12px; margin: 8px 6px; border-radius: 2px; color: #fff; text-align: center; font-size: 16px; 
 }
-.navbar .nav .signin { width: 65px; height: 35px; border: 1px solid rgba(236,97,73,.7);  margin: 5px 5px 5px 5px; color: #ea6f5a; border-radius: 5px;}
-.navbar .nav .signup { width: 65px; height: 35px; margin: 5px 5px 5px 5px; border: 1px solid rgba(193,228,222,.7); font-size: 16px; color: #58c0d0; background-color: transparent; border-radius: 5px;}
+.navbar .nav .signin { width: 65px; height: 35px; border: 1px solid rgba(236,97,73,.7);  margin: 5px 5px 5px 5px; color: #ea6f5a; border-radius: 3px;}
+.navbar .nav .signup { width: 65px; height: 35px; margin: 5px 5px 5px 5px; border: 1px solid rgba(193,228,222,.7); font-size: 16px; color: #58c0d0; background-color: transparent; border-radius: 3px;}
 
 .navbar .nav .signin:hover { background-color: #ea6f5a; color:#fff; }
 .navbar .nav .signup:hover { background-color: #58c0d0; color:#fff;}

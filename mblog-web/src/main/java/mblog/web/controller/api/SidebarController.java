@@ -10,10 +10,10 @@
 package mblog.web.controller.api;
 
 import mblog.base.data.Data;
-import mblog.core.biz.PostBiz;
 import mblog.core.data.AccountProfile;
 import mblog.core.data.Post;
 import mblog.core.data.User;
+import mblog.core.persist.service.PostService;
 import mblog.core.persist.service.UserService;
 import mblog.web.controller.BaseController;
 import org.apache.commons.lang3.StringUtils;
@@ -28,6 +28,7 @@ import org.springframework.ui.ModelMap;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
+
 import java.util.List;
 
 /**
@@ -40,7 +41,7 @@ import java.util.List;
 @RequestMapping("/api")
 public class SidebarController extends BaseController {
 	@Autowired
-	private PostBiz postBiz;
+	private PostService postService;
 
 	@Autowired
 	private UserService userService;
@@ -76,25 +77,25 @@ public class SidebarController extends BaseController {
 		return data;
 	}
 
-	@RequestMapping("/latests.json")
+	@RequestMapping("/latests")
 	public @ResponseBody List<Post> latests() {
 		AccountProfile up = getSubject().getProfile();
 		long ignoreUserId = 0;
 		if (up != null) {
 			ignoreUserId = up.getId();
 		}
-		List<Post> rets = postBiz.findRecents(6, ignoreUserId);
+		List<Post> rets = postService.findLatests(6, ignoreUserId);
 		return rets;
 	}
 	
-	@RequestMapping("/hots.json")
+	@RequestMapping("/hots")
 	public @ResponseBody List<Post> hots() {
 		AccountProfile up = getSubject().getProfile();
 		long ignoreUserId = 0;
 		if (up != null) {
 			ignoreUserId = up.getId();
 		}
-		List<Post> rets = postBiz.findHots(6, ignoreUserId);
+		List<Post> rets = postService.findHots(6, ignoreUserId);
 		return rets;
 	}
 	
@@ -103,7 +104,7 @@ public class SidebarController extends BaseController {
 	 * @param pn
 	 * @return
 	 */
-	@RequestMapping(value="/hotusers.json")
+	@RequestMapping(value="/hotusers")
 	public @ResponseBody List<User> hotusers(Integer pn) {
 		List<User> rets = userService.findHotUserByfans();
          return rets;

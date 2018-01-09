@@ -151,12 +151,12 @@ background-color: #ea6f5a;}
 .recommend{overflow: hidden;margin-bottom: 10px;}
 .recommend ul{list-style: none;margin: 0;padding-left: 50%;}
 .recommend li{width: 50%;float: left;margin-bottom: 10px;}
-.recommend a{margin-left: 10px;display: block;overflow: hidden;height: 128px;position: relative;}
+.recommend a{margin-left: 10px;display: block;overflow: hidden;height: 127px;position: relative;}
 .recommend img{width: 100%;}
 
 .recommend li.large{width: 100%;float: left;margin-left: -100%;}
 
-.recommend li.large img{width: 100%; height:266px;}
+.recommend li.large img{width: 100%;}
 
 .recommend li.large a{height: 266px;margin-left: 0;}
 

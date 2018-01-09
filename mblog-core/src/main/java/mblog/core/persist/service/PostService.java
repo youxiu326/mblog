@@ -13,6 +13,7 @@ import mblog.core.data.Post;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 
+import java.util.Collection;
 import java.util.List;
 import java.util.Map;
 import java.util.Set;
@@ -41,6 +42,8 @@ public interface PostService {
 	 * @param userId
 	 */
 	Page<Post> pagingByAuthorId(Pageable pageable, long userId);
+
+	List<Post> findAllFeatured();
 	
 	/**
 	 * 根据关键字搜索
@@ -120,6 +123,13 @@ public interface PostService {
 	 * @param authorId
 	 */
 	void delete(long id, long authorId);
+
+	/**
+	 * 批量删除文章, 且刷新缓存
+	 *
+	 * @param ids
+	 */
+	void delete(Collection<Long> ids);
 	
 	/**
 	 * 自增浏览数

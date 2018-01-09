@@ -28,6 +28,7 @@ public class FreemarkerConfig {
         configuration.setSharedVariable("num", applicationContext.getBean(NumberDirective.class));
         configuration.setSharedVariable("resource", applicationContext.getBean(ResourceDirective.class));
         configuration.setSharedVariable("authc", applicationContext.getBean(AuthcDirective.class));
+        configuration.setSharedVariable("banner", applicationContext.getBean(BannerDirective.class));
 
         configuration.setSharedVariable("timeAgo", new TimeAgoMethod());
         configuration.setSharedVariable("shiro", new ShiroTags());

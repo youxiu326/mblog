@@ -9,7 +9,6 @@
 */
 package mblog.core.persist.service.impl;
 
-import mblog.base.lang.Consts;
 import mblog.core.data.Comment;
 import mblog.core.data.Post;
 import mblog.core.data.User;
@@ -21,6 +20,7 @@ import mblog.core.persist.service.UserEventService;
 import mblog.core.persist.service.UserService;
 import mblog.core.persist.utils.BeanMapUtils;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.cache.annotation.CacheConfig;
 import org.springframework.cache.annotation.CacheEvict;
 import org.springframework.cache.annotation.Cacheable;
 import org.springframework.data.domain.Page;
@@ -37,6 +37,8 @@ import java.util.*;
  *
  */
 @Service
+@Transactional(readOnly = true)
+@CacheConfig(cacheNames = "commentsCaches")
 public class CommentServiceImpl implements CommentService {
 	@Autowired
 	private CommentDao commentDao;
@@ -48,7 +50,6 @@ public class CommentServiceImpl implements CommentService {
 	private PostService postService;
 	
 	@Override
-	@Transactional(readOnly = true)
 	public Page<Comment> paging4Admin(Pageable pageable) {
 		Page<CommentPO> page = commentDao.findAll(pageable);
 		List<Comment> rets = new ArrayList<>();
@@ -66,8 +67,7 @@ public class CommentServiceImpl implements CommentService {
 	}
 
 	@Override
-	@Transactional(readOnly = true)
-	@Cacheable(value = "commentsCaches", key = "'lth_' + #authorId + '_' + #pageable.getPageNumber() + '_' + #pageable.getPageSize()")
+	@Cacheable
 	public Page<Comment> paging4Home(Pageable pageable, long authorId) {
 		Page<CommentPO> page = commentDao.findAllByAuthorIdOrderByCreatedDesc(pageable, authorId);
 
@@ -89,15 +89,7 @@ public class CommentServiceImpl implements CommentService {
 		});
 
 		// 加载父节点
-		if (!parentIds.isEmpty()) {
-			Map<Long, Comment> pm = findByIds(parentIds);
-
-			rets.forEach(c -> {
-				if (c.getPid() > 0) {
-					c.setParent(pm.get(c.getPid()));
-				}
-			});
-		}
+		buildParent(rets, parentIds);
 
 		buildUsers(rets, uids);
 		buildPosts(rets, postIds);
@@ -106,8 +98,7 @@ public class CommentServiceImpl implements CommentService {
 	}
 
 	@Override
-	@Transactional(readOnly = true)
-	@Cacheable(value = "commentsCaches", key = "'lt_' + #toId + '_' + #pageable.getPageNumber() + '_' + #pageable.getPageSize()")
+	@Cacheable
 	public Page<Comment> paging(Pageable pageable, long toId) {
 		Page<CommentPO> page = commentDao.findAllByToIdOrderByCreatedDesc(pageable, toId);
 		
@@ -127,15 +118,7 @@ public class CommentServiceImpl implements CommentService {
 		});
 
 		// 加载父节点
-		if (!parentIds.isEmpty()) {
-			Map<Long, Comment> pm = findByIds(parentIds);
-
-			rets.forEach(c -> {
-				if (c.getPid() > 0) {
-					c.setParent(pm.get(c.getPid()));
-				}
-			});
-		}
+		buildParent(rets, parentIds);
 
 		buildUsers(rets, uids);
 
@@ -143,7 +126,6 @@ public class CommentServiceImpl implements CommentService {
 	}
 
 	@Override
-	@Transactional(readOnly = true)
 	public Map<Long, Comment> findByIds(Set<Long> ids) {
 		List<CommentPO> list = commentDao.findByIdIn(ids);
 		Map<Long, Comment> ret = new HashMap<>();
@@ -160,7 +142,7 @@ public class CommentServiceImpl implements CommentService {
 
 	@Override
 	@Transactional
-	@CacheEvict(value = "commentsCaches", allEntries = true)
+	@CacheEvict(allEntries = true)
 	public long post(Comment comment) {
 		CommentPO po = new CommentPO();
 		
@@ -177,14 +159,14 @@ public class CommentServiceImpl implements CommentService {
 
 	@Override
 	@Transactional
-	@CacheEvict(value = "commentsCaches", allEntries = true)
+	@CacheEvict(allEntries = true)
 	public void delete(List<Long> ids) {
 		commentDao.deleteAllByIdIn(ids);
 	}
 
 	@Override
 	@Transactional
-	@CacheEvict(value = "commentsCaches", allEntries = true)
+	@CacheEvict(allEntries = true)
 	public void delete(long id, long authorId) {
 		CommentPO po = commentDao.findOne(id);
 		if (po != null) {
@@ -194,8 +176,8 @@ public class CommentServiceImpl implements CommentService {
 		}
 	}
 
-	@Transactional
 	@Override
+	@Transactional
 	public List<CommentPO> findAllByAuthorIdAndToId(long authorId, long toId) {
 		return commentDao.findAllByAuthorIdAndToIdOrderByCreatedDesc(authorId, toId);
 	}
@@ -210,6 +192,18 @@ public class CommentServiceImpl implements CommentService {
 		Map<Long, Post> postMap = postService.findSingleMapByIds(postIds);
 
 		comments.forEach(p -> p.setPost(postMap.get(p.getToId())));
+	}
+
+	private void buildParent(Collection<Comment> comments, Set<Long> parentIds) {
+		if (!parentIds.isEmpty()) {
+			Map<Long, Comment> pm = findByIds(parentIds);
+
+			comments.forEach(c -> {
+				if (c.getPid() > 0) {
+					c.setParent(pm.get(c.getPid()));
+				}
+			});
+		}
 	}
 
 }

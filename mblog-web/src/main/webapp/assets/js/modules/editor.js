@@ -17,7 +17,7 @@ define(function(require, exports, module) {
     var initEditor = function (callback) {
         require.async('ueditor', function () {
             ueditor = UE.getEditor('content', {
-                fastUpload: window.app.base + "/aj_um_upload.json",
+                fastUpload: window.app.base + "/aj_um_upload",
                 fastFileName: 'upfile',
                 fastUrlPrefix: window.app.base,
                 imageAllowFiles: [".png", ".jpg", ".jpeg", ".gif", ".bmp"], /* 上传图片格式显示 */

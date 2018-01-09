@@ -77,7 +77,7 @@
                 btn: ['确定', '取消'], //按钮
                 shade: false //不显示遮罩
             }, function () {
-                J.getJSON('${base}/admin/group/delete.json', {id: that.attr('data-id')}, ajaxReload);
+                J.getJSON('${base}/admin/group/delete', {id: that.attr('data-id')}, ajaxReload);
             }, function () {
             });
             return false;

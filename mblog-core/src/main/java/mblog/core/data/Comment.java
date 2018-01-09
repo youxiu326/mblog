@@ -12,6 +12,7 @@ package mblog.core.data;
 import java.io.Serializable;
 import java.util.Date;
 
+import com.alibaba.fastjson.annotation.JSONField;
 import mblog.core.persist.entity.CommentPO;
 import org.springframework.format.annotation.DateTimeFormat;
 
@@ -27,7 +28,7 @@ public class Comment extends CommentPO implements Serializable {
 	private Comment parent;
 	private Post post;
 
-	@DateTimeFormat(pattern="yyyy-MM-dd")
+	@JSONField(format="yyyy-MM-dd")
 	public Date getCreated() {
 		return super.getCreated();
 	}

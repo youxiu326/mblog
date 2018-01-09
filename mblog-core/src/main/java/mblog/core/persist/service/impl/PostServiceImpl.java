@@ -9,12 +9,14 @@
 */
 package mblog.core.persist.service.impl;
 
+import mblog.base.context.SpringContextHolder;
 import mblog.base.lang.Consts;
 import mblog.base.lang.EntityStatus;
 import mblog.base.utils.PreviewTextUtils;
 import mblog.core.data.Attach;
 import mblog.core.data.Post;
 import mblog.core.data.User;
+import mblog.core.event.FeedsEvent;
 import mblog.core.persist.dao.PostAttributeDao;
 import mblog.core.persist.dao.PostDao;
 import mblog.core.persist.entity.PostAttribute;
@@ -24,6 +26,9 @@ import mblog.core.persist.utils.BeanMapUtils;
 import org.apache.commons.lang3.StringUtils;
 import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.cache.annotation.CacheConfig;
+import org.springframework.cache.annotation.CacheEvict;
+import org.springframework.cache.annotation.Cacheable;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageImpl;
 import org.springframework.data.domain.Pageable;
@@ -40,6 +45,8 @@ import java.util.*;
  *
  */
 @Service
+@Transactional(readOnly = true)
+@CacheConfig(cacheNames = "postsCaches")
 public class PostServiceImpl implements PostService {
 	@Autowired
 	private PostDao postDao;
@@ -53,14 +60,16 @@ public class PostServiceImpl implements PostService {
 	private FavorService favorService;
 	@Autowired
 	private PostAttributeDao postAttributeDao;
+	@Autowired
+	private FeedsService feedsService;
 
 	@Override
-	@Transactional(readOnly = true)
+	@Cacheable
 	public Page<Post> paging(Pageable pageable, int group, String ord, boolean whetherHasAlbums) {
 		Page<PostPO> page = postDao.findAll((root, query, builder) -> {
 
 			List<Order> orders = new ArrayList<>();
-			orders.add(builder.desc(root.<Long>get("featured")));
+//			orders.add(builder.desc(root.<Long>get("featured")));
 			orders.add(builder.desc(root.<Long>get("created")));
 
 			Predicate predicate = builder.conjunction();
@@ -74,6 +83,9 @@ public class PostServiceImpl implements PostService {
 				orders.add(builder.desc(root.<Long>get("views")));
 			}
 
+			predicate.getExpressions().add(
+					builder.equal(root.get("featured").as(Integer.class), Consts.FEATURED_DEFAULT));
+
 			query.orderBy(orders);
 
 			return predicate;
@@ -83,7 +95,6 @@ public class PostServiceImpl implements PostService {
 	}
 
 	@Override
-	@Transactional(readOnly = true)
 	public Page<Post> paging4Admin(Pageable pageable, long id, String title, int group) {
 		Page<PostPO> page = postDao.findAll((root, query, builder) -> {
             query.orderBy(
@@ -115,14 +126,20 @@ public class PostServiceImpl implements PostService {
 	}
 
 	@Override
-	@Transactional(readOnly = true)
+	@Cacheable
 	public Page<Post> pagingByAuthorId(Pageable pageable, long userId) {
 		Page<PostPO> page = postDao.findAllByAuthorIdOrderByCreatedDesc(pageable, userId);
 		return new PageImpl<>(toPosts(page.getContent(), true), pageable, page.getTotalElements());
 	}
-	
+
 	@Override
-	@Transactional(readOnly = true)
+	@Cacheable
+	public List<Post> findAllFeatured() {
+		List<PostPO> list = postDao.findTop5ByFeaturedGreaterThanOrderByCreatedDesc(Consts.FEATURED_DEFAULT);
+		return toPosts(list, true);
+	}
+
+	@Override
 	public Page<Post> search(Pageable pageable, String q) throws Exception {
 		Page<Post> page = postDao.search(pageable, q);
 
@@ -144,7 +161,6 @@ public class PostServiceImpl implements PostService {
 	}
 	
 	@Override
-	@Transactional(readOnly = true)
 	public Page<Post> searchByTag(Pageable pageable, String tag) {
 		Page<Post> page = postDao.searchByTag(pageable, tag);
 
@@ -165,7 +181,7 @@ public class PostServiceImpl implements PostService {
 	}
 	
 	@Override
-	@Transactional(readOnly = true)
+	@Cacheable
 	public List<Post> findLatests(int maxResults, long ignoreUserId) {
 		List<PostPO> list = postDao.findTop12ByOrderByCreatedDesc();
 		List<Post> rets = new ArrayList<>();
@@ -176,7 +192,7 @@ public class PostServiceImpl implements PostService {
 	}
 	
 	@Override
-	@Transactional(readOnly = true)
+	@Cacheable
 	public List<Post> findHots(int maxResults, long ignoreUserId) {
 		List<PostPO> list = postDao.findTop12ByOrderByViewsDesc();
 		List<Post> rets = new ArrayList<>();
@@ -186,7 +202,6 @@ public class PostServiceImpl implements PostService {
 	}
 	
 	@Override
-	@Transactional(readOnly = true)
 	public Map<Long, Post> findSingleMapByIds(Set<Long> ids) {
 		if (ids == null || ids.isEmpty()) {
 			return Collections.emptyMap();
@@ -225,7 +240,6 @@ public class PostServiceImpl implements PostService {
 	}
 
 	@Override
-	@Transactional(readOnly = true)
 	public Map<Long, Post> findMultileMapByIds(Set<Long> ids) {
 		if (ids == null || ids.isEmpty()) {
 			return Collections.emptyMap();
@@ -252,6 +266,7 @@ public class PostServiceImpl implements PostService {
 
 	@Override
 	@Transactional
+	@CacheEvict(allEntries = true)
 	public long post(Post post) {
 		PostPO po = new PostPO();
 
@@ -284,11 +299,16 @@ public class PostServiceImpl implements PostService {
 		// 更新文章统计
 		userEventService.identityPost(po.getAuthorId(), po.getId(), true);
 
+		FeedsEvent event = new FeedsEvent("feedsEvent");
+		event.setPostId(po.getId());
+		event.setAuthorId(post.getAuthorId());
+		SpringContextHolder.publishEvent(event);
+
 		return po.getId();
 	}
 	
 	@Override
-	@Transactional
+	@Cacheable(key = "'view_' + #id")
 	public Post get(long id) {
 		PostPO po = postDao.findOne(id);
 		Post d = null;
@@ -312,6 +332,7 @@ public class PostServiceImpl implements PostService {
 	 */
 	@Override
 	@Transactional
+	@CacheEvict(allEntries = true)
 	public void update(Post p){
 		PostPO po = postDao.findOne(p.getId());
 
@@ -345,6 +366,7 @@ public class PostServiceImpl implements PostService {
 
 	@Override
 	@Transactional
+	@CacheEvict(allEntries = true)
 	public void updateFeatured(long id, int featured) {
 		PostPO po = postDao.findOne(id);
 
@@ -354,11 +376,13 @@ public class PostServiceImpl implements PostService {
 				max = postDao.maxFeatured() + 1;
 			}
 			po.setFeatured(max);
+			postDao.save(po);
 		}
 	}
 
 	@Override
 	@Transactional
+	@CacheEvict(allEntries = true)
 	public void delete(long id) {
 		PostPO po = postDao.findOne(id);
 		if (po != null) {
@@ -369,17 +393,24 @@ public class PostServiceImpl implements PostService {
 	
 	@Override
 	@Transactional
+	@CacheEvict(allEntries = true)
 	public void delete(long id, long authorId) {
 		PostPO po = postDao.findOne(id);
 		if (po != null) {
 			// 判断文章是否属于当前登录用户
 			Assert.isTrue(po.getAuthorId() == authorId, "认证失败");
 
-			attachService.deleteByToId(id);
-			postDao.delete(po);
+			delete(id);
 		}
 	}
-	
+
+	@Override
+	@Transactional
+	@CacheEvict(allEntries = true)
+	public void delete(Collection<Long> ids) {
+		ids.forEach(this::delete);
+	}
+
 	@Override
 	@Transactional
 	public void identityViews(long id) {
@@ -400,6 +431,7 @@ public class PostServiceImpl implements PostService {
 
 	@Override
 	@Transactional
+	@CacheEvict(key = "'view_' + #postId")
 	public void favor(long userId, long postId) {
 		PostPO po = postDao.findOne(postId);
 
@@ -412,6 +444,7 @@ public class PostServiceImpl implements PostService {
 
 	@Override
 	@Transactional
+	@CacheEvict(key = "'view_' + #postId")
 	public void unfavor(long userId, long postId) {
 		PostPO po = postDao.findOne(postId);
 

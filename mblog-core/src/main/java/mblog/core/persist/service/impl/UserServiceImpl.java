@@ -9,30 +9,9 @@
 */
 package mblog.core.persist.service.impl;
 
-import java.util.ArrayList;
-import java.util.Calendar;
-import java.util.Collections;
-import java.util.Date;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
-import java.util.Set;
-
 import mblog.base.lang.EntityStatus;
 import mblog.base.lang.MtonsException;
 import mblog.base.utils.MD5;
-import org.apache.commons.lang3.StringUtils;
-import org.springframework.beans.BeanUtils;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.cache.annotation.CacheEvict;
-import org.springframework.cache.annotation.Cacheable;
-import org.springframework.data.domain.Page;
-import org.springframework.data.domain.PageImpl;
-import org.springframework.data.domain.Pageable;
-import org.springframework.stereotype.Service;
-import org.springframework.transaction.annotation.Transactional;
-import org.springframework.util.Assert;
-
 import mblog.core.data.AccountProfile;
 import mblog.core.data.AuthMenu;
 import mblog.core.data.BadgesCount;
@@ -45,8 +24,24 @@ import mblog.core.persist.entity.UserPO;
 import mblog.core.persist.service.NotifyService;
 import mblog.core.persist.service.UserService;
 import mblog.core.persist.utils.BeanMapUtils;
+import org.apache.commons.lang3.StringUtils;
+import org.springframework.beans.BeanUtils;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.cache.annotation.CacheConfig;
+import org.springframework.cache.annotation.CacheEvict;
+import org.springframework.cache.annotation.Cacheable;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageImpl;
+import org.springframework.data.domain.Pageable;
+import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
+import org.springframework.util.Assert;
+
+import java.util.*;
 
 @Service
+@Transactional(readOnly = true)
+@CacheConfig(cacheNames = "usersCaches")
 public class UserServiceImpl implements UserService {
 	@Autowired
 	private UserDao userDao;
@@ -57,7 +52,6 @@ public class UserServiceImpl implements UserService {
 	private RoleDao roleDao;
 
 	@Override
-	@Transactional
 	public AccountProfile login(String username, String password) {
 		UserPO po = userDao.findByUsername(username);
 		AccountProfile u = null;
@@ -136,7 +130,7 @@ public class UserServiceImpl implements UserService {
 
 	@Override
 	@Transactional
-	@CacheEvict(value = "usersCaches", key = "#user.getId()")
+	@CacheEvict(key = "#user.getId()")
 	public AccountProfile update(User user) {
 		UserPO po = userDao.findOne(user.getId());
 		if (null != po) {
@@ -148,7 +142,7 @@ public class UserServiceImpl implements UserService {
 
 	@Override
 	@Transactional
-	@CacheEvict(value = "usersCaches", key = "#id")
+	@CacheEvict(key = "#id")
 	public AccountProfile updateEmail(long id, String email) {
 		UserPO po = userDao.findOne(id);
 
@@ -171,8 +165,7 @@ public class UserServiceImpl implements UserService {
 	}
 
 	@Override
-	@Transactional(readOnly = true)
-	@Cacheable(value = "usersCaches", key = "#userId")
+	@Cacheable(key = "#userId")
 	public User get(long userId) {
 		UserPO po = userDao.findOne(userId);
 		User ret = null;
@@ -184,7 +177,6 @@ public class UserServiceImpl implements UserService {
 
 	
 	@Override
-	@Transactional(readOnly = true)
 	public List<User> findHotUserByfans(){
 		List<User> rets = new ArrayList<>();
 		List<UserPO> list = userDao.findTop12ByOrderByFansDesc();
@@ -196,7 +188,6 @@ public class UserServiceImpl implements UserService {
 	}
 	
 	@Override
-	@Transactional(readOnly = true)
 	public User getByUsername(String username) {
 		UserPO po = userDao.findByUsername(username);
 		User ret = null;
@@ -208,7 +199,7 @@ public class UserServiceImpl implements UserService {
 
 	@Override
 	@Transactional
-	@CacheEvict(value = "usersCaches", key = "#id")
+	@CacheEvict(key = "#id")
 	public AccountProfile updateAvatar(long id, String path) {
 		UserPO po = userDao.findOne(id);
 		if (po != null) {
@@ -279,7 +270,6 @@ public class UserServiceImpl implements UserService {
 	}
 
 	@Override
-	@Transactional(readOnly = true)
 	public Page<User> paging(Pageable pageable) {
 		Page<UserPO> page = userDao.findAllByOrderByIdDesc(pageable);
 		List<User> rets = new ArrayList<>();
@@ -293,7 +283,6 @@ public class UserServiceImpl implements UserService {
 	}
 
 	@Override
-	@Transactional(readOnly = true)
 	public Map<Long, User> findMapByIds(Set<Long> ids) {
 		if (ids == null || ids.isEmpty()) {
 			return Collections.emptyMap();
@@ -308,7 +297,6 @@ public class UserServiceImpl implements UserService {
 	}
 
 	@Override
-	@Transactional(readOnly = true)
 	public List<AuthMenu> getMenuList(long id) {
 		List<AuthMenu> menus = new ArrayList<>();
 		UserPO userPO = userDao.findOne(id);

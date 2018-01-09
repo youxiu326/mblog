@@ -5,10 +5,10 @@ package mblog.web.controller.desk.posts;
 
 import mblog.base.data.Data;
 import mblog.base.lang.Consts;
-import mblog.core.biz.PostBiz;
 import mblog.core.data.AccountProfile;
 import mblog.core.data.Post;
 import mblog.core.persist.service.GroupService;
+import mblog.core.persist.service.PostService;
 import mblog.web.controller.BaseController;
 import mblog.web.controller.desk.Views;
 import org.apache.commons.lang3.StringUtils;
@@ -32,7 +32,7 @@ import javax.servlet.http.HttpServletRequest;
 @RequestMapping("/post")
 public class PostController extends BaseController {
 	@Autowired
-	private PostBiz postBiz;
+	private PostService postService;
 	@Autowired
 	private GroupService groupService;
 
@@ -63,7 +63,7 @@ public class PostController extends BaseController {
 
 			p.setAuthorId(profile.getId());
 
-			postBiz.post(p);
+			postService.post(p);
 		}
 		return Views.REDIRECT_HOME_POSTS;
 	}
@@ -80,7 +80,7 @@ public class PostController extends BaseController {
 		if (id != null) {
 			AccountProfile up = getSubject().getProfile();
 			try {
-				postBiz.delete(id, up.getId());
+				postService.delete(id, up.getId());
 				data = Data.success("操作成功", Data.NOOP);
 			} catch (Exception e) {
 				data = Data.failure(e.getMessage());
@@ -97,7 +97,7 @@ public class PostController extends BaseController {
 	@RequestMapping("/to_update/{id}")
 	public String toUpdate(@PathVariable Long id, ModelMap model) {
 		AccountProfile up = getSubject().getProfile();
-		Post ret = postBiz.getPost(id);
+		Post ret = postService.get(id);
 
 		Assert.notNull(ret, "该文章已被删除");
 
@@ -120,7 +120,7 @@ public class PostController extends BaseController {
 			String content = request.getParameter("content");
 			p.setContent(content);
 			extractImages(p);
- 			postBiz.update(p);
+			postService.update(p);
 		}
 		return Views.REDIRECT_HOME_POSTS;
 	}

@@ -11,6 +11,7 @@ package mblog.core.persist.service.impl;
 
 import java.util.*;
 
+import mblog.base.upload.FileRepo;
 import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -30,6 +31,8 @@ import mblog.core.persist.utils.BeanMapUtils;
 public class AttachServiceImpl implements AttachService {
 	@Autowired
 	private AttachDao attachDao;
+	@Autowired
+	private FileRepo fileRepo;
 	
 	@Override
 	@Transactional(readOnly = true)
@@ -107,6 +110,15 @@ public class AttachServiceImpl implements AttachService {
 	@Override
 	@Transactional
 	public void deleteByToId(long toId) {
+		List<Attach> atts = findByTarget(toId);
+
+		if (!atts.isEmpty()) {
+			atts.forEach(a -> {
+				fileRepo.deleteFile(a.getPreview());
+				fileRepo.deleteFile(a.getOriginal());
+			});
+		}
+
 		attachDao.deleteAllByToId(toId);
 	}
 
