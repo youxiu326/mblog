@@ -1,13 +1,11 @@
 package mblog.core.event.handler;
 
 import mblog.base.lang.Consts;
-import mblog.core.biz.PostBiz;
 import mblog.core.data.Notify;
 import mblog.core.data.Post;
 import mblog.core.event.NotifyEvent;
 import mblog.core.persist.service.NotifyService;
 import mblog.core.persist.service.PostService;
-
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.ApplicationListener;
 import org.springframework.scheduling.annotation.Async;
@@ -21,8 +19,6 @@ public class NotifyEventHandler implements ApplicationListener<NotifyEvent> {
     @Autowired
     private NotifyService notifyService;
     @Autowired
-    private PostBiz postPlanet;
-    @Autowired
     private PostService postService;
 
     @Async
@@ -35,12 +31,12 @@ public class NotifyEventHandler implements ApplicationListener<NotifyEvent> {
 
         switch (event.getEvent()) {
             case Consts.NOTIFY_EVENT_FAVOR_POST:
-                Post p = postPlanet.getPost(event.getPostId());
+                Post p = postService.get(event.getPostId());
                 nt.setOwnId(p.getAuthorId());
                 break;
             case Consts.NOTIFY_EVENT_COMMENT:
             case Consts.NOTIFY_EVENT_COMMENT_REPLY:
-                Post p2 = postPlanet.getPost(event.getPostId());
+                Post p2 = postService.get(event.getPostId());
                 nt.setOwnId(p2.getAuthorId());
 
                 // 自增评论数

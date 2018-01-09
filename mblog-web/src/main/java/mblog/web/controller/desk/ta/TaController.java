@@ -9,9 +9,9 @@
 */
 package mblog.web.controller.desk.ta;
 
-import mblog.core.biz.PostBiz;
 import mblog.core.data.Post;
 import mblog.core.data.User;
+import mblog.core.persist.service.PostService;
 import mblog.core.persist.service.UserService;
 import mblog.web.controller.BaseController;
 import mblog.web.controller.desk.Views;
@@ -31,7 +31,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 @Controller
 public class TaController extends BaseController {
 	@Autowired
-	private PostBiz postBiz;
+	private PostService postService;
 	@Autowired
 	private UserService userService;
 	
@@ -39,7 +39,7 @@ public class TaController extends BaseController {
 	public String home(@PathVariable Long uid, ModelMap model) {
 		User user = userService.get(uid);
 		Pageable pageable = wrapPageable();
-		Page<Post> page = postBiz.pagingByAuthorId(pageable, uid);
+		Page<Post> page = postService.pagingByAuthorId(pageable, uid);
 		
 		model.put("user", user);
 		model.put("page", page);

@@ -11,6 +11,7 @@ import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.DisposableBean;
 import org.springframework.context.ApplicationContext;
 import org.springframework.context.ApplicationContextAware;
+import org.springframework.context.ApplicationEvent;
 import org.springframework.context.annotation.Lazy;
 import org.springframework.stereotype.Service;
 
@@ -75,6 +76,14 @@ public class SpringContextHolder implements ApplicationContextAware, DisposableB
         }
 
         SpringContextHolder.applicationContext = applicationContext; // NOSONAR
+    }
+
+    /**
+     * 发布事件
+     * @param event
+     */
+    public static void publishEvent(ApplicationEvent event) {
+        getApplicationContext().publishEvent(event);
     }
 
     /**

@@ -9,7 +9,6 @@
 */
 package mblog.web.controller.desk.group;
 
-import mblog.core.biz.PostBiz;
 import mblog.core.data.Post;
 import mblog.core.persist.service.PostService;
 import mblog.web.controller.BaseController;
@@ -31,13 +30,11 @@ import org.springframework.web.bind.annotation.RequestMapping;
 @RequestMapping("/view")
 public class GroupViewController extends BaseController {
 	@Autowired
-	private PostBiz postBiz;
-	@Autowired
 	private PostService postService;
 
 	@RequestMapping("/{id}")
 	public String view(@PathVariable Long id, ModelMap model) {
-		Post ret = postBiz.getPost(id);
+		Post ret = postService.get(id);
 		
 		Assert.notNull(ret, "该文章已被删除");
 		

@@ -9,11 +9,12 @@
 */
 package mblog.web.controller.admin;
 
-import java.util.List;
-
 import mblog.base.data.Data;
+import mblog.base.lang.Consts;
+import mblog.core.data.Post;
 import mblog.core.persist.service.GroupService;
-
+import mblog.core.persist.service.PostService;
+import mblog.web.controller.BaseController;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
@@ -25,13 +26,8 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
-import mblog.base.lang.Consts;
-import mblog.core.biz.PostBiz;
-import mblog.core.data.Post;
-import mblog.core.persist.service.PostService;
-import mblog.web.controller.BaseController;
-
 import javax.servlet.http.HttpServletRequest;
+import java.util.List;
 
 /**
  * @author langhsu
@@ -42,8 +38,6 @@ import javax.servlet.http.HttpServletRequest;
 public class PostsController extends BaseController {
 	@Autowired
 	private PostService postService;
-	@Autowired
-	private PostBiz postBiz;
 	@Autowired
 	private GroupService groupService;
 	
@@ -98,7 +92,7 @@ public class PostsController extends BaseController {
 		int featured = ServletRequestUtils.getIntParameter(request, "featured", Consts.FEATURED_ACTIVE);
 		if (id != null) {
 			try {
-				postBiz.updateFeatured(id, featured);
+				postService.updateFeatured(id, featured);
 				data = Data.success("操作成功", Data.NOOP);
 			} catch (Exception e) {
 				data = Data.failure(e.getMessage());
@@ -112,7 +106,7 @@ public class PostsController extends BaseController {
 		Data data = Data.failure("操作失败");
 		if (id != null) {
 			try {
-				postBiz.delete(id);
+				postService.delete(id);
 				data = Data.success("操作成功", Data.NOOP);
 			} catch (Exception e) {
 				data = Data.failure(e.getMessage());

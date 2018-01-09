@@ -4,8 +4,8 @@
 package mblog.web.controller.api;
 
 import mblog.base.lang.Consts;
-import mblog.core.biz.PostBiz;
 import mblog.core.data.Post;
+import mblog.core.persist.service.PostService;
 import mblog.web.controller.BaseController;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
@@ -25,7 +25,7 @@ import javax.servlet.http.HttpServletRequest;
 @RequestMapping("/api")
 public class PostJsonController extends BaseController {
 	@Autowired
-	private PostBiz postBiz;
+	private PostService postService;
 	
 	@RequestMapping("/posts")
 	public @ResponseBody
@@ -33,7 +33,7 @@ public class PostJsonController extends BaseController {
 		String order = ServletRequestUtils.getStringParameter(request, "ord", Consts.order.NEWEST);
 		int gid = ServletRequestUtils.getIntParameter(request, "gid", 0);
 		Pageable pageable = wrapPageable();
-		Page<Post> page = postBiz.paging(pageable, gid, order);
+		Page<Post> page = postService.paging(pageable, gid, order, true);
 		
 		return page;
 	}

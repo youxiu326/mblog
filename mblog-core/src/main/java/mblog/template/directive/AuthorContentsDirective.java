@@ -3,8 +3,8 @@
  */
 package mblog.template.directive;
 
-import mblog.core.biz.PostBiz;
 import mblog.core.data.Post;
+import mblog.core.persist.service.PostService;
 import mblog.template.DirectiveHandler;
 import mblog.template.TemplateDirective;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -22,7 +22,7 @@ import org.springframework.stereotype.Component;
 @Component
 public class AuthorContentsDirective extends TemplateDirective {
     @Autowired
-	private PostBiz postPlanet;
+	private PostService postService;
 
 	@Override
 	public String getName() {
@@ -35,7 +35,7 @@ public class AuthorContentsDirective extends TemplateDirective {
         long uid = handler.getInteger("uid", 0);
 
         Pageable pageable = new PageRequest(pn - 1, 10);
-        Page<Post> result = postPlanet.pagingByAuthorId(pageable, uid);
+        Page<Post> result = postService.pagingByAuthorId(pageable, uid);
 
         handler.put(RESULTS, result).render();
     }
