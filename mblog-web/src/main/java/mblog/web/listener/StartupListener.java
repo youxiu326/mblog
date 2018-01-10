@@ -15,7 +15,6 @@ import mblog.base.print.Printer;
 import mblog.base.utils.PropertiesLoader;
 import mblog.core.data.Config;
 import mblog.core.persist.service.ConfigService;
-import mblog.core.persist.service.FriendLinkService;
 import mblog.core.persist.service.GroupService;
 import org.springframework.beans.factory.InitializingBean;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -37,9 +36,7 @@ public class StartupListener implements InitializingBean, ServletContextAware {
 	private GroupService groupService;
 	@Autowired
 	private AppContext appContext;
-	@Autowired
-	private FriendLinkService friendLinkService;
-	
+
 	private ServletContext servletContext;
 
 	/**
@@ -92,7 +89,6 @@ public class StartupListener implements InitializingBean, ServletContextAware {
 				appContext.setConfig(configMap);
             	
             	servletContext.setAttribute("groups", groupService.findAll(Consts.STATUS_NORMAL));
-				servletContext.setAttribute("friendLinks", friendLinkService.findAll());
 
 				Printer.info("OK, mblog 加载完了");
             }

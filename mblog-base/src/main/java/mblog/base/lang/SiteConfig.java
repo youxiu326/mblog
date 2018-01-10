@@ -10,7 +10,6 @@ public interface SiteConfig {
 
     String SITE_NAME = "site_name"; // 站点名称
 
-    String SITE_WELCOMES = "site_welcomes"; // 欢迎语
     String SITE_DOMAIN   = "site_domain"; // 站点域名
     String SITE_KEYWORDS = "site_keywords"; // keywords
     String SITE_DESCRIPTION = "site_description"; // description
