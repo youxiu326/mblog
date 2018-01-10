@@ -8,12 +8,6 @@
         </div>
     </div>
     <div class="form-group">
-        <label class="col-lg-2 control-label">欢迎语</label>
-        <div class="col-lg-5">
-            <input type="text" name="site_welcomes" class="form-control" value="${configs['site_welcomes'].value}">
-        </div>
-    </div>
-    <div class="form-group">
         <label class="col-lg-2 control-label">域名</label>
         <div class="col-lg-8">
             <input type="text" name="site_domain" class="form-control" value="${configs['site_domain'].value}">

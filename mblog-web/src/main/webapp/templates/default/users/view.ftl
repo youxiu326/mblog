@@ -34,9 +34,10 @@
                 他的文章
             </div>
 
+            <@author_contents uid=user.id pn=pn>
             <div class="panel-body">
                 <ul class="list-group">
-					<#list page.content as row>
+					<#list results.content as row>
                         <li class="list-group-item" el="loop-${row.id}">
                             <a href="${base}/view/${row.id}" class="remove-padding-left">${row.title}</a>
                             <span class="meta">
@@ -49,7 +50,7 @@
                         </li>
 					</#list>
 
-					<#if page.content?size == 0>
+					<#if results.content?size == 0>
                         <li class="list-group-item ">
                             <div class="infos">
                                 <div class="media-heading">该目录下还没有内容!</div>
@@ -59,8 +60,9 @@
                 </ul>
             </div>
             <div class="panel-footer">
-				<@pager request.requestURI!"", page, 5/>
+				<@pager request.requestURI!"", results, 5/>
             </div>
+            </@author_contents>
         </div>
     </div>
 </div>

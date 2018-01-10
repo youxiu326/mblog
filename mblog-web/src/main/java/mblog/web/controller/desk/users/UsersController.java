@@ -9,19 +9,18 @@
 */
 package mblog.web.controller.desk.users;
 
-import mblog.core.data.Post;
 import mblog.core.data.User;
-import mblog.core.persist.service.PostService;
 import mblog.core.persist.service.UserService;
 import mblog.web.controller.BaseController;
 import mblog.web.controller.desk.Views;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.data.domain.Page;
-import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.ModelMap;
+import org.springframework.web.bind.ServletRequestUtils;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
+
+import javax.servlet.http.HttpServletRequest;
 
 /**
  * 访问他人主页
@@ -31,18 +30,15 @@ import org.springframework.web.bind.annotation.RequestMapping;
 @Controller
 public class UsersController extends BaseController {
 	@Autowired
-	private PostService postService;
-	@Autowired
 	private UserService userService;
 	
 	@RequestMapping("/users/{uid}")
-	public String home(@PathVariable Long uid, ModelMap model) {
+	public String home(@PathVariable Long uid, HttpServletRequest request, ModelMap model) {
 		User user = userService.get(uid);
-		Pageable pageable = wrapPageable();
-		Page<Post> page = postService.pagingByAuthorId(pageable, uid);
-		
+		int pn = ServletRequestUtils.getIntParameter(request, "pn", 1);
+
 		model.put("user", user);
-		model.put("page", page);
+		model.put("pn", pn);
 		return view(Views.USERS_VIEW);
 	}
 }
