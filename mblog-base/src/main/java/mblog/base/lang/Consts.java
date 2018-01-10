@@ -54,6 +54,7 @@ public interface Consts {
 		String FEATURED = "featured";
 		String NEWEST = "newest";
 		String HOTTEST = "hottest";
+		String FAVOR = "favors";
 	}
 
 	/**

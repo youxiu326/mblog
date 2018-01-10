@@ -60,8 +60,6 @@ public class PostServiceImpl implements PostService {
 	private FavorService favorService;
 	@Autowired
 	private PostAttributeDao postAttributeDao;
-	@Autowired
-	private FeedsService feedsService;
 
 	@Override
 	@Cacheable
@@ -69,7 +67,12 @@ public class PostServiceImpl implements PostService {
 		Page<PostPO> page = postDao.findAll((root, query, builder) -> {
 
 			List<Order> orders = new ArrayList<>();
-//			orders.add(builder.desc(root.<Long>get("featured")));
+
+			if (Consts.order.FAVOR.equals(ord)) {
+				orders.add(builder.desc(root.<Long>get("favors")));
+			} else if (Consts.order.HOTTEST.equals(ord)) {
+				orders.add(builder.desc(root.<Long>get("comments")));
+			}
 			orders.add(builder.desc(root.<Long>get("created")));
 
 			Predicate predicate = builder.conjunction();
