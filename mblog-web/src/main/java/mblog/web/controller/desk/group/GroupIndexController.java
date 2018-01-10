@@ -38,13 +38,13 @@ public class GroupIndexController extends BaseController {
 	public String root(@PathVariable String groupKey, ModelMap model,
 			HttpServletRequest request) {
 		// init params
-		String order = ServletRequestUtils.getStringParameter(request, "ord", Consts.order.NEWEST);
+		String order = ServletRequestUtils.getStringParameter(request, "order", Consts.order.NEWEST);
 		int pn = ServletRequestUtils.getIntParameter(request, "pn", 1);
 		Group group = groupService.getByKey(groupKey);
 		
 		// callback params
 		model.put("group", group);
-		model.put("ord", order);
+		model.put("order", order);
 		model.put("pn", pn);
 		return view(Views.ROUTE_POST_INDEX);
 	}

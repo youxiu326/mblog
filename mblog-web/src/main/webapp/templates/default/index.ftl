@@ -7,7 +7,7 @@
             <div class="panel-heading">
                 <ul class="list-inline topic-filter">
                     <li data-toggle="tooltip" title="发布时间排序">
-                        <a href="?order=" <#if !order?exists || order == ''> class="active" </#if>>最近</a>
+                        <a href="?order=" <#if order == 'newest'> class="active" </#if>>最近</a>
                     </li>
                     <li data-toggle="tooltip" title="点赞数排序">
                         <a href="?order=favors" <#if order == 'favors'> class="active" </#if>>投票</a>
