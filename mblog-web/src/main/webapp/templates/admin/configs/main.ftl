@@ -18,6 +18,8 @@
                         </li>
                         <li class=""><a href="#settings" data-toggle="tab" aria-expanded="false">系统配置</a>
                         </li>
+                        <li class=""><a href="#cache" data-toggle="tab" aria-expanded="false">缓存及索引</a>
+                        </li>
                     </ul>
                 </div>
 
@@ -29,6 +31,16 @@
                         </div>
                         <div class="tab-pane" id="settings">
                             <#include "/admin/configs/settings.ftl">
+                        </div>
+                        <div class="tab-pane" id="cache">
+                            <div class="btn-group" role="group" aria-label="...">
+                                <button type="button" class="btn btn-default" data-action="flush_conf">
+                                    刷新系统变量
+                                </button>
+                                <button type="button" class="btn btn-default" data-action="flush_indexs">
+                                    重建索引
+                                </button>
+                            </div>
                         </div>
                     </div>
                 </div>
@@ -55,7 +67,7 @@ function ajaxReload(json){
 
 $(function() {
 	// 刷新缓存
-    $('a[data-action="flush_cache"]').bind('click', function(){
+    $('button[data-action="flush_cache"]').bind('click', function(){
         if(confirm('确定要刷新Ehcache的缓存吗？')){
             J.getJSON('${base}/admin/config/flush_cache', ajaxReload);
         }
@@ -63,7 +75,7 @@ $(function() {
     });
 
     // 刷新系统变量
-    $('a[data-action="flush_conf"]').bind('click', function(){
+    $('button[data-action="flush_conf"]').bind('click', function(){
         if(confirm('确定要刷新系统变量的缓存吗？')){
             J.getJSON('${base}/admin/config/flush_conf', ajaxReload);
         }
@@ -71,7 +83,7 @@ $(function() {
     });
 
     // 重建索引
-    $('a[data-action="flush_indexs"]').bind('click', function(){
+    $('button[data-action="flush_indexs"]').bind('click', function(){
         if(confirm('确定要重建文章索引吗？')){
             J.getJSON('${base}/admin/config/flush_indexs', ajaxReload);
         }

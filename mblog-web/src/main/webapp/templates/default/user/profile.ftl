@@ -1,6 +1,5 @@
-<#include "/default/utils/layout.ftl"/>
-<@ui_simple "修改用户信息">
-<script type="text/javascript" src="${base}/assets/vendors/validate/jquery-validate.js"></script>
+<#include "/default/utils/ui.ftl"/>
+<@layout "修改用户信息">
 
 <div class="panel panel-default stacked">
 	<div class="panel-heading">
@@ -66,4 +65,4 @@ $(function () {
 	});
 });
 </script>
-</@ui_simple>
+</@layout>

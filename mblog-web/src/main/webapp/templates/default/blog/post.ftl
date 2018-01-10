@@ -1,5 +1,5 @@
-<#include "/default/utils/layout.ftl"/>
-<@ui_simple "写文章">
+<#include "/default/utils/ui.ftl"/>
+<@layout "写文章">
 <div class="panel panel-default">
 	<div class="panel-heading">
 		<i class="fa fa-pencil-square"></i> 写文章
@@ -55,4 +55,4 @@ seajs.use('post', function (post) {
 	post.init();
 });
 </script>
-</@ui_simple>
+</@layout>

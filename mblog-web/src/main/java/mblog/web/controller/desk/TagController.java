@@ -1,7 +1,7 @@
 /**
  *
  */
-package mblog.web.controller.desk.posts;
+package mblog.web.controller.desk;
 
 import mblog.core.data.Post;
 import mblog.core.persist.service.PostService;
@@ -26,19 +26,19 @@ public class TagController extends BaseController {
     @Autowired
     private PostService postService;
 
-    @RequestMapping("/tag/{tag}")
-    public String tag(@PathVariable String tag, ModelMap model) {
+    @RequestMapping("/tag/{kw}")
+    public String tag(@PathVariable String kw, ModelMap model) {
         Pageable pageable = wrapPageable();
         try {
-            if (StringUtils.isNotEmpty(tag)) {
-                Page<Post> page = postService.searchByTag(pageable, tag);
+            if (StringUtils.isNotEmpty(kw)) {
+                Page<Post> page = postService.searchByTag(pageable, kw);
                 model.put("page", page);
             }
         } catch (Exception e) {
             e.printStackTrace();
         }
 
-        model.put("tag", tag);
+        model.put("kw", kw);
         return view(Views.TAGS_TAG);
     }
 

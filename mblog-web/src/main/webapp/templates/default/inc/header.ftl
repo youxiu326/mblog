@@ -1,5 +1,3 @@
-<#include "/default/utils/utils.ftl">
-
 <!-- Login dialog BEGIN -->
 <div id="loginalert" style="display: none; top: 0px;" class="fade in">
     <div class="pd20 loginpd">

@@ -31,17 +31,17 @@ public class SearchController extends BaseController {
 	private PostService postService;
 
 	@RequestMapping("/search")
-	public String search(String q, ModelMap model) {
+	public String search(String kw, ModelMap model) {
 		Pageable pageable = wrapPageable();
 		try {
-			if (StringUtils.isNotEmpty(q)) {
-				Page<Post> page = postService.search(pageable, q);
+			if (StringUtils.isNotEmpty(kw)) {
+				Page<Post> page = postService.search(pageable, kw);
 				model.put("page", page);
 			}
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
-		model.put("q", q);
+		model.put("kw", kw);
 		return view(Views.BROWSE_SEARCH);
 	}
 	

@@ -1,5 +1,5 @@
-<#include "/default/utils/layout.ftl"/>
-<@ui_simple "修改用户信息">
+<#include "/default/utils/ui.ftl"/>
+<@layout "修改用户信息">
 
 <div class="panel panel-default stacked">
 	<div class="panel-heading">
@@ -27,7 +27,7 @@
 				</label>
 			</div>
 			<div class="update_ava">
-				<img src="<@resource src=profile.avatar/>" id="target" alt="[Jcrop Example]" />
+				<img src="<@resource src=profile.avatar/>" id="target" alt="[Example]" />
 			</div>
 
 			<div class="form-group">
@@ -42,4 +42,4 @@
 <script type="text/javascript">
     seajs.use('avatar');
 </script>
-</@ui_simple>
+</@layout>

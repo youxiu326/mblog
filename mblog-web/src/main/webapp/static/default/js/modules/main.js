@@ -22,7 +22,7 @@ define(function(require, exports, module) {
     var imagesLazyload = function () {
     	require.async('lazyload', function () {
     		$("img").lazyload({
-	   	   		 placeholder: app.base + '/assets/images/spinner.gif',
+	   	   		 placeholder: app.base + '/dist/images/spinner.gif',
 	   	   		 effect: "fadeIn"
 	   	   	});
         });
@@ -107,7 +107,7 @@ define(function(require, exports, module) {
 			}
 
 			if (parseInt(id) > 0) {
-				jQuery.getJSON(app.base +'/account/favor', {'id': id}, function (ret) {
+				jQuery.getJSON(app.base +'/user/favor', {'id': id}, function (ret) {
 					if (ret.code >=0) {
 						var favors = $('#favors').text();
 						$('#favors').text(parseInt(favors) + 1);
@@ -129,7 +129,7 @@ define(function(require, exports, module) {
 			}
 
 			if (parseInt(id) > 0) {
-				jQuery.getJSON(app.base +'/account/follow', {'id': id}, function (ret) {
+				jQuery.getJSON(app.base +'/user/follow', {'id': id}, function (ret) {
 					if (ret.code >=0) {
 						that.text("已关注");
 					} else {
@@ -144,7 +144,7 @@ define(function(require, exports, module) {
 			var id = that.attr('data-id');
 
 			if (parseInt(id) > 0) {
-				jQuery.getJSON(app.base +'/account/check_follow', {'id': id}, function (ret) {
+				jQuery.getJSON(app.base +'/user/check_follow', {'id': id}, function (ret) {
 					if (ret.code >=0 && ret.data) {
 						that.text("已关注");
 					}

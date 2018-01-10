@@ -1,5 +1,5 @@
-<#include "/default/utils/layout.ftl"/>
-<@ui_simple "编辑文章">
+<#include "/default/utils/ui.ftl"/>
+<@layout "编辑文章">
 
 <div class="panel panel-default">
 	<div class="panel-heading">
@@ -58,4 +58,4 @@ seajs.use('post', function (post) {
 	post.init();
 });
 </script>
-</@ui_simple>
+</@layout>

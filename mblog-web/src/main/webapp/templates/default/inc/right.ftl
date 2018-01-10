@@ -35,7 +35,7 @@
 
 var li_template = '<li>{0}. <a href="${base}/view/{1}">{2}</a></li>';
 
-var hotUser_li_template = '<li class=""><a  href="{1}"><img src="${base}{0}" class="imguser"/></a></li>'
+var hotUser_li_template = '<li><a href="{1}"><img src="${base}{0}" class="avatar avatar-small"/></a></li>'
 
 seajs.use('sidebox', function (sidebox) {
 	sidebox.init({

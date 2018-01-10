@@ -16,4 +16,7 @@ define(function(require, exports, module) {
     //    })
     //});
 
+    require.async('share', function () {
+    });
+
 });

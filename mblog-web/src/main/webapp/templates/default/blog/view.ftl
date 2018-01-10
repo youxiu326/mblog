@@ -1,159 +1,122 @@
-<#include "/default/utils/utils.ftl"/>
+<#include "/default/utils/ui.ftl"/>
 
-<!DOCTYPE html>
-<html lang="en-US">
+<#assign title = ret.title + ' - ' + site_name />
+<#assign keywords = ret.keywords?default(site_keywords) />
+<#assign description = ret.description?default(site_description) />
 
-<head>
-    <meta charset="utf-8"/>
-    <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-    <title>${ret.title?default(site_name)}</title>
-    <meta name="keywords" content="mtons, ${ret.tags?default(site_keywords)}">
-    <meta name="description" content="${ret.summary?default(site_description)}">
-<#include "/default/inc/include.ftl"/>
-</head>
-<body>
-<#include "/default/inc/header.ftl"/>
-<!--.site-main -->
-<div class="wrap" id="wrap">
-    <div class="container">
-        <div class="row">
-            <div class="main clearfix">
-                <!-- left -->
-                <div class="col-xs-12 col-md-9 side-left">
-                    <div class="shadow-box">
-                        <h1 class="post-title">${ret.title}</h1>
-                        <div class="clearfix post-other">
-            <span class="pull-left author">
-                <a class="author-name" href="${base}/ta/${ret.author.id}" target="_blank">${ret.author.name}</a>
-            </span>
-                            <time class="pull-left time">${ret.created?string('yyyy-MM-dd')}</time>
-                            <span class="pull-left time">浏览: ${ret.views}</span>
-                            <ul class="tags">
-                            <#list ret.tagsArray as tag>
-                                <li>
-                                    <a class="tag tag-sm" href="${base}/tag/${tag}/">${tag}</a>
-                                </li>
-                            </#list>
-                            </ul>
-                            <span class="pull-right action-box"></span>
-                        </div>
-                        <div class="post-frame">
-                            <div class="post-content">
-                            ${ret.content}
-                            </div>
-                            <div class="post-footer">
-                                <div class="tip">分享到：</div>
-                                <div class="shares">
-                                    <!-- Share Button BEGIN -->
-                                    <div class="bdsharebuttonbox bdshare-button-24">
-                                        <a href="#" class="bds_tsina" data-cmd="tsina" title="分享到新浪微博"></a>
-                                        <a href="#" class="bds_tqq" data-cmd="tqq" title="分享到腾讯微博"></a>
-                                        <a href="#" class="bds_weixin" data-cmd="weixin" title="分享到微信"></a>
-                                        <a href="#" class="bds_qzone" data-cmd="qzone" title="分享到QQ空间"></a>
-                                    </div>
-                                    <script>window._bd_share_config = {
-                                        "common": {
-                                            "bdSnsKey": {"tsina": "3554307689"},
-                                            "bdText": "",
-                                            "bdMini": "2",
-                                            "bdMiniList": false,
-                                            "bdPic": "",
-                                            "bdStyle": "1",
-                                            "bdSize": "24"
-                                        }, "share": {}
-                                    };
-                                    with (document)0[(getElementsByTagName('head')[0] || body).appendChild(createElement('script')).src = 'http://bdimg.share.baidu.com/static/api/js/share.js?v=89860593.js?cdnversion=' + ~(-new Date() / 36e5)];</script>
-                                    <style>
-                                        .bdshare-button-24 a, .bdshare-button-24 .bds_more {
-                                            background-image: url("${base}/assets/images/btn/icons_0_24.png");
-                                            border-radius: 4px;
-                                        }
+<@layout title keywords description>
+<div class="row main">
+    <div class="col-xs-12 col-md-9 side-left topics-show">
+        <!-- view show -->
+        <div class="topic panel panel-default">
+            <div class="infos panel-heading">
 
-                                        .bdshare-button-style1-24 a, .bdshare-button-style1-24 .bds_more {
-                                            padding-left: 24px;
-                                        }
-                                    </style>
-                                    <!-- Share Button END -->
-                                </div>
-                            </div>
-                        </div>
+                <h1 class="panel-title topic-title">${ret.title}</h1>
+
+                <div class="meta inline-block">
+
+                    <a class="author" href="#">
+                    ${ret.author.name}
+                    </a>
+                    <abbr class="timeago">${timeAgo(ret.created)}</abbr>
+                    ⋅
+                ${ret.views} 阅读
+
+                </div>
+                <div class="clearfix"></div>
+            </div>
+
+            <div class="content-body entry-content panel-body ">
+                <div class="markdown-body" id="emojify">
+                ${ret.content}
+                </div>
+            </div>
+            <div class="panel-footer operate">
+                <#list ret.tagsArray as tag>
+                    <span>
+                            <a class="label label-default" href="${base}/tag/${tag}/">#${tag}</a>
+                        </span>
+                </#list>
+            </div>
+            <div class="panel-footer operate">
+                <div class="hidden-xs">
+                    <div class="social-share" data-sites="weibo, wechat, facebook, twitter, google, qzone, qq"></div>
+                </div>
+                <div class="clearfix"></div>
+            </div>
+        </div>
+
+        <!-- Comments -->
+        <div id="chat" class="chats shadow-box">
+            <div class="chat_other">
+                <h4>全部评论: <i id="chat_count">0</i> 条</h4>
+            </div>
+            <ul id="chat_container" class="its"></ul>
+            <div id="pager" class="text-center"></div>
+            <div class="cbox-wrap">
+                <div class="cbox-title">我有话说: <span id="chat_reply" style="display:none;">@<i
+                        id="chat_to"></i></span>
+                </div>
+                <div class="cbox-post">
+                    <div class="cbox-input">
+                        <textarea id="chat_text" rows="3" placeholder="请输入评论内容"></textarea>
+                        <input type="hidden" value="0" name="chat_pid" id="chat_pid"/>
                     </div>
-                    <!-- post/end -->
-
-                    <div id="chat" class="chats shadow-box">
-                        <div class="chat_other">
-                            <h4>全部评论: <i id="chat_count">0</i> 条</h4>
+                    <div class="cbox-ats clearfix">
+                        <div class="ats-func">
+                            <ul class="func-list">
+                                <li class="list-b">
+                                    <a href="javascript:void(0);" class="join" id="c-btn"><i
+                                            class="fa fa-smile-o fa-2"></i></a>
+                                </li>
+                            </ul>
                         </div>
-                        <ul id="chat_container" class="its"></ul>
-                        <div id="pager" class="text-center"></div>
-                        <div class="cbox-wrap">
-                            <div class="cbox-title">我有话说: <span id="chat_reply" style="display:none;">@<i
-                                    id="chat_to"></i></span>
-                            </div>
-                            <div class="cbox-post">
-                                <div class="cbox-input">
-                                    <textarea id="chat_text" rows="3" placeholder="请输入评论内容"></textarea>
-                                    <input type="hidden" value="0" name="chat_pid" id="chat_pid"/>
-                                </div>
-                                <div class="cbox-ats clearfix">
-                                    <div class="ats-func">
-                                        <ul class="func-list">
-                                            <li class="list-b">
-                                                <a href="javascript:void(0);" class="join" id="c-btn"><i
-                                                        class="fa fa-smile-o fa-2"></i></a>
-                                            </li>
-                                        </ul>
-                                    </div>
-                                    <div class="ats-issue">
-                                        <button id="btn-chat" class="btn btn-success btn-sm bt">发送</button>
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="phiz-box" id="c-phiz" style="display:none">
-                                <div class="phiz-list" view="c-phizs"></div>
-                            </div>
+                        <div class="ats-issue">
+                            <button id="btn-chat" class="btn btn-success btn-sm bt">发送</button>
                         </div>
                     </div>
                 </div>
-                <!-- right sidebar-->
-                <div class="col-xs-12 col-md-3 side-right hidden-xs hidden-sm">
-                    <ul class="list-group about-user">
-                        <li class="list-group-item user-card" >
-                            <div class="ava">
-                                <a href="${base}/ta/${ret.author.id}">
-                                    <@showAva ret.author.avatar "img-circle"/>
-                                </a>
-                            </div>
-                            <div class="user-info">
-                                <div class="nk mb10">${ret.author.name}</div>
-                                <div class="mb6">
-                                    <a class="btn btn-success btn-xs" href="javascript:void(0);" data-id="${ret.author.id}" rel="follow">+ 关注</a>
-                                </div>
-                            </div>
-                        </li>
-
-                        <li class="list-group-item">
-                            <div class="user-datas">
-                                <ul>
-                                    <li><strong>${ret.author.posts}</strong><span>发布</span></li>
-                                    <li class="noborder"><strong>${ret.author.comments}</strong><span>评论</span></li>
-                                </ul>
-                            </div>
-                        </li>
-                    </ul>
-                    <ul class="list-group">
-                        <li class="list-group-item">
-                            <a class="btn btn-success btn-sm" href="javascript:void(0);" data-id="${ret.id}" rel="favor">喜欢</a>
-                            <strong id="favors">${ret.favors}</strong> 喜欢
-                        </li>
-                    </ul>
-                <#include "/default/inc/right.ftl"/>
+                <div class="phiz-box" id="c-phiz" style="display:none">
+                    <div class="phiz-list" view="c-phizs"></div>
                 </div>
             </div>
         </div>
+        <!-- /view show -->
+    </div>
+    <div class="col-xs-12 col-md-3 side-right hidden-xs hidden-sm">
+        <ul class="list-group about-user">
+            <li class="list-group-item user-card" >
+                <div class="ava">
+                    <a href="${base}/ta/${ret.author.id}">
+                        <@showAva ret.author.avatar "img-circle"/>
+                    </a>
+                </div>
+                <div class="user-info">
+                    <div class="nk mb10">${ret.author.name}</div>
+                    <div class="mb6">
+                        <a class="btn btn-success btn-xs" href="javascript:void(0);" data-id="${ret.author.id}" rel="follow">+ 关注</a>
+                    </div>
+                </div>
+            </li>
+
+            <li class="list-group-item">
+                <div class="user-datas">
+                    <ul>
+                        <li><strong>${ret.author.posts}</strong><span>发布</span></li>
+                        <li class="noborder"><strong>${ret.author.comments}</strong><span>评论</span></li>
+                    </ul>
+                </div>
+            </li>
+            <li class="list-group-item">
+                <div class="text-center padding-md">
+                    <a class="btn btn-success btn-sm" href="javascript:void(0);" data-id="${ret.id}" rel="favor">喜欢</a>
+                    <strong id="favors">${ret.favors}</strong> 喜欢
+                </div>
+            </li>
+        </ul>
+        <#include "/default/inc/right.ftl"/>
     </div>
 </div>
-<#include "/default/inc/footer.ftl"/>
 
 <script type="text/plain" id="chat_template">
     <li id="chat{5}">
@@ -215,9 +178,9 @@
         });
     });
 
-    seajs.use('phiz', function (phiz) {
+    seajs.use(['phiz', 'view'], function (phiz) {
         $("#c-btn").jphiz({
-            base: '${base}/assets',
+            base: '${base}/dist',
             textId: 'chat_text',
             lnkBoxId: 'c-lnk',
             phizBoxId: 'c-phiz'
@@ -225,5 +188,4 @@
     });
 
 </script>
-</body>
-</html>
+</@layout>

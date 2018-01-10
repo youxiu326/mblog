@@ -7,8 +7,10 @@ ${site_metas}
 <link rel="stylesheet" media='all' href="${base}/dist/vendors/bootstrap/css/bootstrap.min.css">
 <link rel="stylesheet" media='all' href="${base}/dist/vendors/animate/animate.min.css">
 <link rel='stylesheet' media='all' href="${base}/dist/vendors/baguette/baguetteBox.min.css"/>
+<link rel='stylesheet' media='all' href="${base}/dist/vendors/share.js/css/share.min.css"/>
 
 <link rel='stylesheet' media='all' href="${base}/static/default/css/style.css"/>
+<link rel='stylesheet' media='all' href="${base}/static/default/css/plugins.css"/>
 
 <script type="text/javascript" src="${base}/dist/js/jquery.min.js"></script>
 <script type="text/javascript" src="${base}/dist/js/jquery-migrate-1.2.1.min.js"></script>
