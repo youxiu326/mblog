@@ -83,8 +83,8 @@ public class PostServiceImpl implements PostService {
 				orders.add(builder.desc(root.<Long>get("views")));
 			}
 
-			predicate.getExpressions().add(
-					builder.equal(root.get("featured").as(Integer.class), Consts.FEATURED_DEFAULT));
+//			predicate.getExpressions().add(
+//					builder.equal(root.get("featured").as(Integer.class), Consts.FEATURED_DEFAULT));
 
 			query.orderBy(orders);
 
