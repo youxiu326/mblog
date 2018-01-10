@@ -49,7 +49,8 @@ public class FeedsServiceImpl implements FeedsService {
 		feedsDao.save(po);
 
 		// 派发给粉丝
-		return feedsDao.batchAdd(feeds);
+		int count = feedsDao.batchAdd(feeds);
+		return count;
 	}
 
 	@Override
