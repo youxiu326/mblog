@@ -32,7 +32,7 @@
 						<#else>
 							<span class="label label-warning">未验证</span>
 						</#if>
-						<a href="${base}/account/email">修改邮箱</a>
+						<a href="${base}/user/email">修改邮箱</a>
 					</div>
 				</div>
 				<div class="form-group">

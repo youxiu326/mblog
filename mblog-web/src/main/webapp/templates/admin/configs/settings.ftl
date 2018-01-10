@@ -69,29 +69,6 @@
         </div>
     </div>
 
-    <div class="group-left-border">
-        <div class="group-title">邮件服务配置</div>
-        <div class="form-group">
-            <label class="col-lg-2 control-label">服务器地址</label>
-            <div class="col-lg-3">
-                <input type="text" name="site_mail_host" class="form-control" value="${configs['site_mail_host'].value}">
-                <p class="help-block">示例: smtp.163.com</p>
-            </div>
-        </div>
-        <div class="form-group">
-            <label class="col-lg-2 control-label">用户名</label>
-            <div class="col-lg-3">
-                <input type="text" name="site_mail_username" class="form-control" value="${configs['site_mail_username'].value}">
-            </div>
-        </div>
-        <div class="form-group">
-            <label class="col-lg-2 control-label">密码</label>
-            <div class="col-lg-3">
-                <input type="password" name="site_mail_password" class="form-control" value="${configs['site_mail_password'].value}">
-            </div>
-        </div>
-    </div>
-
     <div class="form-group">
         <div class="col-lg-9 col-lg-offset-3">
             <button type="submit" class="btn btn-primary btn-small">提交</button>

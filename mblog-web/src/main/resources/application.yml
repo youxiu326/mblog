@@ -34,9 +34,9 @@ spring:
             max-file-size: 5MB
 
     mail:
-        host: smtp.exmail.qq.com
-        username: example@qq.com
-        password: {your password}
+        host: smtp.mtons.com
+        username: example@mtons.com
+        password: Example2018
         port: 25
         properties:
             mail.smtp.auth: true

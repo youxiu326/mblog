@@ -19,13 +19,6 @@ public interface SiteConfig {
     String SITE_ICP = "site_icp"; // 备案号
     
     /**
-     * 系统类配置
-     */
-    String SITE_MAIL_HS = "site_mail_host"; // 邮件服务地址
-    String SITE_MAIL_UN = "site_mail_username"; // 邮件账号名
-
-    String SITE_MAIL_PW = "site_mail_password"; // 邮件密码
-    /**
      * 第三方回调地址
      */
     String SITE_OAUTH_QQ = "site_oauth_qq"; // 第三方登录-QQ回调地址
