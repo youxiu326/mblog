@@ -1,5 +1,6 @@
 <#include "/default/utils/layout.ftl"/>
-<@ui_ltr group.name>
+<#include "/default/utils/utils.ftl"/>
+<@ui_ltr "搜索：" + q>
 
     <div class="shadow-box">
         <!-- tab -->
