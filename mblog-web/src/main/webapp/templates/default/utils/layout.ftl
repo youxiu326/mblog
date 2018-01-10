@@ -1,4 +1,4 @@
-<#-- layout simple -->
+
 <#macro ui_simple title keywords description>
 <!DOCTYPE html>
 <html lang="en" class="app">

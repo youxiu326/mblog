@@ -39,7 +39,7 @@ public class TagController extends BaseController {
         }
 
         model.put("tag", tag);
-        return getView(Views.TAGS_TAG);
+        return view(Views.TAGS_TAG);
     }
 
 }

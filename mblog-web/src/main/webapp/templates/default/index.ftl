@@ -1,52 +1,78 @@
-<#include "/default/utils/layout.ftl"/>
-<#include "/default/utils/utils.ftl"/>
+<#include "/default/utils/ui.ftl"/>
 
-<@ui_ltr site_name>
-<!--推荐展示-->
-<div class="content">
-    <div class="recommend hidden-xs hidden-sm"">
-        <ul>
-			<@banner>
-				<#list results as row>
-                    <li <#if row_index == 0> class="large" </#if>>
-                        <a href="${base}/view/${row.id}">
-							<@albShow row.albums[0]/>
-                            <h4>${row.title}</h4>
-                        </a>
+<@layout>
+<div class="row streams">
+    <div class="col-xs-12 col-md-9 side-left">
+        <div class="panel panel-default">
+            <div class="panel-heading">
+                <ul class="list-inline topic-filter">
+                    <li data-toggle="tooltip" title="发布时间排序">
+                        <a href="?order=" <#if !order?exists || order == ''> class="active" </#if>>最近</a>
                     </li>
-				</#list>
-			</@banner>
-        </ul>
+                    <li data-toggle="tooltip" title="点赞数排序">
+                        <a href="?order=favors" <#if order == 'favors'> class="active" </#if>>投票</a>
+                    </li>
+                    <li data-toggle="tooltip" title="评论次数排序">
+                        <a href="?order=hottest" <#if order == 'hottest'> class="active" </#if>>热门</a>
+                    </li>
+                </ul>
+                <div class="clearfix"></div>
+            </div>
+
+            <@contents group=0 pn=pn ord=ord>
+
+                <div class="panel-body remove-padding-horizontal">
+
+                    <ul class="list-group row topic-list">
+                        <#list results.content as row>
+                            <li class="list-group-item ">
+                                <a class="reply_count_area hidden-xs pull-right" href="#">
+                                    <div class="count_set">
+                                        <span class="count_of_votes" title="阅读数">${row.views}</span>
+                                        <span class="count_seperator">/</span>
+                                        <span class="count_of_replies" title="回复数">${row.comments}</span>
+                                        <span class="count_seperator">/</span>
+                                        <span class="count_of_visits" title="点赞数">${row.favors}</span>
+                                        <span class="count_seperator">|</span>
+                                        <abbr class="timeago">${timeAgo(row.created)}</abbr>
+                                    </div>
+                                </a>
+                                <div class="avatar pull-left">
+                                    <a href="${base}/ta/${row.author.id}">
+                                        <img class="media-object img-thumbnail avatar avatar-middle"
+                                             src="${base + row.author.avatar}">
+                                    </a>
+                                </div>
+                                <div class="infos">
+                                    <div class="media-heading">
+                                    <#--<span class="hidden-xs label label-warning">${row.group.name}</span>-->
+                                        <a href="${base}/view/${row.id}">${row.title}</a>
+                                    </div>
+                                </div>
+                            </li>
+                        </#list>
+
+                        <#if  results.content?size == 0>
+                            <li class="list-group-item ">
+                                <div class="infos">
+                                    <div class="media-heading">该目录下还没有内容!</div>
+                                </div>
+                            </li>
+                        </#if>
+                    </ul>
+                </div>
+
+                <div class="panel-footer text-right remove-padding-horizontal pager-footer">
+                    <!-- Pager -->
+                    <@pager request.requestURI!"", results, 5/>
+                </div>
+            </@contents>
+        </div>
+    </div>
+    <div class="col-xs-12 col-md-3 side-right">
+        <#include "/default/inc/right.ftl" />
     </div>
 </div>
 
-<@contents group=0>
-    <div class="shadow-box">
-    	<!-- tab -->
-    	<div class="filter">
-    		<ul class="">
-    			<li><a <#if ord == 'newest'> class="active" </#if> href="${base}/?ord=newest">最新的</a></li>
-    			<li><a <#if ord == 'hottest'> class="active" </#if> href="${base}/?ord=hottest">热门的</a></li>
-    		</ul>
-    	</div>
-    	<!-- tab end -->
-    	<!-- tab panes -->
-    	<div class="stream-list p-stream">
-			<#list results.content as row>
-    			<@showBlog row/>
-			</#list>
-    
-    		<#if  results.content?size == 0>
-    		<div class="stream-item">
-    			该目录下还没有内容!
-    		</div>
-			</#if>
-    	</div>
-    </div>
-    <div class="text-center clr">
-    	<#assign url = "index?ord=" + ord>
-    	<@pager url results 5 />
-    </div>
-</@contents>
 
-</@ui_ltr>
+</@layout>

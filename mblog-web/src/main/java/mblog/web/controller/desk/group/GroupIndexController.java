@@ -46,7 +46,7 @@ public class GroupIndexController extends BaseController {
 		model.put("group", group);
 		model.put("ord", order);
 		model.put("pn", pn);
-		return getView(Views.ROUTE_POST_INDEX);
+		return view(Views.ROUTE_POST_INDEX);
 	}
 	
 }

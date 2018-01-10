@@ -43,7 +43,7 @@ public class PostController extends BaseController {
 	@RequestMapping(value = "/new", method = RequestMethod.GET)
 	public String view(ModelMap model) {
 		model.put("groups", groupService.findAll(Consts.STATUS_NORMAL));
-		return getView(Views.ROUTE_POST_PUBLISH);
+		return view(Views.ROUTE_POST_PUBLISH);
 	}
 
 	/**
@@ -65,7 +65,7 @@ public class PostController extends BaseController {
 
 			postService.post(p);
 		}
-		return Views.REDIRECT_HOME_POSTS;
+		return Views.REDIRECT_USER_POSTS;
 	}
 
 	/**
@@ -105,7 +105,7 @@ public class PostController extends BaseController {
 
 		model.put("groups", groupService.findAll(Consts.STATUS_NORMAL));
 		model.put("view", ret);
-		return getView(Views.ROUTE_POST_UPDATE);
+		return view(Views.ROUTE_POST_UPDATE);
 	}
 
 	/**
@@ -122,7 +122,7 @@ public class PostController extends BaseController {
 			extractImages(p);
 			postService.update(p);
 		}
-		return Views.REDIRECT_HOME_POSTS;
+		return Views.REDIRECT_USER_POSTS;
 	}
 
 }

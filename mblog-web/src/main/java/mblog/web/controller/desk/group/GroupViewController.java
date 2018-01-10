@@ -40,6 +40,6 @@ public class GroupViewController extends BaseController {
 		
 		postService.identityViews(id);
 		model.put("ret", ret);
-		return getView(Views.ROUTE_POST_VIEW);
+		return view(Views.ROUTE_POST_VIEW);
 	}
 }

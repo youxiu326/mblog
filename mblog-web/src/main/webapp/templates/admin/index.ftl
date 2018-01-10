@@ -49,7 +49,7 @@
     </div>
 </div>
 
-<script type='text/javascript' src='${base}/assets/vendors/Chart.js/dist/Chart.min.js'></script>
+<script type='text/javascript' src='${base}/dist/vendors/Chart.js/dist/Chart.min.js'></script>
 <script>
 	$(function () {
         var ctx = document.getElementById("canvas");

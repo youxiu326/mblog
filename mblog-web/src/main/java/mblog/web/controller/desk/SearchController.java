@@ -42,7 +42,7 @@ public class SearchController extends BaseController {
 			e.printStackTrace();
 		}
 		model.put("q", q);
-		return getView(Views.BROWSE_SEARCH);
+		return view(Views.BROWSE_SEARCH);
 	}
 	
 }

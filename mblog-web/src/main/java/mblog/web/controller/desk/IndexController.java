@@ -30,7 +30,7 @@ public class IndexController extends BaseController{
 	public String root(ModelMap model, HttpServletRequest request) {
 		String order = ServletRequestUtils.getStringParameter(request, "ord", Consts.order.NEWEST);
 		model.put("ord", order);
-		return getView(Views.INDEX);
+		return view(Views.INDEX);
 	}
 
 }

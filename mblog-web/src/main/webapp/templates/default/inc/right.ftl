@@ -1,41 +1,39 @@
-<div class="widget-box shadow-box">
-	<div class="title">
-		<h3><i class="fa fa-users "></i> 热门用户</h3>
+<div class="panel panel-default corner-radius panel-hot-topics">
+	<div class="panel-heading text-center">
+		<h3 class="panel-title"><i class="fa fa-users "></i> 热门用户</h3>
 	</div>
-	<ul id="hotuser" class="hotusers">
-
-        <img src="${base}/assets/images/spinner.gif">
-
-	</ul>
+	<div class="panel-body">
+		<ul class="hotusers" id="hotuser">
+            <img src="${base}/dist/images/spinner.gif">
+		</ul>
+	</div>
 </div>
 
-<div class="widget-box shadow-box">
-	<div class="title">
-		<h3>
-		<i class="fa fa-area-chart"></i> 热门文章
-			<#--<a href="" class="rrh-refresh"><i class="fa fa-refresh"></i>换一批</a>-->
-		</h3>
-		
+<div class="panel panel-default corner-radius panel-hot-topics">
+	<div class="panel-heading text-center">
+		<h3 class="panel-title"><i class="fa fa-area-chart"></i> 热门文章</h3>
 	</div>
-	<ul class="box-list" id="hots">
-		<li class="text-center"><img src="${base}/assets/images/spinner.gif"></li>
-	</ul>
+	<div class="panel-body">
+		<ul class="list" id="hots">
+            <img src="${base}/dist/images/spinner.gif">
+		</ul>
+	</div>
 </div>
 
-<div class="widget-box shadow-box">
-	<div class="title">
-		<h3><i class="fa fa-bars"></i> 最新发布
-		<#--<a href="" class="rrh-refresh">查看更多</a></h3>-->
+<div class="panel panel-default corner-radius panel-hot-topics">
+	<div class="panel-heading text-center">
+		<h3 class="panel-title"><i class="fa fa-bars"></i> 最新发布</h3>
 	</div>
-	<ul class="box-list" id="latests">
-        <li class="text-center"><img src="${base}/assets/images/spinner.gif"></li>
-	</ul>
+	<div class="panel-body">
+		<ul class="list" id="latests">
+			<img src="${base}/dist/images/spinner.gif">
+		</ul>
+	</div>
 </div>
-
 
 <script type="text/javascript">
-var hot_li_template = '<li><div class="li-out"><span class="last"><i>{0}</i></span><span class="name"><a  href="{1}">{2}</a></span><span class="nums">{3}</span></div></li>'
-var latest_li_template = '<li><div class="li-out"><span class="name"><a  href="{1}">{2}</a></span><span class="nums">{3}</span></div></li>'
+
+var li_template = '<li>{0}. <a href="${base}/view/{1}">{2}</a></li>';
 
 var hotUser_li_template = '<li class=""><a  href="{1}"><img src="${base}{0}" class="imguser"/></a></li>'
 
@@ -49,14 +47,10 @@ seajs.use('sidebox', function (sidebox) {
     	maxResults :10,
         // callback
         onLoadHot : function (i, data) {
-        	var url = '${base}/view/' + data.id;
-      		var item = jQuery.format(hot_li_template, i + 1, url, data.title, numberScale(data.views));
-      		return item;
+      		return jQuery.format(li_template, i + 1, data.id, data.title);
         },
         onLoadLatest : function (i, data) {
-        	var url = '${base}/view/' + data.id;
-      		var item = jQuery.format(latest_li_template, i + 1, url, data.title, numberScale(data.views));
-      		return item;
+      		return jQuery.format(li_template, i + 1, data.id, data.title);
         },
         onLoadHotUser : function (i, data) {
         var url = '${base}/ta/' + data.id;

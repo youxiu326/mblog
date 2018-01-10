@@ -11,27 +11,27 @@
     <title>${site_name} - 后台管理</title>
 
     <!-- Bootstrap -->
-    <link href="${base}/assets/vendors/bootstrap/css/bootstrap.min.css" rel="stylesheet">
+    <link href="${base}/dist/vendors/bootstrap/css/bootstrap.min.css" rel="stylesheet">
     <!-- Font Awesome -->
-    <link href="${base}/assets/vendors/font-awesome/css/font-awesome.min.css" rel="stylesheet">
-    <link href="${base}/assets/vendors/treeTable/themes/vsStyle/treeTable.min.css" rel="stylesheet"/>
+    <link href="${base}/dist/vendors/font-awesome/css/font-awesome.min.css" rel="stylesheet">
+    <link href="${base}/dist/vendors/treeTable/themes/vsStyle/treeTable.min.css" rel="stylesheet"/>
 
     <!-- Custom Theme Style -->
-    <link href="${base}/assets/admin/css/custom.min.css" rel="stylesheet">
+    <link href="${base}/static/admin/css/custom.min.css" rel="stylesheet">
 
     <!-- jQuery -->
-    <script src="${base}/assets/js/jquery.min.js"></script>
+    <script src="${base}/dist/js/jquery.min.js"></script>
     <!-- Bootstrap -->
-    <script src="${base}/assets/vendors/bootstrap/js/bootstrap.min.js"></script>
-    <script src='${base}/assets/vendors/validate/jquery-validate.js'></script>
+    <script src="${base}/dist/vendors/bootstrap/js/bootstrap.min.js"></script>
+    <script src='${base}/dist/vendors/validate/jquery-validate.js'></script>
     <!-- FastClick -->
-    <script src="${base}/assets/vendors/fastclick/lib/fastclick.js"></script>
+    <script src="${base}/dist/vendors/fastclick/lib/fastclick.js"></script>
 
-    <script src="${base}/assets/vendors/layer/layer.js"></script>
-    <script src="${base}/assets/vendors/treeTable/jquery.treeTable.min.js"></script>
+    <script src="${base}/dist/vendors/layer/layer.js"></script>
+    <script src="${base}/dist/vendors/treeTable/jquery.treeTable.min.js"></script>
 
     <script type="text/javascript">
-        window.UEDITOR_HOME_URL = '${base}/assets/vendors/ueditor/';
+        window.UEDITOR_HOME_URL = '${base}/dist/vendors/ueditor/';
     </script>
 </head>
 <body class="nav-md">

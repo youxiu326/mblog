@@ -37,7 +37,7 @@ public interface FollowDao extends JpaRepository<FollowPO, Long>, JpaSpecificati
 
 	/**
 	 * 查询我的关注
-	 * 
+	 *
 	 * @param pageable
 	 * @param user
 	 */
