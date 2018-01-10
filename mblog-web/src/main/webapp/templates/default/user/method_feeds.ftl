@@ -29,7 +29,7 @@
                                 </div>
                             </a>
                             <div class="avatar pull-left">
-                                <a href="${base}/ta/${target.author.id}">
+                                <a href="${base}/users/${target.author.id}">
                                     <img class="media-object img-thumbnail avatar avatar-middle"
                                          src="${base + target.author.avatar}">
                                 </a>

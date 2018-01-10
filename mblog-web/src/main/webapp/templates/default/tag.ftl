@@ -31,7 +31,7 @@
                                 </div>
                             </a>
                             <div class="avatar pull-left">
-                                <a href="${base}/ta/${row.author.id}">
+                                <a href="${base}/users/${row.author.id}">
                                     <img class="media-object img-thumbnail avatar avatar-middle"
                                          src="${base + row.author.avatar}">
                                 </a>

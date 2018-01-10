@@ -87,7 +87,7 @@
         <ul class="list-group about-user">
             <li class="list-group-item user-card" >
                 <div class="ava">
-                    <a href="${base}/ta/${ret.author.id}">
+                    <a href="${base}/users/${ret.author.id}">
                         <@showAva ret.author.avatar "img-circle"/>
                     </a>
                 </div>
@@ -120,12 +120,12 @@
 
 <script type="text/plain" id="chat_template">
     <li id="chat{5}">
-        <a class="avt fl" target="_blank" href="${base}/ta/{0}">
+        <a class="avt fl" target="_blank" href="${base}/users/{0}">
             <img src="${base}{1}">
         </a>
         <div class="chat_body">
             <h5>
-                <div class="fl"><a class="chat_name" href="${base}/ta/{0}">{2}</a><span>{3}</span></div>
+                <div class="fl"><a class="chat_name" href="${base}/users/{0}">{2}</a><span>{3}</span></div>
                 <div class="fr reply_this"><a href="javascript:void(0);" onclick="goto('{5}', '{2}')">[回复]</a></div>
                 <div class="clear"></div>
             </h5>
@@ -164,7 +164,7 @@
                 if (data.pid > 0 && !(data.parent === null)) {
                     var pat = data.parent;
                     var pcontent = ContentRender.wrapItem(pat.content);
-                    quoto = '<div class="quote"><a href="${base}/ta/' + pat.author.id + '">@' + pat.author.name + '</a>: ' + pcontent + '</div>';
+                    quoto = '<div class="quote"><a href="${base}/users/' + pat.author.id + '">@' + pat.author.name + '</a>: ' + pcontent + '</div>';
                 }
                 var item = jQuery.format(template,
                         data.author.id,

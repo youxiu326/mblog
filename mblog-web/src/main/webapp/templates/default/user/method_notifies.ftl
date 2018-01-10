@@ -22,7 +22,7 @@
                                 </div>
                             </a>
                             <div class="avatar pull-left">
-                                <a href="${base}/ta/${row.from.id}">
+                                <a href="${base}/users/${row.from.id}">
                                     <img class="media-object img-thumbnail avatar avatar-middle"
                                          src="${base + row.from.avatar}">
                                 </a>
@@ -30,7 +30,7 @@
                             <div class="infos">
                                 <div class="media-heading">
                                 <#--<span class="hidden-xs label label-warning">${row.group.name}</span>-->
-                                    <a href="${base}/ta/${target.id}">${row.from.name}</a>
+                                    <a href="${base}/users/${target.id}">${row.from.name}</a>
                                     <span>
                                         <#if (row.event == 1)>
                                             喜欢了你的文章 - <a href="${base}/view/${row.postId}">${row.post.title}</a>

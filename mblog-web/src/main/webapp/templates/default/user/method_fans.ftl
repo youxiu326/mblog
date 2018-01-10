@@ -23,7 +23,7 @@
                                 </div>
                             </div>
                             <div class="avatar pull-left">
-                                <a href="${base}/ta/${row.id}">
+                                <a href="${base}/users/${row.id}">
                                     <img class="media-object img-thumbnail avatar avatar-middle"
                                          src="${base + row.avatar}">
                                 </a>
@@ -31,7 +31,7 @@
                             <div class="infos">
                                 <div class="media-heading">
                                 <#--<span class="hidden-xs label label-warning">${row.group.name}</span>-->
-                                    <a href="${base}/ta/${row.id}">${row.name}</a>
+                                    <a href="${base}/users/${row.id}">${row.name}</a>
                                 </div>
                             </div>
                         </li>
