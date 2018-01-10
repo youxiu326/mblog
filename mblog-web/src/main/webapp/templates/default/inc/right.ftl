@@ -2,7 +2,7 @@
 	<div class="panel-heading text-center">
 		<h3 class="panel-title"><i class="fa fa-users "></i> 热门用户</h3>
 	</div>
-	<div class="panel-body">
+	<div class="panel-body remove-padding-horizontal">
 		<ul class="hotusers" id="hotuser">
             <img src="${base}/dist/images/spinner.gif">
 		</ul>

@@ -40,7 +40,7 @@ public class ContentsDirective extends TemplateDirective {
         Integer group = handler.getInteger("group", 0);
         String order = handler.getString("order", Consts.order.NEWEST);
 
-        Pageable pageable = new PageRequest(pn - 1, 10);
+        Pageable pageable = new PageRequest(pn - 1, 15);
         Page<Post> result = postService.paging(pageable, group, order, true);
 
         handler.put(RESULTS, result).render();
