@@ -15,6 +15,8 @@ import mblog.web.controller.desk.Views;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.ModelMap;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 
@@ -34,7 +36,7 @@ public class RegisterController extends BaseController {
 	@Autowired
 	private MailHelper mailHelper;
 	
-	@RequestMapping(value = "/register", method = RequestMethod.GET)
+	@GetMapping("/register")
 	public String view() {
 		AccountProfile profile = getSubject().getProfile();
 		if (profile != null) {
@@ -43,7 +45,7 @@ public class RegisterController extends BaseController {
 		return view(Views.REGISTER);
 	}
 	
-	@RequestMapping(value = "/register", method = RequestMethod.POST)
+	@PostMapping("/register")
 	public String register(User post, ModelMap model) {
 		Data data;
 		String ret = view(Views.REGISTER);

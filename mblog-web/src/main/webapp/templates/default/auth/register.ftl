@@ -8,11 +8,7 @@
                 <h3 class="panel-title">注册</h3>
             </div>
             <div class="panel-body">
-                <div id="message">
-                    <#if message??>
-                        <div class="alert alert-danger">${message}</div>
-                    </#if>
-                </div>
+                <div id="message"><#include "/default/inc/action_message.ftl"/></div>
                 <form method="POST" action="register" accept-charset="UTF-8">
                     <div class="form-group ">
                         <label class="control-label" for="username">用户名</label>
@@ -56,7 +52,7 @@
             },
             conditional : {
                 confirm : function() {
-                    return $(this).val() == $('#password').val();
+                    return $(this).val() == $('input[name=password]').val();
                 },
                 email : function() {
                     return /^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$/.test($(this).val());

@@ -37,7 +37,7 @@ define(function(require, exports, module) {
   
 	function initJcrop() {
 		$('#target').Jcrop({
-			boxWidth:300,
+			boxWidth:240,
       		aspectRatio: 100 / 100,
 			onChange:   showCoords,
       		onSelect:   showCoords,
