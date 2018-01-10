@@ -27,7 +27,7 @@
 				<label for="desc" class="col-sm-2 control-label no-padding-right">内容</label>
 				<input type="hidden" name="editor" value="$!{site_editor}"/>
 				<div class="col-sm-8">
-					<#include "/default/blog/editor/ueditor.ftl"/>
+					<#include "/default/group/editor/ueditor.ftl"/>
 				</div>
 			</div>
 			<div class="form-group">
