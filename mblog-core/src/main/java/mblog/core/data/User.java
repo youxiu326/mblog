@@ -32,6 +32,7 @@ public class User implements Serializable {
 	private int posts; // 文章数
 	private int comments; // 发布评论数
 	private int follows; // 关注人数
+	private int fans; // 粉丝数
 	private int favors; // 收到的喜欢数
 
 	private Date created;
@@ -171,6 +172,14 @@ public class User implements Serializable {
 
 	public void setFollows(int follows) {
 		this.follows = follows;
+	}
+
+	public int getFans() {
+		return fans;
+	}
+
+	public void setFans(int fans) {
+		this.fans = fans;
 	}
 
 	public int getFavors() {
