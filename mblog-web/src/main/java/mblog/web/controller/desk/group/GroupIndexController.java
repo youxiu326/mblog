@@ -34,7 +34,7 @@ public class GroupIndexController extends BaseController {
 	@Autowired
 	private GroupService groupService;
 	
-	@RequestMapping("/g/{groupKey}")
+	@RequestMapping("/group/{groupKey}")
 	public String root(@PathVariable String groupKey, ModelMap model,
 			HttpServletRequest request) {
 		// init params
