@@ -14,7 +14,7 @@ public interface Consts {
 	/**
 	 * 默认头像
 	 */
-	String AVATAR = "/assets/images/ava/default.png";
+	String AVATAR = "/dist/images/ava/default.png";
 	
 	/**
 	 * 分隔符
