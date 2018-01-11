@@ -84,6 +84,10 @@ abbr[data-original-title], abbr[title] {
     padding-top: 0px;
 }
 
+.background-white {
+    background-color: #fff;
+}
+
 .meta, .operate {
     color: #d0d0d0;
     font-size: 12px;
@@ -921,8 +925,12 @@ abbr[data-original-title], abbr[title] {
     padding: 10px 15px;
 }
 
-.background-white {
-    background-color: #fff;
+.users-show .notify  a {
+    color: #337ab7;
+}
+
+.users-show .notify a:focus, .users-show .notify a:hover {
+    color: #03a9f4;
 }
 
 .about-user {margin-bottom: 15px;}

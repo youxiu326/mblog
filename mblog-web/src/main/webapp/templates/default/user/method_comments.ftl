@@ -26,7 +26,7 @@
       						</span>
 
 							<div class="pull-right hidden-xs">
-								<a class="act" href="javascript:void(0);" data-evt="trash" data-id="${row.id}">
+								<a class="act" href="javascript:void(0);" data-evt="trash" data-id="${row.id}" data-toggle="tooltip" title="删除评论">
                                     <i class="icon icon-close"></i>
                                 </a>
 							</div>

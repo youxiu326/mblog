@@ -113,6 +113,7 @@ define(function(require, exports, module) {
     	imagesLazyload();
     	backToTop();
 		bindClickEvent();
+        $('[data-toggle="tooltip"]').tooltip();
     };
     
 });

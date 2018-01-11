@@ -12,7 +12,7 @@
             </div>
 
             <div class="panel-body remove-padding-horizontal">
-                <ul class="list-group topic-list">
+                <ul class="list-group topic-list notify">
                     <#list page.content as row>
                         <#assign target = row.post>
                         <li class="list-group-item " style="padding: 0 15px;">

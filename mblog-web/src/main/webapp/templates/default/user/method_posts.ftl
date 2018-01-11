@@ -25,10 +25,10 @@
       						</span>
 
                             <div class="pull-right hidden-xs">
-                                <a class="act_edit" href="javascript:void(0);" data-evt="edit" data-id="${row.id}">
+                                <a class="act_edit" href="javascript:void(0);" data-evt="edit" data-id="${row.id}" data-toggle="tooltip" title="编辑文章">
                                     <i class="icon icon-note"></i>
 								</a>
-                                <a class="act_delete" href="javascript:void(0);" data-evt="trash" data-id="${row.id}">
+                                <a class="act_delete" href="javascript:void(0);" data-evt="trash" data-id="${row.id}" data-toggle="tooltip" title="删除文章">
                                     <i class="icon icon-close"></i>
 								</a>
                             </div>
