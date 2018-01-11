@@ -12,7 +12,21 @@
 * Bootstrap 前端框架
 
 ### 启动：
- - 项目默认配置是在容器中启动(个人习惯), 如果想要main方法运行, 请自行修改配置。
+ - 项目默认配置是在容器中启动(个人习惯), 如果想要main方法运行, 请自行修改
+ ```xml
+<dependency>
+    <groupId>org.springframework.boot</groupId>
+    <artifactId>spring-boot-starter-web</artifactId>
+    <exclusions>
+        <!-- 容器启动,启用下面代码. main 方法运行注释此处
+        <exclusion>
+            <groupId>org.springframework.boot</groupId>
+            <artifactId>spring-boot-starter-tomcat</artifactId>
+        </exclusion>
+        -->
+    </exclusions>
+</dependency>
+```
 
 ### 最新版本(2.5)更新内容：
     1. 前端页面结构、链接地址、接口目录调整
