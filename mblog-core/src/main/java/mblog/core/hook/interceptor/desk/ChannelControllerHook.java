@@ -14,18 +14,18 @@ import javax.servlet.http.HttpServletResponse;
  * @author Beldon 2015/10/31
  */
 @Component
-public class GroupVidewControllerHook extends InterceptorHookSupport {
+public class ChannelControllerHook extends InterceptorHookSupport {
 
 
     @Override
     public void init() {
-        this.plugins = getPlugins(GroupViewControllerInterceptorListener.class);
+        this.plugins = getPlugins(ChannelControllerInterceptorListener.class);
     }
 
     @Override
     public String[] getInterceptor() {
         //说明要拦截的controller
-        return new String[]{"mblog.web.controller.desk.group.GroupVidewController"};
+        return new String[]{"mblog.web.controller.desk.ChannelController"};
     }
 
     @Override
@@ -49,7 +49,7 @@ public class GroupVidewControllerHook extends InterceptorHookSupport {
         super.onAfterConcurrentHandlingStarted(request, response, handler);
     }
 
-    public interface GroupViewControllerInterceptorListener extends InterceptorListener {
+    public interface ChannelControllerInterceptorListener extends InterceptorListener {
 
     }
 }

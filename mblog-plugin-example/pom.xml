@@ -14,12 +14,12 @@
 
     <dependencies>
         <dependency>
-            <groupId>com.mtons.mblog</groupId>
-            <artifactId>mblog-core</artifactId>
-        </dependency>
-        <dependency>
             <groupId>org.apache.shiro</groupId>
             <artifactId>shiro-web</artifactId>
+        </dependency>
+        <dependency>
+            <groupId>com.mtons.mblog</groupId>
+            <artifactId>mblog-core</artifactId>
         </dependency>
     </dependencies>
 

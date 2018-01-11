@@ -2,7 +2,7 @@ package mblog.plugin.example;
 
 import mblog.core.data.AccountProfile;
 import mblog.core.data.Post;
-import mblog.core.hook.interceptor.desk.GroupVidewControllerHook;
+import mblog.core.hook.interceptor.desk.ChannelControllerHook;
 import mblog.core.persist.service.CommentService;
 import org.apache.shiro.SecurityUtils;
 import org.apache.shiro.subject.Subject;
@@ -21,7 +21,7 @@ import java.util.List;
  * @author Beldon
  */
 @Component
-public class HidenContentPugin implements GroupVidewControllerHook.GroupViewControllerInterceptorListener {
+public class HidenContentPugin implements ChannelControllerHook.ChannelControllerInterceptorListener {
     @Autowired
     private CommentService commentService;
 
@@ -33,8 +33,8 @@ public class HidenContentPugin implements GroupVidewControllerHook.GroupViewCont
 
     @Override
     public void postHandle(HttpServletRequest request, HttpServletResponse response, HandlerMethod handler, ModelAndView modelAndView) throws Exception {
-        Post ret = (Post) modelAndView.getModelMap().get("ret");
-        if (check(ret.getId(), ret.getAuthor().getId())) {
+        Post ret = (Post) modelAndView.getModelMap().get("view");
+        if (ret != null && check(ret.getId(), ret.getAuthor().getId())) {
             Post post = new Post();
             BeanUtils.copyProperties(ret, post);
             post.setContent(replace(post.getContent()));
