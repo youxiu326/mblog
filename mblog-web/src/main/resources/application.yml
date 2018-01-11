@@ -36,15 +36,12 @@ spring:
             max-file-size: 5MB
 
     mail:
-        host: smtp.exmail.qq.com
+        host: smtp.mtons.com
         username: example@mtons.com
-        password: {your password}
+        password: Example2018
         port: 25
         properties:
             mail.smtp.auth: true
-            mail.smtp.ssl.enable: true
-            mail.smtp.starttls.enable: true
-            mail.smtp.starttls.required: true
 
 site.store.root: /data/mblog
 # 存储模式, 可选值 absolute / relative

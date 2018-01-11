@@ -108,7 +108,7 @@ public class Data implements Serializable {
     }
 
     public String toString() {
-        return "{code:\"" + code + "\", message:\"" + message + "\", data:\"" + data.toString() + "\"}";
+        return "{code:\"" + code + "\", message:\"" + message + "\", data:\"" + (data != null ? data.toString():"") + "\"}";
     }
 
     public class Button {

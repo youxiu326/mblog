@@ -49,7 +49,7 @@ public class RegisterController extends BaseController {
 	public String register(User post, ModelMap model) {
 		Data data;
 		String ret = view(Views.REGISTER);
-		
+
 		try {
 			post.setAvatar(Consts.AVATAR);
 			User user = userService.register(post);

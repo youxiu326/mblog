@@ -4,7 +4,6 @@
 		${message}
 	</div>
 </#if>
-
 <#if data??>
 	<#if (data.code >= 0)>
 		<div class="alert alert-success">

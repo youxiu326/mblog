@@ -2,6 +2,7 @@ package mblog.base.utils;
 
 import freemarker.template.Template;
 import mblog.base.lang.MtonsException;
+import org.apache.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.core.env.Environment;
 import org.springframework.mail.javamail.JavaMailSender;
@@ -19,6 +20,7 @@ import java.util.Map;
  */
 @Component
 public class MailHelper {
+    private Logger log = Logger.getLogger(getClass());
     @Autowired
     private Environment env;
     @Autowired
@@ -40,6 +42,7 @@ public class MailHelper {
             javaMailSender.send(mimeMessage);
 
         } catch (Exception e) {
+            log.error(e.getMessage(), e);
             throw new  MtonsException("邮件发送失败", e);
         }
     }

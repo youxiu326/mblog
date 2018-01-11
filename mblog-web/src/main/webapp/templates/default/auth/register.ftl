@@ -8,7 +8,9 @@
                 <h3 class="panel-title">注册</h3>
             </div>
             <div class="panel-body">
-                <div id="message"><#include "/default/inc/action_message.ftl"/></div>
+                <#include "/default/inc/action_message.ftl"/>
+                <div id="message">
+                </div>
                 <form method="POST" action="register" accept-charset="UTF-8">
                     <div class="form-group ">
                         <label class="control-label" for="username">用户名</label>
