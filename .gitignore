@@ -5,6 +5,8 @@
 *.ear
 .idea
 
+indexes/
+
 # project settings
 *.project
 *.classpath
