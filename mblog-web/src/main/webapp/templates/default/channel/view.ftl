@@ -1,8 +1,8 @@
 <#include "/default/utils/ui.ftl"/>
 
-<#assign title = ret.title + ' - ' + site_name />
-<#assign keywords = ret.keywords?default(site_keywords) />
-<#assign description = ret.description?default(site_description) />
+<#assign title = view.title + ' - ' + site_name />
+<#assign keywords = view.keywords?default(site_keywords) />
+<#assign description = view.description?default(site_description) />
 
 <@layout title keywords description>
 <div class="row main">
@@ -11,16 +11,16 @@
         <div class="topic panel panel-default">
             <div class="infos panel-heading">
 
-                <h1 class="panel-title topic-title">${ret.title}</h1>
+                <h1 class="panel-title topic-title">${view.title}</h1>
 
                 <div class="meta inline-block">
 
-                    <a class="author" href="#">
-                    ${ret.author.name}
+                    <a class="author" href="${base}/users/${view.author.id}">
+                    ${view.author.name}
                     </a>
-                    <abbr class="timeago">${timeAgo(ret.created)}</abbr>
+                    <abbr class="timeago">${timeAgo(view.created)}</abbr>
                     ⋅
-                ${ret.views} 阅读
+                ${view.views} 阅读
 
                 </div>
                 <div class="clearfix"></div>
@@ -28,11 +28,11 @@
 
             <div class="content-body entry-content panel-body ">
                 <div class="markdown-body" id="emojify">
-                ${ret.content}
+                ${view.content}
                 </div>
             </div>
             <div class="panel-footer operate">
-                <#list ret.tagsArray as tag>
+                <#list view.tagsArray as tag>
                     <span>
                             <a class="label label-default" href="${base}/tag/${tag}/">#${tag}</a>
                         </span>
@@ -87,14 +87,14 @@
         <ul class="list-group about-user">
             <li class="list-group-item user-card" >
                 <div class="ava">
-                    <a href="${base}/users/${ret.author.id}">
-                        <@showAva ret.author.avatar "img-circle"/>
+                    <a href="${base}/users/${view.author.id}">
+                        <@showAva view.author.avatar "img-circle"/>
                     </a>
                 </div>
                 <div class="user-info">
-                    <div class="nk mb10">${ret.author.name}</div>
+                    <div class="nk mb10">${view.author.name}</div>
                     <div class="mb6">
-                        <a class="btn btn-success btn-xs" href="javascript:void(0);" data-id="${ret.author.id}" rel="follow">+ 关注</a>
+                        <a class="btn btn-success btn-xs" href="javascript:void(0);" data-id="${view.author.id}" rel="follow">+ 关注</a>
                     </div>
                 </div>
             </li>
@@ -102,15 +102,15 @@
             <li class="list-group-item">
                 <div class="user-datas">
                     <ul>
-                        <li><strong>${ret.author.posts}</strong><span>发布</span></li>
-                        <li class="noborder"><strong>${ret.author.comments}</strong><span>评论</span></li>
+                        <li><strong>${view.author.posts}</strong><span>发布</span></li>
+                        <li class="noborder"><strong>${view.author.comments}</strong><span>评论</span></li>
                     </ul>
                 </div>
             </li>
             <li class="list-group-item">
                 <div class="text-center padding-md">
-                    <a class="btn btn-success btn-sm" href="javascript:void(0);" data-id="${ret.id}" rel="favor">喜欢</a>
-                    <strong id="favors">${ret.favors}</strong> 喜欢
+                    <a class="btn btn-success btn-sm" href="javascript:void(0);" data-id="${view.id}" rel="favor">喜欢</a>
+                    <strong id="favors">${view.favors}</strong> 喜欢
                 </div>
             </li>
         </ul>
@@ -153,9 +153,9 @@
 
     seajs.use('comment', function (comment) {
         comment.init({
-            load_url: '${base}/comment/list/${ret.id}',
+            load_url: '${base}/comment/list/${view.id}',
             post_url: '${base}/comment/submit',
-            toId: '${ret.id}',
+            toId: '${view.id}',
             onLoad: function (i, data) {
 
                 var content = ContentRender.wrapItem(data.content);
@@ -173,7 +173,7 @@
                         data.created,
                         content,
                         data.id, quoto);
-                return item;
+                viewurn item;
             }
         });
     });

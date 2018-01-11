@@ -56,12 +56,12 @@ public class ChannelController extends BaseController {
 
 	@RequestMapping("/view/{id}")
 	public String view(@PathVariable Long id, ModelMap model) {
-		Post ret = postService.get(id);
+		Post view = postService.get(id);
 
-		Assert.notNull(ret, "该文章已被删除");
+		Assert.notNull(view, "该文章已被删除");
 
 		postService.identityViews(id);
-		model.put("ret", ret);
+		model.put("view", view);
 		return view(Views.ROUTE_POST_VIEW);
 	}
 }
