@@ -25,7 +25,7 @@ import org.hibernate.annotations.CacheConcurrencyStrategy;
  *
  */
 @Entity
-@Table(name = "mto_group")
+@Table(name = "mto_channels")
 @Cache(usage = CacheConcurrencyStrategy.READ_WRITE)
 public class ChannelPO {
 	@Id
