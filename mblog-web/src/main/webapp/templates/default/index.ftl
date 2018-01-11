@@ -19,7 +19,7 @@
                 <div class="clearfix"></div>
             </div>
 
-            <@contents group=0 pn=pn order=order>
+            <@contents pn=pn order=order>
 
                 <div class="panel-body remove-padding-horizontal">
 
@@ -45,8 +45,7 @@
                                 </div>
                                 <div class="infos">
                                     <div class="media-heading">
-                                    <#--<span class="hidden-xs label label-warning">${row.group.name}</span>-->
-                                        <a href="${base}/view/${row.id}">${row.title}</a>
+                                        <@classify row/><a href="${base}/view/${row.id}">${row.title}</a>
                                     </div>
                                 </div>
                             </li>

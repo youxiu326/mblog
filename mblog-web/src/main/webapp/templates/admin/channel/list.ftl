@@ -7,7 +7,7 @@
                 <h2>栏目管理</h2>
                 <ul class="nav navbar-right panel_toolbox">
                     <li>
-                        <a href="${base}/admin/group/view">添加栏目</a>
+                        <a href="${base}/admin/channel/view">添加栏目</a>
                     </li>
                 </ul>
                 <div class="clearfix"></div>
@@ -77,7 +77,7 @@
                 btn: ['确定', '取消'], //按钮
                 shade: false //不显示遮罩
             }, function () {
-                J.getJSON('${base}/admin/group/delete', {id: that.attr('data-id')}, ajaxReload);
+                J.getJSON('${base}/admin/channel/delete', {id: that.attr('data-id')}, ajaxReload);
             }, function () {
             });
             return false;

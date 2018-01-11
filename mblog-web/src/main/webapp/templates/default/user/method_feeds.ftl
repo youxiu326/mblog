@@ -36,8 +36,7 @@
                             </div>
                             <div class="infos">
                                 <div class="media-heading">
-                                <#--<span class="hidden-xs label label-warning">${row.group.name}</span>-->
-                                    <a href="${base}/view/${target.id}">${target.title}</a>
+                                    <@classify target/><a href="${base}/view/${target.id}">${target.title}</a>
                                 </div>
                             </div>
                         </li>

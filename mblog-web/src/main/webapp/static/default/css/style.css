@@ -1331,6 +1331,13 @@ abbr[data-original-title], abbr[title] {
 #qql a{background:#3eb0d8 url('../images/qq.png') no-repeat 0px -5px;}
 .loginwrap .login_warning{height:20px;line-height:20px;overflow:hidden;background:#ff7200;color:#fff;padding:0 4px;float:left;text-align:center;font-size:12px; display:inline-block;}
 
+.group_1 {background-color: #e5e5e5; color: #999;}
+.group_2 {background-color: #5cb85c; color: #fff;}
+.group_3 {background-color: #5bc0de; color: #fff;}
+.group_4 {background-color: #5cb85c; color: #fff;}
+.group_5 {background-color: #be4cf0; color: #fff;}
+.group_6 {background-color: #5bc0de; color: #fff;}
+
 /* footer
 -------------------------------------------------- */
 footer { background-color: #fff; }

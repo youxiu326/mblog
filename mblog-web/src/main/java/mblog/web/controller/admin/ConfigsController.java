@@ -13,7 +13,7 @@ import mblog.base.data.Data;
 import mblog.base.lang.Consts;
 import mblog.core.data.Config;
 import mblog.core.persist.service.ConfigService;
-import mblog.core.persist.service.GroupService;
+import mblog.core.persist.service.ChannelService;
 import mblog.core.persist.service.PostService;
 import mblog.web.controller.BaseController;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -41,7 +41,7 @@ public class ConfigsController extends BaseController {
 	@Autowired
 	private ConfigService configService;
 	@Autowired
-	private GroupService groupService;
+	private ChannelService channelService;
 	@Autowired
 	private ServletContext servletContext;
 	@Autowired
@@ -85,7 +85,7 @@ public class ConfigsController extends BaseController {
 		appContext.setConfig(configMap);
 
 		// 刷新文章Group
-		servletContext.setAttribute("groups", groupService.findAll(Consts.STATUS_NORMAL));
+		servletContext.setAttribute("channels", channelService.findAll(Consts.STATUS_NORMAL));
 		return Data.success("操作成功", Data.NOOP);
 	}
 

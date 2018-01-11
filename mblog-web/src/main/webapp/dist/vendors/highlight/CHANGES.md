@@ -1140,7 +1140,7 @@ Overall highlight.js currently supports 51 languages and 20 style themes.
 ## Version 6.2
 
 A lot of things happened in highlight.js since the last version! We've got nine
-new contributors, the discussion group came alive, and the main branch on GitHub
+new contributors, the discussion channel came alive, and the main branch on GitHub
 now counts more than 350 followers. Here are most significant results coming
 from all this activity:
 

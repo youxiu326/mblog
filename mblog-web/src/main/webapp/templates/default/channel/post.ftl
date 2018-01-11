@@ -16,8 +16,8 @@
             <div class="form-group">
                 <label class="col-sm-2 control-label no-padding-right">发布到</label>
                 <div class="col-sm-3">
-                    <select class="form-control" name="group">
-						<#list groups as row>
+                    <select class="form-control" name="channelId">
+						<#list channels as row>
                         <option value="${row.id}">${row.name}</option>
 						</#list>
                     </select>
@@ -27,7 +27,7 @@
 				<label for="desc" class="col-sm-2 control-label no-padding-right">内容</label>
 				<input type="hidden" name="editor" value="$!{site_editor}"/>
 				<div class="col-sm-8">
-					<#include "/default/group/editor/ueditor.ftl"/>
+					<#include "/default/channel/editor/ueditor.ftl"/>
 				</div>
 			</div>
 			<div class="form-group">

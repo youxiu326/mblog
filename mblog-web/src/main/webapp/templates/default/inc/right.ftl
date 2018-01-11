@@ -44,7 +44,7 @@ seajs.use('sidebox', function (sidebox) {
 		hotTagUrl : '${base}/api/hot_tags',
 		hotUserUrl:'${base}/api/hotusers',
 
-    	maxResults :10,
+        size :10,
         // callback
         onLoadHot : function (i, data) {
       		return jQuery.format(li_template, i + 1, data.id, data.title);

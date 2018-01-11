@@ -1,7 +1,7 @@
 <form id="qForm" class="form-horizontal" method="post" action="update">
     <#include "/admin/message.ftl">
-    <div class="group-left-border">
-        <div class="group-title">QQ登录</div>
+    <div class="channel-left-border">
+        <div class="channel-title">QQ登录</div>
         <div class="form-group">
             <label class="col-lg-2 control-label">回调地址</label>
             <div class="col-lg-6">
@@ -23,8 +23,8 @@
         </div>
     </div>
 
-    <div class="group-left-border">
-        <div class="group-title">微博登录</div>
+    <div class="channel-left-border">
+        <div class="channel-title">微博登录</div>
         <div class="form-group">
             <label class="col-lg-2 control-label">回调地址</label>
             <div class="col-lg-6">
@@ -46,8 +46,8 @@
         </div>
     </div>
 
-    <div class="group-left-border">
-        <div class="group-title">豆瓣登录</div>
+    <div class="channel-left-border">
+        <div class="channel-title">豆瓣登录</div>
         <div class="form-group">
             <label class="col-lg-2 control-label">回调地址</label>
             <div class="col-lg-6">

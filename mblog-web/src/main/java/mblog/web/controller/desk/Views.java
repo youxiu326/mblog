@@ -51,8 +51,8 @@ public interface Views {
 	
 	String BROWSE_SEARCH = "/search";
 
-	String ROUTE_POST_PUBLISH = "/group/post";
-	String ROUTE_POST_INDEX = "/group/index";
-	String ROUTE_POST_VIEW = "/group/view";
-	String ROUTE_POST_UPDATE = "/group/update";
+	String ROUTE_POST_PUBLISH = "/channel/post";
+	String ROUTE_POST_INDEX = "/channel/index";
+	String ROUTE_POST_VIEW = "/channel/view";
+	String ROUTE_POST_UPDATE = "/channel/update";
 }

@@ -90,8 +90,8 @@ public class BeanMapUtils {
 		return ret;
 	}
 
-	public static Group copy(GroupPO po) {
-		Group r = new Group();
+	public static Channel copy(ChannelPO po) {
+		Channel r = new Channel();
 		BeanUtils.copyProperties(po, r);
 		return r;
 	}

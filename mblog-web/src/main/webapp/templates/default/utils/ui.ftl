@@ -47,6 +47,10 @@
     </#if>
 </#macro>
 
+<#macro classify row>
+    <span class="hidden-xs label label-default group_${row.channel.id}">${row.channel.name}</span>
+</#macro>
+
 <#macro pager url p spans>
     <#if p??>
         <#local span = (spans - 3)/2 />

@@ -29,7 +29,7 @@
                             </div>
                             <div class="infos">
                                 <div class="media-heading">
-                                <#--<span class="hidden-xs label label-warning">${row.group.name}</span>-->
+                                <#--<span class="hidden-xs label label-warning">${row.channel.name}</span>-->
                                     <a href="${base}/users/${target.id}">${row.from.name}</a>
                                     <span>
                                         <#if (row.event == 1)>

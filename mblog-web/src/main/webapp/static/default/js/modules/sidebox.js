@@ -24,7 +24,7 @@ define(function(require, exports, module) {
         	hotUrl : '',
 			hotTagUrl : '',
 			hotUserUrl:'',
-        	maxResults :6,
+        	size :6,
             // callback
             onLoadLatest : function (i, data) {},
             onLoadHot : function (i, data) {}
@@ -43,7 +43,7 @@ define(function(require, exports, module) {
 
 				J.ajax( {
 					url: opts.hotUrl,
-					data: {maxResults : opts.maxResults},
+					data: {size : opts.size},
 					cache : true,
 					success: function (ret) {
 						$('#hots').empty();
@@ -62,7 +62,7 @@ define(function(require, exports, module) {
 			if (opts.latestUrl) {
 				J.ajax( {
 					url: opts.latestUrl,
-					data: {maxResults : opts.maxResults},
+					data: {size : opts.size},
 					cache : true,
 					success: function (ret) {
 						$('#latests').empty();
@@ -81,7 +81,7 @@ define(function(require, exports, module) {
 			if (opts.hotUserUrl) {
 				J.ajax( {
 					url: opts.hotUserUrl,
-					data: {maxResults : opts.maxResults},
+					data: {size : opts.size},
 					cache : true,
 					success: function (ret) {
 						$('#hotuser').empty();

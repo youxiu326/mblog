@@ -37,11 +37,11 @@ public class ContentsDirective extends TemplateDirective {
     @Override
     public void execute(DirectiveHandler handler) throws Exception {
         Integer pn = handler.getInteger("pn", 1);
-        Integer group = handler.getInteger("group", 0);
+        Integer channelId = handler.getInteger("channelId", 0);
         String order = handler.getString("order", Consts.order.NEWEST);
 
         Pageable pageable = new PageRequest(pn - 1, 15);
-        Page<Post> result = postService.paging(pageable, group, order, true);
+        Page<Post> result = postService.paging(pageable, channelId, order, true);
 
         handler.put(RESULTS, result).render();
     }

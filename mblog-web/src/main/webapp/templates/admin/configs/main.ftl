@@ -33,7 +33,7 @@
                             <#include "/admin/configs/settings.ftl">
                         </div>
                         <div class="tab-pane" id="cache">
-                            <div class="btn-group" role="group" aria-label="...">
+                            <div class="btn-channel" role="channel" aria-label="...">
                                 <button type="button" class="btn btn-default" data-action="flush_conf">
                                     刷新系统变量
                                 </button>

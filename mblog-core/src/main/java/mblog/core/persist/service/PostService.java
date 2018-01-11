@@ -28,13 +28,13 @@ public interface PostService {
 	 * 分页查询所有文章
 	 * 
 	 * @param pageable
-	 * @param group 分组Id
+	 * @param channelId 分组Id
 	 * @param ord   排序
 	 * @param whetherHasAlbums 是否加载图片
 	 */
-	Page<Post> paging(Pageable pageable, int group, String ord, boolean whetherHasAlbums);
+	Page<Post> paging(Pageable pageable, int channelId, String ord, boolean whetherHasAlbums);
 
-	Page<Post> paging4Admin(Pageable pageable, long id, String title, int group);
+	Page<Post> paging4Admin(Pageable pageable, long id, String title, int channelId);
 	
 	/**
 	 * 查询个人发布文章

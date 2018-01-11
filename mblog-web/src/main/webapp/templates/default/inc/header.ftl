@@ -69,9 +69,9 @@
 							<a href="${base}/user" nav="user">我的主页</a>
 						</li>
 					</#if>
-					<#list groups as row>
+					<#list channels as row>
 						<li>
-							<a href="${base}/group/${row.key}" nav="${row.name}">${row.name}</a>
+							<a href="${base}/channel/${row.id}" nav="${row.name}">${row.name}</a>
 						</li>
 					</#list>
                 </ul>
