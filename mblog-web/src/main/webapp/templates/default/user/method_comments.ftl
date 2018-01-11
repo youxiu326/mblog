@@ -27,7 +27,7 @@
 
 							<div class="pull-right hidden-xs">
 								<a class="act" href="javascript:void(0);" data-evt="trash" data-id="${row.id}">
-                                    <i class="fa fa-close"></i>
+                                    <i class="icon icon-close"></i>
                                 </a>
 							</div>
 

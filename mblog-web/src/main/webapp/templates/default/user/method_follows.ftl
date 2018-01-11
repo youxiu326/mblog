@@ -22,7 +22,9 @@
                                     <span class="count_of_visits" title="点赞数">${row.favors}</span>
                                     <span class="count_seperator">|</span>
                                     <abbr class="">
-                                        <a href="javascript:void(0);" data-id="${row.id}" rel="unfollow">取消关注</a>
+                                        <a href="javascript:void(0);" data-id="${row.id}" rel="unfollow" title="取消关注">
+                                            <i class="icon icon-user-unfollow"></i>
+                                        </a>
 									</abbr>
                                 </div>
                             </div>

@@ -26,10 +26,10 @@
 
                             <div class="pull-right hidden-xs">
                                 <a class="act_edit" href="javascript:void(0);" data-evt="edit" data-id="${row.id}">
-                                    <i class="fa fa-edit"></i>
+                                    <i class="icon icon-note"></i>
 								</a>
                                 <a class="act_delete" href="javascript:void(0);" data-evt="trash" data-id="${row.id}">
-                                    <i class="fa fa-close"></i>
+                                    <i class="icon icon-close"></i>
 								</a>
                             </div>
                         </li>

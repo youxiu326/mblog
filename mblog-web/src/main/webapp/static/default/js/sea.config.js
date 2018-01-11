@@ -14,8 +14,7 @@ seajs.config({
         'view': 'default/js/modules/view',
         'webuploader': 'default/js/modules/webuploader',
 
-            /* vendors */
-        'baguetteBox': 'vendors/baguette/baguetteBox.min',
+        /* vendors */
         'pace': 'vendors/pace/pace.min',
         'pjax': 'vendors/pjax/jquery.pjax',
         'dmuploader': 'vendors/uploader/dmuploader',

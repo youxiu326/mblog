@@ -921,6 +921,10 @@ abbr[data-original-title], abbr[title] {
     padding: 10px 15px;
 }
 
+.background-white {
+    background-color: #fff;
+}
+
 .about-user {margin-bottom: 15px;}
 .about-user .user-card{ padding:0;}
 .about-user .ava { float:left; padding: 8px 15px;}
@@ -937,6 +941,7 @@ abbr[data-original-title], abbr[title] {
 .user-nav { margin-bottom: 15px;}
 .user-nav .list-group-item i {padding-right: 15px;}
 .user-nav .list-group-item .label {float: right;}
+.user-nav:first-child {margin-top: 15px;}
 
 /* Detail
 -------------------------------------------------- */

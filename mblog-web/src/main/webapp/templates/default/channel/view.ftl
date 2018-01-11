@@ -94,7 +94,7 @@
                 <div class="user-info">
                     <div class="nk mb10">${view.author.name}</div>
                     <div class="mb6">
-                        <a class="btn btn-success btn-xs" href="javascript:void(0);" data-id="${view.author.id}" rel="follow">+ 关注</a>
+                        <a class="btn btn-success btn-xs" href="javascript:void(0);" data-id="${view.author.id}" rel="follow"><i class="icon icon-user-follow"></i> 关注</a>
                     </div>
                 </div>
             </li>
@@ -173,7 +173,7 @@
                         data.created,
                         content,
                         data.id, quoto);
-                viewurn item;
+                return item;
             }
         });
     });
