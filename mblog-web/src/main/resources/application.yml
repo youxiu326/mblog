@@ -13,9 +13,11 @@ spring:
             number_format: 0.##
 
     datasource:
-        url: jdbc:mysql://localhost/db_mblog?useSSL=false&characterEncoding=utf8
+        driver-class-name: com.mysql.jdbc.Driver
+        url: jdbc:mysql://localhost/db_mblog?useSSL:false&characterEncoding:utf8
         username: root
         password: root
+
     jpa:
         database: mysql
         show-sql: false
@@ -52,7 +54,7 @@ site.store.repo: relative
 site.store.domain: false
 
 # ---------------------------------
-# 资源域名, resource.domain = true 是有效
+# 资源域名, resource.domain : true 是有效
 # 配置域名, 将域名的根目录指向 store.root 配置的地址
 # ---------------------------------
 site.store.host: http://localhost:8080/mblog

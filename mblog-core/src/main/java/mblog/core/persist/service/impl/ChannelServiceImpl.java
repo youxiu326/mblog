@@ -76,8 +76,8 @@ public class ChannelServiceImpl implements ChannelService {
 		} else {
 			po = new ChannelPO();
 			BeanUtils.copyProperties(channel, po);
-			channelDao.save(po);
 		}
+		channelDao.save(po);
 	}
 
 	@Override

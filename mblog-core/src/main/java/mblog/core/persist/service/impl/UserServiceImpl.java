@@ -52,6 +52,7 @@ public class UserServiceImpl implements UserService {
 	private RoleDao roleDao;
 
 	@Override
+	@Transactional
 	public AccountProfile login(String username, String password) {
 		UserPO po = userDao.findByUsername(username);
 		AccountProfile u = null;
@@ -62,7 +63,7 @@ public class UserServiceImpl implements UserService {
 
 		if (StringUtils.equals(po.getPassword(), password)) {
 			po.setLastLogin(Calendar.getInstance().getTime());
-
+			userDao.save(po);
 			u = BeanMapUtils.copyPassport(po);
 		}
 
@@ -136,6 +137,7 @@ public class UserServiceImpl implements UserService {
 		if (null != po) {
 			po.setName(user.getName());
 			po.setSignature(user.getSignature());
+			userDao.save(po);
 		}
 		return BeanMapUtils.copyPassport(po);
 	}
@@ -159,6 +161,8 @@ public class UserServiceImpl implements UserService {
 			}
 			po.setEmail(email);
 			po.setActiveEmail(EntityStatus.ENABLED);
+
+			userDao.save(po);
 		}
 
 		return BeanMapUtils.copyPassport(po);

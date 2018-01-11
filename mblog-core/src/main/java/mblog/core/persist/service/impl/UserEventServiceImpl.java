@@ -34,6 +34,7 @@ public class UserEventServiceImpl implements UserEventService {
 
         if (po != null) {
             po.setPosts(po.getPosts() + ((identity) ? 1 : -1));
+            userDao.save(po);
         }
     }
 
@@ -44,6 +45,7 @@ public class UserEventServiceImpl implements UserEventService {
 
         if (po != null) {
             po.setComments(po.getComments() + ((identity) ? 1 : -1));
+            userDao.save(po);
         }
     }
 
@@ -54,6 +56,7 @@ public class UserEventServiceImpl implements UserEventService {
 
         if (po != null) {
             po.setFollows(po.getFollows() + ((identity) ? 1 : -1));
+            userDao.save(po);
         }
     }
 
@@ -64,6 +67,7 @@ public class UserEventServiceImpl implements UserEventService {
 
         if (po != null) {
             po.setFans(po.getFans() + ((identity) ? 1 : -1));
+            userDao.save(po);
         }
     }
 
@@ -74,6 +78,7 @@ public class UserEventServiceImpl implements UserEventService {
 
         if (po != null) {
             po.setFavors(po.getFavors() + ((identity) ? 1 : -1));
+            userDao.save(po);
         }
     }
 }

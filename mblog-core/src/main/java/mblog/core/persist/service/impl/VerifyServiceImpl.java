@@ -51,7 +51,6 @@ public class VerifyServiceImpl implements VerifyService {
             po.setCode(code);
             po.setType(type);
             po.setTarget(target);
-            verifyDao.save(po);
         } else {
 
             long interval = ( now.getTime() - po.getCreated().getTime() ) / 1000;
@@ -68,6 +67,8 @@ public class VerifyServiceImpl implements VerifyService {
             po.setType(type);
             po.setTarget(target);
         }
+
+        verifyDao.save(po);
 
         return code;
     }
@@ -94,6 +95,7 @@ public class VerifyServiceImpl implements VerifyService {
 
         po.setStatus(Consts.VERIFY_STATUS_TOKEN);
 
+        verifyDao.save(po);
         return token;
     }
 
@@ -111,5 +113,7 @@ public class VerifyServiceImpl implements VerifyService {
         Assert.state(token.equals(po.getToken()), "令牌不对");
 
         po.setStatus(Consts.VERIFY_STATUS_CERTIFIED);
+
+        verifyDao.save(po);
     }
 }

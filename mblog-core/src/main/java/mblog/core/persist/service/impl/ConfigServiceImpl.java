@@ -69,8 +69,8 @@ public class ConfigServiceImpl implements ConfigService {
 			else {
 				entity = new ConfigPO();
 				BeanUtils.copyProperties(st, entity);
-				configDao.save(entity);
 			}
+			configDao.save(entity);
 			appContext.getConfig().put(entity.getKey(), entity.getValue()); //更新全局变量
 			appContext.getServletContext().setAttribute(entity.getKey(),entity.getValue()); //更新容器全局变量
 		}
