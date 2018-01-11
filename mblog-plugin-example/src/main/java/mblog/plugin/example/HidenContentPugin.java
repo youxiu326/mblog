@@ -38,7 +38,7 @@ public class HidenContentPugin implements ChannelControllerHook.ChannelControlle
             Post post = new Post();
             BeanUtils.copyProperties(ret, post);
             post.setContent(replace(post.getContent()));
-            modelAndView.getModelMap().put("ret", post);
+            modelAndView.getModelMap().put("view", post);
         }
     }
 
