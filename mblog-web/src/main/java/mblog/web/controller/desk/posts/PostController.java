@@ -7,7 +7,7 @@ import mblog.base.data.Data;
 import mblog.base.lang.Consts;
 import mblog.core.data.AccountProfile;
 import mblog.core.data.Post;
-import mblog.core.persist.service.GroupService;
+import mblog.core.persist.service.ChannelService;
 import mblog.core.persist.service.PostService;
 import mblog.web.controller.BaseController;
 import mblog.web.controller.desk.Views;
@@ -34,7 +34,7 @@ public class PostController extends BaseController {
 	@Autowired
 	private PostService postService;
 	@Autowired
-	private GroupService groupService;
+	private ChannelService channelService;
 
 	/**
 	 * 发布文章页
@@ -42,8 +42,8 @@ public class PostController extends BaseController {
 	 */
 	@RequestMapping(value = "/new", method = RequestMethod.GET)
 	public String view(ModelMap model) {
-		model.put("groups", groupService.findAll(Consts.STATUS_NORMAL));
-		return getView(Views.ROUTE_POST_PUBLISH);
+		model.put("groups", channelService.findAll(Consts.STATUS_NORMAL));
+		return view(Views.ROUTE_POST_PUBLISH);
 	}
 
 	/**
@@ -65,7 +65,7 @@ public class PostController extends BaseController {
 
 			postService.post(p);
 		}
-		return Views.REDIRECT_HOME_POSTS;
+		return Views.REDIRECT_USER_POSTS;
 	}
 
 	/**
@@ -103,9 +103,9 @@ public class PostController extends BaseController {
 
 		Assert.isTrue(ret.getAuthorId() == up.getId(), "该文章不属于你");
 
-		model.put("groups", groupService.findAll(Consts.STATUS_NORMAL));
+		model.put("groups", channelService.findAll(Consts.STATUS_NORMAL));
 		model.put("view", ret);
-		return getView(Views.ROUTE_POST_UPDATE);
+		return view(Views.ROUTE_POST_UPDATE);
 	}
 
 	/**
@@ -122,7 +122,7 @@ public class PostController extends BaseController {
 			extractImages(p);
 			postService.update(p);
 		}
-		return Views.REDIRECT_HOME_POSTS;
+		return Views.REDIRECT_USER_POSTS;
 	}
 
 }

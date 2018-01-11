@@ -17,41 +17,42 @@ package mblog.web.controller.desk;
  *
  */
 public interface Views {
-	String REDIRECT_HOME = "redirect:/home";
+	String LOGIN = "/auth/login";
+	String REGISTER = "/auth/register";
+	String REGISTER_RESULT = "/auth/register_result";
+	String OAUTH_REGISTER = "/auth/oauth_register";
 
-	String LOGIN = "/login";
-	String REG = "/reg";
-	String REG_RESULT = "/reg_result";
-	String OAUTH_REG = "/oauth_reg";
-
-	String FORGOT_APPLY = "/forgot/apply";
-	String FORGOT_RESET = "/forgot/reset";
+	String FORGOT_APPLY = "/auth/forgot_apply";
+	String FORGOT_RESET = "/auth/forgot_reset";
 
 	String INDEX = "/index";
 
-	String HOME_FEEDS = "/home/feeds";
-	String HOME_POSTS = "/home/posts";
+	String USER_FEEDS = "/user/method_feeds";
+	String USER_POSTS = "/user/method_posts";
 
-	String REDIRECT_HOME_POSTS = "redirect:/home?method=posts";
-	String REDIRECT_POSTS_UPDATE = "redirect:/view/%s";
-	String HOME_COMMENTS = "/home/comments";
-	String HOME_FOLLOWS = "/home/follows";
-	String HOME_FAVORS = "/home/favors";
-	String HOME_FANS = "/home/fans";
-	String HOME_NOTIFIES = "/home/notifies";
+	String USER_COMMENTS = "/user/method_comments";
+	String USER_FOLLOWS = "/user/method_follows";
+	String USER_FAVORS = "/user/method_favors";
+	String USER_FANS = "/user/method_fans";
+	String USER_NOTIFIES = "/user/method_notifies";
 
-	String TA_HOME = "/ta/home";
-	String ACCOUNT_AVATAR = "/account/avatar";
-	String ACCOUNT_PASSWORD = "/account/password";
-	String ACCOUNT_PROFILE = "/account/profile";
-	String ACCOUNT_EMAIL = "/account/email";
+	String REDIRECT_USER = "redirect:/user";
+	String REDIRECT_USER_POSTS = "redirect:/user?method=posts";
+
+	String USER_AVATAR = "/user/avatar";
+	String USER_PASSWORD = "/user/password";
+	String USER_PROFILE = "/user/profile";
+	String USER_EMAIL = "/user/email";
+
+	String USERS_VIEW = "/users/view";
+
 
 	String TAGS_TAG = "/tag";
 	
 	String BROWSE_SEARCH = "/search";
 
-	String ROUTE_POST_PUBLISH = "/blog/post";
-	String ROUTE_POST_INDEX = "/blog/index";
-	String ROUTE_POST_VIEW = "/blog/view";
-	String ROUTE_POST_UPDATE = "/blog/update";
+	String ROUTE_POST_PUBLISH = "/channel/post";
+	String ROUTE_POST_INDEX = "/channel/index";
+	String ROUTE_POST_VIEW = "/channel/view";
+	String ROUTE_POST_UPDATE = "/channel/update";
 }

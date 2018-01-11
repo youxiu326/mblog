@@ -19,17 +19,6 @@
 			</ul>
 		</div>
 	</div>
-	<div class="container mode-link">
-        <h3 class="t-h3">友情链接</h3>
-        <ul class="list-inline">
-            <li><a href="http://www.mtons.com" target="_blank" title="Mtons社区">Mtons社区</a></li>
-            <#list friendLinks as row>
-                <li>
-                    <a href="${link.url}" target="_blank" title="${link.remark}">${link.siteName}</a>
-                </li>
-            </#list>
-        </ul>
-    </div>
 	<div class="container copy-right">
 		<span>${site_copyright} <a
 			href="http://www.miitbeian.gov.cn/" target="_blank">${site_icp}</a>

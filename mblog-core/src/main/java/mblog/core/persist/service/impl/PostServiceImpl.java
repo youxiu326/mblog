@@ -14,6 +14,7 @@ import mblog.base.lang.Consts;
 import mblog.base.lang.EntityStatus;
 import mblog.base.utils.PreviewTextUtils;
 import mblog.core.data.Attach;
+import mblog.core.data.Channel;
 import mblog.core.data.Post;
 import mblog.core.data.User;
 import mblog.core.event.FeedsEvent;
@@ -59,32 +60,37 @@ public class PostServiceImpl implements PostService {
 	@Autowired
 	private FavorService favorService;
 	@Autowired
-	private PostAttributeDao postAttributeDao;
+	private ChannelService channelService;
 	@Autowired
-	private FeedsService feedsService;
+	private PostAttributeDao postAttributeDao;
 
 	@Override
 	@Cacheable
-	public Page<Post> paging(Pageable pageable, int group, String ord, boolean whetherHasAlbums) {
+	public Page<Post> paging(Pageable pageable, int channelId, String ord, boolean whetherHasAlbums) {
 		Page<PostPO> page = postDao.findAll((root, query, builder) -> {
 
 			List<Order> orders = new ArrayList<>();
-//			orders.add(builder.desc(root.<Long>get("featured")));
+
+			if (Consts.order.FAVOR.equals(ord)) {
+				orders.add(builder.desc(root.<Long>get("favors")));
+			} else if (Consts.order.HOTTEST.equals(ord)) {
+				orders.add(builder.desc(root.<Long>get("comments")));
+			}
 			orders.add(builder.desc(root.<Long>get("created")));
 
 			Predicate predicate = builder.conjunction();
 
-			if (group > Consts.ZERO) {
+			if (channelId > Consts.ZERO) {
 				predicate.getExpressions().add(
-						builder.equal(root.get("group").as(Integer.class), group));
+						builder.equal(root.get("channelId").as(Integer.class), channelId));
 			}
 
 			if (Consts.order.HOTTEST.equals(ord)) {
 				orders.add(builder.desc(root.<Long>get("views")));
 			}
 
-			predicate.getExpressions().add(
-					builder.equal(root.get("featured").as(Integer.class), Consts.FEATURED_DEFAULT));
+//			predicate.getExpressions().add(
+//					builder.equal(root.get("featured").as(Integer.class), Consts.FEATURED_DEFAULT));
 
 			query.orderBy(orders);
 
@@ -95,7 +101,7 @@ public class PostServiceImpl implements PostService {
 	}
 
 	@Override
-	public Page<Post> paging4Admin(Pageable pageable, long id, String title, int group) {
+	public Page<Post> paging4Admin(Pageable pageable, long id, String title, int channelId) {
 		Page<PostPO> page = postDao.findAll((root, query, builder) -> {
             query.orderBy(
 					builder.desc(root.<Long>get("featured")),
@@ -104,9 +110,9 @@ public class PostServiceImpl implements PostService {
 
             Predicate predicate = builder.conjunction();
 
-			if (group > Consts.ZERO) {
+			if (channelId > Consts.ZERO) {
 				predicate.getExpressions().add(
-						builder.equal(root.get("group").as(Integer.class), group));
+						builder.equal(root.get("channelId").as(Integer.class), channelId));
 			}
 
 			if (StringUtils.isNotBlank(title)) {
@@ -183,7 +189,7 @@ public class PostServiceImpl implements PostService {
 	@Override
 	@Cacheable
 	public List<Post> findLatests(int maxResults, long ignoreUserId) {
-		List<PostPO> list = postDao.findTop9ByOrderByCreatedDesc();
+		List<PostPO> list = postDao.findTop10ByOrderByCreatedDesc();
 		List<Post> rets = new ArrayList<>();
 
 		list.forEach(po -> rets.add(BeanMapUtils.copy(po, 0)));
@@ -194,7 +200,7 @@ public class PostServiceImpl implements PostService {
 	@Override
 	@Cacheable
 	public List<Post> findHots(int maxResults, long ignoreUserId) {
-		List<PostPO> list = postDao.findTop9ByOrderByViewsDesc();
+		List<PostPO> list = postDao.findTop10ByOrderByViewsDesc();
 		List<Post> rets = new ArrayList<>();
 
 		list.forEach(po -> rets.add(BeanMapUtils.copy(po, 0)));
@@ -318,6 +324,8 @@ public class PostServiceImpl implements PostService {
 			d.setAuthor(userService.get(d.getAuthorId()));
 			d.setAlbums(attachService.findByTarget(d.getId()));
 
+			d.setChannel(channelService.getById(d.getChannelId()));
+
 			PostAttribute attr = postAttributeDao.findOne(po.getId());
 			if (attr != null) {
 				d.setContent(attr.getContent());
@@ -338,7 +346,7 @@ public class PostServiceImpl implements PostService {
 
 		if (po != null) {
 			po.setTitle(p.getTitle());//标题
-			po.setGroup(p.getGroup());
+			po.setChannelId(p.getChannelId());
 
 			// 处理摘要
 			if (StringUtils.isBlank(p.getSummary())) {
@@ -475,16 +483,19 @@ public class PostServiceImpl implements PostService {
 
 		HashSet<Long> pids = new HashSet<>();
 		HashSet<Long> uids = new HashSet<>();
+		HashSet<Integer> groupIds = new HashSet<>();
 
 		posts.forEach(po -> {
 			pids.add(po.getId());
 			uids.add(po.getAuthorId());
+			groupIds.add(po.getChannelId());
 
 			rets.add(BeanMapUtils.copy(po, 0));
 		});
 
 		// 加载用户信息
 		buildUsers(rets, uids);
+		buildGroups(rets, groupIds);
 
 		// 判断是否加载相册
 		if (whetherHasAlbums) {
@@ -503,6 +514,11 @@ public class PostServiceImpl implements PostService {
 		Map<Long, User> userMap = userService.findMapByIds(uids);
 
 		posts.forEach(p -> p.setAuthor(userMap.get(p.getAuthorId())));
+	}
+
+	private void buildGroups(Collection<Post> posts, Set<Integer> groupIds) {
+		Map<Integer, Channel> map = channelService.findMapByIds(groupIds);
+		posts.forEach(p -> p.setChannel(map.get(p.getChannelId())));
 	}
 
 	private void submitAttr(PostAttribute attr) {

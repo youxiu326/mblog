@@ -34,10 +34,10 @@ public interface PostDao extends JpaRepository<PostPO, Long>, JpaSpecificationEx
 	Page<PostPO> findAllByAuthorIdOrderByCreatedDesc(Pageable pageable, long authorId);
 
 	// findLatests
-	List<PostPO> findTop9ByOrderByCreatedDesc();
+	List<PostPO> findTop10ByOrderByCreatedDesc();
 
 	// findHots
-	List<PostPO> findTop9ByOrderByViewsDesc();
+	List<PostPO> findTop10ByOrderByViewsDesc();
 
 	List<PostPO> findAllByIdIn(Collection<Long> id);
 

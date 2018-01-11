@@ -143,12 +143,10 @@ public class ShiroConfig {
          *
          */
         Map<String, String> hashMap = new LinkedHashMap<>();
-        hashMap.put("/assets/**", "anon");
         hashMap.put("/login", "anon");
-        hashMap.put("/home*", "user");
-        hashMap.put("/home/**", "user");
+        hashMap.put("/user*", "user");
+        hashMap.put("/user/**", "user");
         hashMap.put("/post/**", "user");
-        hashMap.put("/account/**", "user");
 
         hashMap.put("/admin", "authc,perms[admin]");
         hashMap.put("/admin/", "authc,perms[admin]");

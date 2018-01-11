@@ -12,7 +12,7 @@ package mblog.web.controller.admin;
 import mblog.base.data.Data;
 import mblog.base.lang.Consts;
 import mblog.core.data.Post;
-import mblog.core.persist.service.GroupService;
+import mblog.core.persist.service.ChannelService;
 import mblog.core.persist.service.PostService;
 import mblog.web.controller.BaseController;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -39,7 +39,7 @@ public class PostsController extends BaseController {
 	@Autowired
 	private PostService postService;
 	@Autowired
-	private GroupService groupService;
+	private ChannelService channelService;
 	
 	@RequestMapping("/list")
 	public String list(String title, ModelMap model, HttpServletRequest request) {
@@ -65,7 +65,7 @@ public class PostsController extends BaseController {
 	public String toUpdate(Long id, ModelMap model) {
 		Post ret = postService.get(id);
 		model.put("view", ret);
-		model.put("groups", groupService.findAll(Consts.STATUS_NORMAL));
+		model.put("groups", channelService.findAll(Consts.STATUS_NORMAL));
 		return "/admin/posts/update";
 	}
 	

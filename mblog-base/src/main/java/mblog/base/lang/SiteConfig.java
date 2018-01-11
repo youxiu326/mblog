@@ -10,7 +10,6 @@ public interface SiteConfig {
 
     String SITE_NAME = "site_name"; // 站点名称
 
-    String SITE_WELCOMES = "site_welcomes"; // 欢迎语
     String SITE_DOMAIN   = "site_domain"; // 站点域名
     String SITE_KEYWORDS = "site_keywords"; // keywords
     String SITE_DESCRIPTION = "site_description"; // description
@@ -19,13 +18,6 @@ public interface SiteConfig {
     String SITE_COPYRIGHT = "site_copyright";
     String SITE_ICP = "site_icp"; // 备案号
     
-    /**
-     * 系统类配置
-     */
-    String SITE_MAIL_HS = "site_mail_host"; // 邮件服务地址
-    String SITE_MAIL_UN = "site_mail_username"; // 邮件账号名
-
-    String SITE_MAIL_PW = "site_mail_password"; // 邮件密码
     /**
      * 第三方回调地址
      */

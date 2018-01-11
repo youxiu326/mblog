@@ -116,15 +116,10 @@ public class BaseController {
 		return name.substring(pos);
 	}
 
-	protected String getView(String view) {
+	protected String view(String view) {
 		return "/default" + view;
 	}
 	
-	protected String routeView(String route, String group) {
-		String format = "/default" + route;
-		return String.format(format, group);
-	}
-
 	public static String getIpAddr(HttpServletRequest request) throws Exception {
 		String ip = request.getHeader("X-Real-IP");
 		if (!StringUtils.isBlank(ip) && !"unknown".equalsIgnoreCase(ip)) {

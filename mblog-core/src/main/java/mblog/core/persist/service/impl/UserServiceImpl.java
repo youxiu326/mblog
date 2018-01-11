@@ -204,6 +204,7 @@ public class UserServiceImpl implements UserService {
 		UserPO po = userDao.findOne(id);
 		if (po != null) {
 			po.setAvatar(path);
+			userDao.save(po);
 		}
 		return BeanMapUtils.copyPassport(po);
 	}
@@ -217,6 +218,7 @@ public class UserServiceImpl implements UserService {
 
 		if (null != po) {
 			po.setPassword(MD5.md5(newPassword));
+			userDao.save(po);
 		}
 	}
 
@@ -230,6 +232,7 @@ public class UserServiceImpl implements UserService {
 		if (po != null) {
 			Assert.isTrue(MD5.md5(oldPassword).equals(po.getPassword()), "当前密码不正确");
 			po.setPassword(MD5.md5(newPassword));
+			userDao.save(po);
 		}
 	}
 
@@ -240,6 +243,7 @@ public class UserServiceImpl implements UserService {
 
 		if (po != null) {
 			po.setStatus(status);
+			userDao.save(po);
 		}
 	}
 
@@ -250,6 +254,7 @@ public class UserServiceImpl implements UserService {
 
 		if (po != null) {
 			po.setActiveEmail(activeEmail);
+			userDao.save(po);
 		}
 		return BeanMapUtils.copyPassport(po);
 	}

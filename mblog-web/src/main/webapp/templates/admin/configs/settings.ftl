@@ -1,7 +1,7 @@
 <form id="qForm" class="form-horizontal" method="post" action="update">
     <#include "/admin/message.ftl">
-    <div class="group-left-border">
-        <div class="group-title">QQ登录</div>
+    <div class="channel-left-border">
+        <div class="channel-title">QQ登录</div>
         <div class="form-group">
             <label class="col-lg-2 control-label">回调地址</label>
             <div class="col-lg-6">
@@ -23,8 +23,8 @@
         </div>
     </div>
 
-    <div class="group-left-border">
-        <div class="group-title">微博登录</div>
+    <div class="channel-left-border">
+        <div class="channel-title">微博登录</div>
         <div class="form-group">
             <label class="col-lg-2 control-label">回调地址</label>
             <div class="col-lg-6">
@@ -46,8 +46,8 @@
         </div>
     </div>
 
-    <div class="group-left-border">
-        <div class="group-title">豆瓣登录</div>
+    <div class="channel-left-border">
+        <div class="channel-title">豆瓣登录</div>
         <div class="form-group">
             <label class="col-lg-2 control-label">回调地址</label>
             <div class="col-lg-6">
@@ -65,29 +65,6 @@
             <label class="col-lg-2 control-label">secret_key</label>
             <div class="col-lg-6">
                 <input type="text" name="douban_secret_key" class="form-control" value="${configs['douban_secret_key'].value}">
-            </div>
-        </div>
-    </div>
-
-    <div class="group-left-border">
-        <div class="group-title">邮件服务配置</div>
-        <div class="form-group">
-            <label class="col-lg-2 control-label">服务器地址</label>
-            <div class="col-lg-3">
-                <input type="text" name="site_mail_host" class="form-control" value="${configs['site_mail_host'].value}">
-                <p class="help-block">示例: smtp.163.com</p>
-            </div>
-        </div>
-        <div class="form-group">
-            <label class="col-lg-2 control-label">用户名</label>
-            <div class="col-lg-3">
-                <input type="text" name="site_mail_username" class="form-control" value="${configs['site_mail_username'].value}">
-            </div>
-        </div>
-        <div class="form-group">
-            <label class="col-lg-2 control-label">密码</label>
-            <div class="col-lg-3">
-                <input type="password" name="site_mail_password" class="form-control" value="${configs['site_mail_password'].value}">
             </div>
         </div>
     </div>

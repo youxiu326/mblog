@@ -10,7 +10,6 @@
 package mblog.core.data;
 
 import com.alibaba.fastjson.annotation.JSONField;
-import com.fasterxml.jackson.annotation.JsonIgnore;
 import mblog.base.lang.Consts;
 import mblog.core.persist.entity.PostAttribute;
 import mblog.core.persist.entity.PostPO;
@@ -32,6 +31,7 @@ public class Post extends PostPO implements Serializable {
 	private List<Attach> albums;
 	private Attach album;
 	private User author;
+	private Channel channel;
 	
 	@JSONField(serialize = false)
 	private PostAttribute attribute;
@@ -81,5 +81,13 @@ public class Post extends PostPO implements Serializable {
 
 	public void setContent(String content) {
 		this.content = content;
+	}
+
+	public Channel getChannel() {
+		return channel;
+	}
+
+	public void setChannel(Channel channel) {
+		this.channel = channel;
 	}
 }

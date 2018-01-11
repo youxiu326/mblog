@@ -23,17 +23,17 @@ public class AboutController extends BaseController {
 	
 	@RequestMapping("/about")
 	public String about() {
-		return getView("/about/about");
+		return view("/about/about");
 	}
 	
 	@RequestMapping("/joinus")
 	public String joinus() {
-		return getView("/about/joinus");
+		return view("/about/joinus");
 	}
 	
 	@RequestMapping("/faqs")
 	public String faqs() {
-		return getView("/about/faqs");
+		return view("/about/faqs");
 	}
 
 }

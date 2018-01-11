@@ -28,9 +28,11 @@ public class IndexController extends BaseController{
 	
 	@RequestMapping(value= {"/", "/index"})
 	public String root(ModelMap model, HttpServletRequest request) {
-		String order = ServletRequestUtils.getStringParameter(request, "ord", Consts.order.NEWEST);
-		model.put("ord", order);
-		return getView(Views.INDEX);
+		String order = ServletRequestUtils.getStringParameter(request, "order", Consts.order.NEWEST);
+		int pn = ServletRequestUtils.getIntParameter(request, "pn", 1);
+		model.put("order", order);
+		model.put("pn", pn);
+		return view(Views.INDEX);
 	}
 
 }

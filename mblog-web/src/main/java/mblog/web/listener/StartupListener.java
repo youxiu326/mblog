@@ -15,8 +15,7 @@ import mblog.base.print.Printer;
 import mblog.base.utils.PropertiesLoader;
 import mblog.core.data.Config;
 import mblog.core.persist.service.ConfigService;
-import mblog.core.persist.service.FriendLinkService;
-import mblog.core.persist.service.GroupService;
+import mblog.core.persist.service.ChannelService;
 import org.springframework.beans.factory.InitializingBean;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
@@ -34,12 +33,10 @@ public class StartupListener implements InitializingBean, ServletContextAware {
 	@Autowired
 	private ConfigService configService;
 	@Autowired
-	private GroupService groupService;
+	private ChannelService channelService;
 	@Autowired
 	private AppContext appContext;
-	@Autowired
-	private FriendLinkService friendLinkService;
-	
+
 	private ServletContext servletContext;
 
 	/**
@@ -91,8 +88,7 @@ public class StartupListener implements InitializingBean, ServletContextAware {
 
 				appContext.setConfig(configMap);
             	
-            	servletContext.setAttribute("groups", groupService.findAll(Consts.STATUS_NORMAL));
-				servletContext.setAttribute("friendLinks", friendLinkService.findAll());
+            	servletContext.setAttribute("channels", channelService.findAll(Consts.STATUS_NORMAL));
 
 				Printer.info("OK, mblog 加载完了");
             }

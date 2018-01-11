@@ -42,8 +42,8 @@ public class PostPO implements Serializable {
 	 */
 	@Field
 	@NumericField
-	@Column(name = "group_", length = 5)
-	private int group;
+	@Column(name = "channel_id", length = 5)
+	private int channelId;
 
 	/**
 	 * 标题
@@ -122,12 +122,12 @@ public class PostPO implements Serializable {
 		this.id = id;
 	}
 
-	public int getGroup() {
-		return group;
+	public int getChannelId() {
+		return channelId;
 	}
 
-	public void setGroup(int group) {
-		this.group = group;
+	public void setChannelId(int channelId) {
+		this.channelId = channelId;
 	}
 
 	public String getTitle() {
