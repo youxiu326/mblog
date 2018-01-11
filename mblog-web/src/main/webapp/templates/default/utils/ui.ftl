@@ -48,7 +48,9 @@
 </#macro>
 
 <#macro classify row>
+    <#if row.channel??>
     <span class="hidden-xs label label-default group_${row.channel.id % 7}">${row.channel.name}</span>
+    </#if>
 </#macro>
 
 <#macro pager url p spans>

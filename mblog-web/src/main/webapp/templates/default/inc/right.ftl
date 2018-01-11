@@ -1,16 +1,5 @@
 <div class="panel panel-default corner-radius panel-hot-topics">
 	<div class="panel-heading text-center">
-		<h3 class="panel-title"><i class="fa fa-users "></i> 热门用户</h3>
-	</div>
-	<div class="panel-body remove-padding-horizontal">
-		<ul class="hotusers" id="hotuser">
-            <img src="${base}/dist/images/spinner.gif">
-		</ul>
-	</div>
-</div>
-
-<div class="panel panel-default corner-radius panel-hot-topics">
-	<div class="panel-heading text-center">
 		<h3 class="panel-title"><i class="fa fa-area-chart"></i> 热门文章</h3>
 	</div>
 	<div class="panel-body">
@@ -29,6 +18,17 @@
 			<img src="${base}/dist/images/spinner.gif">
 		</ul>
 	</div>
+</div>
+
+<div class="panel panel-default corner-radius panel-hot-topics">
+    <div class="panel-heading text-center">
+        <h3 class="panel-title"><i class="fa fa-users "></i> 热门用户</h3>
+    </div>
+    <div class="panel-body remove-padding-horizontal">
+        <ul class="hotusers" id="hotuser">
+            <img src="${base}/dist/images/spinner.gif">
+        </ul>
+    </div>
 </div>
 
 <script type="text/javascript">
