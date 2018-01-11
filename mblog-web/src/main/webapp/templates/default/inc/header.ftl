@@ -90,7 +90,7 @@
                     <li class="dropdown">
                         <a href="#" class="user dropdown-toggle" data-toggle="dropdown">
                             <img class="img-circle" src="${base}${profile.avatar}">
-                            <span>围城</span>
+                            <span>${profile.name}</span>
                         </a>
                         <ul class="dropdown-menu" role="menu">
                             <li>
