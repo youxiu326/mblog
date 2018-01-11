@@ -43,12 +43,17 @@ public class ContextInitRunner implements ApplicationRunner, Ordered, ServletCon
                 Map<String, String> configMap = new HashMap<>();
 
                 if (configs.isEmpty()) {
-                    Printer.error("配置信息加载失败,我猜,可能是没有导入初始化数据(db_init.sql)导致的");
+                    Printer.error("--------------------------------------------------");
+                    Printer.error("- 系统启动失败,原因: 没有导入初始化数据(db_mblog.sql) -");
+                    Printer.error("-             导入初始数据库再来启动吧               -");
+                    Printer.error("--------------------------------------------------");
                     System.exit(1);
                 } else {
 
                     if (configs.size() < 13) {
-                        Printer.warn("嗯哼,系统检测到'系统配置'有更新,而你好像错过了什么, 赶紧去后台'系统配置'里检查下吧!");
+                        Printer.error("--------------------------------------------------");
+                        Printer.error("-  系统异常,原因: 初始数据不全, 请重导(db_mblog.sql)  -");
+                        Printer.error("--------------------------------------------------");
                     }
                     configs.forEach(conf -> {
 //						servletContext.setAttribute(conf.getKey(), conf.getValue());
