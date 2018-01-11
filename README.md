@@ -9,11 +9,7 @@
 * 搜索工具 Lucene
 * 缓存 Ehcache
 * 视图模板 Freemarker
-* 其它 Jsoup、fastjson
-* jQuery、Seajs
 * Bootstrap 前端框架
-* UEditor/Markdown编辑器
-* font-Awesome 字体/图标
 
 ### 启动：
  - 项目默认配置是在容器中启动(个人习惯), 如果想要main方法运行, 请自行修改配置。
