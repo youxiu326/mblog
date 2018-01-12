@@ -28,11 +28,11 @@
                             <li class="list-group-item ">
                                 <a class="reply_count_area hidden-xs pull-right" href="#">
                                     <div class="count_set">
-                                        <span class="count_of_votes" title="阅读数">${row.views}</span>
+                                        <span class="count_of_votes" data-toggle="tooltip" title="阅读数">${row.views}</span>
                                         <span class="count_seperator">/</span>
-                                        <span class="count_of_replies" title="回复数">${row.comments}</span>
+                                        <span class="count_of_replies" data-toggle="tooltip" title="回复数">${row.comments}</span>
                                         <span class="count_seperator">/</span>
-                                        <span class="count_of_visits" title="点赞数">${row.favors}</span>
+                                        <span class="count_of_visits" data-toggle="tooltip" title="点赞数">${row.favors}</span>
                                         <span class="count_seperator">|</span>
                                         <abbr class="timeago">${timeAgo(row.created)}</abbr>
                                     </div>
