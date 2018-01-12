@@ -1,5 +1,5 @@
 ﻿﻿### Mblog 开源Java多人博客系统
-![logo](https://gitee.com/uploads/images/2017/1221/102716_2e4bbce7_330414.png "mblog-logo.png")
+
 ### 技术选型：
 
 * JDK8
