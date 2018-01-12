@@ -43,7 +43,7 @@
                         <td>
                             <input type="checkbox" name="id" value="${row.id}">
                         </td>
-                        <td>${row.title}
+                        <td>
                             <a href="${base}/view/${row.id}" target="_blank">${row.title}</a>
                         </td>
                         <td>${row.author.username}</td>

@@ -24,8 +24,8 @@ import org.springframework.web.bind.annotation.ResponseBody;
  * @author langhsu
  *
  */
-@Controller("mng_group_ctl")
-@RequestMapping("/admin/group")
+@Controller("mng_channel_ctl")
+@RequestMapping("/admin/channel")
 public class ChannelController extends BaseController {
 	@Autowired
 	private ChannelService channelService;
