@@ -151,7 +151,7 @@ public class ShiroConfig {
         hashMap.put("/admin", "authc,perms[admin]");
         hashMap.put("/admin/", "authc,perms[admin]");
         hashMap.put("/admin/index", "authc,perms[admin]");
-        hashMap.put("/admin/posts", "authc,perms[posts:view]");
+        hashMap.put("/admin/posts/**", "authc,perms[posts:view]");
 
         hashMap.put("/admin/posts/update**", "authc,perms[posts:edit]");
         hashMap.put("/admin/posts/delete**", "authc,perms[posts:edit]");

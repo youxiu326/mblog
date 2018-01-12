@@ -113,8 +113,8 @@
         <!-- /footer content -->
     </div>
     <!-- Custom Theme Scripts -->
-    <script src="${base}/assets/admin/js/custom.min.js"></script>
-    <script src="${base}/assets/admin/js/app.data.js"></script>
+    <script src="${base}/static/admin/js/custom.min.js"></script>
+    <script src="${base}/static/admin/js/app.data.js"></script>
 </body>
 </html>
 </#macro>

@@ -75,6 +75,8 @@ public class PostServiceImpl implements PostService {
 				orders.add(builder.desc(root.<Long>get("favors")));
 			} else if (Consts.order.HOTTEST.equals(ord)) {
 				orders.add(builder.desc(root.<Long>get("comments")));
+			} else {
+				orders.add(builder.desc(root.<Long>get("weight")));
 			}
 			orders.add(builder.desc(root.<Long>get("created")));
 
@@ -104,7 +106,7 @@ public class PostServiceImpl implements PostService {
 	public Page<Post> paging4Admin(Pageable pageable, long id, String title, int channelId) {
 		Page<PostPO> page = postDao.findAll((root, query, builder) -> {
             query.orderBy(
-					builder.desc(root.<Long>get("featured")),
+					builder.desc(root.<Long>get("weight")),
 					builder.desc(root.<Long>get("created"))
 			);
 
@@ -379,11 +381,24 @@ public class PostServiceImpl implements PostService {
 		PostPO po = postDao.findOne(id);
 
 		if (po != null) {
-			int max = featured;
-			if (Consts.FEATURED_ACTIVE == featured) {
-				max = postDao.maxFeatured() + 1;
+			int status = Consts.FEATURED_ACTIVE == featured ? Consts.FEATURED_ACTIVE: Consts.FEATURED_DEFAULT;
+			po.setFeatured(status);
+			postDao.save(po);
+		}
+	}
+
+	@Override
+	@Transactional
+	@CacheEvict(allEntries = true)
+	public void updateWeight(long id, int weight) {
+		PostPO po = postDao.findOne(id);
+
+		if (po != null) {
+			int max = weight;
+			if (Consts.FEATURED_ACTIVE == weight) {
+				max = postDao.maxWeight() + 1;
 			}
-			po.setFeatured(max);
+			po.setWeight(max);
 			postDao.save(po);
 		}
 	}

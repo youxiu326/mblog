@@ -109,7 +109,19 @@ public interface PostService {
 	 */
 	void update(Post p);
 
+	/**
+	 * 推荐/精华
+	 * @param id
+	 * @param featured 0: 取消, 1: 加精
+	 */
 	void updateFeatured(long id, int featured);
+
+	/**
+	 * 置顶
+	 * @param id
+	 * @param weight 0: 取消, 1: 置顶
+	 */
+	void updateWeight(long id, int weight);
 	
 	/**
 	 * 删除

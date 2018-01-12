@@ -49,7 +49,7 @@
 
 <#macro classify row>
     <#if row.channel??>
-    <span class="hidden-xs label label-default group_${row.channel.id % 7}">${row.channel.name}</span>
+    <span class="hidden-xs label label-default <#if (row.featured > 0)>channel_featured</#if> <#if (row.weight > 0)>channel_top</#if>">${row.channel.name}</span>
     </#if>
 </#macro>
 

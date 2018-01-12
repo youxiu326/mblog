@@ -43,7 +43,7 @@ public interface PostDao extends JpaRepository<PostPO, Long>, JpaSpecificationEx
 
 	List<PostPO> findTop5ByFeaturedGreaterThanOrderByCreatedDesc(int featured);
 
-	@Query("select coalesce(max(p.featured), 0) from PostPO p")
-	int maxFeatured();
+	@Query("select coalesce(max(weight), 0) from PostPO")
+	int maxWeight();
 	
 }

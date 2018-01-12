@@ -26,14 +26,14 @@
                 <table id="dataGrid" class="table table-striped table-bordered b-t">
                     <thead>
                     <tr>
-                        <th width="50"><input type="checkbox" class="checkall"></th>
-                        <th width="360">文章标题</th>
-                        <th>作者</th>
-                        <th>发表日期</th>
-                        <th>访问数</th>
-                        <th>推荐</th>
+                        <th width="30"><input type="checkbox" class="checkall"></th>
+                        <th>文章标题</th>
+                        <th width="120">作者</th>
+                        <th width="90">发表日期</th>
+                        <th width="60">访问数</th>
+                        <th width="80">状态</th>
                         <@shiro.hasPermission name="posts:edit">
-                        <th width="200"></th>
+                        <th width="140"></th>
                         </@shiro.hasPermission>
                     </tr>
                     </thead>
@@ -51,26 +51,43 @@
                         <td>${row.views}</td>
                         <td>
                             <#if (row.featured > 0)>
-                            <span class="label label-info">置顶</span>
+                                <span class="label label-danger">荐</span>
 							</#if>
+                            <#if (row.weight > 0)>
+                                <span class="label label-warning">顶</span>
+                            </#if>
                         </td>
 						<@shiro.hasPermission name="posts:edit">
                         <td class="text-center" align="left">
-                            <a href="${base}/admin/posts/update?id=${row.id}" class="btn btn-xs btn-info">
-                                <i class="fa fa-edit"></i>编辑
-                            </a>
-
                             <#if (row.featured == 0)>
-                            <a href="javascript:void(0);" class="btn btn-xs btn-danger" data-id="${row.id}" rel="featured">
-                                <i class="fa fa-edit"></i>推荐
+                            <a href="javascript:void(0);" class="btn btn-xs btn-default" data-id="${row.id}" rel="featured"
+                               data-toggle="tooltip" title="推荐">
+                                <i class="fa fa-sun-o"></i>
                             </a>
-                            <#elseif (row.featured > 0)>
-                            <a href="javascript:void(0);" class="btn btn-xs btn-primary" data-id="${row.id}" rel="unfeatured">
-                                <i class="fa fa-edit"></i>撤销
+                            <#else>
+                            <a href="javascript:void(0);" class="btn btn-xs btn-danger" data-id="${row.id}" rel="unfeatured"
+                               data-toggle="tooltip" title="取消推荐">
+                                <i class="fa fa-circle-thin"></i>
                             </a>
 							</#if>
+
+                            <#if (row.weight == 0)>
+                                <a href="javascript:void(0);" class="btn btn-xs btn-default" data-id="${row.id}" rel="weight"
+                                   data-toggle="tooltip" title="置顶">
+                                    <i class="fa fa-angle-double-up"></i>
+                                </a>
+                            <#else>
+                                <a href="javascript:void(0);" class="btn btn-xs btn-warning" data-id="${row.id}" rel="unweight"
+                                   data-toggle="tooltip" title="取消置顶">
+                                    <i class="fa fa-angle-double-down"></i>
+                                </a>
+                            </#if>
+
+                            <a href="${base}/admin/posts/update?id=${row.id}" class="btn btn-xs btn-info">
+                                <i class="fa fa-edit"></i>
+                            </a>
                             <a href="javascript:void(0);" class="btn btn-xs btn-default" data-id="${row.id}" rel="delete">
-                                <i class="fa fa-bitbucket"></i> 删除
+                                <i class="fa fa-trash-o"></i>
                             </a>
                         </td>
 						</@shiro.hasPermission>
@@ -106,6 +123,10 @@ function doUpdateFeatured(id, featured) {
     J.getJSON('${base}/admin/posts/featured', J.param({'id': id, 'featured': featured}, true), ajaxReload);
 }
 
+function doUpdateWeight(id, weight) {
+    J.getJSON('${base}/admin/posts/weight', J.param({'id': id, 'weight': weight}, true), ajaxReload);
+}
+
 $(function() {
 	// 删除
     $('#dataGrid a[rel="delete"]').bind('click', function(){
@@ -120,10 +141,10 @@ $(function() {
         return false;
     });
 
-    // 推荐
+    // 推荐/加精
     $('#dataGrid a[rel="featured"]').bind('click', function(){
         var that = $(this);
-        layer.confirm('确定推荐吗?推荐后将显示在Banner位上', {
+        layer.confirm('确定推荐吗?', {
             btn: ['确定','取消'], //按钮
             shade: false //不显示遮罩
         }, function(){
@@ -141,6 +162,32 @@ $(function() {
             shade: false //不显示遮罩
         }, function(){
             doUpdateFeatured(that.attr('data-id'), 0);
+        }, function(){
+        });
+        return false;
+    });
+
+    // 推荐/加精
+    $('#dataGrid a[rel="weight"]').bind('click', function(){
+        var that = $(this);
+        layer.confirm('确定推荐吗?推荐后将显示在Banner位上', {
+            btn: ['确定','取消'], //按钮
+            shade: false //不显示遮罩
+        }, function(){
+            doUpdateWeight(that.attr('data-id'), 1);
+        }, function(){
+        });
+        return false;
+    });
+
+    // 撤销
+    $('#dataGrid a[rel="unweight"]').bind('click', function(){
+        var that = $(this);
+        layer.confirm('确定撤销吗?', {
+            btn: ['确定','取消'], //按钮
+            shade: false //不显示遮罩
+        }, function(){
+            doUpdateWeight(that.attr('data-id'), 0);
         }, function(){
         });
         return false;

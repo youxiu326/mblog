@@ -100,6 +100,21 @@ public class PostsController extends BaseController {
 		}
 		return data;
 	}
+
+	@RequestMapping("/weight")
+	public @ResponseBody Data weight(Long id, HttpServletRequest request) {
+		Data data = Data.failure("操作失败");
+		int weight = ServletRequestUtils.getIntParameter(request, "weight", Consts.FEATURED_ACTIVE);
+		if (id != null) {
+			try {
+				postService.updateWeight(id, weight);
+				data = Data.success("操作成功", Data.NOOP);
+			} catch (Exception e) {
+				data = Data.failure(e.getMessage());
+			}
+		}
+		return data;
+	}
 	
 	@RequestMapping("/delete")
 	public @ResponseBody Data delete(@RequestParam("id") List<Long> id) {

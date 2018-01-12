@@ -80,7 +80,6 @@ public interface Consts {
 
 	int FEEDS_TYPE_POST = 1; // 动态类型 - 发布文章
 
-	int FEATURED_COLD = -1;   // 推荐状态-不显示
 	int FEATURED_DEFAULT = 0; // 推荐状态-默认
 	int FEATURED_ACTIVE = 1;  // 推荐状态-推荐
 

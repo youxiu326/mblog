@@ -1348,23 +1348,19 @@ abbr[data-original-title], abbr[title] {
 #qql a{background:#3eb0d8 url('../images/qq.png') no-repeat 0px -5px;}
 .loginwrap .login_warning{height:20px;line-height:20px;overflow:hidden;background:#ff7200;color:#fff;padding:0 4px;float:left;text-align:center;font-size:12px; display:inline-block;}
 
-.group_1 {background-color: #e5e5e5; color: #999;}
-.group_2 {background-color: #5cb85c; color: #fff;}
-.group_3 {background-color: #5bc0de; color: #fff;}
-.group_4 {background-color: #5cb85c; color: #fff;}
-.group_5 {background-color: #be4cf0; color: #fff;}
-.group_6 {background-color: #5bc0de; color: #fff;}
+.channel_featured {background-color: #5cb85c; color: #fff;}
+.channel_top {background-color: #ff7200; color: #fff;}
 
 /* footer
 -------------------------------------------------- */
 footer { background-color: #fff; }
 
 footer .copy-right { margin-top: 25px; position: relative; }
-footer .copy-right { border-bottom: 1px solid #31353c; line-height: 28px; padding-bottom: 20px; display: block; }
+footer .copy-right { line-height: 28px; padding-bottom: 20px; display: block; }
 footer .copy-right,footer .copy-right span{ color: #9398A2; font-size: 12px;}
 footer .copy-right,footer .copy-right span a { color: #46d1da; font-size: 12px;}
 
-footer .footer-nav { height: 40px; line-height: 40px; border-top: 2px solid #00a388; text-align: center; border-bottom: 1px solid #ebebeb;}
+footer .footer-nav { height: 40px; line-height: 40px; border-top: 2px solid #9398A2; text-align: center; border-bottom: 1px solid #ebebeb;}
 footer .footer-nav ul { margin: 0 auto; display: inline-block; }
 footer .footer-nav  ul li { padding: 0; float: left; line-height: 39px; -webkit-transition: all .2s; -moz-transition: all .2s; -ms-transition: all .2s; -o-transition: all .2s; transition: all .2s; }
 footer .footer-nav  ul li a:hover{ color: #000; }

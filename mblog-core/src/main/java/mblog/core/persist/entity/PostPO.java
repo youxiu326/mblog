@@ -90,11 +90,6 @@ public class PostPO implements Serializable {
 	private int images;
 
 	/**
-	 * 推荐状态
-	 */
-	private int featured;
-
-	/**
 	 * 喜欢数
 	 */
 	private int favors;
@@ -113,6 +108,16 @@ public class PostPO implements Serializable {
 	 * 文章状态
 	 */
 	private int status;
+
+	/**
+	 * 推荐状态
+	 */
+	private int featured;
+
+	/**
+	 * 置顶状态
+	 */
+	private int weight;
 
 	public long getId() {
 		return id;
@@ -234,4 +239,11 @@ public class PostPO implements Serializable {
 		this.images = images;
 	}
 
+	public int getWeight() {
+		return weight;
+	}
+
+	public void setWeight(int weight) {
+		this.weight = weight;
+	}
 }
