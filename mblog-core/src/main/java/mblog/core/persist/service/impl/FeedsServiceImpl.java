@@ -76,7 +76,7 @@ public class FeedsServiceImpl implements FeedsService {
 		}
 
 		// 加载文章
-		Map<Long, Post> postMap = postService.findMultileMapByIds(postIds);
+		Map<Long, Post> postMap = postService.findMapByIds(postIds);
 
 		for (Feeds f : rets) {
 			f.setPost(postMap.get(f.getPostId()));

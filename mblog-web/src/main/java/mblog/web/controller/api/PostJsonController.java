@@ -33,7 +33,7 @@ public class PostJsonController extends BaseController {
 		String order = ServletRequestUtils.getStringParameter(request, "ord", Consts.order.NEWEST);
 		int gid = ServletRequestUtils.getIntParameter(request, "gid", 0);
 		Pageable pageable = wrapPageable();
-		Page<Post> page = postService.paging(pageable, gid, order, true);
+		Page<Post> page = postService.paging(pageable, gid, order);
 		
 		return page;
 	}

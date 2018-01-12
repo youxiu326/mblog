@@ -84,12 +84,6 @@ public class BeanMapUtils {
 		return d;
 	}
 
-	public static Attach copy(AttachPO po) {
-		Attach ret = new Attach();
-		BeanUtils.copyProperties(po, ret);
-		return ret;
-	}
-
 	public static Channel copy(ChannelPO po) {
 		Channel r = new Channel();
 		BeanUtils.copyProperties(po, r);

@@ -30,9 +30,8 @@ public interface PostService {
 	 * @param pageable
 	 * @param channelId 分组Id
 	 * @param ord   排序
-	 * @param whetherHasAlbums 是否加载图片
 	 */
-	Page<Post> paging(Pageable pageable, int channelId, String ord, boolean whetherHasAlbums);
+	Page<Post> paging(Pageable pageable, int channelId, String ord);
 
 	Page<Post> paging4Admin(Pageable pageable, long id, String title, int channelId);
 	
@@ -77,19 +76,12 @@ public interface PostService {
 	List<Post> findHots(int maxResults, long ignoreUserId);
 	
 	/**
-	 * 根据Ids查询 - 单图
+	 * 根据Ids查询
 	 * @param ids
 	 * @return <id, 文章对象>
 	 */
-	Map<Long, Post> findSingleMapByIds(Set<Long> ids);
+	Map<Long, Post> findMapByIds(Set<Long> ids);
 
-	/**
-	 * 根据Ids查询 - 多图
-	 * @param ids
-	 * @return <id, 文章对象>
-	 */
-	Map<Long, Post> findMultileMapByIds(Set<Long> ids);
-	
 	/**
 	 * 发布文章
 	 * @param post

@@ -27,9 +27,6 @@ public class Post extends PostPO implements Serializable {
 
 	private String content;
 
-	// extends
-	private List<Attach> albums;
-	private Attach album;
 	private User author;
 	private Channel channel;
 	
@@ -49,22 +46,6 @@ public class Post extends PostPO implements Serializable {
 
 	public void setAuthor(User author) {
 		this.author = author;
-	}
-
-	public List<Attach> getAlbums() {
-		return albums;
-	}
-
-	public void setAlbums(List<Attach> albums) {
-		this.albums = albums;
-	}
-
-	public Attach getAlbum() {
-		return album;
-	}
-
-	public void setAlbum(Attach album) {
-		this.album = album;
 	}
 
 	public PostAttribute getAttribute() {

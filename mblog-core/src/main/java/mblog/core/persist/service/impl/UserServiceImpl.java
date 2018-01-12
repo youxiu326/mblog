@@ -61,17 +61,16 @@ public class UserServiceImpl implements UserService {
 
 //		Assert.state(po.getStatus() != Const.STATUS_CLOSED, "您的账户已被封禁");
 
-		if (StringUtils.equals(po.getPassword(), password)) {
-			po.setLastLogin(Calendar.getInstance().getTime());
-			userDao.save(po);
-			u = BeanMapUtils.copyPassport(po);
-		}
+		Assert.state(StringUtils.equals(po.getPassword(), password), "密码错误");
+
+		po.setLastLogin(Calendar.getInstance().getTime());
+		userDao.save(po);
+		u = BeanMapUtils.copyPassport(po);
 
 		BadgesCount badgesCount = new BadgesCount();
 		badgesCount.setNotifies(notifyService.unread4Me(u.getId()));
 
 		u.setBadgesCount(badgesCount);
-
 		return u;
 	}
 

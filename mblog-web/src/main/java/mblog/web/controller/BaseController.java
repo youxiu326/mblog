@@ -13,18 +13,12 @@ import mblog.base.context.AppContext;
 import mblog.base.upload.FileRepoFactory;
 import mblog.base.utils.MD5;
 import mblog.core.data.AccountProfile;
-import mblog.core.data.Attach;
-import mblog.core.data.Post;
 import mblog.shiro.authc.AccountSubject;
 import mblog.web.formatter.StringEscapeEditor;
 import org.apache.commons.lang3.StringUtils;
 import org.apache.shiro.SecurityUtils;
 import org.apache.shiro.authc.AuthenticationToken;
 import org.apache.shiro.authc.UsernamePasswordToken;
-import org.jsoup.Jsoup;
-import org.jsoup.nodes.Document;
-import org.jsoup.nodes.Element;
-import org.jsoup.select.Elements;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.propertyeditors.CustomDateEditor;
 import org.springframework.data.domain.PageRequest;
@@ -37,11 +31,8 @@ import org.springframework.web.context.request.ServletRequestAttributes;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
-import java.io.File;
 import java.text.SimpleDateFormat;
-import java.util.ArrayList;
 import java.util.Date;
-import java.util.List;
 
 /**
  * Controller 基类
@@ -139,73 +130,4 @@ public class BaseController {
 		}
 	}
 	
-//	protected List<Attach> handleAlbums(String[] albums) {
-//		if (albums == null || albums.length == 0) {
-//			return Collections.emptyList();
-//		}
-//
-//		List<Attach> rets = new ArrayList<>();
-//
-//		for (String album : albums) {
-//			if (StringUtils.isBlank(album)) {
-//				continue;
-//			}
-//
-//			String root = fileRepoFactory.select().getRoot();
-//			File temp = new File(root + album);
-//			Attach item = new Attach();
-//			try {
-//				// 保存原图
-//				String orig = fileRepoFactory.select().storeScale(temp, appContext.getOrigDir(), 750);
-//				item.setOriginal(orig);
-//
-//				// 创建缩放图片
-//				String preview = fileRepoFactory.select().storeScale(temp, appContext.getThumbsDir(), 305);
-//				item.setPreview(preview);
-//
-//				// 创建快照
-//				String screenshot = fileRepoFactory.select().storeScale(temp, appContext.getScreenshotDir(), 225, 140);
-//				item.setScreenshot(screenshot);
-//
-//				rets.add(item);
-//			} catch (Exception e) {
-//				e.printStackTrace();
-//			} finally {
-//				if (temp != null) {
-//					temp.delete();
-//				}
-//			}
-//		}
-//
-//		return rets;
-//	}
-
-	protected void extractImages(Post post) {
-		Document doc = Jsoup.parse(post.getContent());
-		Elements elements = doc.select("img");
-		List<Attach> rets = new ArrayList<>();
-
-		HttpServletRequest request = ((ServletRequestAttributes) RequestContextHolder.getRequestAttributes()).getRequest();
-
-		for (Element el : elements) {
-			String imageUrl = el.attr("src");
-
-			if (request.getContextPath().length() > 1 && imageUrl.startsWith(request.getContextPath())) {
-				imageUrl = imageUrl.replace(request.getContextPath(), "");
-			}
-			Attach a = new Attach();
-			a.setOriginal(imageUrl);
-			a.setPreview(imageUrl);
-
-			if (imageUrl.startsWith("http")) {
-				a.setStore(1);
-			}
-			rets.add(a);
-		}
-
-		post.setContent(doc.html());
-		if (rets.size() > 0) {
-			post.setAlbums(rets);
-		}
-	}
 }

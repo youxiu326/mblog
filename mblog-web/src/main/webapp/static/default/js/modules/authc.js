@@ -17,22 +17,20 @@ define(function(require, exports, module) {
         },
         showLogin : function () {
             var that = this;
-            $('#loginalert').modal();
+            $('#login_alert').modal();
 
-            $('#alt_login').unbind().click(function () {
+            $('#ajax_login_submit').unbind().click(function () {
                 that.doPostLogin();
             });
         },
         doPostLogin: function () {
-            var un = $('#alt_un').val();
-            var pw = $('#alt_pw').val();
+            var un = $('#ajax_login_username').val();
+            var pw = $('#ajax_login_password').val();
             jQuery.post(app.base + '/api/login', {'username': un, 'password': pw}, function (ret) {
                 if (ret && ret.code == 0) {
-                    //$('#loginalert').modal('hide');
-                    //window.app.login = ret.data.id;
                     window.location.reload();
                 } else {
-                    $('#login_warning').text(ret.message).show();
+                    $('#ajax_login_message').text(ret.message).show();
                 }
             });
         }

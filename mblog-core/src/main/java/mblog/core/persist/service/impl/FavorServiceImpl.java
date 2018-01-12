@@ -64,7 +64,7 @@ public class FavorServiceImpl implements FavorService {
         }
 
         if (postIds.size() > 0) {
-            Map<Long, Post> posts = postService.findMultileMapByIds(postIds);
+            Map<Long, Post> posts = postService.findMapByIds(postIds);
 
             for (Favor t : rets) {
                 Post p = posts.get(t.getPostId());

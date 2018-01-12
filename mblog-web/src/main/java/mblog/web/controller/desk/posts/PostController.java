@@ -59,8 +59,6 @@ public class PostController extends BaseController {
 			AccountProfile profile = getSubject().getProfile();
 
 			p.setContent(content);
-			extractImages(p);
-
 			p.setAuthorId(profile.getId());
 
 			postService.post(p);
@@ -119,7 +117,6 @@ public class PostController extends BaseController {
 		if (p != null && p.getAuthorId() == up.getId()) {
 			String content = request.getParameter("content");
 			p.setContent(content);
-			extractImages(p);
 			postService.update(p);
 		}
 		return Views.REDIRECT_USER_POSTS;

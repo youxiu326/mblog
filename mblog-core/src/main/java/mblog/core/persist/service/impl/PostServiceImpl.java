@@ -13,7 +13,6 @@ import mblog.base.context.SpringContextHolder;
 import mblog.base.lang.Consts;
 import mblog.base.lang.EntityStatus;
 import mblog.base.utils.PreviewTextUtils;
-import mblog.core.data.Attach;
 import mblog.core.data.Channel;
 import mblog.core.data.Post;
 import mblog.core.data.User;
@@ -52,8 +51,6 @@ public class PostServiceImpl implements PostService {
 	@Autowired
 	private PostDao postDao;
 	@Autowired
-	private AttachService attachService;
-	@Autowired
 	private UserService userService;
 	@Autowired
 	private UserEventService userEventService;
@@ -66,7 +63,7 @@ public class PostServiceImpl implements PostService {
 
 	@Override
 	@Cacheable
-	public Page<Post> paging(Pageable pageable, int channelId, String ord, boolean whetherHasAlbums) {
+	public Page<Post> paging(Pageable pageable, int channelId, String ord) {
 		Page<PostPO> page = postDao.findAll((root, query, builder) -> {
 
 			List<Order> orders = new ArrayList<>();
@@ -99,7 +96,7 @@ public class PostServiceImpl implements PostService {
 			return predicate;
 		}, pageable);
 
-		return new PageImpl<>(toPosts(page.getContent(), whetherHasAlbums), pageable, page.getTotalElements());
+		return new PageImpl<>(toPosts(page.getContent()), pageable, page.getTotalElements());
 	}
 
 	@Override
@@ -130,21 +127,21 @@ public class PostServiceImpl implements PostService {
             return predicate;
         }, pageable);
 
-		return new PageImpl<>(toPosts(page.getContent(), false), pageable, page.getTotalElements());
+		return new PageImpl<>(toPosts(page.getContent()), pageable, page.getTotalElements());
 	}
 
 	@Override
 	@Cacheable
 	public Page<Post> pagingByAuthorId(Pageable pageable, long userId) {
 		Page<PostPO> page = postDao.findAllByAuthorIdOrderByCreatedDesc(pageable, userId);
-		return new PageImpl<>(toPosts(page.getContent(), true), pageable, page.getTotalElements());
+		return new PageImpl<>(toPosts(page.getContent()), pageable, page.getTotalElements());
 	}
 
 	@Override
 	@Cacheable
 	public List<Post> findAllFeatured() {
 		List<PostPO> list = postDao.findTop5ByFeaturedGreaterThanOrderByCreatedDesc(Consts.FEATURED_DEFAULT);
-		return toPosts(list, true);
+		return toPosts(list);
 	}
 
 	@Override
@@ -158,9 +155,6 @@ public class PostServiceImpl implements PostService {
 			ids.add(po.getId());
 			uids.add(po.getAuthorId());
 		}
-
-		// 加载相册
-		buildAttachs(page.getContent(), ids);
 
 		// 加载用户信息
 		buildUsers(page.getContent(), uids);
@@ -179,9 +173,6 @@ public class PostServiceImpl implements PostService {
 			ids.add(po.getId());
 			uids.add(po.getAuthorId());
 		}
-
-		// 加载相册
-		buildAttachs(page.getContent(), ids);
 
 		// 加载用户信息
 		buildUsers(page.getContent(), uids);
@@ -210,7 +201,7 @@ public class PostServiceImpl implements PostService {
 	}
 	
 	@Override
-	public Map<Long, Post> findSingleMapByIds(Set<Long> ids) {
+	public Map<Long, Post> findMapByIds(Set<Long> ids) {
 		if (ids == null || ids.isEmpty()) {
 			return Collections.emptyMap();
 		}
@@ -223,49 +214,9 @@ public class PostServiceImpl implements PostService {
 
 		list.forEach(po -> {
 			rets.put(po.getId(), BeanMapUtils.copy(po, 0));
-
-			// 此处加载最后一张图片
-			if (po.getLastImageId() > 0) {
-				imageIds.add(po.getLastImageId());
-			}
-
 			uids.add(po.getAuthorId());
 		});
 		
-		Map<Long, Attach> ats = attachService.findByIds(imageIds);
-
-		rets.forEach((k, v) -> {
-			if (v.getLastImageId() > 0) {
-				Attach a = ats.get(v.getLastImageId());
-				v.setAlbum(a);
-			}
-		});
-
-		// 加载用户信息
-		buildUsers(rets.values(), uids);
-
-		return rets;
-	}
-
-	@Override
-	public Map<Long, Post> findMultileMapByIds(Set<Long> ids) {
-		if (ids == null || ids.isEmpty()) {
-			return Collections.emptyMap();
-		}
-
-		List<PostPO> list = postDao.findAllByIdIn(ids);
-		Map<Long, Post> rets = new HashMap<>();
-
-		HashSet<Long> uids = new HashSet<>();
-
-		list.forEach(po -> {
-			rets.put(po.getId(), BeanMapUtils.copy(po, 0));
-			uids.add(po.getAuthorId());
-		});
-
-		// 加载相册
-		buildAttachs(rets.values(), ids);
-
 		// 加载用户信息
 		buildUsers(rets.values(), uids);
 
@@ -297,13 +248,6 @@ public class PostServiceImpl implements PostService {
 		attr.setId(po.getId());
 		submitAttr(attr);
 		
-		// 处理相册
-		if (post.getAlbums() != null) {
-			long lastImageId = attachService.batchPost(po.getId(), post.getAlbums());
-			po.setLastImageId(lastImageId);
-			po.setImages(post.getAlbums().size());
-		}
-		
 		// 更新文章统计
 		userEventService.identityPost(po.getAuthorId(), po.getId(), true);
 
@@ -324,7 +268,6 @@ public class PostServiceImpl implements PostService {
 			d = BeanMapUtils.copy(po, 1);
 
 			d.setAuthor(userService.get(d.getAuthorId()));
-			d.setAlbums(attachService.findByTarget(d.getId()));
 
 			d.setChannel(channelService.getById(d.getChannelId()));
 
@@ -358,13 +301,6 @@ public class PostServiceImpl implements PostService {
 			}
 
 			po.setTags(p.getTags());//标签
-
-			// 处理相册
-			if (p.getAlbums() != null && !p.getAlbums().isEmpty()) {
-				long lastImageId = attachService.batchPost(po.getId(), p.getAlbums());
-				po.setLastImageId(lastImageId);
-				po.setImages(po.getImages() + p.getAlbums().size());
-			}
 
 			// 保存扩展
 			PostAttribute attr = new PostAttribute();
@@ -409,7 +345,6 @@ public class PostServiceImpl implements PostService {
 	public void delete(long id) {
 		PostPO po = postDao.findOne(id);
 		if (po != null) {
-			attachService.deleteByToId(id);
 			postDao.delete(po);
 		}
 	}
@@ -493,7 +428,7 @@ public class PostServiceImpl implements PostService {
 		return PreviewTextUtils.getText(text, 126);
 	}
 
-	private List<Post> toPosts(List<PostPO> posts, boolean whetherHasAlbums) {
+	private List<Post> toPosts(List<PostPO> posts) {
 		List<Post> rets = new ArrayList<>();
 
 		HashSet<Long> pids = new HashSet<>();
@@ -512,18 +447,8 @@ public class PostServiceImpl implements PostService {
 		buildUsers(rets, uids);
 		buildGroups(rets, groupIds);
 
-		// 判断是否加载相册
-		if (whetherHasAlbums) {
-			buildAttachs(rets, pids);
-		}
 		return rets;
 	}
-
-	private void buildAttachs(Collection<Post> posts, Set<Long> postIds) {
-    	Map<Long, List<Attach>> attMap = attachService.findByTarget(postIds);
-
-		posts.forEach(p -> p.setAlbums(attMap.get(p.getId())));
-    }
 
 	private void buildUsers(Collection<Post> posts, Set<Long> uids) {
 		Map<Long, User> userMap = userService.findMapByIds(uids);

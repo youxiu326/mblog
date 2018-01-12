@@ -74,13 +74,6 @@ public class PostPO implements Serializable {
 	 */
 	private String editor; // 编辑器
 
-	/**
-	 * 文章最后AttachId
-	 * - 冗余字段
-	 */
-	@Column(name = "last_image_id")
-	private long lastImageId;
-
 	@Temporal(value = TemporalType.TIMESTAMP)
 	private Date created;
 
@@ -149,14 +142,6 @@ public class PostPO implements Serializable {
 
 	public void setSummary(String summary) {
 		this.summary = summary;
-	}
-
-	public long getLastImageId() {
-		return lastImageId;
-	}
-
-	public void setLastImageId(long lastImageId) {
-		this.lastImageId = lastImageId;
 	}
 
 	public String getTags() {

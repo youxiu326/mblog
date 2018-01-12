@@ -1,39 +1,42 @@
 <!-- Login dialog BEGIN -->
-<div id="loginalert" style="display: none; top: 0px;" class="fade in">
-    <div class="pd20 loginpd">
-        <h3><i class="closealert fr" data-dismiss="modal" aria-label="Close"></i><div class="clear"></div></h3>
-        <div class="loginwrap">
-            <div class="loginh">
-                <div class="fl">会员登录</div>
-                <div class="fr">还没有账号<a id="sigup_now" href="${base}/reg">立即注册</a></div>
+<div id="login_alert" class="modal fade" tabindex="-1" role="dialog">
+    <div class="modal-dialog" role="document" style="width: 450px;">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                <h4 class="modal-title">请登录</h4>
             </div>
-            <h3><span class="login_warning" id="login_warning" style="display: none;">用户名或密码错误</span><div class="clear"></div></h3>
-            <form action="" method="post" id="login_form">
-                <div class="logininput">
-                    <input type="text" id="alt_un" name="username" class="loginusername" value="" placeholder="用户名">
-                    <input type="password" id="alt_pw" name="password" class="loginuserpasswordp" placeholder="密码">
-                </div>
-                <div class="loginbtn">
-                    <div class="loginsubmit fl"><input type="button" value="登录" id="alt_login" class="btn"></div>
-                    <!--
-                    <div class="fr" style="margin:26px 0 0 0;"><a href="##">忘记密码?</a></div>
-                    -->
-                    <div class="clear"></div>
-                </div>
-            </form>
-        </div>
-    </div>
-    <div class="thirdlogin">
-        <div class="pd50">
-            <h4>用第三方帐号直接登录</h4>
-            <ul>
-                <li id="sinal"><a href="${base}/oauth/callback/call_weibo">微博帐号注册</a></li>
-                <li id="qql" style="margin-right: 0px;"><a href="${base}/oauth/callback/call_qq">QQ帐号注册</a></li>
-            </ul>
-            <div class="clear"></div>
-        </div>
-    </div>
-</div>
+            <div class="modal-body">
+                <form method="POST" action="${base}/login" accept-charset="UTF-8">
+                    <div class="form-group ">
+                        <label class="control-label" for="username">账号</label>
+                        <input class="form-control" id="ajax_login_username" name="username" type="text" required>
+                    </div>
+                    <div class="form-group ">
+                        <label class="control-label" for="password">密码</label>
+                        <input class="form-control" id="ajax_login_password" name="password" type="password" required>
+                    </div>
+                    <button id="ajax_login_submit" class="btn btn-lg btn-success btn-block btn-sm" type="button">
+                        登录 Use it
+                    </button>
+                    <div id="ajax_login_message" class="text-danger"></div>
+                    <hr>
+                    <fieldset class="form-group">
+                        <div class="alert alert-info">
+                            使用以下方法注册或者登录（<a class="forget-password" href="${base}/forgot/apply">忘记密码？</a>）
+                        </div>
+                        <a class="btn btn-default btn-block" href="${base}/oauth/callback/call_weibo">
+                            <i class="fa fa-weibo"></i> 微博帐号登录
+                        </a>
+                        <a class="btn btn-default btn-block" href="${base}/oauth/callback/call_qq">
+                            <i class="fa fa-qq"></i> QQ帐号登录
+                        </a>
+                    </fieldset>
+                </form>
+            </div>
+        </div><!-- /.modal-content -->
+    </div><!-- /.modal-dialog -->
+</div><!-- /.modal -->
 <!-- Login dialog END -->
 
 <!-- Fixed navbar -->

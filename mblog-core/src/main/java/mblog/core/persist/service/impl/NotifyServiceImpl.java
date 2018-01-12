@@ -57,7 +57,7 @@ public class NotifyServiceImpl implements NotifyService {
         });
 
         // 加载
-        Map<Long, Post> posts = postService.findSingleMapByIds(postIds);
+        Map<Long, Post> posts = postService.findMapByIds(postIds);
         Map<Long, User> fromUsers = userService.findMapByIds(fromUserIds);
 
         rets.forEach(n -> {

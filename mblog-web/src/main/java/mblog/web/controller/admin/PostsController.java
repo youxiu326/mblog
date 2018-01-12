@@ -79,7 +79,6 @@ public class PostsController extends BaseController {
 		if (p != null) {
 			String content = request.getParameter("content");
 			p.setContent(content);
-			extractImages(p);
 			postService.update(p);
 		}
 		return "redirect:/admin/posts/list";

@@ -65,13 +65,13 @@ public class SidebarController extends BaseController {
 			SecurityUtils.getSubject().login(token);
 			data = Data.success("登录成功", getSubject().getProfile());
 
-		} catch (AuthenticationException e) {
+		} catch (Exception e) {
 			if (e instanceof UnknownAccountException) {
 				data.setMessage("用户不存在");
 			} else if (e instanceof LockedAccountException) {
 				data.setMessage("用户被禁用");
 			} else {
-				data.setMessage("用户认证失败");
+				data.setMessage("登录认证失败");
 			}
 		}
 		return data;
