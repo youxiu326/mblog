@@ -5,7 +5,7 @@ ${site_metas}
 <link rel='stylesheet' media='all' href="${base}/dist/vendors/share.js/css/share.min.css"/>
 
 <link rel='stylesheet' media='all' href="${base}/static/default/css/style.css"/>
-<link rel='stylesheet' media='all' href="${base}/static/default/css/plugins.css"/>
+<link rel='stylesheet' media='all' href="${base}/dist/css/plugins.css"/>
 
 <link rel='stylesheet' media='all' href="${base}/dist/vendors/simple-line-icons/css/simple-line-icons.css"/>
 <link rel='stylesheet' media='all' href="${base}/dist/vendors/font-awesome/css/font-awesome.min.css"/>
