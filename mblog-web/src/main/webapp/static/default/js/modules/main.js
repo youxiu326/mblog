@@ -81,7 +81,7 @@ define(function(require, exports, module) {
 			if (parseInt(id) > 0) {
 				jQuery.getJSON(app.base +'/user/follow', {'id': id}, function (ret) {
 					if (ret.code >=0) {
-						that.text("已关注");
+						that.html('<i class="icon icon-user-following"></i> 已关注');
 					} else {
 						layer.msg(ret.message, {icon: 2});
 					}
@@ -96,7 +96,7 @@ define(function(require, exports, module) {
 			if (parseInt(id) > 0) {
 				jQuery.getJSON(app.base +'/user/check_follow', {'id': id}, function (ret) {
 					if (ret.code >=0 && ret.data) {
-						that.text("已关注");
+						that.html('<i class="icon icon-user-following"></i> 已关注');
 					}
 				});
 			}

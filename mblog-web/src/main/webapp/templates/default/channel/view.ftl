@@ -94,7 +94,7 @@
                 <div class="user-info">
                     <div class="nk mb10">${view.author.name}</div>
                     <div class="mb6">
-                        <a class="btn btn-success btn-xs" href="javascript:void(0);" data-id="${view.author.id}" rel="follow"><i class="icon icon-user-follow"></i> 关注</a>
+                        <a class="btn btn-default btn-xs" href="javascript:void(0);" data-id="${view.author.id}" rel="follow"><i class="icon icon-user-follow"></i> 关注</a>
                     </div>
                 </div>
             </li>
@@ -109,7 +109,9 @@
             </li>
             <li class="list-group-item">
                 <div class="text-center padding-md">
-                    <a class="btn btn-success btn-sm" href="javascript:void(0);" data-id="${view.id}" rel="favor">喜欢</a>
+                    <a class="btn btn-default btn-sm" href="javascript:void(0);" data-id="${view.id}" rel="favor">
+                        <i class="icon icon-like"></i> 喜欢
+                    </a>
                     <strong id="favors">${view.favors}</strong> 喜欢
                 </div>
             </li>
