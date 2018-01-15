@@ -27,7 +27,7 @@ public class FeedsDaoImpl implements FeedsDaoCustom {
 	@PersistenceContext
 	private EntityManager entityManager;
 
-	String pattern = "INSERT INTO mto_feeds (own_id, type, post_id, author_id, created) SELECT user_id, {0}, {1}, {2}, now() FROM mto_follows WHERE follow_id = {3}";
+	String pattern = "INSERT INTO mto_feeds (own_id, type, post_id, author_id, created) SELECT user_id, {0}, {1,number,###}, {2,number,###}, now() FROM mto_follows WHERE follow_id = {3,number,###}";
 
 	@Override
 	@Transactional
