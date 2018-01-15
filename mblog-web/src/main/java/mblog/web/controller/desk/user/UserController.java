@@ -14,6 +14,7 @@ import mblog.core.persist.service.*;
 import mblog.shiro.authc.AccountSubject;
 import mblog.web.controller.BaseController;
 import mblog.web.controller.desk.Views;
+import org.apache.shiro.SecurityUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
@@ -173,13 +174,18 @@ public class UserController extends BaseController {
 		User user = userService.get(up.getId());
 
 		model.put("user", user);
+
+		pushBadgesCount();
 	}
 
 	private void pushBadgesCount() {
 		AccountProfile profile = (AccountProfile) session.getAttribute("profile");
 		if (profile != null && profile.getBadgesCount() != null) {
-			profile.getBadgesCount().setNotifies(0);
+			BadgesCount count = new BadgesCount();
+			count.setNotifies(notifyService.unread4Me(profile.getId()));
+			profile.setBadgesCount(count);
 			session.setAttribute("profile", profile);
 		}
 	}
+
 }

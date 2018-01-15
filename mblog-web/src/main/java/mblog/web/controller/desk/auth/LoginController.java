@@ -9,10 +9,15 @@
 */
 package mblog.web.controller.desk.auth;
 
+import mblog.base.lang.Consts;
+import mblog.core.data.BadgesCount;
+import mblog.core.persist.service.NotifyService;
+import mblog.shiro.authc.AccountSubject;
 import mblog.web.controller.BaseController;
 import org.apache.commons.lang3.StringUtils;
 import org.apache.shiro.SecurityUtils;
 import org.apache.shiro.authc.*;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.ModelMap;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -27,6 +32,8 @@ import org.springframework.web.bind.annotation.RequestParam;
  */
 @Controller
 public class LoginController extends BaseController {
+    @Autowired
+    private NotifyService notifyService;
 
     /**
      * 跳转登录页
@@ -66,9 +73,6 @@ public class LoginController extends BaseController {
             SecurityUtils.getSubject().login(token);
 
             ret = Views.REDIRECT_USER;
-
-            // 更新消息数量
-//            pushBadgesCount();
         } catch (AuthenticationException e) {
             if (e instanceof UnknownAccountException) {
             	model.put("message", "用户不存在");
@@ -81,22 +85,5 @@ public class LoginController extends BaseController {
 
         return ret;
 	}
-
-//    private void pushBadgesCount() {
-//        new Thread(() -> {
-//
-//            try {
-//                Thread.sleep(1 * Consts.TIME_MIN);
-//            } catch (InterruptedException e) {
-//            }
-//
-//            AccountSubject subject = (AccountSubject) SecurityUtils.getSubject();
-//
-//            BadgesCount count = new BadgesCount();
-//            count.setNotifies(notifyService.unread4Me(subject.getProfile().getId()));
-//            session.setAttribute("badgesCount", count);
-//
-//        }).start();
-//    }
 
 }
