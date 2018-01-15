@@ -164,8 +164,6 @@ public class UserController extends BaseController {
 		model.put("page", page);
 		initUser(model);
 
-		pushBadgesCount();
-
 		return view(Views.USER_NOTIFIES);
 	}
 
