@@ -14,11 +14,10 @@
             <div class="panel-body remove-padding-horizontal">
                 <ul class="list-group topic-list notify">
                     <#list page.content as row>
-                        <#assign target = row.post>
                         <li class="list-group-item " style="padding: 0 15px;">
                             <a class="reply_count_area hidden-xs pull-right" href="#">
                                 <div class="count_set">
-                                    <abbr class="timeago">${timeAgo(target.created)}</abbr>
+                                    <abbr class="timeago">${timeAgo(row.created)}</abbr>
                                 </div>
                             </a>
                             <div class="avatar pull-left">
@@ -30,7 +29,7 @@
                             <div class="infos">
                                 <div class="media-heading">
                                 <#--<span class="hidden-xs label label-warning">${row.channel.name}</span>-->
-                                    <a href="${base}/users/${target.id}">${row.from.name}</a>
+                                    <a href="${base}/users/${row.from.id}">${row.from.name}</a>
                                     <span>
                                         <#if (row.event == 1)>
                                             喜欢了你的文章 - <a href="${base}/view/${row.postId}">${row.post.title}</a>

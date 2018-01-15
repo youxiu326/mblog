@@ -26,7 +26,7 @@
                     </div>
                     <div class="form-group ">
                         <label class="control-label" for="username">密码</label>
-                        <input class="form-control" name="password" type="password" maxlength="18" placeholder="新密码" data-required>
+                        <input class="form-control" id="password" name="password" type="password" maxlength="18" placeholder="新密码" data-required>
                     </div>
                     <div class="form-group ">
                         <label class="control-label" for="username">确认密码</label>
@@ -54,7 +54,7 @@
             },
             conditional : {
                 confirm : function() {
-                    return $(this).val() == $('input[name=password]').val();
+                    return $(this).val() == $('#password').val();
                 },
                 email : function() {
                     return /^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$/.test($(this).val());
