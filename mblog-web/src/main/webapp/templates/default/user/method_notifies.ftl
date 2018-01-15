@@ -49,7 +49,7 @@
                     <#if page.content?size == 0>
                         <li class="list-group-item ">
                             <div class="infos">
-                                <div class="media-heading">该目录下还没有内容!</div>
+                                <div>该目录下还没有内容!</div>
                             </div>
                         </li>
                     </#if>
