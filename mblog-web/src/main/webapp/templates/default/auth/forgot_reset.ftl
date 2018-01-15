@@ -17,7 +17,7 @@
                     <input type="hidden" name="token" value="${token}"/>
                     <div class="form-group ">
                         <label class="control-label" for="username">密码</label>
-                        <input class="form-control" name="password" type="password" maxlength="18" placeholder="新密码" data-required>
+                        <input class="form-control" name="password" id="password" type="password" maxlength="18" placeholder="新密码" data-required>
                     </div>
                     <div class="form-group ">
                         <label class="control-label" for="username">确认密码</label>
@@ -57,4 +57,4 @@
         });
     })
 </script>
-</script>
+</@layout>
