@@ -9,7 +9,7 @@
         <div class="user-info">
             <div class="nk mb10">${user.name}</div>
             <div class="mb6">
-                <a class="btn btn-success btn-xs" href="${base}/user/profile"><i class="fa fa-pencil"></i> 修改账户</a>
+                <a class="btn btn-success btn-xs" href="${base}/user/profile"><i class="icon icon-note"></i> 修改账户</a>
             </div>
         </div>
     </li>
@@ -55,7 +55,12 @@
         <ul class="list-group user-nav">
             <li class="list-group-item">
                 <a href="${base}/user?method=notifies">
-                    <i class="icon icon-envelope"></i> 通知 <span class="label label-danger">${profile.badgesCount.notifies}</span>
+                    <i class="icon icon-envelope"></i> 通知
+                    <#if (profile.badgesCount.notifies > 0)>
+                        <span class="label label-danger">${profile.badgesCount.notifies}</span>
+                    <#else>
+                        <span class="label label-default">0</span>
+                    </#if>
                 </a>
             </li>
         </ul>

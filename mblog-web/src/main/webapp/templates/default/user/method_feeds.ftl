@@ -4,7 +4,7 @@
 
 <div class="row users-show streams">
     <div class="col-xs-12 col-md-3 side-left">
-        <#include "/default/user/right.ftl"/>
+        <#include "/default/user/left.ftl"/>
     </div>
     <div class="col-xs-12 col-md-9 side-right">
         <div class="panel panel-default">
