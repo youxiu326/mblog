@@ -34,10 +34,6 @@ define(function(require, exports, module) {
         	var opts = this.options;
 			var that = this;
 
-			// 手机端跳过加载侧边栏
-			if(mblog && (mblog.browser.ios || mblog.browser.android)) {
-				return false;
-			}
         	// load hots
 			if (opts.hotUrl) {
 
