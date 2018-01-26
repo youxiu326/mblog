@@ -78,11 +78,6 @@ public class PostPO implements Serializable {
 	private Date created;
 
 	/**
-	 * 图片统计
-	 */
-	private int images;
-
-	/**
 	 * 喜欢数
 	 */
 	private int favors;
@@ -214,14 +209,6 @@ public class PostPO implements Serializable {
 
 	public void setEditor(String editor) {
 		this.editor = editor;
-	}
-
-	public int getImages() {
-		return images;
-	}
-
-	public void setImages(int images) {
-		this.images = images;
 	}
 
 	public int getWeight() {
