@@ -2,7 +2,7 @@
 <@layout "写文章">
 <div class="panel panel-default">
 	<div class="panel-heading">
-		<i class="fa fa-pencil-square"></i> 写文章
+		<i class="icon icon-pencil"></i> 写文章
 	</div>
 	<div class="panel-body">
 		<div id="message"></div>

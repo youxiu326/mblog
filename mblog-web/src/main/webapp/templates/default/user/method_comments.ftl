@@ -16,8 +16,8 @@
 					<#list page.content as row>
 						<#assign target = row.post>
                         <li class="list-group-item" el="loop-${row.id}">
-							<#if row.post??>
-                                <a href="${base}/view/${row.post.id}" class="remove-padding-left">${row.post.title}</a>
+							<#if target??>
+                                <a href="${base}/view/${target.id}" class="remove-padding-left">${target.title}</a>
 							<#else>
                                 <a href="javascript:;" class="remove-padding-left">文章已删除</a>
 							</#if>

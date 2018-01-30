@@ -8,6 +8,7 @@ spring:
         cache: false
         settings:
             classic_compatible: true #处理空值
+            template_exception_handler: rethrow
             template_update_delay: 0
             datetime_format: yyyy-MM-dd HH:mm
             number_format: 0.##
