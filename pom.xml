@@ -229,6 +229,7 @@
 				<groupId>org.springframework.boot</groupId>
 				<artifactId>spring-boot-maven-plugin</artifactId>
 				<configuration>
+					<jvmArguments>-Dfile.encoding=UTF-8</jvmArguments>
 					<executable>true</executable>
 					<mainClass>mblog.BootApplication</mainClass>
 					<includeSystemScope>true</includeSystemScope>
