@@ -23,7 +23,7 @@
    - 启动成功后,你应该去后台的`系统配置`里配置你的网站信息等。
    
 5. 常见问题总结
-   - 进入系统后, 菜单加载不出来, 那应该是你没有导 db_init.sql
+   - 进入系统后, 菜单加载不出来, 那应该是你没有导 sql/db_mblog.sql
    - 点标签显示乱码, 请设置Tomcat的 URIEncoding 为 UTF-8
    ```
    <Connector port="8080" protocol="HTTP/1.1" ... URIEncoding="UTF-8"/>
