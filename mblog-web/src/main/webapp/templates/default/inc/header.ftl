@@ -16,7 +16,7 @@
                         <label class="control-label" for="password">密码</label>
                         <input class="form-control" id="ajax_login_password" name="password" type="password" required>
                     </div>
-                    <button id="ajax_login_submit" class="btn btn-lg btn-success btn-block btn-sm" type="button">
+                    <button id="ajax_login_submit" class="btn btn-success btn-block btn-sm" type="button">
                         登录 Use it
                     </button>
                     <div id="ajax_login_message" class="text-danger"></div>

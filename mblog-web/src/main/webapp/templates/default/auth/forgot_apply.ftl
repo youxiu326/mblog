@@ -16,7 +16,7 @@
                     <div class="form-group ">
                         <input maxlength="32" class="form-control border" name="username" placeholder="用户名" type="text" required>
                     </div>
-                    <button type="submit" class="btn btn-lg btn-success btn-block btn-sm">
+                    <button type="submit" class="btn btn-success btn-block btn-sm">
                         提 交
                     </button>
 

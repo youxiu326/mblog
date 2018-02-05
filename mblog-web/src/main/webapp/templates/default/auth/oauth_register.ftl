@@ -29,7 +29,7 @@
                         <input class="form-control" name="nickname" type="text" value="${open.nickname}" data-required>
                     </div>
 
-                    <button type="submit" class="btn btn-lg btn-success btn-block">
+                    <button type="submit" class="btn btn-success btn-block">
                         提  交
                     </button>
 
