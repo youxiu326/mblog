@@ -275,6 +275,7 @@ public class UserServiceImpl implements UserService {
 		if (po != null) {
 			po.setRoles(rolePOs);
 		}
+		userDao.save(po);
 	}
 
 	@Override
