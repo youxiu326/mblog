@@ -375,6 +375,7 @@ public class PostServiceImpl implements PostService {
 		PostPO po = postDao.findOne(id);
 		if (po != null) {
 			po.setViews(po.getViews() + Consts.IDENTITY_STEP);
+			postDao.save(po);
 		}
 	}
 
@@ -384,6 +385,7 @@ public class PostServiceImpl implements PostService {
 		PostPO po = postDao.findOne(id);
 		if (po != null) {
 			po.setComments(po.getComments() + Consts.IDENTITY_STEP);
+			postDao.save(po);
 		}
 	}
 
