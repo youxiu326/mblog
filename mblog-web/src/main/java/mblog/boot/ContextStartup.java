@@ -21,7 +21,7 @@ import java.util.*;
  *
  */
 @Component
-public class ContextInitRunner implements ApplicationRunner, Ordered, ServletContextAware {
+public class ContextStartup implements ApplicationRunner, Ordered, ServletContextAware {
     @Autowired
     private ConfigService configService;
     @Autowired
