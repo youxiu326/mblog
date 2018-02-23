@@ -15,8 +15,8 @@
             <div class="panel-body remove-padding-horizontal">
                 <ul class="list-group topic-list">
                     <#list page.content as row>
-                        <#assign target = row.post>
-                        <#if target??>
+                        <#if row.post??>
+                            <#assign target = row.post>
                             <li class="list-group-item " style="padding: 0 15px;">
                                 <a class="reply_count_area hidden-xs pull-right" href="#">
                                     <div class="count_set">
