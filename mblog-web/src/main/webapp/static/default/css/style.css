@@ -138,6 +138,13 @@ abbr[data-original-title], abbr[title] {
     font-size: 13px;
 }
 
+.fl {
+    float: left;
+}
+
+.fr {
+    float: right;
+}
 
 /* Override bootstrap
 -------------------------------------------------- */
