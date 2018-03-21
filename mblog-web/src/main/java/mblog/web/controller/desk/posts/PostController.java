@@ -42,7 +42,7 @@ public class PostController extends BaseController {
 	 */
 	@RequestMapping(value = "/new", method = RequestMethod.GET)
 	public String view(ModelMap model) {
-		model.put("groups", channelService.findAll(Consts.STATUS_NORMAL));
+		model.put("channels", channelService.findAll(Consts.STATUS_NORMAL));
 		return view(Views.ROUTE_POST_PUBLISH);
 	}
 
