@@ -20,7 +20,7 @@
 
 ###3. 存储在Tomcat目录以外
 - 优点: 独立于tomcat等应用服务器以外, 图片的存储安全不受容器影响
-- 确定: 配置复杂点
+- 缺点: 配置复杂点
 
 1. 给图片单独配置域名
 配置如下:
@@ -30,7 +30,7 @@ site.store.repo=absolute
 site.store.domain=true
 site.store.host={你的域名}
 ```
-如果你用了nginx,为图片单独配置一个server即可, 如果只是tomcat 可以在tomcat里面把图片目录当一个项目部署, 如果在一个tomcat里面部署两个项目这里不做阐述
+如果你用了nginx,为图片单独配置一个server即可, 如果只是tomcat 可以在tomcat里面把图片目录当一个项目部署, 如何在一个tomcat里面部署两个项目这里不做阐述
 
 2. 不给图片单独配置域名
 配置如下:
