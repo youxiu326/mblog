@@ -77,8 +77,6 @@ public class PostsController extends BaseController {
 	@RequestMapping(value = "/update", method = RequestMethod.POST)
 	public String subUpdate(Post p, HttpServletRequest request) {
 		if (p != null) {
-			String content = request.getParameter("content");
-			p.setContent(content);
 			postService.update(p);
 		}
 		return "redirect:/admin/posts/list";

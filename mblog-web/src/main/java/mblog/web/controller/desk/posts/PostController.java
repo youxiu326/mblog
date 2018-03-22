@@ -55,10 +55,7 @@ public class PostController extends BaseController {
 	public String post(Post p, HttpServletRequest request) {
 
 		if (p != null && StringUtils.isNotBlank(p.getTitle())) {
-			String content = request.getParameter("content");
 			AccountProfile profile = getSubject().getProfile();
-
-			p.setContent(content);
 			p.setAuthorId(profile.getId());
 
 			postService.post(p);

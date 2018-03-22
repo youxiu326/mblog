@@ -19,7 +19,7 @@
                     <input type="hidden" name="author.id" value="${view.author.id}"/>
                     <div class="form-group">
                         <label class="col-sm-2 control-label no-padding-right">标题</label>
-                        <div class="col-sm-8">
+                        <div class="col-sm-10">
                             <input type="text" class="form-control" name="title" value="${view.title}" maxlength="64" data-required >
                         </div>
                     </div>
@@ -35,13 +35,13 @@
                     </div>
                     <div class="form-group">
                         <label for="desc" class="col-sm-2 control-label no-padding-right">内容:</label>
-                        <div class="col-sm-8">
+                        <div class="col-sm-10">
 							<#include "/admin/editor/ueditor.ftl"/>
                         </div>
                     </div>
                     <div class="form-group">
                         <label class="col-sm-2 control-label no-padding-right">标签</label>
-                        <div class="col-sm-8">
+                        <div class="col-sm-10">
                             <input type="hidden" name="tags" id="fieldTags" value="${view.tags}">
                             <ul id="tags"></ul>
                             <p class="help-block" style="font-size: 12px;">添加相关标签，用逗号或空格分隔.</p>

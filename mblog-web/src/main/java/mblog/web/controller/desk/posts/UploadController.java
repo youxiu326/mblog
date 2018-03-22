@@ -1,91 +1,184 @@
+/*
++--------------------------------------------------------------------------
+|   WeCMS [#RELEASE_VERSION#]
+|   ========================================
+|   Copyright (c) 2014, 2015 mtons. All Rights Reserved
+|   http://www.mtons.com
+|
++---------------------------------------------------------------------------
+*/
 package mblog.web.controller.desk.posts;
 
-import java.util.Arrays;
-import java.util.HashMap;
-import java.util.Iterator;
-import java.util.Map;
-
-import mblog.base.data.Data;
+import mblog.base.utils.FileKit;
 import mblog.web.controller.BaseController;
-
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Controller;
+import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.multipart.MultipartFile;
 
+import java.io.IOException;
+import java.util.HashMap;
+
 /**
- * 上传图片
+ * Ueditor 文件上传
  *
  * @author langhsu
  */
 @Controller
 @RequestMapping("/post")
 public class UploadController extends BaseController {
-    private static Map<String, String> errors = new HashMap<String, String>();
+    private static HashMap<String, String> errorInfo = new HashMap<>();
 
-    // 文件允许格式
-
-    private String[] allowFiles = {".gif", ".png", ".jpg", ".jpeg", ".bmp"};
+    @Value("${site.store.size:2}")
+    private String size;
 
     static {
-        errors.put("SUCCESS", "SUCCESS"); //默认成功
-
-        errors.put("NOFILE", "未包含文件上传域");
-        errors.put("TYPE", "不允许的文件格式");
-        errors.put("SIZE", "文件大小超出限制");
-        errors.put("REQUEST", "上传请求异常");
-        errors.put("UNKNOWN", "未知错误");
+        errorInfo.put("SUCCESS", "SUCCESS"); //默认成功
+        errorInfo.put("NOFILE", "未包含文件上传域");
+        errorInfo.put("TYPE", "不允许的文件格式");
+        errorInfo.put("SIZE", "文件大小超出限制，最大支持2Mb");
+        errorInfo.put("ENTYPE", "请求类型ENTYPE错误");
+        errorInfo.put("REQUEST", "上传请求异常");
+        errorInfo.put("IO", "IO异常");
+        errorInfo.put("DIR", "目录创建失败");
+        errorInfo.put("UNKNOWN", "未知错误");
     }
 
-    @RequestMapping("/upload")
-    public
+    @PostMapping("/upload")
     @ResponseBody
-    Data upload(@RequestParam(value = "file", required = false) MultipartFile file, Boolean scale, Integer size) {
-        Data data = Data.failure("error");
+    public UploadResult upload(@RequestParam(value = "thumbnail", required = false) MultipartFile file) throws IOException {
+        UploadResult result = new UploadResult();
 
-        if (file == null || file.isEmpty()) {
-            data = Data.failure(errors.get("NOFILE"));
-            return data;
+        // 检查空
+        if (null == file || file.isEmpty()) {
+            return result.error(errorInfo.get("NOFILE"));
         }
 
-        if (!checkFileType(file.getOriginalFilename())) {
-            data = Data.failure(errors.get("TYPE"));
-            return data;
+        String fileName = file.getOriginalFilename();
+
+        // 检查类型
+        if (!FileKit.checkFileType(fileName)) {
+            return result.error(errorInfo.get("TYPE"));
         }
 
+        // 检查大小
+        if (file.getSize() > (Long.parseLong(size) * 1024 * 1024)) {
+            return result.error(errorInfo.get("SIZE"));
+        }
+
+        // 保存图片
         try {
-            String path;
+            String path = fileRepoFactory.select().storeScale(file, appContext.getThumbsDir(), 700);
+            result.ok(errorInfo.get("SUCCESS"));
+            result.setName(fileName);
+            result.setType(getSuffix(fileName));
+            result.setPath(path);
+            result.setSize(file.getSize());
 
-            if (scale != null && scale == true) {
-                path = fileRepoFactory.select().tempScale(file, appContext.getTempDir(), size);
-            } else {
-                path = fileRepoFactory.select().temp(file, appContext.getTempDir());
-            }
-            data = Data.success("", path);
         } catch (Exception e) {
-            //FIXME: error handle
-
-            data = Data.failure(errors.get("UNKNOWN"));
+            result.error(errorInfo.get("UNKNOWN"));
+            e.printStackTrace();
         }
 
-        return data;
+        return result;
     }
 
-    /**
-     * 文件类型判断
-     *
-     * @param fileName
-     * @return
-     */
-    private boolean checkFileType(String fileName) {
-        Iterator<String> type = Arrays.asList(this.allowFiles).iterator();
-        while (type.hasNext()) {
-            String ext = type.next();
-            if (fileName.toLowerCase().endsWith(ext)) {
-                return true;
-            }
+    static class UploadResult {
+        public static int OK = 200;
+        public static int ERROR = 400;
+
+        /**
+         * 上传状态
+         */
+        private int status;
+
+        /**
+         * 提示文字
+         */
+        private String message;
+
+        /**
+         * 文件名
+         */
+        private String name;
+
+        /**
+         * 文件大小
+         */
+        private long size;
+
+        /**
+         * 文件类型
+         */
+        private String type;
+
+        /**
+         * 文件存放路径
+         */
+        private String path;
+
+        public UploadResult ok(String message) {
+            this.status = OK;
+            this.message = message;
+            return this;
         }
-        return false;
+
+        public UploadResult error(String message) {
+            this.status = ERROR;
+            this.message = message;
+            return this;
+        }
+
+        public int getStatus() {
+            return status;
+        }
+
+        public void setStatus(int status) {
+            this.status = status;
+        }
+
+        public String getMessage() {
+            return message;
+        }
+
+        public void setMessage(String message) {
+            this.message = message;
+        }
+
+        public String getName() {
+            return name;
+        }
+
+        public void setName(String name) {
+            this.name = name;
+        }
+
+        public long getSize() {
+            return size;
+        }
+
+        public void setSize(long size) {
+            this.size = size;
+        }
+
+        public String getType() {
+            return type;
+        }
+
+        public void setType(String type) {
+            this.type = type;
+        }
+
+        public String getPath() {
+            return path;
+        }
+
+        public void setPath(String path) {
+            this.path = path;
+        }
+
     }
 }

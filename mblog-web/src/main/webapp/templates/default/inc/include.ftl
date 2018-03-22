@@ -12,6 +12,8 @@ ${site_metas}
 <link rel='stylesheet' media='all' href="${base}/dist/vendors/font-awesome/css/font-awesome.min.css"/>
 <link rel='stylesheet' media='all' href="${base}/dist/vendors/pace/themes/pace-theme-minimal.css"/>
 
+<link rel="stylesheet" media="all" href="${base}/dist/vendors/highlight/styles/github.css"/>
+
 <script type="text/javascript" src="${base}/dist/js/jquery.min.js"></script>
 <script type="text/javascript" src="${base}/dist/js/jquery-migrate-1.2.1.min.js"></script>
 <script type="text/javascript" src="${base}/dist/vendors/layer/layer.js"></script>
