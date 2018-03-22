@@ -27,7 +27,7 @@
             </div>
 
             <div class="content-body entry-content panel-body ">
-                <div class="markdown-body" id="emojify">
+                <div class="markdown-body">
                 ${view.content}
                 </div>
             </div>
