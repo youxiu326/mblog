@@ -13,12 +13,14 @@ import mblog.base.utils.FileKit;
 import mblog.web.controller.BaseController;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Controller;
+import org.springframework.web.bind.ServletRequestUtils;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.multipart.MultipartFile;
 
+import javax.servlet.http.HttpServletRequest;
 import java.io.IOException;
 import java.util.HashMap;
 
@@ -33,7 +35,7 @@ public class UploadController extends BaseController {
     private static HashMap<String, String> errorInfo = new HashMap<>();
 
     @Value("${site.store.size:2}")
-    private String size;
+    private String storeSize;
 
     static {
         errorInfo.put("SUCCESS", "SUCCESS"); //默认成功
@@ -49,8 +51,10 @@ public class UploadController extends BaseController {
 
     @PostMapping("/upload")
     @ResponseBody
-    public UploadResult upload(@RequestParam(value = "thumbnail", required = false) MultipartFile file) throws IOException {
+    public UploadResult upload(@RequestParam(value = "file", required = false) MultipartFile file,
+                               HttpServletRequest request) throws IOException {
         UploadResult result = new UploadResult();
+        int size = ServletRequestUtils.getIntParameter(request, "size", 800);
 
         // 检查空
         if (null == file || file.isEmpty()) {
@@ -65,13 +69,13 @@ public class UploadController extends BaseController {
         }
 
         // 检查大小
-        if (file.getSize() > (Long.parseLong(size) * 1024 * 1024)) {
+        if (file.getSize() > (Long.parseLong(storeSize) * 1024 * 1024)) {
             return result.error(errorInfo.get("SIZE"));
         }
 
         // 保存图片
         try {
-            String path = fileRepoFactory.select().storeScale(file, appContext.getThumbsDir(), 700);
+            String path = fileRepoFactory.select().storeScale(file, appContext.getThumbsDir(), size);
             result.ok(errorInfo.get("SUCCESS"));
             result.setName(fileName);
             result.setType(getSuffix(fileName));

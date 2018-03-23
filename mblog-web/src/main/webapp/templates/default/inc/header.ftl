@@ -92,7 +92,7 @@
                     <li><a href="${base}/post/new" class="btn btn-sm"><i class="icon icon-note"></i> 写文章</a></li>
                     <li class="dropdown">
                         <a href="#" class="user dropdown-toggle" data-toggle="dropdown">
-                            <img class="img-circle" src="${base}${profile.avatar}">
+                            <img class="img-circle" src="${base}${profile.avatar}?t=${.now}">
                             <span>${profile.name}</span>
                         </a>
                         <ul class="dropdown-menu" role="menu">

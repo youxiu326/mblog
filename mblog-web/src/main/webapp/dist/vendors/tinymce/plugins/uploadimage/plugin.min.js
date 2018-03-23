@@ -7,7 +7,7 @@ tinymce.PluginManager.add('uploadimage', function (editor) {
     function selectLocalImages() {
         var dom = editor.dom;
         //var input_f = $('<input type="file" name="thumbnail" accept="image/jpg,image/jpeg,image/png,image/gif" multiple="multiple">');
-        var input_f = $('<input type="file" name="thumbnail" accept="image/jpg,image/jpeg,image/png,image/gif">');
+        var input_f = $('<input type="file" name="file" accept="image/jpg,image/jpeg,image/png,image/gif">');
 
         input_f.on('change', function () {
                 var form = $("<form/>",

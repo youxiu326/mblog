@@ -50,10 +50,10 @@ define(function(require, exports, module) {
 	
 	$('#upload_btn').change(function(){
 		$(this).upload(upload_url, function(data){
-			if (data.code >= 0) {
-				var path = base_url + data.data;
+            if (data.status == 200) {
+				var path = base_url + data.path;
 				$("#target").attr("src", path);
-				$("#path").val(data.data);
+				$("#path").val(data.path);
 				
 				if (!jcrop_init) {
 					initJcrop();
