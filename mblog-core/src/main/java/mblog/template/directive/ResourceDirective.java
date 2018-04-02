@@ -31,11 +31,6 @@ public class ResourceDirective extends TemplateDirective {
             base = handler.getContextPath();
         }
 
-        // 判断是否启用图片域名
-        if (Global.getImageDomain()) {
-            base = Global.getImageHost();
-        }
-
         StringBuffer buf = new StringBuffer();
 
         buf.append(base);
