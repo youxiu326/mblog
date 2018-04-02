@@ -1,5 +1,5 @@
 
-<script id="content" name="content">${view.content}</script>
+<textarea id="content" name="content">${view.content}</textarea>
 
 <script type="text/javascript">
 function setContent(content) {
