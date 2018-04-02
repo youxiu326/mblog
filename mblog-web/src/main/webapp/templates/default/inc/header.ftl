@@ -97,6 +97,9 @@
                         </a>
                         <ul class="dropdown-menu" role="menu">
                             <li>
+                                <a href="${base}/user" nav="user">我的主页</a>
+                            </li>
+                            <li>
                                 <a href="${base}/user/profile">编辑资料</a>
                             </li>
                             <li class="divider"></li>
