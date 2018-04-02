@@ -53,13 +53,13 @@ public class PostController extends BaseController {
 	 */
 	@RequestMapping(value = "/submit", method = RequestMethod.POST)
 	public String post(Post p, HttpServletRequest request) {
+		Assert.notNull(p, "参数不完整");
+		Assert.state(StringUtils.isNotBlank(p.getTitle()), "标题不能为空");
+		Assert.state(StringUtils.isNotBlank(p.getContent()), "内容不能为空");
+		AccountProfile profile = getSubject().getProfile();
+		p.setAuthorId(profile.getId());
 
-		if (p != null && StringUtils.isNotBlank(p.getTitle())) {
-			AccountProfile profile = getSubject().getProfile();
-			p.setAuthorId(profile.getId());
-
-			postService.post(p);
-		}
+		postService.post(p);
 		return Views.REDIRECT_USER_POSTS;
 	}
 
@@ -110,8 +110,12 @@ public class PostController extends BaseController {
 	 */
 	@RequestMapping(value = "/update", method = RequestMethod.POST)
 	public String subUpdate(Post p, HttpServletRequest request) {
+		Assert.notNull(p, "参数不完整");
+		Assert.state(StringUtils.isNotBlank(p.getTitle()), "标题不能为空");
+		Assert.state(StringUtils.isNotBlank(p.getContent()), "内容不能为空");
+
 		AccountProfile up = getSubject().getProfile();
-		if (p != null && p.getAuthorId() == up.getId()) {
+		if (p.getAuthorId() == up.getId()) {
 			String content = request.getParameter("content");
 			p.setContent(content);
 			postService.update(p);
