@@ -56,7 +56,7 @@
                 </ul>
             </div>
             <div class="panel-footer">
-                <@pager request.requestURI!"", page, 5/>
+                <@pager "user?method=notifies", page, 5/>
             </div>
         </div>
     </div>
