@@ -1,11 +1,11 @@
 package mblog.web.controller.desk.auth;
 
-import com.mblog.api.oauth.APIConfig;
-import com.mblog.api.oauth.OauthDouban;
-import com.mblog.api.oauth.OauthQQ;
-import com.mblog.api.oauth.OauthSina;
-import com.mblog.api.oauth.util.OpenOauthBean;
-import com.mblog.api.oauth.util.TokenUtil;
+import mblog.base.oauth.APIConfig;
+import mblog.base.oauth.OauthDouban;
+import mblog.base.oauth.OauthQQ;
+import mblog.base.oauth.OauthSina;
+import mblog.base.oauth.utils.OpenOauthBean;
+import mblog.base.oauth.utils.TokenUtil;
 import mblog.base.context.AppContext;
 import mblog.base.lang.Consts;
 import mblog.base.lang.MtonsException;

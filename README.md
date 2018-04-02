@@ -28,6 +28,8 @@
 </dependency>
 ```
 - 启动成功后访问： http://localhost:8080/
+- 更多文档及教程见 [http://mtons.com/dock/mblog](http://mtons.com/dock/mblog)
+- QQ交流群：378433412
 
 ### 最新版本(2.5)更新内容：
     1. 前端页面结构、链接地址、接口目录调整
@@ -43,11 +45,6 @@
     5. 重新定义了Group概念, 即内容分组, 不再有原来复杂的模板定制等, 去除了原有的视频和问答定制, 可以在Group里面自行扩展
     6. 全新的后台界面
 
-### 配置教程
-[配置教程-点击入往通道](http://www.mtons.com/dock/mblog)
-
-### QQ交流群
-群号：378433412
 
 [官网地址](http://www.mtons.com)
     
