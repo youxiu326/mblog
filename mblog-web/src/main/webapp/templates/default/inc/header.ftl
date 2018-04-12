@@ -97,9 +97,11 @@
                         </a>
                         <ul class="dropdown-menu" role="menu">
                             <li>
+                                <a href="${base}/user">我的主页</a>
+                            </li>
+                            <li>
                                 <a href="${base}/user/profile">编辑资料</a>
                             </li>
-                            <li class="divider"></li>
                             <@shiro.hasPermission name="admin">
                                 <li><a href="${base}/admin">后台管理</a></li>
                             </@shiro.hasPermission>
