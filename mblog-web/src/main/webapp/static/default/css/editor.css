@@ -1,3 +1,4 @@
+/* Editor style */
 body.markdown-body {
     padding: 0;
     margin: 20px 15px;
@@ -10,6 +11,7 @@ body.markdown-body {
     color: #444;
 }
 
+/* Detail style */
 .markdown-body {
     min-height: 202px;
     line-height: 26px;
@@ -85,14 +87,24 @@ body.markdown-body {
     margin-bottom: 0;
 }
 
-.markdown-body pre {
+.markdown-body code {
+    color: #c7254e;
+    background-color: #f9f2f4;
+    border-radius: 2px;
+    padding: 4px 2px 0;
+}
+
+
+.markdown-body pre, .markdown-body pre code {
     padding: 16px;
     overflow: auto;
     font-size: 85%;
     line-height: 1.45;
+    color: #333;
     background-color: #f6f8fa;
     border: 1px solid #f5f5f5;
     border-radius: 3px;
+    white-space: pre-wrap;
     word-break: break-all;
     word-wrap: break-word;
 }

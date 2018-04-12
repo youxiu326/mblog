@@ -48,9 +48,8 @@ public class FeedsServiceImpl implements FeedsService {
 		// 给自己保存一条
 		feedsDao.save(po);
 
-		// 派发给粉丝
-		int count = feedsDao.batchAdd(feeds);
-		return count;
+		// 派发给粉丝, 此处牺牲了空间, 提升查询速度
+		return feedsDao.batchAdd(feeds);
 	}
 
 	@Override

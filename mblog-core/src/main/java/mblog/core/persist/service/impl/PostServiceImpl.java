@@ -33,6 +33,7 @@ import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageImpl;
 import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Propagation;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.util.Assert;
 
@@ -45,7 +46,7 @@ import java.util.*;
  *
  */
 @Service
-@Transactional(readOnly = true)
+@Transactional
 @CacheConfig(cacheNames = "postsCaches")
 public class PostServiceImpl implements PostService {
 	@Autowired
@@ -209,7 +210,6 @@ public class PostServiceImpl implements PostService {
 		List<PostPO> list = postDao.findAllByIdIn(ids);
 		Map<Long, Post> rets = new HashMap<>();
 
-		HashSet<Long> imageIds = new HashSet<>();
 		HashSet<Long> uids = new HashSet<>();
 
 		list.forEach(po -> {
@@ -372,47 +372,30 @@ public class PostServiceImpl implements PostService {
 	@Override
 	@Transactional
 	public void identityViews(long id) {
-		PostPO po = postDao.findOne(id);
-		if (po != null) {
-			po.setViews(po.getViews() + Consts.IDENTITY_STEP);
-			postDao.save(po);
-		}
+		// 次数不清理缓存, 等待文章缓存自动过期
+		postDao.updateViews(id, Consts.IDENTITY_STEP);
 	}
 
 	@Override
 	@Transactional
 	public void identityComments(long id) {
-		PostPO po = postDao.findOne(id);
-		if (po != null) {
-			po.setComments(po.getComments() + Consts.IDENTITY_STEP);
-			postDao.save(po);
-		}
+		postDao.updateComments(id, Consts.IDENTITY_STEP);
 	}
 
 	@Override
 	@Transactional
 	@CacheEvict(key = "'view_' + #postId")
 	public void favor(long userId, long postId) {
-		PostPO po = postDao.findOne(postId);
-
-		Assert.notNull(po, "文章不存在");
-
+		postDao.updateFavors(postId, Consts.IDENTITY_STEP);
 		favorService.add(userId, postId);
-
-		po.setFavors(po.getFavors() + Consts.IDENTITY_STEP);
 	}
 
 	@Override
 	@Transactional
 	@CacheEvict(key = "'view_' + #postId")
 	public void unfavor(long userId, long postId) {
-		PostPO po = postDao.findOne(postId);
-
-		Assert.notNull(po, "文章不存在");
-
+		postDao.updateFavors(postId,  Consts.DECREASE_STEP);
 		favorService.delete(userId, postId);
-
-		po.setFavors(po.getFavors() - Consts.IDENTITY_STEP);
 	}
 	
 	@Override
