@@ -73,13 +73,13 @@ abbr[data-original-title], abbr[title] {
 }
 
 .meta, .operate {
-    color: #d0d0d0;
-    font-size: 12px;
+    color: #888;
+    font-size: 14px;
 }
 
 .meta a, .operate a {
-    padding: 1px 2px;
-    color: #B9BDC0;
+    padding:0 5px;
+    color: #888;
     text-decoration: none;
 }
 
@@ -1291,7 +1291,7 @@ abbr[data-original-title], abbr[title] {
 .cbox-wrap .fa-2 { font-size: 1.7em; }
 .cbox-wrap .cbox-ats {padding: 0; display: block; border-top: 1px solid #ccc;}
 .cbox-wrap .ats-func {float: left;}
-.cbox-wrap .func-list {padding: 0; overflow: hidden;}
+.cbox-wrap .func-list {padding: 0; margin: 0; overflow: hidden;}
 .cbox-wrap .func-list .list-b {float: left; padding: 0; height: auto; border: none; border-right: 1px solid #ccc;}
 .cbox-wrap .join {display: block; padding: 3px 8px 2px;}
 .cbox-wrap .join:hover {color: #ff8a00}
