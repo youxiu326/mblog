@@ -45,7 +45,7 @@ public class ForgotController extends BaseController {
                 context.put("code", code);
                 context.put("type", Consts.VERIFY_FORGOT);
 
-                mailHelper.sendEmail(Consts.EMAIL_TEMPLATE_FORGOT, user.getEmail(), "找回密码", context);
+                sendEmail(Consts.EMAIL_TEMPLATE_FORGOT, user.getEmail(), "找回密码", context);
 
                 data = Data.success("邮件发送成功", Data.NOOP);
 
