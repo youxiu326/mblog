@@ -1,10 +1,9 @@
-#set($layout = "/default/layout/columns_noop.vm")
 <html>
 <head>
-    <link rel="stylesheet" href="$base/dist/vendors/zTree_v3/css/demo.css" type="text/css">
-    <link rel="stylesheet" href="$base/dist/vendors/zTree_v3/css/zTreeStyle/zTreeStyle.css" type="text/css">
-    <script type="text/javascript" src="$base/dist/vendors/zTree_v3/js/jquery-1.4.4.min.js"></script>
-    <script type="text/javascript" src="$base/dist/vendors/zTree_v3/js/jquery.ztree.core-3.5.js"></script>
+    <link rel="stylesheet" href="${base}/dist/vendors/zTree_v3/css/demo.css" type="text/css">
+    <link rel="stylesheet" href="${base}/dist/vendors/zTree_v3/css/zTreeStyle/zTreeStyle.css" type="text/css">
+    <script type="text/javascript" src="${base}/dist/vendors/zTree_v3/js/jquery-1.4.4.min.js"></script>
+    <script type="text/javascript" src="${base}/dist/vendors/zTree_v3/js/jquery.ztree.core-3.5.js"></script>
     <SCRIPT type="text/javascript">
         var index = parent.layer.getFrameIndex(window.name);
         var setting = {
@@ -20,7 +19,7 @@
         var zNodes;
         window.fuck = $.fn.zTree
         $(document).ready(function(){
-            jQuery.ajax({url:"$base/admin/authMenus/tree",success:function(data){
+            jQuery.ajax({url:"${base}/admin/authMenus/tree",success:function(data){
                 zNodes = data;
                 fuck.init($("#treeDemo"), setting, zNodes);
                 var treeObj = fuck.getZTreeObj("treeDemo");
