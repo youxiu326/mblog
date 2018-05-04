@@ -5,6 +5,7 @@ package mblog.web.controller.desk.auth;
 
 import mblog.base.data.Data;
 import mblog.base.lang.Consts;
+import mblog.base.print.Printer;
 import mblog.base.utils.MailHelper;
 import mblog.core.data.AccountProfile;
 import mblog.core.data.User;
@@ -22,6 +23,8 @@ import org.springframework.web.bind.annotation.RequestMethod;
 
 import java.util.HashMap;
 import java.util.Map;
+import java.util.concurrent.ExecutorService;
+import java.util.concurrent.Executors;
 
 /**
  * @author langhsu
@@ -35,6 +38,8 @@ public class RegisterController extends BaseController {
 	private VerifyService verifyService;
 	@Autowired
 	private MailHelper mailHelper;
+	@Autowired
+	private ExecutorService executorService;
 	
 	@GetMapping("/register")
 	public String view() {
@@ -54,7 +59,13 @@ public class RegisterController extends BaseController {
 			post.setAvatar(Consts.AVATAR);
 			User user = userService.register(post);
 
-			sendEmail(user);
+			String code = verifyService.generateCode(user.getId(), Consts.VERIFY_BIND, user.getEmail());
+			Map<String, Object> context = new HashMap<>();
+			context.put("userId", user.getId());
+			context.put("code", code);
+			context.put("type", Consts.VERIFY_BIND);
+
+			sendEmail(Consts.EMAIL_TEMPLATE_BIND, user.getEmail(), "邮箱绑定验证", context);
 
 			data = Data.success("恭喜您! 注册成功, 已经给您的邮箱发了验证码, 赶紧去完成邮箱绑定吧。", Data.NOOP);
 			data.addLink("login", "先去登陆尝尝鲜");
@@ -67,16 +78,6 @@ public class RegisterController extends BaseController {
 		}
 		model.put("data", data);
 		return ret;
-	}
-
-	private void sendEmail(User user) {
-		String code = verifyService.generateCode(user.getId(), Consts.VERIFY_BIND, user.getEmail());
-		Map<String, Object> data = new HashMap<>();
-		data.put("userId", user.getId());
-		data.put("code", code);
-		data.put("type", Consts.VERIFY_BIND);
-
-		mailHelper.sendEmail(Consts.EMAIL_TEMPLATE_BIND, user.getEmail(), "邮箱绑定验证", data);
 	}
 
 }

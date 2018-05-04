@@ -10,6 +10,10 @@ public class Printer {
         log.info(message);
     }
 
+    public static void debug(String message) {
+        log.debug(message);
+    }
+
     public static void warn(String message) {
         log.warn(message);
     }

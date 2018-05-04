@@ -9,14 +9,14 @@
 */
 package mblog.core.persist.service;
 
+import mblog.core.data.Channel;
+
 import java.util.Collection;
 import java.util.List;
 import java.util.Map;
 
-import mblog.core.data.Channel;
-
 /**
- * TODO: 暂时添加修改都在数据库操作
+ * 栏目管理
  * 
  * @author langhsu
  *

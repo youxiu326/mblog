@@ -2,6 +2,7 @@ package mblog.web.controller.desk.auth;
 
 import mblog.base.data.Data;
 import mblog.base.lang.Consts;
+import mblog.base.print.Printer;
 import mblog.base.utils.MailHelper;
 import mblog.core.data.AccountProfile;
 import mblog.core.data.User;
@@ -19,6 +20,7 @@ import org.springframework.web.bind.annotation.RequestMethod;
 
 import java.util.HashMap;
 import java.util.Map;
+import java.util.concurrent.ExecutorService;
 
 /**
  * @author langhsu on 2015/8/14.
@@ -32,6 +34,8 @@ public class EmailController extends BaseController {
     private VerifyService verifyService;
     @Autowired
     private MailHelper mailHelper;
+    @Autowired
+    private ExecutorService executorService;
 
     @RequestMapping(value = "/retry/{userId}", method = RequestMethod.GET)
     public String retry(@PathVariable("userId") Long userId, Integer type, ModelMap model) {
@@ -53,7 +57,7 @@ public class EmailController extends BaseController {
         context.put("userId", user.getId());
         context.put("code", code);
 
-        mailHelper.sendEmail(template, user.getEmail(), subject, context);
+        sendEmail(template, user.getEmail(), subject, context);
 
         Data data = Data.success("邮件发送成功", Data.NOOP);
         model.put("data", data);

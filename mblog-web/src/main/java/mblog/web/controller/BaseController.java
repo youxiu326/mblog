@@ -10,8 +10,10 @@
 package mblog.web.controller;
 
 import mblog.base.context.AppContext;
+import mblog.base.print.Printer;
 import mblog.base.upload.FileRepoFactory;
 import mblog.base.utils.MD5;
+import mblog.base.utils.MailHelper;
 import mblog.core.data.AccountProfile;
 import mblog.shiro.authc.AccountSubject;
 import mblog.web.formatter.StringEscapeEditor;
@@ -33,6 +35,8 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 import java.text.SimpleDateFormat;
 import java.util.Date;
+import java.util.Map;
+import java.util.concurrent.ExecutorService;
 
 /**
  * Controller 基类
@@ -47,6 +51,10 @@ public class BaseController {
 	protected AppContext appContext;
 	@Autowired
 	protected FileRepoFactory fileRepoFactory;
+	@Autowired
+	private MailHelper mailHelper;
+	@Autowired
+	private ExecutorService executorService;
 
 	@InitBinder
 	public void initBinder(ServletRequestDataBinder binder) {
@@ -110,24 +118,12 @@ public class BaseController {
 	protected String view(String view) {
 		return "/default" + view;
 	}
-	
-	public static String getIpAddr(HttpServletRequest request) throws Exception {
-		String ip = request.getHeader("X-Real-IP");
-		if (!StringUtils.isBlank(ip) && !"unknown".equalsIgnoreCase(ip)) {
-			return ip;
-		}
-		ip = request.getHeader("X-Forwarded-For");
-		if (!StringUtils.isBlank(ip) && !"unknown".equalsIgnoreCase(ip)) {
-			// 多次反向代理后会有多个IP值，第一个为真实IP。
-			int index = ip.indexOf(',');
-			if (index != -1) {
-				return ip.substring(0, index);
-			} else {
-				return ip;
-			}
-		} else {
-			return request.getRemoteAddr();
-		}
+
+	protected void sendEmail(String template, String email, String subject, Map<String, Object> context) {
+		executorService.execute(() -> {
+			mailHelper.sendEmail(template, email, subject, context);
+			Printer.debug(email + " send success");
+		});
 	}
 	
 }

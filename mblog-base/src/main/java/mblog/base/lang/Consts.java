@@ -25,6 +25,8 @@ public interface Consts {
 
 	int IDENTITY_STEP = 1; // 自增步进
 
+	int DECREASE_STEP = -1; // 递减
+
 	int TIME_MIN = 1000; // 最小时间单位, 1秒
 
 	// 忽略值

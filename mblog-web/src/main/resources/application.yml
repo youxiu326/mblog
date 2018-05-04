@@ -11,6 +11,7 @@ spring:
         - /templates/
         - file:./templates/
         cache: false
+        checkTemplateLocation: false
         settings:
             classic_compatible: true #处理空值
             template_exception_handler: rethrow
