@@ -40,7 +40,7 @@ public class ContentsDirective extends TemplateDirective {
         Integer channelId = handler.getInteger("channelId", 0);
         String order = handler.getString("order", Consts.order.NEWEST);
 
-        Pageable pageable = new PageRequest(pn - 1, 15);
+        Pageable pageable = new PageRequest(pn - 1, 20);
         Page<Post> result = postService.paging(pageable, channelId, order);
 
         handler.put(RESULTS, result).render();
