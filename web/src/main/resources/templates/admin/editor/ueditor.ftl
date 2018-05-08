@@ -27,7 +27,7 @@ $(function () {
 
         content_css: [
             '${base}/dist/vendors/bootstrap/css/bootstrap.min.css',
-            '${base}/static/default/css/editor.css',
+            '${base}/theme/default/css/editor.css',
         ]
         //参考网站 https://www.tinymce.com/
     });

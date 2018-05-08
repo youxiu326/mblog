@@ -9,9 +9,7 @@ spring:
           force: true
           enabled: true
     freemarker:
-        template-loader-path:
-        - classpath:/templates
-        - file:./templates
+        template-loader-path: classpath:/templates
         cache: false
         checkTemplateLocation: false
         settings:
@@ -52,7 +50,7 @@ spring:
         properties:
             mail.smtp.auth: true
 
-site.store.root: /data/mblog
-# 存储模式, 可选值 absolute / relative
-site.store.repo: relative
-site.store.size: 2
+site:
+    store:
+      root: /data/mblog/
+      size: 2

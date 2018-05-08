@@ -1,9 +1,9 @@
 package mblog.boot;
 
 import com.alibaba.fastjson.support.spring.FastJsonHttpMessageConverter;
+import mblog.base.context.AppContext;
 import mblog.web.interceptor.BaseInterceptor;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.http.converter.HttpMessageConverter;
 import org.springframework.web.servlet.config.annotation.InterceptorRegistry;
@@ -11,6 +11,7 @@ import org.springframework.web.servlet.config.annotation.PathMatchConfigurer;
 import org.springframework.web.servlet.config.annotation.ResourceHandlerRegistry;
 import org.springframework.web.servlet.config.annotation.WebMvcConfigurerAdapter;
 
+import java.io.File;
 import java.util.List;
 
 /**
@@ -22,6 +23,8 @@ public class WebMvcConfig extends WebMvcConfigurerAdapter {
     private BaseInterceptor baseInterceptor;
     @Autowired
     private FastJsonHttpMessageConverter fastJsonHttpMessageConverter;
+    @Autowired
+    private AppContext appContext;
 
     @Override
     public void configurePathMatch(PathMatchConfigurer configurer) {
@@ -42,14 +45,28 @@ public class WebMvcConfig extends WebMvcConfigurerAdapter {
 
     @Override
     public void addResourceHandlers(ResourceHandlerRegistry registry) {
-        registry.addResourceHandler("/dist/**").addResourceLocations("/dist/");
-        registry.addResourceHandler("/static/**").addResourceLocations("/static/");
-        registry.addResourceHandler("/store/**").addResourceLocations("/store/");
+        registry.addResourceHandler("/dist/**").addResourceLocations("classpath:/static/dist/");
+        registry.addResourceHandler("/theme/**").addResourceLocations("classpath:/static/theme/");
+        registry.addResourceHandler("/store/**").addResourceLocations(getStorePath());
         super.addResourceHandlers(registry);
     }
 
     @Override
     public void configureMessageConverters(List<HttpMessageConverter<?>> converters) {
         converters.add(fastJsonHttpMessageConverter);
+    }
+
+    private String getStorePath() {
+        StringBuilder builder = new StringBuilder("file:");
+
+        builder.append(appContext.getRoot());
+
+        if (!appContext.getRoot().endsWith(File.separator)) {
+            builder.append(File.separator);
+        }
+
+        builder.append("store/");
+
+        return builder.toString();
     }
 }

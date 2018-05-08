@@ -17,7 +17,7 @@
     <link href="${base}/dist/vendors/treeTable/themes/vsStyle/treeTable.min.css" rel="stylesheet"/>
 
     <!-- Custom Theme Style -->
-    <link href="${base}/static/admin/css/custom.min.css" rel="stylesheet">
+    <link href="${base}/theme/admin/css/custom.min.css" rel="stylesheet">
 
     <!-- jQuery -->
     <script src="${base}/dist/js/jquery.min.js"></script>
@@ -113,8 +113,8 @@
         <!-- /footer content -->
     </div>
     <!-- Custom Theme Scripts -->
-    <script src="${base}/static/admin/js/custom.min.js"></script>
-    <script src="${base}/static/admin/js/app.data.js"></script>
+    <script src="${base}/theme/admin/js/custom.min.js"></script>
+    <script src="${base}/theme/admin/js/app.data.js"></script>
 </body>
 </html>
 </#macro>

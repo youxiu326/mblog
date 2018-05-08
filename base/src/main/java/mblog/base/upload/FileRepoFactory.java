@@ -17,8 +17,8 @@ import org.springframework.stereotype.Service;
 public class FileRepoFactory {
 	private Map<String, FileRepo> fileRepos = new HashMap<>();
 	
-	@Value("${site.store.repo}")
-	private String repo = "relative";
+//	@Value("${site.store.repo}")
+	private String repo = "absolute";
 	
 	public void addRepo(String key, FileRepo value) {
 		fileRepos.put(key, value);

@@ -38,7 +38,7 @@ define(function(require, exports, module) {
 
                 content_css: [
                     window.app.base + '/dist/vendors/bootstrap/css/bootstrap.min.css',
-                    window.app.base + '/static/default/css/editor.css',
+                    window.app.base + '/theme/default/css/editor.css',
                 ]
                 //参考网站 https://www.tinymce.com/
             });

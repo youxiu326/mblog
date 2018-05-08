@@ -25,10 +25,6 @@ seajs.config({
         'lazyload': 'vendors/lazyload/jquery.lazyload',
         'share': 'vendors/share.js/js/social-share.min.js',
 
-        'ueditor': 'vendors/ueditor/ueditor.all.min',
-        'ueditor.config': 'vendors/ueditor/ueditor.config',
-        'ueditor.parse': 'vendors/ueditor/ueditor.parse.min',
-
         'highlight':'vendors/highlight/highlight.pack',
         "tinymce": "vendors/tinymce/tinymce.min",
         "form": "dist/js/jquery.form.min"
@@ -38,7 +34,7 @@ seajs.config({
     paths: {
         'vendors': _base_path + '/dist/vendors',
         'dist': _base_path + '/dist',
-        'default': _base_path + '/static/default'
+        'default': _base_path + '/theme/default'
     },
 
     // 变量配置
