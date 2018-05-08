@@ -46,7 +46,6 @@ body.markdown-body {
     border-collapse: collapse;
     display: table;
     width: 100%;
-    text-align: center;
     margin: 10px 0 15px;
 }
 
@@ -107,4 +106,8 @@ body.markdown-body {
     white-space: pre-wrap;
     word-break: break-all;
     word-wrap: break-word;
+}
+
+.hljs {
+    /*中文和code之间不换行 注释 display:block*/
 }
