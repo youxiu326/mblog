@@ -32,11 +32,11 @@
     3. 发文章支持图片黏贴上传(来自@杭州-锋)
     4. 项目目录调整
     5. 去除mblog-api.jar 合并到base模块中
-    6.ueditor改为tinymce
-    7.修改footer样式
+    6. ueditor改为tinymce
+    7. 修改footer样式
     8. 优化文章统计
     9. 优化用户统计
-    10. 优化文章详情页code显示
+    10.优化文章详情页code显示
     11.fixed角色修改不能保存
     12.fixed评论框按钮变形
     13.fixed后台添加菜单项bug
