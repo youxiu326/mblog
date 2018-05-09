@@ -343,10 +343,8 @@ public class PostServiceImpl implements PostService {
 	@Transactional
 	@CacheEvict(allEntries = true)
 	public void delete(long id) {
-		PostPO po = postDao.findOne(id);
-		if (po != null) {
-			postDao.delete(po);
-		}
+		postDao.delete(id);
+		postAttributeDao.delete(id);
 	}
 	
 	@Override

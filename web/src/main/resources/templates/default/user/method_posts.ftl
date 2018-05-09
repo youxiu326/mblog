@@ -65,8 +65,7 @@ $(function() {
 			jQuery.getJSON('${base}/post/delete/' + id, function (ret) {
 				layer.msg(ret.message, {icon: 1});
 				if (ret.code >=0) {
-					$('#loop-' + id).fadeOut();
-					$('#loop-' + id).remove();
+					location.reload();
 				}
 			});
 
