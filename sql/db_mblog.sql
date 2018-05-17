@@ -61,7 +61,7 @@ CREATE TABLE `mto_channels` (
 --  Records of `mto_channels`
 -- ----------------------------
 BEGIN;
-INSERT INTO `mto_channels` VALUES ('1', 'blog', '博客', '0'), ('2', 'share', '分享', '0'), ('3', 'questions', '问答', '0'), ('4', 'job', '招聘', '0');
+INSERT INTO `mto_channels` VALUES ('1', 'blog', '博客', '0'), ('2', 'questions', '问答', '0'), ('3', 'share', '分享', '0');
 COMMIT;
 
 -- ----------------------------
