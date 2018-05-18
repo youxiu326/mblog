@@ -22,29 +22,6 @@ SET NAMES utf8;
 SET FOREIGN_KEY_CHECKS = 0;
 
 -- ----------------------------
---  Table structure for `mto_auth_menu`
--- ----------------------------
-DROP TABLE IF EXISTS `mto_auth_menu`;
-CREATE TABLE `mto_auth_menu` (
-  `id` bigint(20) NOT NULL AUTO_INCREMENT,
-  `name` varchar(255) DEFAULT NULL,
-  `parent_ids` varchar(255) DEFAULT NULL,
-  `permission` varchar(255) DEFAULT NULL,
-  `sort` int(11) NOT NULL,
-  `url` varchar(255) DEFAULT NULL,
-  `parent_id` bigint(20) DEFAULT NULL,
-  `icon` varchar(255) DEFAULT NULL,
-  PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=44 DEFAULT CHARSET=utf8;
-
--- ----------------------------
---  Records of `mto_auth_menu`
--- ----------------------------
-BEGIN;
-INSERT INTO `mto_auth_menu` VALUES ('1', '根目录', '', '', '1', '/', '1', null), ('2', '后台管理', null, 'admin', '1', 'admin', '1', null), ('4', '文章管理', null, 'posts:view', '2', 'admin/posts/list', '2', 'fa fa-clone icon-xlarge'), ('5', '文章修改', null, 'posts:edit', '1', null, '4', null), ('6', '文章查看', null, 'posts:view', '1', '', '4', null), ('8', '评论管理', null, 'comments:view', '4', 'admin/comments/list', '2', 'fa fa-comments-o icon-xlarge'), ('9', '删除评论', null, 'comments:edit', '1', null, '8', null), ('10', '评论查看', null, 'comments:view', '1', '', '8', null), ('11', '栏目管理', null, 'group:view', '5', 'admin/channel/list', '2', 'fa fa-tags icon-xlarge'), ('12', '删除栏目', null, 'group:edit', '1', null, '11', null), ('13', '修改栏目', null, 'group:edit', '2', null, '11', null), ('15', '系统配置', null, 'config:view', '6', 'admin/config/', '2', 'fa fa-sun-o icon-xlarge'), ('16', '修改配置', null, 'config:edit', '1', null, '15', null), ('17', '用户管理', null, 'users:view', '3', 'admin/users/list', '2', 'fa fa-user icon-xlarge'), ('18', '禁用用户', null, 'users:edit', '1', '', '17', null), ('19', '修改密码', null, 'users:edit', '1', null, '17', null), ('20', '用户查看', null, 'users:view', '1', '', '17', null), ('35', '角色管理', null, 'roles:view', '7', 'admin/roles/list', '2', 'fa fa fa-registered icon-xlarge'), ('36', '角色修改', null, 'roles:edit', '0', null, '35', null), ('37', '角色查看', null, 'roles:view', '1', '', '35', null), ('41', '菜单管理', null, 'authMenus:view', '8', 'admin/authMenus/list', '2', 'fa fa-reorder icon-xlarge'), ('42', '菜单修改', null, 'authMenus:edit', '0', '', '41', null), ('43', '菜单查看', null, 'authMenus:view', '1', '', '41', null);
-COMMIT;
-
--- ----------------------------
 --  Table structure for `mto_channels`
 -- ----------------------------
 DROP TABLE IF EXISTS `mto_channels`;
@@ -102,65 +79,6 @@ INSERT INTO `mto_config` VALUES (16, 'weibo_client_sercret', '0', '');
 COMMIT;
 
 -- ----------------------------
---  Table structure for `mto_role`
--- ----------------------------
-DROP TABLE IF EXISTS `mto_role`;
-CREATE TABLE `mto_role` (
-  `id` bigint(20) NOT NULL AUTO_INCREMENT,
-  `name` varchar(255) DEFAULT NULL,
-  PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=4 DEFAULT CHARSET=utf8;
-
--- ----------------------------
---  Records of `mto_role`
--- ----------------------------
-BEGIN;
-INSERT INTO `mto_role` VALUES ('1', '管理员'), ('2', '普通用户'), ('3', '半个管理员');
-COMMIT;
-
--- ----------------------------
---  Table structure for `mto_role_menu`
--- ----------------------------
-DROP TABLE IF EXISTS `mto_role_menu`;
-CREATE TABLE `mto_role_menu` (
-  `role_id` bigint(20) NOT NULL,
-  `menu_id` bigint(20) NOT NULL,
-  KEY `FK_5o5vaxfyg0d1qa0142dnkruiv` (`role_id`),
-  KEY `FK1enh5yen34dpmson36gn7peq2` (`menu_id`),
-  CONSTRAINT `FK1enh5yen34dpmson36gn7peq2` FOREIGN KEY (`menu_id`) REFERENCES `mto_auth_menu` (`id`),
-  CONSTRAINT `FK4c4m4bpj3t1f4ovq7y36n5dq7` FOREIGN KEY (`role_id`) REFERENCES `mto_role` (`id`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8;
-
--- ----------------------------
---  Records of `mto_role_menu`
--- ----------------------------
-BEGIN;
-INSERT INTO `mto_role_menu` VALUES ('1', '1'), ('1', '2'), ('1', '4'), ('1', '5'), ('1', '6'), ('1', '8'), ('1', '9'), ('1', '10'), ('1', '11'), ('1', '12'), ('1', '13'), ('1', '15'), ('1', '16'), ('1', '17'), ('1', '18'), ('1', '19'), ('1', '20'), ('1', '35'), ('1', '36'), ('1', '37'), ('1', '41'), ('1', '42'), ('1', '43');
-COMMIT;
-
--- ----------------------------
---  Table structure for `mto_user_role`
--- ----------------------------
-DROP TABLE IF EXISTS `mto_user_role`;
-CREATE TABLE `mto_user_role` (
-  `user_id` bigint(20) NOT NULL,
-  `role_id` bigint(20) NOT NULL,
-  KEY `FK_fhtla2vc199mv0ru2r2kvakha` (`role_id`),
-  KEY `FK_b4m7ef0uvkr4efrscf8r1ehy2` (`user_id`),
-  CONSTRAINT `FK_b4m7ef0uvkr4efrscf8r1ehy2` FOREIGN KEY (`user_id`) REFERENCES `mto_users` (`id`),
-  CONSTRAINT `FK_fhtla2vc199mv0ru2r2kvakha` FOREIGN KEY (`role_id`) REFERENCES `mto_role` (`id`),
-  CONSTRAINT `FKi5bot5saeg7e7fkjleer6cl0q` FOREIGN KEY (`user_id`) REFERENCES `mto_users` (`id`),
-  CONSTRAINT `FKklvl5j02s6eorfu88bbvr2e7x` FOREIGN KEY (`role_id`) REFERENCES `mto_role` (`id`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8;
-
--- ----------------------------
---  Records of `mto_user_role`
--- ----------------------------
-BEGIN;
-INSERT INTO `mto_user_role` VALUES ('1', '1');
-COMMIT;
-
--- ----------------------------
 --  Table structure for `mto_users`
 -- ----------------------------
 DROP TABLE IF EXISTS `mto_users`;
@@ -212,4 +130,111 @@ CREATE TABLE `mto_users_open_oauth` (
   PRIMARY KEY (`id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
+-- ----------------------------
+-- Table structure for shiro_permission
+-- ----------------------------
+DROP TABLE IF EXISTS `shiro_permission`;
+CREATE TABLE `shiro_permission` (
+  `id` bigint(20) NOT NULL AUTO_INCREMENT,
+  `description` varchar(255) DEFAULT NULL,
+  `name` varchar(255) NOT NULL,
+  `parent_id` bigint(11) DEFAULT NULL,
+  `version` int(11) DEFAULT NULL,
+  `weight` int(11) NOT NULL,
+  PRIMARY KEY (`id`),
+  UNIQUE KEY `UK_89ve8ffuihnryt1nw4o2t1feu` (`name`)
+) ENGINE=InnoDB AUTO_INCREMENT=21 DEFAULT CHARSET=utf8;
+
+-- ----------------------------
+-- Records of shiro_permission
+-- ----------------------------
+INSERT INTO `shiro_permission` VALUES ('1', '进入后台', 'admin', '0', '0', '0');
+INSERT INTO `shiro_permission` VALUES ('2', '栏目管理', 'channel:list', '0', '0', '0');
+INSERT INTO `shiro_permission` VALUES ('3', '编辑栏目', 'channel:update', '2', '0', '0');
+INSERT INTO `shiro_permission` VALUES ('4', '删除栏目', 'channel:delete', '2', '0', '0');
+INSERT INTO `shiro_permission` VALUES ('5', '文章管理', 'post:list', '0', '0', '0');
+INSERT INTO `shiro_permission` VALUES ('6', '编辑文章', 'post:update', '5', '0', '0');
+INSERT INTO `shiro_permission` VALUES ('7', '删除文章', 'post:delete', '5', '0', '0');
+INSERT INTO `shiro_permission` VALUES ('8', '评论管理', 'comment:list', '0', '0', '0');
+INSERT INTO `shiro_permission` VALUES ('10', '删除评论', 'comment:delete', '8', '0', '0');
+INSERT INTO `shiro_permission` VALUES ('11', '用户管理', 'user:list', '0', '0', '0');
+INSERT INTO `shiro_permission` VALUES ('12', '用户授权', 'user:role', '11', '0', '0');
+INSERT INTO `shiro_permission` VALUES ('13', '修改密码', 'user:pwd', '11', '0', '0');
+INSERT INTO `shiro_permission` VALUES ('14', '激活用户', 'user:open', '11', '0', '0');
+INSERT INTO `shiro_permission` VALUES ('15', '关闭用户', 'user:close', '11', '0', '0');
+INSERT INTO `shiro_permission` VALUES ('16', '角色管理', 'role:list', '0', '0', '0');
+INSERT INTO `shiro_permission` VALUES ('17', '修改角色', 'role:update', '16', '0', '0');
+INSERT INTO `shiro_permission` VALUES ('18', '删除角色', 'role:delete', '16', '0', '0');
+INSERT INTO `shiro_permission` VALUES ('19', '系统配置', 'config:list', '0', '0', '0');
+INSERT INTO `shiro_permission` VALUES ('20', '修改配置', 'config:update', '19', '0', '0');
+
+-- ----------------------------
+-- Table structure for shiro_role
+-- ----------------------------
+DROP TABLE IF EXISTS `shiro_role`;
+CREATE TABLE `shiro_role` (
+  `id` bigint(20) NOT NULL AUTO_INCREMENT,
+  `description` varchar(255) DEFAULT NULL,
+  `name` varchar(255) NOT NULL,
+  `status` int(11) NOT NULL,
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=utf8;
+
+-- ----------------------------
+-- Records of shiro_role
+-- ----------------------------
+INSERT INTO `shiro_role` VALUES ('1', null, 'admin', '0');
+
+-- ----------------------------
+-- Table structure for shiro_role_permission
+-- ----------------------------
+DROP TABLE IF EXISTS `shiro_role_permission`;
+CREATE TABLE `shiro_role_permission` (
+  `id` bigint(20) NOT NULL AUTO_INCREMENT,
+  `permission_id` bigint(20) DEFAULT NULL,
+  `role_id` bigint(20) DEFAULT NULL,
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB AUTO_INCREMENT=20 DEFAULT CHARSET=utf8;
+
+-- ----------------------------
+-- Records of shiro_role_permission
+-- ----------------------------
+INSERT INTO `shiro_role_permission` VALUES ('1', '10', '1');
+INSERT INTO `shiro_role_permission` VALUES ('2', '4', '1');
+INSERT INTO `shiro_role_permission` VALUES ('3', '16', '1');
+INSERT INTO `shiro_role_permission` VALUES ('4', '1', '1');
+INSERT INTO `shiro_role_permission` VALUES ('5', '14', '1');
+INSERT INTO `shiro_role_permission` VALUES ('6', '17', '1');
+INSERT INTO `shiro_role_permission` VALUES ('7', '3', '1');
+INSERT INTO `shiro_role_permission` VALUES ('8', '12', '1');
+INSERT INTO `shiro_role_permission` VALUES ('9', '6', '1');
+INSERT INTO `shiro_role_permission` VALUES ('10', '2', '1');
+INSERT INTO `shiro_role_permission` VALUES ('11', '5', '1');
+INSERT INTO `shiro_role_permission` VALUES ('12', '18', '1');
+INSERT INTO `shiro_role_permission` VALUES ('13', '15', '1');
+INSERT INTO `shiro_role_permission` VALUES ('14', '19', '1');
+INSERT INTO `shiro_role_permission` VALUES ('15', '13', '1');
+INSERT INTO `shiro_role_permission` VALUES ('16', '7', '1');
+INSERT INTO `shiro_role_permission` VALUES ('17', '20', '1');
+INSERT INTO `shiro_role_permission` VALUES ('18', '8', '1');
+INSERT INTO `shiro_role_permission` VALUES ('19', '11', '1');
+
+-- ----------------------------
+-- Table structure for shiro_user_role
+-- ----------------------------
+DROP TABLE IF EXISTS `shiro_user_role`;
+CREATE TABLE `shiro_user_role` (
+  `id` bigint(20) NOT NULL AUTO_INCREMENT,
+  `role_id` bigint(20) DEFAULT NULL,
+  `user_id` bigint(20) DEFAULT NULL,
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=utf8;
+
+-- ----------------------------
+-- Records of shiro_user_role
+-- ----------------------------
+INSERT INTO `shiro_user_role` VALUES ('1', '1', '1');
+
 SET FOREIGN_KEY_CHECKS = 1;
+
+
