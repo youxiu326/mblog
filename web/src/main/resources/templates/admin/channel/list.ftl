@@ -13,6 +13,11 @@
                 <div class="clearfix"></div>
             </div>
             <div class="x_content">
+                <form id="qForm" class="form-inline">
+                    <input type="hidden" name="pn" value="${page.pageNo}" />
+                </form>
+            </div>
+            <div class="x_content">
                 <table id="dataGrid" class="table table-striped table-bordered b-t">
                     <thead>
                     <tr>
