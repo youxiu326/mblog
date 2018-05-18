@@ -14,7 +14,6 @@
     <link href="${base}/dist/vendors/bootstrap/css/bootstrap.min.css" rel="stylesheet">
     <!-- Font Awesome -->
     <link href="${base}/dist/vendors/font-awesome/css/font-awesome.min.css" rel="stylesheet">
-    <link href="${base}/dist/vendors/treeTable/themes/vsStyle/treeTable.min.css" rel="stylesheet"/>
 
     <!-- Custom Theme Style -->
     <link href="${base}/theme/admin/css/custom.min.css" rel="stylesheet">
@@ -28,7 +27,6 @@
     <script src="${base}/dist/vendors/fastclick/lib/fastclick.js"></script>
 
     <script src="${base}/dist/vendors/layer/layer.js"></script>
-    <script src="${base}/dist/vendors/treeTable/jquery.treeTable.min.js"></script>
 
     <script type="text/javascript">
         window.UEDITOR_HOME_URL = '${base}/dist/vendors/ueditor/';

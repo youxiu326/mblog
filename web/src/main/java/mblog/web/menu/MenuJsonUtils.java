@@ -6,6 +6,7 @@ import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.InputStreamReader;
+import java.nio.charset.Charset;
 import java.util.List;
 
 /**
@@ -25,7 +26,7 @@ public class MenuJsonUtils {
      */
     private static synchronized List<Menu> loadJson() throws IOException {
         InputStream inStream = MenuJsonUtils.class.getResourceAsStream(config);
-        BufferedReader reader = new BufferedReader(new InputStreamReader(inStream));
+        BufferedReader reader = new BufferedReader(new InputStreamReader(inStream, Charset.forName("UTF-8")));
 
         StringBuilder json = new StringBuilder();
         String tmp;

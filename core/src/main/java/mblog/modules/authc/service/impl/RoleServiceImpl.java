@@ -21,7 +21,7 @@ import java.util.*;
  * @author - langhsu on 2018/2/11
  */
 @Service
-@Transactional(readOnly = true)
+@Transactional
 public class RoleServiceImpl implements RoleService {
     @Autowired
     private RoleDao roleDao;
@@ -70,9 +70,9 @@ public class RoleServiceImpl implements RoleService {
     }
 
     @Override
-    @Transactional
     public void update(Role r, Set<Permission> permissions) {
         Role po = roleDao.findOne(r.getId());
+
         if (null == po) {
             po = new Role();
             po.setName(r.getName());
@@ -96,17 +96,14 @@ public class RoleServiceImpl implements RoleService {
 
             rolePermissionService.add(rps);
         }
-        roleDao.save(po);
     }
 
     @Override
-    @Transactional
     public boolean delete(long id) {
         return false;
     }
 
     @Override
-    @Transactional
     public void activate(long id, boolean active) {
         Role po = roleDao.findOne(id);
         if (po != null) {

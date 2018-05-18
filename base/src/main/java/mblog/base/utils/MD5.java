@@ -20,7 +20,7 @@ import org.apache.commons.lang3.StringUtils;
  * MD5摘要
  */
 public class MD5 {
-	
+
 	/**
 	 * 对字符串进行Md5加密
 	 * 
