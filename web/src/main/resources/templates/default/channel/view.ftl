@@ -4,7 +4,7 @@
 <#assign keywords = view.keywords?default(site_keywords) />
 <#assign description = view.description?default(site_description) />
 
-<@layout title keywords description>
+<@layout title>
 <div class="row main">
     <div class="col-xs-12 col-md-9 side-left topics-show">
         <!-- view show -->

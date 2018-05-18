@@ -39,32 +39,8 @@ public class ContextStartup implements ApplicationRunner, Ordered, ServletContex
             public void run() {
                 Printer.info("initialization ...");
 
-                List<Config> configs = configService.findAll();
-                Map<String, String> configMap = new HashMap<>();
-
-                if (configs.isEmpty()) {
-                    Printer.error("------------------------------------------------------------");
-                    Printer.error("- ERROR: No initialization data is imported (db_mblog.sql) -");
-                    Printer.error("-       Import the initial database and start again.       -");
-                    Printer.error("------------------------------------------------------------");
-                    System.exit(1);
-                } else {
-
-                    if (configs.size() < 13) {
-                        Printer.error("-----------------------------------------------------------------");
-                        Printer.error("- ERROR: The data is not complete, Please import (db_mblog.sql) -");
-                        Printer.error("-----------------------------------------------------------------");
-                    }
-                    configs.forEach(conf -> {
-//						servletContext.setAttribute(conf.getKey(), conf.getValue());
-                        configMap.put(conf.getKey(), conf.getValue());
-                    });
-                }
-
-                appContext.setServletContext(servletContext);
-                appContext.setConfig(configMap);
-
-                servletContext.setAttribute("channels", channelService.findAll(Consts.STATUS_NORMAL));
+                resetSiteConfig(true);
+                resetChannels();
 
                 Printer.info("OK, completed");
             }
@@ -79,5 +55,45 @@ public class ContextStartup implements ApplicationRunner, Ordered, ServletContex
     @Override
     public void setServletContext(ServletContext servletContext) {
         this.servletContext = servletContext;
+    }
+
+    /**
+     * 重置站点配置
+     */
+    public void resetSiteConfig(boolean exit) {
+        List<Config> configs = configService.findAll();
+
+        Map<String, String> map = new HashMap<>();
+
+        if (null == configs || configs.isEmpty()) {
+            Printer.error("------------------------------------------------------------");
+            Printer.error("- ERROR: No initialization data is imported (db_mblog.sql) -");
+            Printer.error("-       Import the initial database and start again.       -");
+            Printer.error("------------------------------------------------------------");
+
+            if (exit) {
+                System.exit(1);
+            }
+        } else {
+
+            if (configs.size() < 13) {
+                Printer.error("-----------------------------------------------------------------");
+                Printer.error("-     ERROR: Incomplete data, Please import (db_mblog.sql)      -");
+                Printer.error("-----------------------------------------------------------------");
+            }
+            configs.forEach(conf -> {
+                servletContext.setAttribute(conf.getKey(), conf.getValue());
+                map.put(conf.getKey(), conf.getValue());
+            });
+
+            appContext.setConfig(map);
+        }
+    }
+
+    /**
+     * 重置栏目缓存
+     */
+    public void resetChannels() {
+        servletContext.setAttribute("channels", channelService.findAll(Consts.STATUS_NORMAL));
     }
 }

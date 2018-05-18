@@ -7,7 +7,7 @@
 |
 +---------------------------------------------------------------------------
 */
-package mblog.web.controller.desk.user;
+package mblog.web.controller.site.user;
 
 import mblog.base.data.Data;
 import mblog.core.data.AccountProfile;
@@ -20,7 +20,7 @@ import org.springframework.web.bind.annotation.RequestMethod;
 
 import mblog.core.persist.service.UserService;
 import mblog.web.controller.BaseController;
-import mblog.web.controller.desk.Views;
+import mblog.web.controller.site.Views;
 
 /**
  * @author langhsu

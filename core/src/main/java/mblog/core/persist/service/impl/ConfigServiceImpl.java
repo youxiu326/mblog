@@ -9,21 +9,19 @@
 */
 package mblog.core.persist.service.impl;
 
-import java.util.ArrayList;
-import java.util.LinkedHashMap;
-import java.util.List;
-import java.util.Map;
-
-import mblog.base.context.AppContext;
+import mblog.core.data.Config;
+import mblog.core.persist.dao.ConfigDao;
+import mblog.core.persist.entity.ConfigPO;
+import mblog.core.persist.service.ConfigService;
 import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
-import mblog.core.data.Config;
-import mblog.core.persist.dao.ConfigDao;
-import mblog.core.persist.entity.ConfigPO;
-import mblog.core.persist.service.ConfigService;
+import java.util.ArrayList;
+import java.util.LinkedHashMap;
+import java.util.List;
+import java.util.Map;
 
 /**
  * @author langhsu
@@ -33,9 +31,6 @@ import mblog.core.persist.service.ConfigService;
 public class ConfigServiceImpl implements ConfigService {
 	@Autowired
 	private ConfigDao configDao;
-
-	@Autowired
-	private AppContext appContext;
 
 	@Override
 	@Transactional(readOnly = true)
@@ -71,8 +66,6 @@ public class ConfigServiceImpl implements ConfigService {
 				BeanUtils.copyProperties(st, entity);
 			}
 			configDao.save(entity);
-			appContext.getConfig().put(entity.getKey(), entity.getValue()); //更新全局变量
-			appContext.getServletContext().setAttribute(entity.getKey(),entity.getValue()); //更新容器全局变量
 		}
 	}
 

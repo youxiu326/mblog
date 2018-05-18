@@ -7,7 +7,7 @@
 |
 +---------------------------------------------------------------------------
 */
-package mblog.web.controller.desk.user;
+package mblog.web.controller.site.user;
 
 import mblog.base.context.AppContext;
 import mblog.base.data.Data;
@@ -16,7 +16,7 @@ import mblog.base.utils.ImageUtils;
 import mblog.core.data.AccountProfile;
 import mblog.core.persist.service.UserService;
 import mblog.web.controller.BaseController;
-import mblog.web.controller.desk.Views;
+import mblog.web.controller.site.Views;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.ModelMap;

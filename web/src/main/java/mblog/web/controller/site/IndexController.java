@@ -7,7 +7,7 @@
 |
 +---------------------------------------------------------------------------
 */
-package mblog.web.controller.desk;
+package mblog.web.controller.site;
 
 import javax.servlet.http.HttpServletRequest;
 

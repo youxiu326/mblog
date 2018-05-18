@@ -23,7 +23,7 @@ public class IndexControllerHook extends InterceptorHookSupport {
 
     @Override
     public String[] getInterceptor() {
-        String[] n = {"mblog.web.controller.desk.IndexController"};
+        String[] n = {"mblog.web.controller.site.IndexController"};
         return n;
     }
 

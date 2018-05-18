@@ -274,6 +274,15 @@ abbr[data-original-title], abbr[title] {
     margin: 10px 0 10px 10px;
 }
 
+.site-header .navbar-button > li a.plus {
+    display: inline-block;
+    padding: 7px 10px;
+    margin: 10px 0 10px 10px;
+    font-size: 12px;
+    line-height: 1.5;
+    border-radius: 3px;
+}
+
 .site-header .navbar-button > li > a.login, .site-header .navbar-button > li > a.signup {
     min-width: 70px;
 }

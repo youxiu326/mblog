@@ -1,12 +1,11 @@
 /**
  *
  */
-package mblog.web.controller.desk;
+package mblog.web.controller.site;
 
 import mblog.core.data.Post;
 import mblog.core.persist.service.PostService;
 import mblog.web.controller.BaseController;
-import mblog.web.controller.desk.Views;
 import org.apache.commons.lang3.StringUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;

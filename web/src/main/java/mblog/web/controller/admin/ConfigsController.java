@@ -10,10 +10,9 @@
 package mblog.web.controller.admin;
 
 import mblog.base.data.Data;
-import mblog.base.lang.Consts;
+import mblog.boot.ContextStartup;
 import mblog.core.data.Config;
 import mblog.core.persist.service.ConfigService;
-import mblog.core.persist.service.ChannelService;
 import mblog.core.persist.service.PostService;
 import mblog.web.controller.BaseController;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -22,10 +21,8 @@ import org.springframework.ui.ModelMap;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 
-import javax.servlet.ServletContext;
 import javax.servlet.http.HttpServletRequest;
 import java.util.ArrayList;
-import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
@@ -41,11 +38,9 @@ public class ConfigsController extends BaseController {
 	@Autowired
 	private ConfigService configService;
 	@Autowired
-	private ChannelService channelService;
-	@Autowired
-	private ServletContext servletContext;
-	@Autowired
 	private PostService postService;
+	@Autowired
+	private ContextStartup contextStartup;
 
 	@RequestMapping("/")
 	public String list(ModelMap model) {
@@ -54,8 +49,7 @@ public class ConfigsController extends BaseController {
 	}
 	
 	@RequestMapping("/update")
-	@SuppressWarnings("unchecked")
-	public String update(HttpServletRequest request, ModelMap model) {
+	public String update(HttpServletRequest request) {
 		Map<String, String[]> params = request.getParameterMap();
 
 		List<Config> configs = new ArrayList<>();
@@ -67,25 +61,22 @@ public class ConfigsController extends BaseController {
 
 			configs.add(conf);
 		});
+
 		configService.update(configs);
+
+		contextStartup.resetSiteConfig(false);
+
 		return "redirect:/admin/config/";
 	}
-	
+
+	/**
+	 * 刷新系统变量
+	 * @return
+	 */
 	@RequestMapping("/flush_conf")
 	public @ResponseBody Data flushFiledia() {
-		// 刷新系统变量
-		List<Config> configs = configService.findAll();
-
-		Map<String, String> configMap = new HashMap<>();
-		configs.forEach(conf -> {
-			servletContext.setAttribute(conf.getKey(), conf.getValue());
-			configMap.put(conf.getKey(), conf.getValue());
-		});
-
-		appContext.setConfig(configMap);
-
-		// 刷新文章Group
-		servletContext.setAttribute("channels", channelService.findAll(Consts.STATUS_NORMAL));
+		contextStartup.resetSiteConfig(false);
+		contextStartup.resetChannels();
 		return Data.success("操作成功", Data.NOOP);
 	}
 

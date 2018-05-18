@@ -1,7 +1,7 @@
 /**
  * 
  */
-package mblog.web.controller.desk.user;
+package mblog.web.controller.site.user;
 
 import java.util.HashMap;
 import java.util.Map;
@@ -21,7 +21,7 @@ import mblog.core.data.User;
 import mblog.core.persist.service.UserService;
 import mblog.core.persist.service.VerifyService;
 import mblog.web.controller.BaseController;
-import mblog.web.controller.desk.Views;
+import mblog.web.controller.site.Views;
 
 /**
  * @author langhsu

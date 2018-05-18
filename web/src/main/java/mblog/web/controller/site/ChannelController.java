@@ -7,7 +7,7 @@
 |
 +---------------------------------------------------------------------------
 */
-package mblog.web.controller.desk;
+package mblog.web.controller.site;
 
 import javax.servlet.http.HttpServletRequest;
 
@@ -25,7 +25,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import mblog.base.lang.Consts;
 import mblog.core.persist.service.ChannelService;
 import mblog.web.controller.BaseController;
-import mblog.web.controller.desk.Views;
+import mblog.web.controller.site.Views;
 
 /**
  * Channel 主页

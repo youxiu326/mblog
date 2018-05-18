@@ -7,7 +7,7 @@
 |
 +---------------------------------------------------------------------------
 */
-package mblog.web.controller.desk.posts;
+package mblog.web.controller.site.posts;
 
 import mblog.base.utils.FileKit;
 import mblog.web.controller.BaseController;

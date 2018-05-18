@@ -1,7 +1,7 @@
 /**
  * 
  */
-package mblog.web.controller.desk.comment;
+package mblog.web.controller.site.comment;
 
 import mblog.base.data.Data;
 import mblog.base.lang.Consts;

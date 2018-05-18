@@ -7,7 +7,7 @@
 |
 +---------------------------------------------------------------------------
 */
-package mblog.web.controller.desk;
+package mblog.web.controller.site;
 
 import mblog.core.data.Post;
 import mblog.core.persist.service.PostService;

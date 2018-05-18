@@ -25,7 +25,7 @@ public class ChannelControllerHook extends InterceptorHookSupport {
     @Override
     public String[] getInterceptor() {
         //说明要拦截的controller
-        return new String[]{"mblog.web.controller.desk.ChannelController"};
+        return new String[]{"mblog.web.controller.site.ChannelController"};
     }
 
     @Override

@@ -7,13 +7,11 @@
 |
 +---------------------------------------------------------------------------
 */
-package mblog.web.controller.desk.auth;
+package mblog.web.controller.site.auth;
 
-import mblog.base.lang.Consts;
-import mblog.core.data.BadgesCount;
 import mblog.core.persist.service.NotifyService;
-import mblog.shiro.authc.AccountSubject;
 import mblog.web.controller.BaseController;
+import mblog.web.controller.site.Views;
 import org.apache.commons.lang3.StringUtils;
 import org.apache.shiro.SecurityUtils;
 import org.apache.shiro.authc.*;
@@ -22,8 +20,6 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.ModelMap;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
-
-import mblog.web.controller.desk.Views;
 import org.springframework.web.bind.annotation.RequestParam;
 
 /**

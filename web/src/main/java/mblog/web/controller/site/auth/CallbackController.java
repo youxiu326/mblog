@@ -1,4 +1,4 @@
-package mblog.web.controller.desk.auth;
+package mblog.web.controller.site.auth;
 
 import mblog.base.oauth.APIConfig;
 import mblog.base.oauth.OauthDouban;
@@ -17,7 +17,7 @@ import mblog.core.data.User;
 import mblog.core.persist.service.OpenOauthService;
 import mblog.core.persist.service.UserService;
 import mblog.web.controller.BaseController;
-import mblog.web.controller.desk.Views;
+import mblog.web.controller.site.Views;
 import org.apache.commons.lang3.StringUtils;
 import org.apache.log4j.Logger;
 import org.apache.shiro.SecurityUtils;

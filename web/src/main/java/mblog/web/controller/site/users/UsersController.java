@@ -7,12 +7,12 @@
 |
 +---------------------------------------------------------------------------
 */
-package mblog.web.controller.desk.users;
+package mblog.web.controller.site.users;
 
 import mblog.core.data.User;
 import mblog.core.persist.service.UserService;
 import mblog.web.controller.BaseController;
-import mblog.web.controller.desk.Views;
+import mblog.web.controller.site.Views;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.ModelMap;

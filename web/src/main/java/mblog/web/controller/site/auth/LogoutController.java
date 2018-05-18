@@ -7,7 +7,7 @@
 |
 +---------------------------------------------------------------------------
 */
-package mblog.web.controller.desk.auth;
+package mblog.web.controller.site.auth;
 
 import mblog.web.controller.BaseController;
 import org.apache.shiro.SecurityUtils;

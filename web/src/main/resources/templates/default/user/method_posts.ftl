@@ -77,7 +77,7 @@ $(function() {
 	// edit
 	$('a[data-evt=edit]').click(function () {
 		var id = $(this).attr('data-id');
-		window.location.href='${base}/post/to_update/' + id;
+		window.location.href='${base}/post/editing?id=' + id;
 	});
 })
 </script>

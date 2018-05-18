@@ -7,7 +7,7 @@
 |
 +---------------------------------------------------------------------------
 */
-package mblog.web.controller.desk;
+package mblog.web.controller.site;
 
 /**
  * 
@@ -46,13 +46,11 @@ public interface Views {
 
 	String USERS_VIEW = "/users/view";
 
-
 	String TAGS_TAG = "/tag";
 	
 	String BROWSE_SEARCH = "/search";
 
-	String ROUTE_POST_PUBLISH = "/channel/post";
+	String ROUTE_POST_EDITING = "/channel/editing";
 	String ROUTE_POST_INDEX = "/channel/index";
 	String ROUTE_POST_VIEW = "/channel/view";
-	String ROUTE_POST_UPDATE = "/channel/update";
 }

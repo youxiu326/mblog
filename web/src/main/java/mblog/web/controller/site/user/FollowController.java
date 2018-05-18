@@ -1,4 +1,4 @@
-package mblog.web.controller.desk.user;
+package mblog.web.controller.site.user;
 
 import mblog.base.data.Data;
 import mblog.base.lang.Consts;

@@ -7,21 +7,19 @@
 |
 +---------------------------------------------------------------------------
 */
-package mblog.web.controller.desk.user;
+package mblog.web.controller.site.user;
 
 import mblog.core.data.*;
 import mblog.core.persist.service.*;
 import mblog.shiro.authc.AccountSubject;
 import mblog.web.controller.BaseController;
-import mblog.web.controller.desk.Views;
-import org.apache.shiro.SecurityUtils;
+import mblog.web.controller.site.Views;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.ModelMap;
 import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
 
 /**
  * 用户主页

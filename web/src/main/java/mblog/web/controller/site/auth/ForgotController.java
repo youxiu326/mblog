@@ -1,4 +1,4 @@
-package mblog.web.controller.desk.auth;
+package mblog.web.controller.site.auth;
 
 import mblog.base.data.Data;
 import mblog.base.lang.Consts;
@@ -7,7 +7,7 @@ import mblog.core.data.User;
 import mblog.core.persist.service.UserService;
 import mblog.core.persist.service.VerifyService;
 import mblog.web.controller.BaseController;
-import mblog.web.controller.desk.Views;
+import mblog.web.controller.site.Views;
 import org.apache.commons.lang3.StringUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;

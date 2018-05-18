@@ -39,10 +39,6 @@
                         <a class="btn btn-default btn-block" href="${base}/oauth/callback/call_qq">
                             <i class="fa fa-qq"></i> QQ帐号登录
                         </a>
-
-                        <a class="btn btn-default btn-block" href="${base}/oauth/callback/call_douban">
-                            <i class="fa fa-th-large"></i> 豆瓣帐号登录
-                        </a>
                     </fieldset>
                 </form>
             </div>

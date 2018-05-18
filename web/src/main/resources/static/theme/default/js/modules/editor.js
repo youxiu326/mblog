@@ -10,9 +10,6 @@
 
 define(function(require, exports, module) {
 
-
-    var ueditor;
-
     var initEditor = function (callback) {
         require.async(['form', 'tinymce'], function () {
 
@@ -22,7 +19,7 @@ define(function(require, exports, module) {
                 upload_image_url: window.app.base + "/post/upload", //配置的上传图片的路由
                 height: 400,
                 plugins: [
-                    'advlist autolink autosave lists link image print anchor codesample',
+                    'fullpage advlist autolink autosave lists link image print anchor codesample',
                     'searchreplace visualblocks code fullscreen textcolor colorpicker textpattern uploadimage',
                     'contextmenu paste'
                 ],
@@ -46,9 +43,9 @@ define(function(require, exports, module) {
             callback.call(this);
         });
 
-    }
+    };
 
 	exports.init = function (callback) {
         initEditor(callback);
-    }
+    };
 });

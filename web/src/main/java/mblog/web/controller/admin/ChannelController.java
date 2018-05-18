@@ -11,6 +11,7 @@ package mblog.web.controller.admin;
 
 import mblog.base.data.Data;
 import mblog.base.lang.Consts;
+import mblog.boot.ContextStartup;
 import mblog.core.data.Channel;
 import mblog.core.persist.service.ChannelService;
 import mblog.web.controller.BaseController;
@@ -29,6 +30,8 @@ import org.springframework.web.bind.annotation.ResponseBody;
 public class ChannelController extends BaseController {
 	@Autowired
 	private ChannelService channelService;
+	@Autowired
+	private ContextStartup contextStartup;
 	
 	@RequestMapping("/list")
 	public String list(ModelMap model) {
@@ -49,6 +52,8 @@ public class ChannelController extends BaseController {
 	public String update(Channel view) {
 		if (view != null) {
 			channelService.update(view);
+
+			contextStartup.resetChannels();
 		}
 		return "redirect:/admin/channel/list";
 	}
@@ -60,6 +65,8 @@ public class ChannelController extends BaseController {
 			try {
 				channelService.delete(id);
 				data = Data.success("操作成功", Data.NOOP);
+
+				contextStartup.resetChannels();
 			} catch (Exception e) {
 				data = Data.failure(e.getMessage());
 			}

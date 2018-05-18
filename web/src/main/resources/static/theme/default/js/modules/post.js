@@ -26,7 +26,7 @@ define(function(require, exports, module) {
         },
         bindEvents : function () {
         	var that = this;
-        	
+
         	that.bindTagit();
         	that.bindValidate();
         },
@@ -38,7 +38,7 @@ define(function(require, exports, module) {
                 tagLimit: 4
             });
         },
-        
+
         bindValidate: function () {
         	$('form').validate({
                 onKeyup: true,
