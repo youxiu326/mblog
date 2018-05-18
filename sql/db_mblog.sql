@@ -80,8 +80,25 @@ CREATE TABLE `mto_config` (
 -- ----------------------------
 --  Records of `mto_config`
 -- ----------------------------
+-- ----------------------------
+-- Records of mto_config
+-- ----------------------------
 BEGIN;
-INSERT INTO `mto_config` VALUES ('1', 'site_name', '0', 'Mtons'), ('3', 'site_domain', '0', 'http://mtons.com'), ('4', 'site_keywords', '0', 'mtons,博客,社区,摄影,旅游,艺术,娱乐'), ('5', 'site_description', '0', 'Mtons, 轻松分享你的兴趣. 便捷的文字、图片发布,扁平化的响应式设计,美观、大气,是您记录生活的最佳选择'), ('6', 'site_editor', '1', 'ueditor'), ('7', 'site_metas', '0', ''), ('8', 'site_copyright', '0', 'Copyright © Mtons'), ('9', 'site_icp', '0', ''), ('10', 'site_advs_right', '0', ''), ('11', 'image_processor', '0', 'Thumbnailator'), ('12', 'site_oauth_qq', '0', ''), ('13', 'qq_app_id', '0', ''), ('14', 'qq_app_key', '0', ''), ('15', 'site_oauth_weibo', '0', ''), ('16', 'weibo_client_id', '0', ''), ('17', 'weibo_client_sercret', '0', ''), ('18', 'site_oauth_douban', '0', ''), ('19', 'douban_api_key', '0', ''), ('20', 'douban_secret_key', '0', '');
+INSERT INTO `mto_config` VALUES (1, 'site_name', '0', 'Mtons');
+INSERT INTO `mto_config` VALUES (3, 'site_domain', '0', 'http://mtons.com');
+INSERT INTO `mto_config` VALUES (4, 'site_keywords', '0', 'mtons,博客,社区,摄影,旅游,艺术,娱乐');
+INSERT INTO `mto_config` VALUES (5, 'site_description', '0', 'Mtons, 轻松分享你的兴趣. 便捷的文字、图片发布,扁平化的响应式设计,美观、大气,是您记录生活的最佳选择');
+INSERT INTO `mto_config` VALUES (6, 'site_metas', '0', '');
+INSERT INTO `mto_config` VALUES (7, 'site_copyright', '0', 'Copyright © Mtons');
+INSERT INTO `mto_config` VALUES (8, 'site_icp', '0', '');
+INSERT INTO `mto_config` VALUES (9, 'site_advs_right', '0', '');
+INSERT INTO `mto_config` VALUES (10, 'image_processor', '0', 'Thumbnailator');
+INSERT INTO `mto_config` VALUES (11, 'site_oauth_qq', '0', '');
+INSERT INTO `mto_config` VALUES (12, 'qq_app_id', '0', '');
+INSERT INTO `mto_config` VALUES (13, 'qq_app_key', '0', '');
+INSERT INTO `mto_config` VALUES (14, 'site_oauth_weibo', '0', '');
+INSERT INTO `mto_config` VALUES (15, 'weibo_client_id', '0', '');
+INSERT INTO `mto_config` VALUES (16, 'weibo_client_sercret', '0', '');
 COMMIT;
 
 -- ----------------------------
