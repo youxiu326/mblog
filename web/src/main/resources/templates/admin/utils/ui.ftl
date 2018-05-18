@@ -54,14 +54,11 @@
                         <ul class="nav side-menu">
                             <li><a href="${base}/admin"><i class="fa fa-home"></i> Home</a>
                             </li>
-                            <@authc pid=2>
+                            <@menus>
                                 <#list results as menu>
-                                    <@shiro.hasPermission name=menu.permission>
-                                        <li><a href="${base}/${menu.url}" nav="${menu.sort}"><i class="${menu.icon}"></i>${menu.name}</a></li>
-                                    </@shiro.hasPermission>
+                                    <li><a href="${base}/${menu.url}" nav="${menu.url}"><i class="${menu.icon}"></i>${menu.name}</a></li>
                                 </#list>
-                            </@authc>
-
+                            </@menus>
                         </ul>
                     </div>
                 </div>

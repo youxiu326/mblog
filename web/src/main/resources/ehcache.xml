@@ -7,44 +7,17 @@
 	 
 	<cache name="postsCaches"
 		eternal="false"
-		maxElementsOnDisk="9999"
-		maxElementsInMemory="1000" 
+		maxElementsOnDisk="999"
+		maxElementsInMemory="50"
 		overflowToDisk="true"
 		timeToIdleSeconds="360"
 		timeToLiveSeconds="720"
 		memoryStoreEvictionPolicy="LRU"/>
 	
-	<cache name="tagsCaches"
-		eternal="false"
-		maxElementsOnDisk="9999"
-		maxElementsInMemory="1000" 
-		overflowToDisk="true"
-		timeToIdleSeconds="360"
-		timeToLiveSeconds="720"
-		memoryStoreEvictionPolicy="LRU"/>
-	
-	<cache name="commentsCaches"
-		eternal="false"
-		maxElementsOnDisk="9999"
-		maxElementsInMemory="1000" 
-		overflowToDisk="true"
-		timeToIdleSeconds="360"
-		timeToLiveSeconds="720"
-		memoryStoreEvictionPolicy="LRU"/>
-		
-	<cache name="groupsCaches"
-		eternal="false"
-		maxElementsOnDisk="9999"
-		maxElementsInMemory="1000"
-		overflowToDisk="true"
-		timeToIdleSeconds="360"
-		timeToLiveSeconds="720"
-		memoryStoreEvictionPolicy="LRU"/>
-
 	<cache name="usersCaches"
 		   eternal="false"
-		   maxElementsOnDisk="9999"
-		   maxElementsInMemory="1000"
+		   maxElementsOnDisk="999"
+		   maxElementsInMemory="50"
 		   overflowToDisk="true"
 		   timeToIdleSeconds="360"
 		   timeToLiveSeconds="720"
