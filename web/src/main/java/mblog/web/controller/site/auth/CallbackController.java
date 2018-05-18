@@ -12,10 +12,10 @@ import mblog.base.lang.MtonsException;
 import mblog.base.lang.SiteConfig;
 import mblog.base.utils.FilePathUtils;
 import mblog.base.utils.ImageUtils;
-import mblog.core.data.OpenOauth;
-import mblog.core.data.User;
-import mblog.core.persist.service.OpenOauthService;
-import mblog.core.persist.service.UserService;
+import mblog.modules.user.data.OpenOauthVO;
+import mblog.modules.user.data.UserVO;
+import mblog.modules.user.service.OpenOauthService;
+import mblog.modules.user.service.UserService;
 import mblog.web.controller.BaseController;
 import mblog.web.controller.site.Views;
 import org.apache.commons.lang3.StringUtils;
@@ -102,7 +102,7 @@ public class CallbackController extends BaseController {
             throw new MtonsException("解析信息时发生错误");
         }
 
-        OpenOauth openOauth = new OpenOauth();
+        OpenOauthVO openOauth = new OpenOauthVO();
         openOauth.setOauthCode(code);
         openOauth.setAccessToken(openOauthBean.getAccessToken());
         openOauth.setExpireIn(openOauthBean.getNickname());
@@ -114,7 +114,7 @@ public class CallbackController extends BaseController {
         openOauth.setAvatar(openOauthBean.getAvatar());
 
         // 判断是否存在绑定此accessToken的用户
-        OpenOauth thirdToken = openOauthService.getOauthByOauthUserId(openOauth.getOauthUserId());
+        OpenOauthVO thirdToken = openOauthService.getOauthByOauthUserId(openOauth.getOauthUserId());
         if (thirdToken == null) {
             model.put("open", openOauth);
             return view(Views.OAUTH_REGISTER);
@@ -170,7 +170,7 @@ public class CallbackController extends BaseController {
             throw new MtonsException("解析信息时发生错误");
         }
 
-        OpenOauth openOauth = new OpenOauth();
+        OpenOauthVO openOauth = new OpenOauthVO();
         openOauth.setOauthCode(code);
         openOauth.setAccessToken(openOauthBean.getAccessToken());
         openOauth.setExpireIn(openOauthBean.getNickname());
@@ -181,7 +181,7 @@ public class CallbackController extends BaseController {
         openOauth.setAvatar(openOauthBean.getAvatar());
 
         // 判断是否存在绑定此accessToken的用户
-        OpenOauth thirdToken = openOauthService.getOauthByOauthUserId(openOauth.getOauthUserId());
+        OpenOauthVO thirdToken = openOauthService.getOauthByOauthUserId(openOauth.getOauthUserId());
 
         if (thirdToken == null) {
             model.put("open", openOauth);
@@ -239,7 +239,7 @@ public class CallbackController extends BaseController {
             throw new MtonsException("解析信息时发生错误");
         }
 
-        OpenOauth openOauth = new OpenOauth();
+        OpenOauthVO openOauth = new OpenOauthVO();
         openOauth.setOauthCode(code);
         openOauth.setAccessToken(openOauthBean.getAccessToken());
         openOauth.setExpireIn(openOauthBean.getNickname());
@@ -250,7 +250,7 @@ public class CallbackController extends BaseController {
         openOauth.setAvatar(openOauthBean.getAvatar());
 
         // 判断是否存在绑定此accessToken的用户
-        OpenOauth thirdToken = openOauthService.getOauthByOauthUserId(openOauth.getOauthUserId());
+        OpenOauthVO thirdToken = openOauthService.getOauthByOauthUserId(openOauth.getOauthUserId());
 
         if (thirdToken == null) {
             model.put("open", openOauth);
@@ -268,8 +268,8 @@ public class CallbackController extends BaseController {
      * @throws Exception
      */
     @RequestMapping("/bind_oauth")
-    public String bindOauth(OpenOauth openOauth, HttpServletRequest request) throws Exception {
-        OpenOauth thirdToken = openOauthService.getOauthByOauthUserId(openOauth.getOauthUserId());
+    public String bindOauth(OpenOauthVO openOauth, HttpServletRequest request) throws Exception {
+        OpenOauthVO thirdToken = openOauthService.getOauthByOauthUserId(openOauth.getOauthUserId());
         String username = openOauth.getUsername();
 
         // 已存在：提取用户信息，登录
@@ -277,16 +277,16 @@ public class CallbackController extends BaseController {
             username = userService.get(thirdToken.getUserId()).getUsername();
             // 不存在：注册新用户，并绑定此token，登录
         } else {
-            User user = userService.getByUsername(username);
+            UserVO user = userService.getByUsername(username);
             if(user == null){
-                User u = userService.register(wrapUser(openOauth));
+                UserVO u = userService.register(wrapUser(openOauth));
 
                 // ===将远程图片下载到本地===
                 String ava100 = appContext.getAvaDir() + getAvaPath(u.getId(), 100);
                 ImageUtils.download(openOauth.getAvatar(), fileRepoFactory.select().getRoot() + ava100);
                 userService.updateAvatar(u.getId(), ava100);
 
-                thirdToken = new OpenOauth();
+                thirdToken = new OpenOauthVO();
                 BeanUtils.copyProperties(openOauth, thirdToken);
                 thirdToken.setUserId(u.getId());
                 openOauthService.saveOauthToken(thirdToken);
@@ -329,8 +329,8 @@ public class CallbackController extends BaseController {
         throw new MtonsException("登录失败！");
     }
 
-    private User wrapUser(OpenOauth openOauth) {
-        User user = new User();
+    private UserVO wrapUser(OpenOauthVO openOauth) {
+        UserVO user = new UserVO();
         user.setUsername(openOauth.getUsername());
         user.setName(openOauth.getNickname());
         user.setPassword(openOauth.getAccessToken());

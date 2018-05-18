@@ -3,8 +3,8 @@
  */
 package mblog.template.directive;
 
-import mblog.core.data.Post;
-import mblog.core.persist.service.PostService;
+import mblog.modules.blog.data.PostVO;
+import mblog.modules.blog.service.PostService;
 import mblog.template.DirectiveHandler;
 import mblog.template.TemplateDirective;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -35,7 +35,7 @@ public class AuthorContentsDirective extends TemplateDirective {
         long uid = handler.getInteger("uid", 0);
 
         Pageable pageable = new PageRequest(pn - 1, 10);
-        Page<Post> result = postService.pagingByAuthorId(pageable, uid);
+        Page<PostVO> result = postService.pagingByAuthorId(pageable, uid);
 
         handler.put(RESULTS, result).render();
     }

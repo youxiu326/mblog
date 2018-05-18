@@ -6,10 +6,10 @@ package mblog.web.controller.site.auth;
 import mblog.base.data.Data;
 import mblog.base.lang.Consts;
 import mblog.base.utils.MailHelper;
-import mblog.core.data.AccountProfile;
-import mblog.core.data.User;
-import mblog.core.persist.service.UserService;
-import mblog.core.persist.service.VerifyService;
+import mblog.modules.user.data.AccountProfile;
+import mblog.modules.user.data.UserVO;
+import mblog.modules.user.service.UserService;
+import mblog.modules.user.service.VerifyService;
 import mblog.web.controller.BaseController;
 import mblog.web.controller.site.Views;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -47,13 +47,13 @@ public class RegisterController extends BaseController {
 	}
 	
 	@PostMapping("/register")
-	public String register(User post, ModelMap model) {
+	public String register(UserVO post, ModelMap model) {
 		Data data;
 		String ret = view(Views.REGISTER);
 
 		try {
 			post.setAvatar(Consts.AVATAR);
-			User user = userService.register(post);
+			UserVO user = userService.register(post);
 
 			String code = verifyService.generateCode(user.getId(), Consts.VERIFY_BIND, user.getEmail());
 			Map<String, Object> context = new HashMap<>();

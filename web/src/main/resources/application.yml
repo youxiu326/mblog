@@ -9,7 +9,9 @@ spring:
           force: true
           enabled: true
     freemarker:
-        template-loader-path: classpath:/templates
+        template-loader-path:
+        - classpath:/templates
+        - file:./templates
         cache: false
         checkTemplateLocation: false
         settings:
@@ -36,7 +38,6 @@ spring:
             hibernate.cache.use_second_level_cache: false
             hibernate.search.default.directory_provider: filesystem
             hibernate.search.default.indexBase: ./indexes
-        open-in-view: true
 
     servlet:
         multipart:

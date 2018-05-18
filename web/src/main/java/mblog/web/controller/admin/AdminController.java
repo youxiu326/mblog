@@ -11,6 +11,7 @@ package mblog.web.controller.admin;
 
 import javax.servlet.http.HttpServletRequest;
 
+import org.apache.shiro.authz.annotation.RequiresPermissions;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.ModelMap;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -23,6 +24,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 public class AdminController {
 
 	@RequestMapping("/admin")
+    @RequiresPermissions("admin")
 	public String index(HttpServletRequest request, ModelMap model) {
 		pushSystemStatus(request, model);
 		return "/admin/index";
