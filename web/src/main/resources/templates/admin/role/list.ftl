@@ -35,11 +35,16 @@
                             <td class="text-center">${row.id}</td>
                             <td>${row.name}</td>
                             <td class="text-center">
-                                <a href="${base}/admin/role/view?id=${row.id}" class="btn btn-xs btn-primary">
-                                    <i class="fa fa-check-square-o"></i> 修改
-                                </a>
-                                <a href="${base}/admin/role/delete?id=${row.id}" class="btn btn-xs btn-default"><i
-                                        class="fa fa-check-square-o"></i> 删除</a>
+                                <#if row.id != 1>
+                                    <a href="${base}/admin/role/view?id=${row.id}" class="btn btn-xs btn-primary">
+                                        <i class="fa fa-check-square-o"></i> 修改
+                                    </a>
+                                    <a href="${base}/admin/role/delete?id=${row.id}" class="btn btn-xs btn-default">
+                                        <i class="fa fa-check-square-o"></i> 删除
+                                    </a>
+                                <#else>
+                                    <a href="javascript:void(0);" class="btn btn-xs disabled"><i class="fa fa-check-square-o"></i> 不可编辑</a>
+                                </#if>
                             </td>
                         </tr>
                         </#list>

@@ -20,7 +20,7 @@ public class MenuJsonUtils {
     private static List<Menu> menus;
 
     /**
-     * 将配置文件转换成 Map 对象
+     * 将配置文件转换成 List 对象
      *
      * @return
      */

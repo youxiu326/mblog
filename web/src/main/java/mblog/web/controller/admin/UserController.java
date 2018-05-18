@@ -11,6 +11,7 @@ package mblog.web.controller.admin;
 
 import mblog.base.data.Data;
 import mblog.base.lang.Consts;
+import mblog.modules.authc.entity.Role;
 import mblog.modules.authc.service.RoleService;
 import mblog.modules.authc.service.UserRoleService;
 import mblog.modules.user.data.UserVO;
@@ -24,6 +25,9 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.ModelMap;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.ArrayList;
+import java.util.List;
+import java.util.Map;
 import java.util.Set;
 
 /**
@@ -47,6 +51,19 @@ public class UserController extends BaseController {
 	public String list(ModelMap model) {
 		Pageable pageable = wrapPageable();
 		Page<UserVO> page = userService.paging(pageable);
+
+		List<UserVO> users = page.getContent();
+		List<Long> userIds = new ArrayList<>();
+
+		users.forEach(item -> {
+			userIds.add(item.getId());
+		});
+
+		Map<Long, List<Role>> map = userRoleService.findMapByUserIds(userIds);
+		users.forEach(item -> {
+			item.setRoles(map.get(item.getId()));
+		});
+
 		model.put("page", page);
 		return "/admin/user/list";
 	}
@@ -54,6 +71,7 @@ public class UserController extends BaseController {
 	@RequestMapping("/view")
 	public String view(Long id, ModelMap model) {
 		UserVO view = userService.get(id);
+		view.setRoles(userRoleService.listRoles(view.getId()));
 		model.put("view", view);
 		model.put("roles", roleService.list());
 		return "/admin/user/view";
