@@ -10,7 +10,7 @@
 package mblog.web.controller.site.user;
 
 import mblog.base.data.Data;
-import mblog.core.data.AccountProfile;
+import mblog.modules.user.data.AccountProfile;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -18,7 +18,7 @@ import org.springframework.ui.ModelMap;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 
-import mblog.core.persist.service.UserService;
+import mblog.modules.user.service.UserService;
 import mblog.web.controller.BaseController;
 import mblog.web.controller.site.Views;
 

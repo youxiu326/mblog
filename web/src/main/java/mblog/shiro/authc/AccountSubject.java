@@ -17,7 +17,7 @@ import org.apache.shiro.session.Session;
 import org.apache.shiro.subject.PrincipalCollection;
 import org.apache.shiro.web.subject.support.WebDelegatingSubject;
 
-import mblog.core.data.AccountProfile;
+import mblog.modules.user.data.AccountProfile;
 
 public class AccountSubject extends WebDelegatingSubject{
 	private AccountProfile profile;

@@ -3,9 +3,9 @@ package mblog.web.controller.site.auth;
 import mblog.base.data.Data;
 import mblog.base.lang.Consts;
 import mblog.base.utils.MailHelper;
-import mblog.core.data.User;
-import mblog.core.persist.service.UserService;
-import mblog.core.persist.service.VerifyService;
+import mblog.modules.user.data.UserVO;
+import mblog.modules.user.service.UserService;
+import mblog.modules.user.service.VerifyService;
 import mblog.web.controller.BaseController;
 import mblog.web.controller.site.Views;
 import org.apache.commons.lang3.StringUtils;
@@ -36,7 +36,7 @@ public class ForgotController extends BaseController {
         Data data = null;
 
         if (StringUtils.isNotBlank(username)) {
-            User user = userService.getByUsername(username);
+            UserVO user = userService.getByUsername(username);
 
             if (user != null) {
                 String code = verifyService.generateCode(user.getId(), Consts.VERIFY_FORGOT, user.getEmail());

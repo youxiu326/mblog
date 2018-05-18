@@ -2,9 +2,9 @@ package mblog.web.controller.site.user;
 
 import mblog.base.data.Data;
 import mblog.base.lang.Consts;
-import mblog.core.data.AccountProfile;
+import mblog.modules.user.data.AccountProfile;
 import mblog.core.event.NotifyEvent;
-import mblog.core.persist.service.FollowService;
+import mblog.modules.user.service.FollowService;
 import mblog.web.controller.BaseController;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.ApplicationContext;

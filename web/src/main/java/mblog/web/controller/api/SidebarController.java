@@ -10,15 +10,14 @@
 package mblog.web.controller.api;
 
 import mblog.base.data.Data;
-import mblog.core.data.AccountProfile;
-import mblog.core.data.Post;
-import mblog.core.data.User;
-import mblog.core.persist.service.PostService;
-import mblog.core.persist.service.UserService;
+import mblog.modules.user.data.AccountProfile;
+import mblog.modules.blog.data.PostVO;
+import mblog.modules.user.data.UserVO;
+import mblog.modules.blog.service.PostService;
+import mblog.modules.user.service.UserService;
 import mblog.web.controller.BaseController;
 import org.apache.commons.lang3.StringUtils;
 import org.apache.shiro.SecurityUtils;
-import org.apache.shiro.authc.AuthenticationException;
 import org.apache.shiro.authc.AuthenticationToken;
 import org.apache.shiro.authc.LockedAccountException;
 import org.apache.shiro.authc.UnknownAccountException;
@@ -78,24 +77,24 @@ public class SidebarController extends BaseController {
 	}
 
 	@RequestMapping("/latests")
-	public @ResponseBody List<Post> latests() {
+	public @ResponseBody List<PostVO> latests() {
 		AccountProfile up = getSubject().getProfile();
 		long ignoreUserId = 0;
 		if (up != null) {
 			ignoreUserId = up.getId();
 		}
-		List<Post> rets = postService.findLatests(6, ignoreUserId);
+		List<PostVO> rets = postService.findLatests(6, ignoreUserId);
 		return rets;
 	}
 	
 	@RequestMapping("/hots")
-	public @ResponseBody List<Post> hots() {
+	public @ResponseBody List<PostVO> hots() {
 		AccountProfile up = getSubject().getProfile();
 		long ignoreUserId = 0;
 		if (up != null) {
 			ignoreUserId = up.getId();
 		}
-		List<Post> rets = postService.findHots(6, ignoreUserId);
+		List<PostVO> rets = postService.findHots(6, ignoreUserId);
 		return rets;
 	}
 	
@@ -105,8 +104,8 @@ public class SidebarController extends BaseController {
 	 * @return
 	 */
 	@RequestMapping(value="/hotusers")
-	public @ResponseBody List<User> hotusers(Integer pn) {
-		List<User> rets = userService.findHotUserByfans();
+	public @ResponseBody List<UserVO> hotusers(Integer pn) {
+		List<UserVO> rets = userService.findHotUserByfans();
          return rets;
 	}
 }

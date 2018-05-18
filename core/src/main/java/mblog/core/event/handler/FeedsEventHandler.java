@@ -10,9 +10,9 @@
 package mblog.core.event.handler;
 
 import mblog.base.lang.Consts;
-import mblog.core.data.Feeds;
+import mblog.modules.blog.data.FeedsVO;
 import mblog.core.event.FeedsEvent;
-import mblog.core.persist.service.FeedsService;
+import mblog.modules.blog.service.FeedsService;
 
 import org.apache.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -40,7 +40,7 @@ public class FeedsEventHandler implements ApplicationListener<FeedsEvent> {
         }
 
         // 创建动态对象
-        Feeds feeds = new Feeds();
+        FeedsVO feeds = new FeedsVO();
         feeds.setType(Consts.FEEDS_TYPE_POST);
         feeds.setOwnId(event.getAuthorId());
         feeds.setPostId(event.getPostId());

@@ -35,27 +35,25 @@ public class Data implements Serializable {
         this.data = data;
     }
 
+    public static final Data success(){
+        return success(null);
+    }
+
     /**
      * 处理成功，并返回数据
      * @param data
      * @return
      */
     public static final Data success(Object data){
-        return new Data(Data.CODE_SUCCESS, "操作成功", data);
-    }
-
-    /**
-     *
-     * @param message
-     * @return
-     * @deprecated with 1.0.3
-     */
-    public static final Data success(String message){
-        return new Data(Data.CODE_SUCCESS, message, null);
+        return success("操作成功", data);
     }
 
     public static final Data success(String message, Object data){
         return new Data(Data.CODE_SUCCESS, message, data);
+    }
+
+    public static final Data failure(String message){
+        return failure(Data.CODE_FAILURED, message);
     }
 
     /**
@@ -65,10 +63,6 @@ public class Data implements Serializable {
      */
     public static final Data failure(int code, String message){
         return new Data(code, message, null);
-    }
-
-    public static final Data failure(String message){
-        return failure(Data.CODE_FAILURED, message);
     }
 
     public int getCode() {

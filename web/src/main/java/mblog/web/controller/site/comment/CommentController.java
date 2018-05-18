@@ -5,10 +5,10 @@ package mblog.web.controller.site.comment;
 
 import mblog.base.data.Data;
 import mblog.base.lang.Consts;
-import mblog.core.data.AccountProfile;
-import mblog.core.data.Comment;
+import mblog.modules.user.data.AccountProfile;
+import mblog.modules.blog.data.CommentVO;
 import mblog.core.event.NotifyEvent;
-import mblog.core.persist.service.CommentService;
+import mblog.modules.blog.service.CommentService;
 import mblog.web.controller.BaseController;
 import org.apache.commons.lang3.StringUtils;
 import org.apache.shiro.SecurityUtils;
@@ -38,9 +38,9 @@ public class CommentController extends BaseController {
 	private ApplicationContext applicationContext;
 
 	@RequestMapping("/list/{toId}")
-	public @ResponseBody Page<Comment> view(@PathVariable Long toId) {
+	public @ResponseBody Page<CommentVO> view(@PathVariable Long toId) {
 		Pageable pageable = wrapPageable();
-		Page<Comment> page = commentService.paging(pageable, toId);
+		Page<CommentVO> page = commentService.paging(pageable, toId);
 		return page;
 	}
 	
@@ -59,7 +59,7 @@ public class CommentController extends BaseController {
 		if (toId > 0 && StringUtils.isNotEmpty(text)) {
 			AccountProfile up = getSubject().getProfile();
 			
-			Comment c = new Comment();
+			CommentVO c = new CommentVO();
 			c.setToId(toId);
 			c.setContent(HtmlUtils.htmlEscape(text));
 			c.setAuthorId(up.getId());

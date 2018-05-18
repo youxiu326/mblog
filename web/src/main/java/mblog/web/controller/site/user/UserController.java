@@ -9,8 +9,21 @@
 */
 package mblog.web.controller.site.user;
 
-import mblog.core.data.*;
-import mblog.core.persist.service.*;
+import mblog.modules.blog.data.CommentVO;
+import mblog.modules.blog.data.FavorVO;
+import mblog.modules.blog.data.FeedsVO;
+import mblog.modules.blog.data.PostVO;
+import mblog.modules.blog.service.CommentService;
+import mblog.modules.blog.service.FavorService;
+import mblog.modules.blog.service.FeedsService;
+import mblog.modules.blog.service.PostService;
+import mblog.modules.user.data.AccountProfile;
+import mblog.modules.user.data.BadgesCount;
+import mblog.modules.user.data.NotifyVO;
+import mblog.modules.user.data.UserVO;
+import mblog.modules.user.service.FollowService;
+import mblog.modules.user.service.NotifyService;
+import mblog.modules.user.service.UserService;
 import mblog.shiro.authc.AccountSubject;
 import mblog.web.controller.BaseController;
 import mblog.web.controller.site.Views;
@@ -53,7 +66,7 @@ public class UserController extends BaseController {
 		Pageable pageable = wrapPageable();
 		AccountSubject subject = getSubject();
 
-		Page<Feeds> page = feedsService.findUserFeeds(pageable, subject.getProfile().getId());
+		Page<FeedsVO> page = feedsService.findUserFeeds(pageable, subject.getProfile().getId());
 
 		model.put("page", page);
 		initUser(model);
@@ -70,7 +83,7 @@ public class UserController extends BaseController {
 	public String posts(ModelMap model) {
 		Pageable pageable = wrapPageable();
 		AccountProfile up = getSubject().getProfile();
-		Page<Post> page = postService.pagingByAuthorId(pageable, up.getId());
+		Page<PostVO> page = postService.pagingByAuthorId(pageable, up.getId());
 
 		model.put("page", page);
 		initUser(model);
@@ -87,7 +100,7 @@ public class UserController extends BaseController {
 	public String comments(ModelMap model) {
 		Pageable pageable = wrapPageable();
 		AccountSubject subject = getSubject();
-		Page<Comment> page = commentService.paging4Home(pageable, subject.getProfile().getId());
+		Page<CommentVO> page = commentService.paging4Home(pageable, subject.getProfile().getId());
 
 		model.put("page", page);
 		initUser(model);
@@ -104,7 +117,7 @@ public class UserController extends BaseController {
 	public String favors(ModelMap model) {
 		Pageable pageable = wrapPageable();
 		AccountProfile profile = getSubject().getProfile();
-		Page<Favor> page = favorService.pagingByOwnId(pageable, profile.getId());
+		Page<FavorVO> page = favorService.pagingByOwnId(pageable, profile.getId());
 
 		model.put("page", page);
 		initUser(model);
@@ -121,7 +134,7 @@ public class UserController extends BaseController {
 	public String follows(ModelMap model) {
 		Pageable pageable = wrapPageable();
 		AccountProfile profile = getSubject().getProfile();
-		Page<User> page = followService.follows(pageable, profile.getId());
+		Page<UserVO> page = followService.follows(pageable, profile.getId());
 
 		model.put("page", page);
 		initUser(model);
@@ -138,7 +151,7 @@ public class UserController extends BaseController {
 	public String fans(ModelMap model) {
 		Pageable pageable = wrapPageable();
 		AccountProfile profile = getSubject().getProfile();
-		Page<User> page = followService.fans(pageable, profile.getId());
+		Page<UserVO> page = followService.fans(pageable, profile.getId());
 
 		model.put("page", page);
 		initUser(model);
@@ -155,7 +168,7 @@ public class UserController extends BaseController {
 	public String notifies(ModelMap model) {
 		Pageable pageable = wrapPageable();
 		AccountProfile profile = getSubject().getProfile();
-		Page<Notify> page = notifyService.findByOwnId(pageable, profile.getId());
+		Page<NotifyVO> page = notifyService.findByOwnId(pageable, profile.getId());
 		// 标记已读
 		notifyService.readed4Me(profile.getId());
 
@@ -167,7 +180,7 @@ public class UserController extends BaseController {
 
 	private void initUser(ModelMap model) {
 		AccountProfile up = getSubject().getProfile();
-		User user = userService.get(up.getId());
+		UserVO user = userService.get(up.getId());
 
 		model.put("user", user);
 

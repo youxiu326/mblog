@@ -3,8 +3,8 @@
  */
 package mblog.template.directive;
 
-import mblog.core.data.Post;
-import mblog.core.persist.service.PostService;
+import mblog.modules.blog.data.PostVO;
+import mblog.modules.blog.service.PostService;
 import mblog.template.DirectiveHandler;
 import mblog.template.TemplateDirective;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -30,7 +30,7 @@ public class BannerDirective extends TemplateDirective {
 
     @Override
     public void execute(DirectiveHandler handler) throws Exception {
-        List<Post> result = postService.findAllFeatured();
+        List<PostVO> result = postService.findAllFeatured();
         handler.put(RESULTS, result).render();
     }
 }

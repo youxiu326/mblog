@@ -9,8 +9,8 @@
 */
 package mblog.web.controller.site;
 
-import mblog.core.data.Post;
-import mblog.core.persist.service.PostService;
+import mblog.modules.blog.data.PostVO;
+import mblog.modules.blog.service.PostService;
 import mblog.web.controller.BaseController;
 import org.apache.commons.lang3.StringUtils;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -35,7 +35,7 @@ public class SearchController extends BaseController {
 		Pageable pageable = wrapPageable();
 		try {
 			if (StringUtils.isNotEmpty(kw)) {
-				Page<Post> page = postService.search(pageable, kw);
+				Page<PostVO> page = postService.search(pageable, kw);
 				model.put("page", page);
 			}
 		} catch (Exception e) {

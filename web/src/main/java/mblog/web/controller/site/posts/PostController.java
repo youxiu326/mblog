@@ -5,10 +5,10 @@ package mblog.web.controller.site.posts;
 
 import mblog.base.data.Data;
 import mblog.base.lang.Consts;
-import mblog.core.data.AccountProfile;
-import mblog.core.data.Post;
-import mblog.core.persist.service.ChannelService;
-import mblog.core.persist.service.PostService;
+import mblog.modules.user.data.AccountProfile;
+import mblog.modules.blog.data.PostVO;
+import mblog.modules.blog.service.ChannelService;
+import mblog.modules.blog.service.PostService;
 import mblog.web.controller.BaseController;
 import mblog.web.controller.site.Views;
 import org.apache.commons.lang3.StringUtils;
@@ -17,8 +17,6 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.ModelMap;
 import org.springframework.util.Assert;
 import org.springframework.web.bind.annotation.*;
-
-import javax.servlet.http.HttpServletRequest;
 
 /**
  * 文章操作
@@ -43,7 +41,7 @@ public class PostController extends BaseController {
 
 		if (null != id && id > 0) {
 			AccountProfile profile = getSubject().getProfile();
-			Post view = postService.get(id);
+			PostVO view = postService.get(id);
 
 			Assert.notNull(view, "该文章已被删除");
 			Assert.isTrue(view.getAuthorId() == profile.getId(), "该文章不属于你");
@@ -60,7 +58,7 @@ public class PostController extends BaseController {
 	 * @return
 	 */
 	@PostMapping("/submit")
-	public String post(Post post) {
+	public String post(PostVO post) {
 		Assert.notNull(post, "参数不完整");
 		Assert.state(StringUtils.isNotBlank(post.getTitle()), "标题不能为空");
 		Assert.state(StringUtils.isNotBlank(post.getContent()), "内容不能为空");
@@ -70,7 +68,7 @@ public class PostController extends BaseController {
 
 		// 修复文章时, 验证归属
 		if (post.getId() > 0) {
-			Post exist = postService.get(post.getId());
+			PostVO exist = postService.get(post.getId());
 			Assert.notNull(exist, "文章不存在");
 			Assert.isTrue(exist.getAuthorId() == profile.getId(), "该文章不属于你");
 

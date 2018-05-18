@@ -1,12 +1,11 @@
 package mblog.plugin.example;
 
-import mblog.core.data.AccountProfile;
-import mblog.core.data.Post;
+import mblog.modules.user.data.AccountProfile;
+import mblog.modules.blog.data.PostVO;
 import mblog.core.hook.interceptor.desk.ChannelControllerHook;
-import mblog.core.persist.service.CommentService;
+import mblog.modules.blog.service.CommentService;
 import org.apache.shiro.SecurityUtils;
 import org.apache.shiro.subject.Subject;
-import org.hibernate.Query;
 import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
@@ -33,9 +32,9 @@ public class HidenContentPugin implements ChannelControllerHook.ChannelControlle
 
     @Override
     public void postHandle(HttpServletRequest request, HttpServletResponse response, HandlerMethod handler, ModelAndView modelAndView) throws Exception {
-        Post ret = (Post) modelAndView.getModelMap().get("view");
+        PostVO ret = (PostVO) modelAndView.getModelMap().get("view");
         if (ret != null && check(ret.getId(), ret.getAuthor().getId())) {
-            Post post = new Post();
+            PostVO post = new PostVO();
             BeanUtils.copyProperties(ret, post);
             post.setContent(replace(post.getContent()));
             modelAndView.getModelMap().put("view", post);

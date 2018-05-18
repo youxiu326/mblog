@@ -9,8 +9,8 @@
 */
 package mblog.web.controller.site.users;
 
-import mblog.core.data.User;
-import mblog.core.persist.service.UserService;
+import mblog.modules.user.data.UserVO;
+import mblog.modules.user.service.UserService;
 import mblog.web.controller.BaseController;
 import mblog.web.controller.site.Views;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -34,7 +34,7 @@ public class UsersController extends BaseController {
 	
 	@RequestMapping("/users/{uid}")
 	public String home(@PathVariable Long uid, HttpServletRequest request, ModelMap model) {
-		User user = userService.get(uid);
+		UserVO user = userService.get(uid);
 		int pn = ServletRequestUtils.getIntParameter(request, "pn", 1);
 
 		model.put("user", user);

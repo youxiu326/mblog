@@ -5,6 +5,7 @@ import freemarker.template.TemplateModelException;
 import mblog.shiro.tags.ShiroTags;
 import mblog.template.directive.*;
 import mblog.template.method.TimeAgoMethod;
+import mblog.web.menu.MenusDirective;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.ApplicationContext;
 import org.springframework.stereotype.Component;
@@ -28,7 +29,7 @@ public class FreemarkerConfig {
         configuration.setSharedVariable("contents", applicationContext.getBean(ContentsDirective.class));
         configuration.setSharedVariable("num", applicationContext.getBean(NumberDirective.class));
         configuration.setSharedVariable("resource", applicationContext.getBean(ResourceDirective.class));
-        configuration.setSharedVariable("authc", applicationContext.getBean(AuthcDirective.class));
+        configuration.setSharedVariable("menus", applicationContext.getBean(MenusDirective.class));
         configuration.setSharedVariable("banner", applicationContext.getBean(BannerDirective.class));
 
         configuration.setSharedVariable("timeAgo", new TimeAgoMethod());

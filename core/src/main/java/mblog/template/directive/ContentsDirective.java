@@ -4,8 +4,8 @@
 package mblog.template.directive;
 
 import mblog.base.lang.Consts;
-import mblog.core.data.Post;
-import mblog.core.persist.service.PostService;
+import mblog.modules.blog.data.PostVO;
+import mblog.modules.blog.service.PostService;
 import mblog.template.DirectiveHandler;
 import mblog.template.TemplateDirective;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -41,7 +41,7 @@ public class ContentsDirective extends TemplateDirective {
         String order = handler.getString("order", Consts.order.NEWEST);
 
         Pageable pageable = new PageRequest(pn - 1, 20);
-        Page<Post> result = postService.paging(pageable, channelId, order);
+        Page<PostVO> result = postService.paging(pageable, channelId, order);
 
         handler.put(RESULTS, result).render();
     }

@@ -8,7 +8,8 @@ import java.util.Map;
 
 import mblog.base.data.Data;
 import mblog.base.utils.MailHelper;
-import mblog.core.data.AccountProfile;
+import mblog.modules.user.data.AccountProfile;
+import mblog.modules.user.data.UserVO;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.ModelMap;
@@ -17,9 +18,8 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 
 import mblog.base.lang.Consts;
-import mblog.core.data.User;
-import mblog.core.persist.service.UserService;
-import mblog.core.persist.service.VerifyService;
+import mblog.modules.user.service.UserService;
+import mblog.modules.user.service.VerifyService;
 import mblog.web.controller.BaseController;
 import mblog.web.controller.site.Views;
 
@@ -40,7 +40,7 @@ public class ProfileController extends BaseController {
 	@RequestMapping(value = "/profile", method = RequestMethod.GET)
 	public String view(ModelMap model) {
 		AccountProfile profile = getSubject().getProfile();
-		User view = userService.get(profile.getId());
+		UserVO view = userService.get(profile.getId());
 		model.put("view", view);
 		return view(Views.USER_PROFILE);
 	}
@@ -51,7 +51,7 @@ public class ProfileController extends BaseController {
 		AccountProfile profile = getSubject().getProfile();
 		
 		try {
-			User user = new User();
+			UserVO user = new UserVO();
 			user.setId(profile.getId());
 			user.setName(name);
 			user.setSignature(signature);
@@ -59,7 +59,7 @@ public class ProfileController extends BaseController {
 			putProfile(userService.update(user));
 
 			// put 最新信息
-			User view = userService.get(profile.getId());
+			UserVO view = userService.get(profile.getId());
 			model.put("view", view);
 
 			data = Data.success("操作成功", Data.NOOP);

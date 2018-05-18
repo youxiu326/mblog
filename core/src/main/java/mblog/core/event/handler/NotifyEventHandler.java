@@ -1,11 +1,11 @@
 package mblog.core.event.handler;
 
 import mblog.base.lang.Consts;
-import mblog.core.data.Notify;
-import mblog.core.data.Post;
+import mblog.modules.user.data.NotifyVO;
+import mblog.modules.blog.data.PostVO;
 import mblog.core.event.NotifyEvent;
-import mblog.core.persist.service.NotifyService;
-import mblog.core.persist.service.PostService;
+import mblog.modules.blog.service.PostService;
+import mblog.modules.user.service.NotifyService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.ApplicationListener;
 import org.springframework.scheduling.annotation.Async;
@@ -24,19 +24,19 @@ public class NotifyEventHandler implements ApplicationListener<NotifyEvent> {
     @Async
     @Override
     public void onApplicationEvent(NotifyEvent event) {
-        Notify nt = new Notify();
+        NotifyVO nt = new NotifyVO();
         nt.setPostId(event.getPostId());
         nt.setFromId(event.getFromUserId());
         nt.setEvent(event.getEvent());
 
         switch (event.getEvent()) {
             case Consts.NOTIFY_EVENT_FAVOR_POST:
-                Post p = postService.get(event.getPostId());
+                PostVO p = postService.get(event.getPostId());
                 nt.setOwnId(p.getAuthorId());
                 break;
             case Consts.NOTIFY_EVENT_COMMENT:
             case Consts.NOTIFY_EVENT_COMMENT_REPLY:
-                Post p2 = postService.get(event.getPostId());
+                PostVO p2 = postService.get(event.getPostId());
                 nt.setOwnId(p2.getAuthorId());
 
                 // 自增评论数

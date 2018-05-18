@@ -12,9 +12,10 @@ package mblog.web.controller.admin;
 import mblog.base.data.Data;
 import mblog.base.lang.Consts;
 import mblog.boot.ContextStartup;
-import mblog.core.data.Channel;
-import mblog.core.persist.service.ChannelService;
+import mblog.modules.blog.entity.Channel;
+import mblog.modules.blog.service.ChannelService;
 import mblog.web.controller.BaseController;
+import org.apache.shiro.authz.annotation.RequiresPermissions;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.ModelMap;
@@ -25,7 +26,7 @@ import org.springframework.web.bind.annotation.ResponseBody;
  * @author langhsu
  *
  */
-@Controller("mng_channel_ctl")
+@Controller("adminChannelController")
 @RequestMapping("/admin/channel")
 public class ChannelController extends BaseController {
 	@Autowired
@@ -34,6 +35,7 @@ public class ChannelController extends BaseController {
 	private ContextStartup contextStartup;
 	
 	@RequestMapping("/list")
+	@RequiresPermissions("channel:list")
 	public String list(ModelMap model) {
 		model.put("list", channelService.findAll(Consts.IGNORE));
 		return "/admin/channel/list";
@@ -49,6 +51,7 @@ public class ChannelController extends BaseController {
 	}
 	
 	@RequestMapping("/update")
+	@RequiresPermissions("channel:update")
 	public String update(Channel view) {
 		if (view != null) {
 			channelService.update(view);
@@ -59,6 +62,7 @@ public class ChannelController extends BaseController {
 	}
 	
 	@RequestMapping("/delete")
+	@RequiresPermissions("channel:delete")
 	public @ResponseBody Data delete(Integer id) {
 		Data data = Data.failure("操作失败");
 		if (id != null) {

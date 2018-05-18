@@ -1,6 +1,6 @@
 package mblog.template.directive;
 
-import mblog.core.persist.service.ChannelService;
+import mblog.modules.blog.service.ChannelService;
 import mblog.template.DirectiveHandler;
 import mblog.template.TemplateDirective;
 import org.springframework.beans.factory.annotation.Autowired;

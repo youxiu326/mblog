@@ -9,7 +9,7 @@
 */
 package mblog.web.controller.site.auth;
 
-import mblog.core.persist.service.NotifyService;
+import mblog.modules.user.service.NotifyService;
 import mblog.web.controller.BaseController;
 import mblog.web.controller.site.Views;
 import org.apache.commons.lang3.StringUtils;

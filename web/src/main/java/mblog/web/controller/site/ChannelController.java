@@ -9,11 +9,12 @@
 */
 package mblog.web.controller.site;
 
-import javax.servlet.http.HttpServletRequest;
-
-import mblog.core.data.Channel;
-import mblog.core.data.Post;
-import mblog.core.persist.service.PostService;
+import mblog.base.lang.Consts;
+import mblog.modules.blog.data.PostVO;
+import mblog.modules.blog.entity.Channel;
+import mblog.modules.blog.service.ChannelService;
+import mblog.modules.blog.service.PostService;
+import mblog.web.controller.BaseController;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.ModelMap;
@@ -22,10 +23,7 @@ import org.springframework.web.bind.ServletRequestUtils;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 
-import mblog.base.lang.Consts;
-import mblog.core.persist.service.ChannelService;
-import mblog.web.controller.BaseController;
-import mblog.web.controller.site.Views;
+import javax.servlet.http.HttpServletRequest;
 
 /**
  * Channel 主页
@@ -56,7 +54,7 @@ public class ChannelController extends BaseController {
 
 	@RequestMapping("/view/{id}")
 	public String view(@PathVariable Long id, ModelMap model) {
-		Post view = postService.get(id);
+		PostVO view = postService.get(id);
 
 		Assert.notNull(view, "该文章已被删除");
 

@@ -6,7 +6,7 @@
 //import org.springframework.beans.factory.annotation.Autowired;
 //
 //import mblog.core.persist.dao.AuthMenuDao;
-//import mblog.core.persist.entity.AuthMenuPO;
+//import mblog.core.persist.entity.AuthMenu;
 //
 //public class AuthMenuDaoTest extends SpringTransactionalContextTests{
 //
@@ -15,7 +15,7 @@
 //
 //	@Test
 //	public void testFindByParentId(){
-//		List<AuthMenuPO> list = authMenuDao.findAll();
+//		List<AuthMenu> list = authMenuDao.findAll();
 //		System.out.println(list);
 //	}
 //

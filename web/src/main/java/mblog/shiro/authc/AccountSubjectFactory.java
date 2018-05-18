@@ -9,7 +9,7 @@
 */
 package mblog.shiro.authc;
 
-import mblog.core.persist.service.UserService;
+import mblog.modules.user.service.UserService;
 import org.apache.shiro.authc.AuthenticationInfo;
 import org.apache.shiro.mgt.SubjectFactory;
 import org.apache.shiro.session.Session;
@@ -18,7 +18,7 @@ import org.apache.shiro.subject.SubjectContext;
 import org.apache.shiro.web.subject.WebSubjectContext;
 
 import mblog.base.lang.Consts;
-import mblog.core.data.AccountProfile;
+import mblog.modules.user.data.AccountProfile;
 import org.springframework.beans.factory.annotation.Autowired;
 
 public class AccountSubjectFactory implements SubjectFactory {

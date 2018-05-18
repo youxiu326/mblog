@@ -3,10 +3,10 @@ package mblog.web.controller.site.auth;
 import mblog.base.data.Data;
 import mblog.base.lang.Consts;
 import mblog.base.utils.MailHelper;
-import mblog.core.data.AccountProfile;
-import mblog.core.data.User;
-import mblog.core.persist.service.UserService;
-import mblog.core.persist.service.VerifyService;
+import mblog.modules.user.data.AccountProfile;
+import mblog.modules.user.data.UserVO;
+import mblog.modules.user.service.UserService;
+import mblog.modules.user.service.VerifyService;
 import mblog.web.controller.BaseController;
 import mblog.web.controller.site.Views;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -49,7 +49,7 @@ public class EmailController extends BaseController {
             subject = "找回密码";
         }
 
-        User user = userService.get(userId);
+        UserVO user = userService.get(userId);
 
         String code = verifyService.generateCode(user.getId(), type, user.getEmail());
         Map<String, Object> context = new HashMap<>();
