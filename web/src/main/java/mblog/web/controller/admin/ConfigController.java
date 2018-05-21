@@ -69,7 +69,7 @@ public class ConfigController extends BaseController {
 
 		contextStartup.resetSiteConfig(false);
 
-		return "redirect:/admin/config/";
+		return "redirect:/admin/config/main";
 	}
 
 	/**
