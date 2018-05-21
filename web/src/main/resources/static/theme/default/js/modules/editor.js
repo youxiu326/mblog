@@ -19,12 +19,12 @@ define(function(require, exports, module) {
                 upload_image_url: window.app.base + "/post/upload", //配置的上传图片的路由
                 height: 400,
                 plugins: [
-                    'fullpage advlist autolink autosave lists link image print anchor codesample',
+                    'fullpage advlist autolink autosave charmap lists link image print anchor codesample',
                     'searchreplace visualblocks code fullscreen textcolor colorpicker textpattern uploadimage',
                     'contextmenu paste'
                 ],
-                toolbar: "undo redo | formatselect bold underline blockquote alignleft aligncenter alignright " +
-                "forecolor bullist numlist link unlink uploadimage codesample removeformat fullscreen ",
+                toolbar: "undo redo | formatselect | bold underline blockquote | alignleft aligncenter alignright | " +
+                "forecolor bullist numlist | link unlink | uploadimage codesample removeformat | fullscreen ",
                 menubar: false,
                 language: "zh_CN",
                 statusbar : false,
