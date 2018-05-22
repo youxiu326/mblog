@@ -67,8 +67,8 @@ public class ContextStartup implements ApplicationRunner, Ordered, ServletContex
 
         if (null == configs || configs.isEmpty()) {
             Printer.error("------------------------------------------------------------");
-            Printer.error("- ERROR: No initialization data is imported (db_mblog.sql) -");
-            Printer.error("-       Import the initial database and start again.       -");
+            Printer.error("-  ERROR:The SQL file is not imported. (sql/db_mblog.sql)  -");
+            Printer.error("-         Please import the SQL file and try again.        -");
             Printer.error("------------------------------------------------------------");
 
             if (exit) {
