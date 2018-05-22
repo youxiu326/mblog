@@ -75,12 +75,6 @@ public class ContextStartup implements ApplicationRunner, Ordered, ServletContex
                 System.exit(1);
             }
         } else {
-
-            if (configs.size() < 13) {
-                Printer.error("-----------------------------------------------------------------");
-                Printer.error("-     ERROR: Incomplete data, Please import (db_mblog.sql)      -");
-                Printer.error("-----------------------------------------------------------------");
-            }
             configs.forEach(conf -> {
                 servletContext.setAttribute(conf.getKey(), conf.getValue());
                 map.put(conf.getKey(), conf.getValue());
