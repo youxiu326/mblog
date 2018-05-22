@@ -14,7 +14,7 @@
 * SeaJs
 
 ### 启动：
- - 项目默认配置是在容器中启动(个人习惯), 如果想要main方法运行, 请自行修改
+ - main方法运行
  ```xml
  配置：web/src/main/resources/application.yml (数据库账号密码)、向数据库导入初始数据 sql/db_mblog.sql
  运行：web/src/main/java/mblog/BootApplication
