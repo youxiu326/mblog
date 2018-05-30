@@ -14,20 +14,25 @@ import mblog.base.lang.Consts;
 import mblog.modules.blog.data.PostVO;
 import mblog.modules.blog.service.ChannelService;
 import mblog.modules.blog.service.PostService;
+import mblog.modules.user.data.AccountProfile;
 import mblog.web.controller.BaseController;
+import org.apache.commons.lang3.StringUtils;
 import org.apache.shiro.authz.annotation.RequiresPermissions;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.ModelMap;
+import org.springframework.util.Assert;
 import org.springframework.web.bind.ServletRequestUtils;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.multipart.MultipartFile;
 
 import javax.servlet.http.HttpServletRequest;
+import java.io.IOException;
 import java.util.List;
 
 /**
@@ -65,9 +70,11 @@ public class PostController extends BaseController {
 	 */
 	@RequestMapping(value = "/view", method = RequestMethod.GET)
 	public String toUpdate(Long id, ModelMap model) {
-		PostVO ret = postService.get(id);
-		model.put("view", ret);
-		model.put("groups", channelService.findAll(Consts.STATUS_NORMAL));
+		if (null != id && id > 0) {
+			PostVO ret = postService.get(id);
+			model.put("view", ret);
+		}
+		model.put("groups", channelService.findAll(Consts.IGNORE));
 		return "/admin/post/update";
 	}
 	
@@ -78,9 +85,28 @@ public class PostController extends BaseController {
 	 */
 	@RequestMapping(value = "/update", method = RequestMethod.POST)
 	@RequiresPermissions("post:update")
-	public String subUpdate(PostVO p, HttpServletRequest request) {
-		if (p != null) {
-			postService.update(p);
+	public String subUpdate(PostVO post, @RequestParam(value = "file", required=false) MultipartFile file) throws Exception {
+		if (post != null) {
+			/**
+			 * 保存预览图片
+			 */
+			if (file != null && !file.isEmpty()) {
+				String thumbnail = fileRepo.storeScale(file, appContext.getThumbsDir(), 364, 200);
+
+				if (StringUtils.isNotBlank(post.getThumbnail())) {
+					fileRepo.deleteFile(post.getThumbnail());
+				}
+
+				post.setThumbnail(thumbnail);
+			}
+
+			if (post.getId() > 0) {
+				postService.update(post);
+			} else {
+				AccountProfile profile = getSubject().getProfile();
+				post.setAuthorId(profile.getId());
+				postService.post(post);
+			}
 		}
 		return "redirect:/admin/post/list";
 	}

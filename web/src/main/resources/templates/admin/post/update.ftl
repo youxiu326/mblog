@@ -13,10 +13,12 @@
             <div class="x_content">
                 <br>
 				<#include "/admin/message.ftl">
-                <form id="qForm" class="form-horizontal form-label-left" method="post" action="${base}/admin/post/update">
-                    <input type="hidden" name="type" value="${view.type}"/>
-                    <input type="hidden" name="id" value="${view.id}"/>
-                    <input type="hidden" name="thumbnail" value="${view.thumbnail}">
+                <form id="qForm" class="form-horizontal form-label-left" method="post" action="${base}/admin/post/update" enctype="multipart/form-data">
+                    <#if view??>
+                        <input type="hidden" name="type" value="${view.type}"/>
+                        <input type="hidden" name="id" value="${view.id}"/>
+                        <input type="hidden" name="thumbnail" value="${view.thumbnail}">
+                    </#if>
                     <div class="form-group">
                         <label class="col-sm-2 control-label no-padding-right">标题</label>
                         <div class="col-sm-10">
@@ -24,10 +26,16 @@
                         </div>
                     </div>
                     <div class="form-group">
+                        <label class="col-sm-2 control-label no-padding-right">预览图</label>
+                        <div class="col-sm-10">
+                            <input type="file" name="file" thumbnail>
+                        </div>
+                    </div>
+                    <div class="form-group">
                         <label class="col-sm-2 control-label no-padding-right">发布到</label>
                         <div class="col-sm-3">
                             <select class="form-control" name="channelId">
-                                <#list channels as row>
+                                <#list groups as row>
                                 <option value="${row.id}" <#if (view.channelId == row.id)> selected </#if>>${row.name}</option>
 								</#list>
                             </select>

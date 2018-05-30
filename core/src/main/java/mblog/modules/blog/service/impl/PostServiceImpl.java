@@ -67,7 +67,7 @@ public class PostServiceImpl implements PostService {
 
 	@Override
 	@Cacheable
-	public Page<PostVO> paging(Pageable pageable, int channelId, String ord) {
+	public Page<PostVO> paging(Pageable pageable, int channelId, Set<Integer> excludeChannelIds, String ord) {
 		Page<Post> page = postDao.findAll((root, query, builder) -> {
 
 			List<Order> orders = new ArrayList<>();
@@ -86,6 +86,11 @@ public class PostServiceImpl implements PostService {
 			if (channelId > Consts.ZERO) {
 				predicate.getExpressions().add(
 						builder.equal(root.get("channelId").as(Integer.class), channelId));
+			}
+
+			if (null != excludeChannelIds && !excludeChannelIds.isEmpty()) {
+				predicate.getExpressions().add(
+						builder.not(root.get("channelId").in(excludeChannelIds)));
 			}
 
 			if (Consts.order.HOTTEST.equals(ord)) {

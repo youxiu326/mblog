@@ -6,6 +6,7 @@
 			<div class="x_title">
 				<h2>文章管理</h2>
                 <ul class="nav navbar-right panel_toolbox">
+                    <li><a href="${base}/admin/post/view">新建</a></li>
                     <li><a href="javascrit:void(0);" data-action="batch_del">批量删除</a></li>
                 </ul>
 				<div class="clearfix"></div>
@@ -24,6 +25,7 @@
                     <thead>
                     <tr>
                         <th width="30"><input type="checkbox" class="checkall"></th>
+                        <th width="80">#</th>
                         <th>文章标题</th>
                         <th width="120">作者</th>
                         <th width="90">发表日期</th>
@@ -37,6 +39,9 @@
                     <tr>
                         <td>
                             <input type="checkbox" name="id" value="${row.id}">
+                        </td>
+                        <td>
+                            <img src="${base}${row.thumbnail}" style="width: 80px;">
                         </td>
                         <td>
                             <a href="${base}/view/${row.id}" target="_blank">${row.title}</a>

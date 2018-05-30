@@ -31,9 +31,9 @@ public class PostJsonController extends BaseController {
 	public @ResponseBody
 	Page<PostVO> posts(HttpServletRequest request) {
 		String order = ServletRequestUtils.getStringParameter(request, "ord", Consts.order.NEWEST);
-		int gid = ServletRequestUtils.getIntParameter(request, "gid", 0);
+		int channelId = ServletRequestUtils.getIntParameter(request, "channelId", 0);
 		Pageable pageable = wrapPageable();
-		Page<PostVO> page = postService.paging(pageable, gid, order);
+		Page<PostVO> page = postService.paging(pageable, channelId, null, order);
 		return page;
 	}
 }
