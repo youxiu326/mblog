@@ -29,6 +29,7 @@ define(function(require, exports, module) {
 
         	that.bindTagit();
         	that.bindValidate();
+        	that.bindUpload();
         },
         
         bindTagit : function () {
@@ -36,6 +37,18 @@ define(function(require, exports, module) {
                 singleField: true,
                 singleFieldNode: $('#fieldTags'),
                 tagLimit: 4
+            });
+        },
+        
+        bindUpload : function () {
+            $('#upload_btn').change(function(){
+                $(this).upload(app.base + '/post/upload?crop=true&width=364&height=200', function(data){
+                    if (data.status == 200) {
+                        var path = app.base + data.path;
+                        $("#thumbnail_image").css("background", "url(" + path + ") no-repeat scroll center 0 rgba(0, 0, 0, 0)");
+                        $("#thumbnail").val(data.path);
+                    }
+                });
             });
         },
 

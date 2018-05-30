@@ -13,9 +13,9 @@ import mblog.base.context.SpringContextHolder;
 import mblog.base.lang.Consts;
 import mblog.base.lang.EntityStatus;
 import mblog.base.utils.PreviewTextUtils;
+import mblog.core.event.PostUpdateEvent;
 import mblog.modules.blog.data.PostVO;
 import mblog.modules.user.data.UserVO;
-import mblog.core.event.FeedsEvent;
 import mblog.modules.blog.dao.PostAttributeDao;
 import mblog.modules.blog.dao.PostDao;
 import mblog.modules.blog.entity.Channel;
@@ -250,15 +250,8 @@ public class PostServiceImpl implements PostService {
 		attr.setContent(post.getContent());
 		attr.setId(po.getId());
 		submitAttr(attr);
-		
-		// 更新文章统计
-		userEventService.identityPost(po.getAuthorId(), po.getId(), true);
 
-		FeedsEvent event = new FeedsEvent("feedsEvent");
-		event.setPostId(po.getId());
-		event.setAuthorId(post.getAuthorId());
-		SpringContextHolder.publishEvent(event);
-
+		onPushEvent(po, PostUpdateEvent.ACTION_PUBLISH);
 		return po.getId();
 	}
 	
@@ -295,6 +288,7 @@ public class PostServiceImpl implements PostService {
 		if (po != null) {
 			po.setTitle(p.getTitle());//标题
 			po.setChannelId(p.getChannelId());
+			po.setThumbnail(p.getThumbnail());
 
 			// 处理摘要
 			if (StringUtils.isBlank(p.getSummary())) {
@@ -360,6 +354,8 @@ public class PostServiceImpl implements PostService {
 			Assert.isTrue(po.getAuthorId() == authorId, "认证失败");
 
 			delete(id);
+
+			onPushEvent(po, PostUpdateEvent.ACTION_DELETE);
 		}
 	}
 
@@ -451,4 +447,11 @@ public class PostServiceImpl implements PostService {
 		postAttributeDao.save(attr);
 	}
 
+	private void onPushEvent(Post post, int action) {
+		PostUpdateEvent event = new PostUpdateEvent(System.currentTimeMillis());
+		event.setPostId(post.getId());
+		event.setUserId(post.getAuthorId());
+		event.setAction(action);
+		SpringContextHolder.publishEvent(event);
+	}
 }

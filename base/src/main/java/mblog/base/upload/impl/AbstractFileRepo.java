@@ -9,17 +9,9 @@
 */
 package mblog.base.upload.impl;
 
-import java.awt.*;
-import java.awt.image.BufferedImage;
-import java.io.File;
-import java.io.IOException;
-import java.util.Arrays;
-import java.util.Iterator;
-
-import javax.imageio.ImageIO;
-
 import mblog.base.context.AppContext;
 import mblog.base.lang.MtonsException;
+import mblog.base.upload.FileRepo;
 import mblog.base.utils.FileNameUtils;
 import mblog.base.utils.ImageUtils;
 import org.apache.commons.io.FileUtils;
@@ -27,8 +19,12 @@ import org.apache.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.multipart.MultipartFile;
 
-import mblog.base.upload.FileRepo;
-import mblog.base.upload.FileRepoFactory;
+import javax.imageio.ImageIO;
+import java.awt.image.BufferedImage;
+import java.io.File;
+import java.io.IOException;
+import java.util.Arrays;
+import java.util.Iterator;
 
 /**
  * @author langhsu
@@ -39,9 +35,7 @@ public abstract class AbstractFileRepo implements FileRepo {
 
 	@Autowired
 	protected AppContext appContext;
-	@Autowired
-	protected FileRepoFactory fileRepoFactory;
-	
+
 	// 文件允许格式
 	protected String[] allowFiles = { ".gif", ".png", ".jpg", ".jpeg", ".bmp" };
 	
@@ -173,6 +167,32 @@ public abstract class AbstractFileRepo implements FileRepo {
 			// 根据临时文件生成略缩图
 			String dest = root + basePath + path;
 			ImageUtils.scaleImageByWidth(temp.getAbsolutePath(), dest, maxWidth);
+
+		} catch (Exception e) {
+			throw e;
+		} finally {
+			temp.delete();
+		}
+		return basePath + path;
+	}
+
+	@Override
+	public String storeScale(MultipartFile file, String basePath, int width, int height) throws Exception {
+		validateFile(file);
+
+		String root = getRoot();
+
+		String path = FileNameUtils.genPathAndFileName(getExt(file.getOriginalFilename()));
+
+		File temp = new File(root + appContext.getTempDir() + path);
+		checkDirAndCreate(temp);
+
+		try {
+			file.transferTo(temp);
+
+			// 根据临时文件生成略缩图
+			String dest = root + basePath + path;
+			ImageUtils.scale(temp.getAbsolutePath(), dest, width, height);
 
 		} catch (Exception e) {
 			throw e;

@@ -8,7 +8,6 @@
 	<modules>
 		<module>base</module>
 		<module>core</module>
-		<module>plugins</module>
 		<module>web</module>
 	</modules>
 

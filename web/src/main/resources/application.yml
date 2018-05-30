@@ -37,7 +37,7 @@ spring:
             hibernate.naming.physical-strategy: org.hibernate.boot.model.naming.PhysicalNamingStrategyStandardImpl
             hibernate.cache.use_second_level_cache: false
             hibernate.search.default.directory_provider: filesystem
-            hibernate.search.default.indexBase: ./indexes
+            hibernate.search.default.indexBase: ${site.store.root}/indexes
 
     servlet:
         multipart:
@@ -53,5 +53,5 @@ spring:
 
 site:
     store:
-      root: /data/mblog/
+      root: D:/data/mblog/
       size: 2

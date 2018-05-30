@@ -1,9 +1,9 @@
-package mblog.plugin.example;
+package mblog.plugins;
 
-import mblog.modules.user.data.AccountProfile;
-import mblog.modules.blog.data.PostVO;
 import mblog.core.hook.interceptor.desk.ChannelControllerHook;
+import mblog.modules.blog.data.PostVO;
 import mblog.modules.blog.service.CommentService;
+import mblog.modules.user.data.AccountProfile;
 import org.apache.shiro.SecurityUtils;
 import org.apache.shiro.subject.Subject;
 import org.springframework.beans.BeanUtils;
@@ -23,7 +23,6 @@ import java.util.List;
 public class HidenContentPugin implements ChannelControllerHook.ChannelControllerInterceptorListener {
     @Autowired
     private CommentService commentService;
-
 
     @Override
     public void preHandle(HttpServletRequest request, HttpServletResponse response, HandlerMethod handler) throws Exception {

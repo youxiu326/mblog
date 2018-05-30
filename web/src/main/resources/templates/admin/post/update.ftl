@@ -16,7 +16,7 @@
                 <form id="qForm" class="form-horizontal form-label-left" method="post" action="${base}/admin/post/update">
                     <input type="hidden" name="type" value="${view.type}"/>
                     <input type="hidden" name="id" value="${view.id}"/>
-                    <input type="hidden" name="author.id" value="${view.author.id}"/>
+                    <input type="hidden" name="thumbnail" value="${view.thumbnail}">
                     <div class="form-group">
                         <label class="col-sm-2 control-label no-padding-right">标题</label>
                         <div class="col-sm-10">

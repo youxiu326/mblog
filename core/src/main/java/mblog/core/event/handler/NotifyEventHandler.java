@@ -41,7 +41,6 @@ public class NotifyEventHandler implements ApplicationListener<NotifyEvent> {
 
                 // 自增评论数
                 postService.identityComments(event.getPostId());
-
                 break;
             default:
                 nt.setOwnId(event.getToUserId());

@@ -59,18 +59,6 @@ public interface Consts {
 		String FAVOR = "favors";
 	}
 
-	/**
-	 * 附件-存储-本地
-	 */
-	int ATTACH_STORE_LOCAL = 0;
-
-	/**
-	 * 附件-存储-网络
-	 */
-	int ATTACH_STORE_NETWORK = 1;
-
-	String SYSTEM_VERSION = "system.version";
-
 	int VERIFY_BIND = 1;   // bind email
 	int VERIFY_FORGOT = 2; // forgot password
 
@@ -84,7 +72,6 @@ public interface Consts {
 
 	int FEATURED_DEFAULT = 0; // 推荐状态-默认
 	int FEATURED_ACTIVE = 1;  // 推荐状态-推荐
-
 
 	/**
 	 * 未读

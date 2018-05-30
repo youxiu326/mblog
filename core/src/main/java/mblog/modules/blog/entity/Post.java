@@ -59,6 +59,11 @@ public class Post implements Serializable {
 	private String summary;
 
 	/**
+	 * 预览图
+	 */
+	private String thumbnail;
+
+	/**
 	 * 标签, 多个逗号隔开
 	 */
 	@Field
@@ -68,11 +73,6 @@ public class Post implements Serializable {
 	@NumericField
 	@Column(name = "author_id")
 	private long authorId; // 作者
-
-	/**
-	 * 编辑器 (ueditor/markdown)
-	 */
-	private String editor; // 编辑器
 
 	@Temporal(value = TemporalType.TIMESTAMP)
 	private Date created;
@@ -203,19 +203,19 @@ public class Post implements Serializable {
 		this.views = views;
 	}
 
-	public String getEditor() {
-		return editor;
-	}
-
-	public void setEditor(String editor) {
-		this.editor = editor;
-	}
-
 	public int getWeight() {
 		return weight;
 	}
 
 	public void setWeight(int weight) {
 		this.weight = weight;
+	}
+
+	public String getThumbnail() {
+		return thumbnail;
+	}
+
+	public void setThumbnail(String thumbnail) {
+		this.thumbnail = thumbnail;
 	}
 }

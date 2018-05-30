@@ -54,6 +54,7 @@ public class UploadController extends BaseController {
     public UploadResult upload(@RequestParam(value = "file", required = false) MultipartFile file,
                                HttpServletRequest request) throws IOException {
         UploadResult result = new UploadResult();
+        int crop = ServletRequestUtils.getIntParameter(request, "crop", 0);
         int size = ServletRequestUtils.getIntParameter(request, "size", 800);
 
         // 检查空
@@ -75,7 +76,14 @@ public class UploadController extends BaseController {
 
         // 保存图片
         try {
-            String path = fileRepoFactory.select().storeScale(file, appContext.getThumbsDir(), size);
+            String path;
+            if (crop == 1) {
+                int width = ServletRequestUtils.getIntParameter(request, "width", 364);
+                int height = ServletRequestUtils.getIntParameter(request, "height", 200);
+                path = fileRepo.storeScale(file, appContext.getThumbsDir(), width, height);
+            } else {
+                path = fileRepo.storeScale(file, appContext.getThumbsDir(), size);
+            }
             result.ok(errorInfo.get("SUCCESS"));
             result.setName(fileName);
             result.setType(getSuffix(fileName));

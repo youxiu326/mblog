@@ -11,7 +11,7 @@ package mblog.web.controller;
 
 import mblog.base.context.AppContext;
 import mblog.base.print.Printer;
-import mblog.base.upload.FileRepoFactory;
+import mblog.base.upload.FileRepo;
 import mblog.base.utils.MD5;
 import mblog.base.utils.MailHelper;
 import mblog.modules.user.data.AccountProfile;
@@ -49,7 +49,7 @@ public class BaseController {
 	@Autowired
 	protected AppContext appContext;
 	@Autowired
-	protected FileRepoFactory fileRepoFactory;
+	protected FileRepo fileRepo;
 	@Autowired
 	private MailHelper mailHelper;
 	@Autowired

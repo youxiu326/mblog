@@ -65,6 +65,15 @@ public interface FileRepo {
 	 * @throws IOException
 	 */
 	String storeScale(MultipartFile file, String basePath, int maxWidth) throws Exception;
+
+	/**
+	 * 存储压缩图片
+	 * @param file
+	 * @param basePath
+	 * @return
+	 * @throws IOException
+	 */
+	String storeScale(MultipartFile file, String basePath, int width, int height) throws Exception;
 	
 	/**
 	 * 存储压缩图片
