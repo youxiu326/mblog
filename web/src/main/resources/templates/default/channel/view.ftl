@@ -86,17 +86,18 @@
     <div class="col-xs-12 col-md-3 side-right hidden-xs hidden-sm">
         <ul class="list-group about-user">
             <li class="list-group-item user-card" >
-                <div class="ava">
+                <div class="user-avatar">
                     <a href="${base}/users/${view.author.id}">
                         <@showAva view.author.avatar "img-circle"/>
                     </a>
                 </div>
-                <div class="user-info">
-                    <div class="nk mb10">${view.author.name}</div>
-                    <div class="mb6">
-                        <a class="btn btn-default btn-xs" href="javascript:void(0);" data-id="${view.author.id}" rel="follow"><i class="icon icon-user-follow"></i> 关注</a>
-                    </div>
+                <div class="user-name">
+                    <span>${view.author.name}</span>
                 </div>
+            </li>
+
+            <li class="list-group-item">
+                <a class="btn btn-primary btn-block btn-sm" href="javascript:void(0);" data-id="${view.author.id}" rel="follow"><i class="icon icon-user-follow"></i> 关注</a>
             </li>
 
             <li class="list-group-item">
@@ -108,7 +109,7 @@
                 </div>
             </li>
             <li class="list-group-item">
-                <div class="text-center padding-md">
+                <div class="text-center">
                     <a class="btn btn-default btn-sm" href="javascript:void(0);" data-id="${view.id}" rel="favor">
                         <i class="icon icon-like"></i> 喜欢
                     </a>

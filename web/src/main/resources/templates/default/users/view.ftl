@@ -5,17 +5,17 @@
     <div class="col-xs-12 col-md-3 side-left">
         <ul class="list-group about-user">
             <li class="list-group-item user-card" >
-                <div class="ava">
+                <div class="user-avatar">
                     <a href="${base}/users/${user.id}">
-					<@showAva user.avatar "img-circle"/>
+                        <@showAva user.avatar "img-circle"/>
                     </a>
                 </div>
-                <div class="user-info">
-                    <div class="nk mb10">${user.name}</div>
-                    <div class="mb6">
-                        <a class="btn btn-success btn-xs" href="javascript:void(0);" data-id="${user.id}" rel="follow">+ 关注</a>
-                    </div>
+                <div class="user-name">
+                    <span>${user.name}</span>
                 </div>
+            </li>
+            <li class="list-group-item">
+                <a class="btn btn-primary btn-block btn-sm" href="javascript:void(0);" data-id="${user.id}" rel="follow"><i class="icon icon-user-follow"></i> 关注</a>
             </li>
 			<li class="list-group-item">
                 <span>

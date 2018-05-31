@@ -1,17 +1,17 @@
 
 <ul class="list-group about-user">
     <li class="list-group-item user-card" >
-        <div class="ava">
+        <div class="user-avatar">
             <a href="${base}/users/${user.id}">
-                <@showAva user.avatar "img-circle"/>
+            <@showAva user.avatar "img-circle"/>
             </a>
         </div>
-        <div class="user-info">
-            <div class="nk mb10">${user.name}</div>
-            <div class="mb6">
-                <a class="btn btn-success btn-xs" href="${base}/user/profile"><i class="icon icon-note"></i> 修改账户</a>
-            </div>
+        <div class="user-name">
+            <span>${user.name}</span>
         </div>
+    </li>
+    <li class="list-group-item">
+        <a class="btn btn-primary btn-block btn-sm" href="${base}/user/profile"><i class="icon icon-note"></i> 修改账户</a>
     </li>
 </ul>
 <nav class="navbar navbar-default shadow-box background-white">
