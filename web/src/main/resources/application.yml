@@ -53,5 +53,5 @@ spring:
 
 site:
     store:
-      root: D:/data/mblog/
+      root: /data/mblog/
       size: 2
