@@ -213,6 +213,10 @@ abbr[data-original-title], abbr[title] {
 .nav-pills>li.active>a, .nav-pills>li.active>a:focus, .nav-pills>li.active>a:hover {
     background-color: #03a9f4;
 }
+
+.breadcrumb>.active a{
+    color: #337ab7;
+}
 /* HEAD
 -------------------------------------------------- */
 .site-header {

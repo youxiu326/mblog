@@ -21,6 +21,7 @@ import org.apache.shiro.SecurityUtils;
 import org.apache.shiro.authc.AuthenticationToken;
 import org.apache.shiro.authc.UsernamePasswordToken;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.beans.propertyeditors.CustomDateEditor;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;
@@ -54,6 +55,9 @@ public class BaseController {
 	private MailHelper mailHelper;
 	@Autowired
 	private ExecutorService executorService;
+
+	@Value("${site.theme:default}")
+	private String theme;
 
 	@InitBinder
 	public void initBinder(ServletRequestDataBinder binder) {
@@ -115,7 +119,7 @@ public class BaseController {
 	}
 
 	protected String view(String view) {
-		return "/default" + view;
+		return "/" + theme + view;
 	}
 
 	protected void sendEmail(String template, String email, String subject, Map<String, Object> context) {

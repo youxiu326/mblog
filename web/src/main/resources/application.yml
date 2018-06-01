@@ -51,7 +51,9 @@ spring:
         properties:
             mail.smtp.auth: true
 
+# site.theme: [default|card]
 site:
+    theme: card
     store:
-      root: /data/mblog/
+      root: d:/data/mblog/
       size: 2
