@@ -38,6 +38,14 @@
                     </div>
                 </div>
             </#list>
+
+            <#if results.content?size == 0>
+                <div class="col-md-12 col-sm-12">
+                    <div class="infos text-center">
+                        <div class="media-heading">该目录下还没有内容!</div>
+                    </div>
+                </div>
+            </#if>
         </div>
         <div class="row" style="width:100%; text-align:center;">
             <!-- Pager -->
