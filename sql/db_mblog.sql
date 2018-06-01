@@ -63,13 +63,11 @@ CREATE TABLE `mto_config` (
 BEGIN;
 INSERT INTO `mto_config` VALUES (1, 'site_name', '0', 'Mtons');
 INSERT INTO `mto_config` VALUES (3, 'site_domain', '0', 'http://mtons.com');
-INSERT INTO `mto_config` VALUES (4, 'site_keywords', '0', 'mtons,博客,社区,摄影,旅游,艺术,娱乐');
-INSERT INTO `mto_config` VALUES (5, 'site_description', '0', 'Mtons, 轻松分享你的兴趣. 便捷的文字、图片发布,扁平化的响应式设计,美观、大气,是您记录生活的最佳选择');
+INSERT INTO `mto_config` VALUES (4, 'site_keywords', '0', 'mtons,博客,社区');
+INSERT INTO `mto_config` VALUES (5, 'site_description', '0', 'Mtons, 做一个有内涵的技术社区');
 INSERT INTO `mto_config` VALUES (6, 'site_metas', '0', '');
 INSERT INTO `mto_config` VALUES (7, 'site_copyright', '0', 'Copyright © Mtons');
 INSERT INTO `mto_config` VALUES (8, 'site_icp', '0', '');
-INSERT INTO `mto_config` VALUES (9, 'site_advs_right', '0', '');
-INSERT INTO `mto_config` VALUES (10, 'image_processor', '0', 'Thumbnailator');
 INSERT INTO `mto_config` VALUES (11, 'site_oauth_qq', '0', '');
 INSERT INTO `mto_config` VALUES (12, 'qq_app_id', '0', '');
 INSERT INTO `mto_config` VALUES (13, 'qq_app_key', '0', '');
