@@ -23,9 +23,6 @@
     <!-- Bootstrap -->
     <script src="${base}/dist/vendors/bootstrap/js/bootstrap.min.js"></script>
     <script src='${base}/dist/vendors/validate/jquery-validate.js'></script>
-    <!-- FastClick -->
-    <script src="${base}/dist/vendors/fastclick/lib/fastclick.js"></script>
-
     <script src="${base}/dist/vendors/layer/layer.js"></script>
 
     <script type="text/javascript">
@@ -38,7 +35,9 @@
         <div class="col-md-3 left_col">
             <div class="left_col scroll-view">
                 <div class="navbar nav_title" style="border: 0;">
-                    <a href="${base}/index" class="site_title"><span>Mtons</span></a>
+                    <a href="${base}/index" class="site_title" style="padding-left: 18px;">
+                        <img src="${base}/dist/images/logo/logo.png" style="height: 36px;"/>
+                    </a>
                 </div>
 
                 <div class="clearfix"></div>
