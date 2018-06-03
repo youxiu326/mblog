@@ -1,15 +1,13 @@
 <#include "/admin/utils/ui.ftl"/>
 <@layout>
 <div class="row">
-    <div class="col-md-12 col-sm-12 col-xs-12">
-        <div class="x_panel">
-            <div class="x_title">
-                <h2>修改角色</h2>
-                <div class="clearfix"></div>
+    <div class="col-md-12">
+        <div class="panel panel-default">
+            <div class="panel-heading">
+                <span>修改角色</span>
             </div>
-            <div class="x_content">
-                <br>
-				<#include "/admin/message.ftl">
+            <div class="panel-body">
+                <#include "/admin/message.ftl">
                 <form id="qForm" class="form-horizontal form-label-left" method="post" action="update_role">
                     <input type="hidden" name="id" value="${view.id}" />
 
@@ -22,23 +20,23 @@
                     <div class="form-group">
                         <label class="col-lg-2 control-label">角色</label>
                         <div class="col-lg-8">
-                            <#--遍历所有角色和用户当前拥有的角色，如果用户当前拥有某个角色，则把checkbox设置为选中-->
-							<#list roles as role>
-								<#assign hasRole ="false">
-								<label class="checkbox-inline">
-									<#list view.roles as userRole>
-										<#if userRole.id == role.id>
-											<#assign hasRole ="true">
-										<#break>
-										</#if>
-									</#list>
-									<#if hasRole == "true">
-									<input type="checkbox" name="roleIds" value="${role.id}" checked="checked"> ${role.name}
-									<#else>
-									<input type="checkbox" name="roleIds" value="${role.id}"> ${role.name}
-									</#if>
-								</label>
-							</#list>
+                        <#--遍历所有角色和用户当前拥有的角色，如果用户当前拥有某个角色，则把checkbox设置为选中-->
+                            <#list roles as role>
+                                <#assign hasRole ="false">
+                                <label class="checkbox-inline">
+                                    <#list view.roles as userRole>
+                                        <#if userRole.id == role.id>
+                                            <#assign hasRole ="true">
+                                            <#break>
+                                        </#if>
+                                    </#list>
+                                    <#if hasRole == "true">
+                                        <input type="checkbox" name="roleIds" value="${role.id}" checked="checked"> ${role.name}
+                                    <#else>
+                                        <input type="checkbox" name="roleIds" value="${role.id}"> ${role.name}
+                                    </#if>
+                                </label>
+                            </#list>
 
                         </div>
                     </div>

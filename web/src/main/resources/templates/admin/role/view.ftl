@@ -20,15 +20,14 @@
             </#if>
         </#list>
     </#macro>
+
 <div class="row">
-    <div class="col-md-12 col-sm-12 col-xs-12">
-        <div class="x_panel">
-            <div class="x_title">
-                <h2>角色管理</h2>
-                <div class="clearfix"></div>
+    <div class="col-md-12">
+        <div class="panel panel-default">
+            <div class="panel-heading">
+                <span>角色管理</span>
             </div>
-            <div class="x_content">
-                <br>
+            <div class="panel-body">
                 <#include "/admin/message.ftl">
                 <form id="qForm" class="form-horizontal form-label-left" method="post" action="update">
                     <#if view?? && (view.id > 0)>

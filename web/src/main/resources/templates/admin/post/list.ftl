@@ -1,104 +1,104 @@
 <#include "/admin/utils/ui.ftl"/>
 <@layout>
+
 <div class="row">
-    <div class="col-md-12 col-sm-12 col-xs-12">
-		<div class="x_panel">
-			<div class="x_title">
-				<h2>文章管理</h2>
-                <ul class="nav navbar-right panel_toolbox">
+    <div class="col-md-12">
+        <div class="panel panel-default">
+            <div class="panel-heading">
+                <span>文章管理</span>
+                <ul class="nav nav-pills navbar-right panel-toolbox">
                     <li><a href="${base}/admin/post/view">新建</a></li>
                     <li><a href="javascrit:void(0);" data-action="batch_del">批量删除</a></li>
                 </ul>
-				<div class="clearfix"></div>
-			</div>
-            <div class="x_content">
-				<form id="qForm" class="form-inline">
-					<input type="hidden" name="pn" value="${page.pageNo}" />
-					<div class="form-group">
-						<input type="text" name="title" class="form-control" value="${title}" placeholder="请输入标题关键字">
-					</div>
-					<button type="submit" class="btn btn-default">查询</button>
-				</form>
-			</div>
-			<div class="x_content">
-                <table id="dataGrid" class="table table-striped table-bordered b-t">
-                    <thead>
-                    <tr>
-                        <th width="30"><input type="checkbox" class="checkall"></th>
-                        <th width="80">#</th>
-                        <th>文章标题</th>
-                        <th width="120">作者</th>
-                        <th width="90">发表日期</th>
-                        <th width="60">访问数</th>
-                        <th width="80">状态</th>
-                        <th width="140"></th>
-                    </tr>
-                    </thead>
-                    <tbody>
-					<#list page.content as row>
-                    <tr>
-                        <td>
-                            <input type="checkbox" name="id" value="${row.id}">
-                        </td>
-                        <td>
-                            <img src="${base}${row.thumbnail}" style="width: 80px;">
-                        </td>
-                        <td>
-                            <a href="${base}/view/${row.id}" target="_blank">${row.title}</a>
-                        </td>
-                        <td>${row.author.username}</td>
-                        <td>${row.created?string('yyyy-MM-dd')}</td>
-                        <td>${row.views}</td>
-                        <td>
-                            <#if (row.featured > 0)>
-                                <span class="label label-danger">荐</span>
-							</#if>
-                            <#if (row.weight > 0)>
-                                <span class="label label-warning">顶</span>
-                            </#if>
-                        </td>
-						<@shiro.hasPermission name="posts:edit">
-                        <td class="text-center" align="left">
-                            <#if (row.featured == 0)>
-                            <a href="javascript:void(0);" class="btn btn-xs btn-default" data-id="${row.id}" rel="featured"
-                               data-toggle="tooltip" title="推荐">
-                                <i class="fa fa-sun-o"></i>
-                            </a>
-                            <#else>
-                            <a href="javascript:void(0);" class="btn btn-xs btn-danger" data-id="${row.id}" rel="unfeatured"
-                               data-toggle="tooltip" title="取消推荐">
-                                <i class="fa fa-circle-thin"></i>
-                            </a>
-							</#if>
+            </div>
+            <div class="panel-body">
+                <form id="qForm" class="form-inline panel-form">
+                    <input type="hidden" name="pn" value="${page.pageNo}" />
+                    <div class="form-group">
+                        <input type="text" name="title" class="form-control" value="${title}" placeholder="请输入标题关键字">
+                    </div>
+                    <button type="submit" class="btn btn-default">查询</button>
+                </form>
+                <div class="table-responsive">
+                    <table id="dataGrid" class="table table-striped table-bordered b-t">
+                        <thead>
+                        <tr>
+                            <th width="30"><input type="checkbox" class="checkall"></th>
+                            <th width="80">#</th>
+                            <th>文章标题</th>
+                            <th width="120">作者</th>
+                            <th width="100">发表日期</th>
+                            <th width="60">访问数</th>
+                            <th width="80">状态</th>
+                            <th width="140"></th>
+                        </tr>
+                        </thead>
+                        <tbody>
+                            <#list page.content as row>
+                            <tr>
+                                <td>
+                                    <input type="checkbox" name="id" value="${row.id}">
+                                </td>
+                                <td>
+                                    <img src="${base}${row.thumbnail}" style="width: 80px;">
+                                </td>
+                                <td>
+                                    <a href="${base}/view/${row.id}" target="_blank">${row.title}</a>
+                                </td>
+                                <td>${row.author.username}</td>
+                                <td>${row.created?string('yyyy-MM-dd')}</td>
+                                <td>${row.views}</td>
+                                <td>
+                                    <#if (row.featured > 0)>
+                                        <span class="label label-danger">荐</span>
+                                    </#if>
+                                    <#if (row.weight > 0)>
+                                        <span class="label label-warning">顶</span>
+                                    </#if>
+                                </td>
+                                <td class="text-center" align="left">
+                                    <#if (row.featured == 0)>
+                                        <a href="javascript:void(0);" class="btn btn-xs btn-default" data-id="${row.id}" rel="featured"
+                                           data-toggle="tooltip" title="推荐">
+                                            <i class="fa fa-sun-o"></i>
+                                        </a>
+                                    <#else>
+                                        <a href="javascript:void(0);" class="btn btn-xs btn-danger" data-id="${row.id}" rel="unfeatured"
+                                           data-toggle="tooltip" title="取消推荐">
+                                            <i class="fa fa-circle-thin"></i>
+                                        </a>
+                                    </#if>
 
-                            <#if (row.weight == 0)>
-                                <a href="javascript:void(0);" class="btn btn-xs btn-default" data-id="${row.id}" rel="weight"
-                                   data-toggle="tooltip" title="置顶">
-                                    <i class="fa fa-angle-double-up"></i>
-                                </a>
-                            <#else>
-                                <a href="javascript:void(0);" class="btn btn-xs btn-warning" data-id="${row.id}" rel="unweight"
-                                   data-toggle="tooltip" title="取消置顶">
-                                    <i class="fa fa-angle-double-down"></i>
-                                </a>
-                            </#if>
+                                    <#if (row.weight == 0)>
+                                        <a href="javascript:void(0);" class="btn btn-xs btn-default" data-id="${row.id}" rel="weight"
+                                           data-toggle="tooltip" title="置顶">
+                                            <i class="fa fa-angle-double-up"></i>
+                                        </a>
+                                    <#else>
+                                        <a href="javascript:void(0);" class="btn btn-xs btn-warning" data-id="${row.id}" rel="unweight"
+                                           data-toggle="tooltip" title="取消置顶">
+                                            <i class="fa fa-angle-double-down"></i>
+                                        </a>
+                                    </#if>
 
-                            <a href="${base}/admin/post/view?id=${row.id}" class="btn btn-xs btn-info">
-                                <i class="fa fa-edit"></i>
-                            </a>
-                            <a href="javascript:void(0);" class="btn btn-xs btn-default" data-id="${row.id}" rel="delete">
-                                <i class="fa fa-trash-o"></i>
-                            </a>
-                        </td>
-						</@shiro.hasPermission>
-                    </tr>
-					</#list>
-                    </tbody>
-                </table>
-				<@pager "list" page 5 />
-			</div>
-		</div>
-	</div>
+                                    <a href="${base}/admin/post/view?id=${row.id}" class="btn btn-xs btn-info">
+                                        <i class="fa fa-edit"></i>
+                                    </a>
+                                    <a href="javascript:void(0);" class="btn btn-xs btn-primary" data-id="${row.id}" rel="delete">
+                                        <i class="fa fa-trash-o"></i>
+                                    </a>
+                                </td>
+                            </tr>
+                            </#list>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+            <div class="panel-footer">
+                <@pager "list" page 5 />
+            </div>
+        </div>
+    </div>
 </div>
 
 <script type="text/javascript">

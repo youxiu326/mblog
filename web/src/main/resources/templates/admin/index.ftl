@@ -1,26 +1,26 @@
 <#include "/admin/utils/ui.ftl"/>
 <@layout>
 
-<div class="page-title">
-    <div class="title_left">
-        <h3>${profile.username} <small> 欢迎使用Mblog</small></h3>
+<div class="row">
+    <div class="col-md-12">
+        <h1 class="page-header">
+        ${profile.username} <small>欢迎使用Mblog</small>
+        </h1>
     </div>
 </div>
-<div class="clearfix">
-</div>
+<!-- /. ROW  -->
 <div class="row">
     <div class="col-md-6 col-sm-6 col-xs-12">
-        <div class="x_panel">
-            <div class="x_title">
-                <h2>系统状态</h2>
-                <div class="clearfix"></div>
+        <div class="panel panel-default">
+            <div class="panel-heading">
+                系统状态
             </div>
-            <div class="x_content" style="height: 231px;">
+            <div class="panel-body" style="height: 340px;">
                 <table class="table table-bordered">
                     <tr>
                         <td>内存消耗:</td>
                         <td>
-						${usedMemory}M / ${totalMemory}M
+                        ${usedMemory}M / ${totalMemory}M
                         </td>
                     </tr>
                     <tr>
@@ -37,12 +37,11 @@
     </div>
 
     <div class="col-md-6 col-sm-6 col-xs-12">
-        <div class="x_panel">
-            <div class="x_title">
-                <h2>内存使用情况</h2>
-                <div class="clearfix"></div>
+        <div class="panel panel-default">
+            <div class="panel-heading">
+                内存使用情况
             </div>
-            <div class="x_content">
+            <div class="panel-body" style="height: 340px;">
                 <canvas id="canvas"></canvas>
             </div>
         </div>

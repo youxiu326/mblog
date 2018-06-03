@@ -1,24 +1,19 @@
 <#include "/admin/utils/ui.ftl"/>
 <@layout>
 <div class="row">
-    <div class="col-md-12 col-sm-12 col-xs-12">
-        <div class="x_panel">
-            <div class="x_title">
-                <h2>重置密码</h2>
-                <div class="clearfix"></div>
+    <div class="col-md-12">
+        <div class="panel panel-default">
+            <div class="panel-heading">
+                <span>重置密码</span>
             </div>
-            <div class="x_content">
-                <br>
-				<#include "/admin/message.ftl">
+            <div class="panel-body">
+                <#include "/admin/message.ftl">
                 <form id="qForm" class="form-horizontal form-label-left" method="post">
                     <div class="form-group">
-                        <p>设置  ${view.username} 的新密码:</p>
-                        <div style="width: 260px;">
+                        <label class="col-lg-3 control-label">${view.username} 的新密码：</label>
+                        <div class="col-lg-4">
                             <input type="text" class="input-small form-control" data-required="true" name="newPassword" placeholder="新密码">
                         </div>
-                    </div>
-                    <div class="actions m-t">
-                        <button type="submit" class="btn btn-primary btn-small">提交</button>
                     </div>
 
                     <div class="ln_solid"></div>

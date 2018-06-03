@@ -2,50 +2,42 @@
 <@layout>
 
 <div class="row">
-    <div class="col-md-12 col-sm-12 col-xs-12">
-        <div class="x_panel">
-            <div class="x_title">
-                <h2>系统配置</h2>
-                <div class="clearfix"></div>
+    <div class="col-md-12">
+        <div class="panel panel-default">
+            <div class="panel-heading">
+                <span>系统配置</span>
             </div>
-            <div class="x_content">
-
-                <div class="col-xs-3">
-                    <!-- required for floating -->
-                    <!-- Nav tabs -->
-                    <ul class="nav nav-tabs tabs-left">
-                        <li class="active"><a href="#sites" data-toggle="tab" aria-expanded="true">站点配置</a>
-                        </li>
-                        <li class=""><a href="#settings" data-toggle="tab" aria-expanded="false">系统配置</a>
-                        </li>
-                        <li class=""><a href="#cache" data-toggle="tab" aria-expanded="false">缓存及索引</a>
-                        </li>
-                    </ul>
-                </div>
-
-                <div class="col-xs-9">
-                    <!-- Tab panes -->
-                    <div class="tab-content">
-                        <div class="tab-pane active" id="sites">
-                            <#include "/admin/config/sites.ftl">
-                        </div>
-                        <div class="tab-pane" id="settings">
-                            <#include "/admin/config/settings.ftl">
-                        </div>
-                        <div class="tab-pane" id="cache">
-                            <div class="btn-channel" role="channel" aria-label="...">
-                                <button type="button" class="btn btn-default" data-action="flush_conf">
-                                    刷新系统变量
-                                </button>
-                                <button type="button" class="btn btn-default" data-action="flush_indexs">
-                                    重建索引
-                                </button>
-                            </div>
+            <div class="panel-body">
+                <ul class="nav nav-pills">
+                    <li class="active">
+                        <a href="#sites" data-toggle="tab" aria-expanded="true">站点配置</a>
+                    </li>
+                    <li class="">
+                        <a href="#settings" data-toggle="tab" aria-expanded="false">系统配置</a>
+                    </li>
+                    <li class="">
+                        <a href="#cache" data-toggle="tab" aria-expanded="false">缓存及索引</a>
+                    </li>
+                </ul>
+                <!-- Tab panes -->
+                <div class="tab-content" style="margin-top: 15px;">
+                    <div class="tab-pane active" id="sites">
+                        <#include "/admin/config/sites.ftl">
+                    </div>
+                    <div class="tab-pane" id="settings">
+                        <#include "/admin/config/settings.ftl">
+                    </div>
+                    <div class="tab-pane" id="cache">
+                        <div class="btn-channel" role="channel" aria-label="...">
+                            <button type="button" class="btn btn-default" data-action="flush_conf">
+                                刷新系统变量
+                            </button>
+                            <button type="button" class="btn btn-default" data-action="flush_indexs">
+                                重建索引
+                            </button>
                         </div>
                     </div>
                 </div>
-
-                <div class="clearfix"></div>
             </div>
         </div>
     </div>

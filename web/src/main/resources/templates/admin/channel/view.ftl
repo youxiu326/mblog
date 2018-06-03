@@ -1,18 +1,16 @@
 <#include "/admin/utils/ui.ftl"/>
 <@layout>
 <div class="row">
-    <div class="col-md-12 col-sm-12 col-xs-12">
-        <div class="x_panel">
-            <div class="x_title">
-                <h2>修改栏目</h2>
-                <div class="clearfix"></div>
+    <div class="col-md-12">
+        <div class="panel panel-default">
+            <div class="panel-heading">
+                <span>修改栏目</span>
             </div>
-            <div class="x_content">
-                <br>
-				<#include "/admin/message.ftl">
+            <div class="panel-body">
+                <#include "/admin/message.ftl">
                 <form id="qForm" class="form-horizontal form-label-left" method="post" action="update">
                     <#if view??>
-                    <input type="hidden" name="id" value="${view.id}" />
+                        <input type="hidden" name="id" value="${view.id}" />
                     </#if>
 
                     <div class="form-group">

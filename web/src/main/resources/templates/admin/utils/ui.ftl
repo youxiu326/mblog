@@ -1,13 +1,10 @@
 <#-- layout -->
 <#macro layout>
 <!DOCTYPE html>
-<html lang="en" class="app">
+<html xmlns="http://www.w3.org/1999/xhtml">
 <head>
-    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-    <!-- Meta, title, CSS, favicons, etc. -->
-    <meta charset="utf-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>${site_name} - 后台管理</title>
 
     <!-- Bootstrap -->
@@ -16,7 +13,7 @@
     <link href="${base}/dist/vendors/font-awesome/css/font-awesome.min.css" rel="stylesheet">
 
     <!-- Custom Theme Style -->
-    <link href="${base}/theme/admin/css/custom.min.css" rel="stylesheet">
+    <link href="${base}/theme/admin/css/custom-styles.css" rel="stylesheet">
 
     <!-- jQuery -->
     <script src="${base}/dist/js/jquery.min.js"></script>
@@ -24,90 +21,65 @@
     <script src="${base}/dist/vendors/bootstrap/js/bootstrap.min.js"></script>
     <script src='${base}/dist/vendors/validate/jquery-validate.js'></script>
     <script src="${base}/dist/vendors/layer/layer.js"></script>
-
-    <script type="text/javascript">
-        window.UEDITOR_HOME_URL = '${base}/dist/vendors/ueditor/';
-    </script>
 </head>
-<body class="nav-md">
-<div class="container body">
-    <div class="main_container">
-        <div class="col-md-3 left_col">
-            <div class="left_col scroll-view">
-                <div class="navbar nav_title" style="border: 0;">
-                    <a href="${base}/index" class="site_title" style="padding-left: 18px;">
-                        <img src="${base}/dist/images/logo/logo.png" style="height: 36px;"/>
+<body>
+    <div id="wrapper">
+        <nav class="navbar navbar-default top-navbar" role="navigation">
+            <div class="navbar-header">
+                <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".sidebar-collapse">
+                    <span class="sr-only">Toggle navigation</span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                </button>
+                <a href="${base}/index" class="navbar-brand">
+                    <img src="${base}/dist/images/logo/logo.png" style="height: 30px;"/>
+                </a>
+            </div>
+
+            <ul class="nav navbar-top-links navbar-right">
+                <li class="dropdown">
+                    <a class="dropdown-toggle" data-toggle="dropdown" href="#" aria-expanded="false">
+                        <img src="${base}${profile.avatar}" style="width: 22px;margin-right: 5px; border-radius: 25px;">${profile.username}
                     </a>
-                </div>
-
-                <div class="clearfix"></div>
-
-                <br/>
-
-                <!-- sidebar menu -->
-                <div id="sidebar-menu" class="main_menu_side hidden-print main_menu">
-                    <div class="menu_section">
-                        <h3>系统菜单</h3>
-                        <ul class="nav side-menu">
-                            <li><a href="${base}/admin"><i class="fa fa-home"></i> Home</a>
-                            </li>
-                            <@menus>
-                                <#list results as menu>
-                                    <li><a href="${base}/${menu.url}" nav="${menu.url}"><i class="${menu.icon}"></i>${menu.name}</a></li>
-                                </#list>
-                            </@menus>
-                        </ul>
-                    </div>
-                </div>
-                <!-- /sidebar menu -->
-            </div>
-        </div>
-
-        <!-- top navigation -->
-        <div class="top_nav">
-            <div class="nav_menu">
-                <nav>
-                    <div class="nav toggle">
-                        <a id="menu_toggle"><i class="fa fa-bars"></i></a>
-                    </div>
-
-                    <ul class="nav navbar-nav navbar-right">
-                        <li class="">
-                            <a href="javascript:;" class="user-profile dropdown-toggle" data-toggle="dropdown"
-                               aria-expanded="false">
-                                <img src="${base}${profile.avatar}" alt="">${profile.username}
-                                <span class=" fa fa-angle-down"></span>
-                            </a>
-                            <ul class="dropdown-menu dropdown-usermenu pull-right">
-                                <li><a href="${base}/user/profile"> Profile</a></li>
-                                <li><a href="${base}/logout"><i class="fa fa-sign-out pull-right"></i> Log Out</a></li>
-                            </ul>
-                        </li>
+                    <ul class="dropdown-menu dropdown-user">
+                        <li><a href="${base}/user/profile"><i class="fa fa-user fa-fw"></i> Profile</a></li>
+                        <li><a href="${base}/logout"><i class="fa fa-sign-out fa-fw"></i> Log Out</a></li>
                     </ul>
-                </nav>
-            </div>
-        </div>
-        <!-- /top navigation -->
+                    <!-- /.dropdown-user -->
+                </li>
+                <!-- /.dropdown -->
+            </ul>
+        </nav>
+        <!--/. NAV TOP  -->
 
-        <!-- page content -->
-        <div class="right_col" role="main">
-            <div>
+        <nav class="navbar-default navbar-side" role="navigation">
+            <div class="sidebar-collapse">
+                <ul class="nav" id="main-menu">
+                    <li>
+                        <a href="${base}/admin" nav="${base}/admin"><i class="fa fa-dashboard"></i> 面板</a>
+                    </li>
+                    <@menus>
+                        <#list results as menu>
+                            <li><a href="${base}/${menu.url}" nav="${base}/${menu.url}"><i class="${menu.icon}"></i>${menu.name}</a></li>
+                        </#list>
+                    </@menus>
+                </ul>
+            </div>
+        </nav>
+        <!-- /. NAV SIDE  -->
+
+        <div id="page-wrapper">
+            <div id="page-inner">
                 <#nested/>
             </div>
         </div>
-        <!-- /page content -->
-
-        <!-- footer content -->
-        <footer>
-            <div class="pull-right">
-                Mblog - Powered By <a href="http://mtons.com/?copyright" target="_blank">Mtons</a>
-            </div>
-            <div class="clearfix"></div>
-        </footer>
-        <!-- /footer content -->
+        <!-- /. PAGE WRAPPER  -->
     </div>
+
     <!-- Custom Theme Scripts -->
-    <script src="${base}/theme/admin/js/custom.min.js"></script>
+    <script src="${base}/theme/admin/js/jquery.metisMenu.js"></script>
+    <script src="${base}/theme/admin/js/custom-scripts.js"></script>
     <script src="${base}/theme/admin/js/app.data.js"></script>
 </body>
 </html>
