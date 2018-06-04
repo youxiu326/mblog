@@ -14,10 +14,6 @@
 			<groupId>com.mtons.mblog</groupId>
 			<artifactId>core</artifactId>
 		</dependency>
-		<dependency>
-			<groupId>com.mtons.mblog</groupId>
-			<artifactId>plugins</artifactId>
-		</dependency>
 
 		<dependency>
 			<groupId>com.fasterxml.jackson.core</groupId>

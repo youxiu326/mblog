@@ -17,7 +17,7 @@
                     <input type="hidden" name="pn" value="${page.pageNo}" />
                 </form>
                 <div class="table-responsive">
-                    <table id="dataGrid" class="table table-striped table-bordered b-t">
+                    <table id="dataGrid" class="table table-striped table-bordered">
                         <thead>
                         <tr>
                             <th width="80">#</th>

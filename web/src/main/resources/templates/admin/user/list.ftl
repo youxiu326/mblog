@@ -16,7 +16,7 @@
                     <button type="submit" class="btn btn-default">查询</button>
                 </form>
                 <div class="table-responsive">
-                    <table id="dataGrid" class="table table-striped table-bordered b-t">
+                    <table id="dataGrid" class="table table-striped table-bordered">
                         <thead>
                         <tr>
                             <th width="80">#</th>
