@@ -1,7 +1,7 @@
 <#include "/default/utils/ui.ftl"/>
 <@layout "编辑文章">
 
-<form class="form-horizontal" action="${base}/post/submit" method="post" enctype="multipart/form-data">
+<form class="form" action="${base}/post/submit" method="post" enctype="multipart/form-data">
     <div class="row">
         <div class="col-xs-12 col-md-8">
             <div id="message"></div>

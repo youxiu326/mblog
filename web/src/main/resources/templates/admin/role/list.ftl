@@ -39,8 +39,9 @@
                                         <a href="${base}/admin/role/view?id=${row.id}" class="btn btn-xs btn-success">
                                             <i class="fa fa-check-square-o"></i> 修改
                                         </a>
-                                        <a href="${base}/admin/role/delete?id=${row.id}" class="btn btn-xs btn-primary">
-                                            <i class="fa fa-check-square-o"></i> 删除
+                                        <a href="javascript:void(0);" class="btn btn-xs btn-primary" data-id="${row.id}"
+                                           data-action="delete">
+                                            <i class="fa fa-bitbucket"></i> 删除
                                         </a>
                                     <#else>
                                         <a href="javascript:void(0);" class="btn btn-xs disabled"><i class="fa fa-check-square-o"></i> 不可编辑</a>
@@ -58,5 +59,37 @@
         </div>
     </div>
 </div>
+<script type="text/javascript">
+    var J = jQuery;
 
+    function ajaxReload(json) {
+        if (json.code >= 0) {
+            if (json.message != null && json.message != '') {
+                layer.msg(json.message, {icon: 1});
+            }
+            $('#qForm').submit();
+        } else {
+            layer.msg(json.message, {icon: 2});
+        }
+    }
+
+    function doDelete(ids) {
+        J.getJSON('${base}/admin/role/delete', J.param({'id': ids}, true), ajaxReload);
+    }
+
+    $(function () {
+        // 删除
+        $('#dataGrid a[data-action="delete"]').bind('click', function () {
+            var that = $(this);
+            layer.confirm('确定删除此项吗?', {
+                btn: ['确定', '取消'], //按钮
+                shade: false //不显示遮罩
+            }, function () {
+                doDelete(that.attr('data-id'));
+            }, function () {
+            });
+            return false;
+        });
+    })
+</script>
 </@layout>

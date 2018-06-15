@@ -12,8 +12,7 @@ define(function(require, exports, module) {
 
     var initEditor = function (callback) {
         require.async(['form', 'tinymce'], function () {
-
-            tinymce.init({
+            var options = {
                 selector: "#content",
                 theme: 'modern',
                 upload_image_url: window.app.base + "/post/upload", //配置的上传图片的路由
@@ -38,7 +37,13 @@ define(function(require, exports, module) {
                     window.app.base + '/theme/default/css/editor.css',
                 ]
                 //参考网站 https://www.tinymce.com/
-            });
+            };
+
+            if ($(window).width() < 900) {
+                options.theme = 'mobile';
+                options.toolbar = "undo redo | bold underline blockquote | alignleft aligncenter alignright | uploadimage"
+            }
+            tinymce.init(options);
 
             callback.call(this);
         });
