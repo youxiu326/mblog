@@ -68,10 +68,10 @@ public class AvatarController extends BaseController {
 		        }
 		        // 在目标目录下生成截图
 		        String scalePath = f.getParent() + "/" + profile.getId() + ".jpg";
-				ImageUtils.truncateImage(temp.getAbsolutePath(), scalePath, x.intValue(), y.intValue(), width.intValue());
+				ImageUtils.cutImage(temp, scalePath, x.intValue(), y.intValue(), width.intValue());
 		        
 				// 对结果图片进行压缩
-				ImageUtils.scaleImage(scalePath, dest, 100);
+				ImageUtils.scaleImage(new File(scalePath), dest, 100);
 
 				AccountProfile user = userService.updateAvatar(profile.getId(), ava100);
 				putProfile(user);

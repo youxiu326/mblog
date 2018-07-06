@@ -2,6 +2,7 @@ package mblog.base.utils;
 
 import net.coobird.thumbnailator.Thumbnails;
 import org.apache.log4j.Logger;
+import org.springframework.web.multipart.MultipartFile;
 
 import javax.imageio.ImageIO;
 import java.awt.image.BufferedImage;
@@ -15,18 +16,10 @@ import java.net.URLConnection;
 public class ImageUtils {
     private static Logger log = Logger.getLogger(ImageUtils.class);
 
-    public static void validate(File ori, String dest) throws IOException {
+    public static void validate(String dest) throws IOException {
         File destFile = new File(dest);
-        if(ori == null) {
-            throw new NullPointerException("Source must not be null");
-        } else if(dest == null) {
+        if(dest == null) {
             throw new NullPointerException("Destination must not be null");
-        } else if(!ori.exists()) {
-            throw new FileNotFoundException("Source \'" + ori + "\' does not exist");
-        } else if(ori.isDirectory()) {
-            throw new IOException("Source \'" + ori + "\' exists but is a directory");
-        } else if(ori.getCanonicalPath().equals(destFile.getCanonicalPath())) {
-            throw new IOException("Source \'" + ori + "\' and destination \'" + dest + "\' are the same");
         } else if(destFile.getParentFile() != null && !destFile.getParentFile().exists() && !destFile.getParentFile().mkdirs()) {
             throw new IOException("Destination \'" + dest + "\' directory cannot be created");
         } else if(destFile.exists() && !destFile.canWrite()) {
@@ -68,17 +61,14 @@ public class ImageUtils {
     /**
      * 根据最大宽度图片压缩
      *
-     * @param ori     原图位置
+     * @param file     原图位置
      * @param dest    目标位置
      * @param maxSize 指定压缩后最大边长
      * @return boolean
      * @throws IOException
      */
-    public static boolean scaleImageByWidth(String ori, String dest, int maxSize) throws IOException {
-        File oriFile = new File(ori);
-        validate(oriFile, dest);
-
-        BufferedImage src = ImageIO.read(oriFile); // 读入文件
+    public static boolean scaleImageByWidth(MultipartFile file, String dest, int maxSize) throws IOException {
+        BufferedImage src = ImageIO.read(file.getInputStream()); // 读入文件
         int w = src.getWidth();
         int h = src.getHeight();
 
@@ -97,39 +87,39 @@ public class ImageUtils {
                 toh = maxSize;
             }
         }
-        scale(ori, dest, tow, toh);
+        scale(file, dest, tow, toh);
         return true;
     }
 
-    public static void scale(String ori, String dest, int width, int height) throws IOException {
-        File destFile = new File(dest);
-        if (destFile.exists()) {
-            destFile.delete();
-        }
+    public static void scale(MultipartFile file, String dest, int width, int height) throws IOException {
+        validate(dest);
         log.debug("scaled with/height : " + width + "/" + height);
-        Thumbnails.of(ori).size(width, height).toFile(dest);
+        Thumbnails.of(file.getInputStream()).size(width, height).toFile(dest);
+    }
+
+    public static void scale(File file, String dest, int width, int height) throws IOException {
+        validate(dest);
+        log.debug("scaled with/height : " + width + "/" + height);
+        Thumbnails.of(file).size(width, height).toFile(dest);
     }
 
     /**
      * 图片压缩,各个边按比例压缩
      *
-     * @param ori     原图位置
+     * @param file     原图位置
      * @param dest    目标位置
      * @param maxSize 指定压缩后最大边长
      * @return boolean
      * @throws IOException
      */
-    public static boolean scaleImage(String ori, String dest, int maxSize) throws IOException {
-        File oriFile = new File(ori);
-        validate(oriFile, dest);
-
-        BufferedImage src = ImageIO.read(oriFile); // 读入文件
+    public static boolean scaleImage(MultipartFile file, String dest, int maxSize) throws IOException {
+        BufferedImage src = ImageIO.read(file.getInputStream()); // 读入文件
         int w = src.getWidth();
         int h = src.getHeight();
 
         log.debug("origin with/height " + w + "/" + h);
 
-        int size = (int) Math.max(w, h);
+        int size = Math.max(w, h);
         int tow = w;
         int toh = h;
 
@@ -145,15 +135,41 @@ public class ImageUtils {
 
         log.debug("scaled with/height : " + tow + "/" + toh);
 
-        scale(ori, dest, tow, toh);
+        scale(file, dest, tow, toh);
+        return true;
+    }
 
+    public static boolean scaleImage(File file, String dest, int maxSize) throws IOException {
+        BufferedImage src = ImageIO.read(file); // 读入文件
+        int w = src.getWidth();
+        int h = src.getHeight();
+
+        log.debug("origin with/height " + w + "/" + h);
+
+        int size = Math.max(w, h);
+        int tow = w;
+        int toh = h;
+
+        if (size > maxSize) {
+            if (w > maxSize) {
+                tow = maxSize;
+                toh = h * maxSize / w;
+            } else {
+                tow = w * maxSize / h;
+                toh = maxSize;
+            }
+        }
+
+        log.debug("scaled with/height : " + tow + "/" + toh);
+
+        scale(file, dest, tow, toh);
         return true;
     }
 
     /**
      * 裁剪图片
      *
-     * @param ori  源图片路径
+     * @param file  源图片路径
      * @param dest 处理后图片路径
      * @param x    起始X坐标
      * @param y    起始Y坐标
@@ -161,21 +177,17 @@ public class ImageUtils {
      * @param height  裁剪高度
      * @return boolean
      *
-     * @throws java.io.IOException io异常
+     * @throws IOException io异常
      * @throws InterruptedException 中断异常
      */
-    public static boolean truncateImage(String ori, String dest, int x, int y, int width, int height) throws IOException, InterruptedException {
-        File oriFile = new File(ori);
-
-        validate(oriFile, dest);
-
-        Thumbnails.of(ori).sourceRegion(x, y, width, height).size(width,height).keepAspectRatio(false).toFile(dest);
-
+    public static boolean cutImage(File file, String dest, int x, int y, int width, int height) throws IOException, InterruptedException {
+        validate(dest);
+        Thumbnails.of(file).sourceRegion(x, y, width, height).size(width,height).keepAspectRatio(false).toFile(dest);
         return true;
     }
 
-    public static boolean truncateImage(String ori, String dest, int x, int y, int size) throws IOException, InterruptedException {
-        return truncateImage(ori, dest, x, y, size, size);
+    public static boolean cutImage(File file, String dest, int x, int y, int size) throws IOException, InterruptedException {
+        return cutImage(file, dest, x, y, size, size);
     }
 
 }

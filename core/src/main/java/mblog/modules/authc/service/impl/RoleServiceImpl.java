@@ -2,9 +2,11 @@ package mblog.modules.authc.service.impl;
 
 import mblog.modules.authc.dao.PermissionDao;
 import mblog.modules.authc.dao.RoleDao;
+import mblog.modules.authc.dao.UserRoleDao;
 import mblog.modules.authc.entity.Permission;
 import mblog.modules.authc.entity.Role;
 import mblog.modules.authc.entity.RolePermission;
+import mblog.modules.authc.entity.UserRole;
 import mblog.modules.authc.service.RolePermissionService;
 import mblog.modules.authc.service.RoleService;
 import org.apache.commons.lang3.StringUtils;
@@ -13,6 +15,7 @@ import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
+import org.springframework.util.Assert;
 
 import javax.persistence.criteria.Predicate;
 import java.util.*;
@@ -29,6 +32,8 @@ public class RoleServiceImpl implements RoleService {
     private PermissionDao permissionDao;
     @Autowired
     private RolePermissionService rolePermissionService;
+    @Autowired
+    private UserRoleDao userRoleDao;
 
     @Override
     public Page<Role> paging(Pageable pageable, String name) {
@@ -100,7 +105,11 @@ public class RoleServiceImpl implements RoleService {
 
     @Override
     public boolean delete(long id) {
-        return false;
+        List<UserRole> urs = userRoleDao.findAllByRoleId(id);
+        Assert.state(urs == null || urs.size() == 0, "该角色已经被使用,不能被删除");
+        roleDao.delete(id);
+        rolePermissionService.deleteByRoleId(id);
+        return true;
     }
 
     @Override

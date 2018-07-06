@@ -4,15 +4,13 @@
 <script type="text/javascript" src="${base}/dist/js/plugins.js"></script>
 
 <div class="row">
-    <div class="col-md-12 col-sm-12 col-xs-12">
-        <div class="x_panel">
-            <div class="x_title">
-                <h2>文章编辑</h2>
-                <div class="clearfix"></div>
+    <div class="col-md-12">
+        <div class="panel panel-default">
+            <div class="panel-heading">
+                <span>文章编辑</span>
             </div>
-            <div class="x_content">
-                <br>
-				<#include "/admin/message.ftl">
+            <div class="panel-body">
+                <#include "/admin/message.ftl">
                 <form id="qForm" class="form-horizontal form-label-left" method="post" action="${base}/admin/post/update" enctype="multipart/form-data">
                     <#if view??>
                         <input type="hidden" name="type" value="${view.type}"/>
@@ -36,15 +34,15 @@
                         <div class="col-sm-3">
                             <select class="form-control" name="channelId">
                                 <#list groups as row>
-                                <option value="${row.id}" <#if (view.channelId == row.id)> selected </#if>>${row.name}</option>
-								</#list>
+                                    <option value="${row.id}" <#if (view.channelId == row.id)> selected </#if>>${row.name}</option>
+                                </#list>
                             </select>
                         </div>
                     </div>
                     <div class="form-group">
                         <label for="desc" class="col-sm-2 control-label no-padding-right">内容:</label>
                         <div class="col-sm-10">
-							<#include "/admin/editor/ueditor.ftl"/>
+                            <#include "/admin/editor/ueditor.ftl"/>
                         </div>
                     </div>
                     <div class="form-group">

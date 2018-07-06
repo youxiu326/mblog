@@ -28,234 +28,119 @@ import java.util.Iterator;
 
 /**
  * @author langhsu
- *
  */
 public abstract class AbstractFileRepo implements FileRepo {
-	private Logger log = Logger.getLogger(this.getClass());
+    private Logger log = Logger.getLogger(this.getClass());
 
-	@Autowired
-	protected AppContext appContext;
+    @Autowired
+    protected AppContext appContext;
 
-	// 文件允许格式
-	protected String[] allowFiles = { ".gif", ".png", ".jpg", ".jpeg", ".bmp" };
-	
-	protected void validateFile(MultipartFile file) {
-		if (file == null || file.isEmpty()) {
-			throw new MtonsException("文件不能为空");
-		}
-		
-		if (!checkFileType(file.getOriginalFilename())) {
-			throw new MtonsException("文件格式不支持");
-    	}
-	}
-	
-	/**
-	 * 文件类型判断
-	 * 
-	 * @param fileName
-	 * @return
-	 */
-	protected boolean checkFileType(String fileName) {
-		Iterator<String> type = Arrays.asList(this.allowFiles).iterator();
-		while (type.hasNext()) {
-			String ext = type.next();
-			if (fileName.toLowerCase().endsWith(ext)) {
-				return true;
-			}
-		}
-		return false;
-	}
-	
-	protected String getExt(String filename) {
-		int pos = filename.lastIndexOf(".");
-		return filename.substring(pos + 1);
-	}
-	
-	protected void checkDirAndCreate(File file) {
-		if (!file.getParentFile().exists()) {
-			file.getParentFile().mkdirs();
-		}
-	}
+    // 文件允许格式
+    protected String[] allowFiles = {".gif", ".png", ".jpg", ".jpeg", ".bmp"};
 
-	@Override
-	public String temp(MultipartFile file, String basePath) throws IOException {
-		validateFile(file);
+    protected void validateFile(MultipartFile file) {
+        if (file == null || file.isEmpty()) {
+            throw new MtonsException("文件不能为空");
+        }
 
-		String root = getRoot();
+        if (!checkFileType(file.getOriginalFilename())) {
+            throw new MtonsException("文件格式不支持");
+        }
+    }
 
-		String name = FileNameUtils.genFileName(getExt(file.getOriginalFilename()));
-		String path = basePath + "/" + name;
-		File temp = new File(root + path);
-		checkDirAndCreate(temp);
-		file.transferTo(temp);
-		return path;
-	}
+    /**
+     * 文件类型判断
+     *
+     * @param fileName
+     * @return
+     */
+    protected boolean checkFileType(String fileName) {
+        Iterator<String> type = Arrays.asList(this.allowFiles).iterator();
+        while (type.hasNext()) {
+            String ext = type.next();
+            if (fileName.toLowerCase().endsWith(ext)) {
+                return true;
+            }
+        }
+        return false;
+    }
 
-	@Override
-	public String tempScale(MultipartFile file, String basePath, int maxWidth) throws Exception {
-		validateFile(file);
+    protected String getExt(String filename) {
+        int pos = filename.lastIndexOf(".");
+        return filename.substring(pos + 1);
+    }
 
-		String root = getRoot();
+    protected void checkDirAndCreate(File file) {
+        if (!file.getParentFile().exists()) {
+            file.getParentFile().mkdirs();
+        }
+    }
 
-		String name = FileNameUtils.genFileName(getExt(file.getOriginalFilename()));
-		String path = basePath + "/" + name;
+    @Override
+    public String store(MultipartFile file, String basePath) throws IOException {
+        validateFile(file);
 
-		// 存储临时文件
-		File temp = new File(root + path);
-		checkDirAndCreate(temp);
+        String path = basePath + FileNameUtils.genPathAndFileName(getExt(file.getOriginalFilename()));
+        File temp = new File(getRoot() + path);
+        checkDirAndCreate(temp);
+        file.transferTo(temp);
+        return path;
+    }
 
-		try {
-			file.transferTo(temp);
+    @Override
+    public String storeScale(MultipartFile file, String basePath, int maxWidth) throws Exception {
+        validateFile(file);
 
-			// 根据临时文件生成略缩图
-			String scaleName = FileNameUtils.genFileName(getExt(file.getOriginalFilename()));
-			String dest = root + basePath + "/" + scaleName;
+        String path = basePath + FileNameUtils.genPathAndFileName(getExt(file.getOriginalFilename()));
+        // 根据临时文件生成略缩图
+        String dest = getRoot() + path;
+        ImageUtils.scaleImageByWidth(file, dest, maxWidth);
+        return path;
+    }
 
-			ImageUtils.scaleImageByWidth(temp.getAbsolutePath(), dest, maxWidth);
+    @Override
+    public String storeScale(MultipartFile file, String basePath, int width, int height) throws Exception {
+        validateFile(file);
 
-			path = basePath + "/" + scaleName;
-		} catch (Exception e) {
-			throw e;
-		} finally {
-			if (temp != null) {
-				temp.delete();
-			}
-		}
-		return path;
-	}
+        String path = basePath + FileNameUtils.genPathAndFileName(getExt(file.getOriginalFilename()));
 
-	@Override
-	public String store(MultipartFile file, String basePath) throws IOException {
-		validateFile(file);
+        // 根据临时文件生成略缩图
+        String dest = getRoot() + path;
+        ImageUtils.scale(file, dest, width, height);
+        return path;
+    }
 
-		String root = getRoot();
+    @Override
+    public int[] imageSize(String storePath) {
+        String root = getRoot();
 
-		String path = FileNameUtils.genPathAndFileName(getExt(file.getOriginalFilename()));
+        File dest = new File(root + storePath);
+        int[] ret = new int[2];
 
-		File temp = new File(root + basePath + path);
-		checkDirAndCreate(temp);
-		file.transferTo(temp);
-		return basePath + path;
-	}
+        try {
+            // 读入文件
+            BufferedImage src = ImageIO.read(dest);
+            int w = src.getWidth();
+            int h = src.getHeight();
 
-	@Override
-	public String store(File file, String basePath) throws IOException {
-		String root = getRoot();
+            ret = new int[]{w, h};
 
-		String path = FileNameUtils.genPathAndFileName(getExt(file.getName()));
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
 
-		File dest = new File(root + basePath + path);
-		checkDirAndCreate(dest);
-		FileUtils.copyDirectory(file, dest);
-		return basePath + path;
-	}
+        return ret;
+    }
 
-	@Override
-	public String storeScale(MultipartFile file, String basePath, int maxWidth) throws Exception {
-		validateFile(file);
+    @Override
+    public void deleteFile(String storePath) {
+        File file = new File(getRoot() + storePath);
 
-		String root = getRoot();
+        // 文件存在, 且不是目录
+        if (file.exists() && !file.isDirectory()) {
+            file.delete();
+            log.info("fileRepo delete " + storePath);
+        }
+    }
 
-		String path = FileNameUtils.genPathAndFileName(getExt(file.getOriginalFilename()));
-
-		File temp = new File(root + appContext.getTempDir() + path);
-		checkDirAndCreate(temp);
-
-		try {
-			file.transferTo(temp);
-
-			// 根据临时文件生成略缩图
-			String dest = root + basePath + path;
-			ImageUtils.scaleImageByWidth(temp.getAbsolutePath(), dest, maxWidth);
-
-		} catch (Exception e) {
-			throw e;
-		} finally {
-			temp.delete();
-		}
-		return basePath + path;
-	}
-
-	@Override
-	public String storeScale(MultipartFile file, String basePath, int width, int height) throws Exception {
-		validateFile(file);
-
-		String root = getRoot();
-
-		String path = FileNameUtils.genPathAndFileName(getExt(file.getOriginalFilename()));
-
-		File temp = new File(root + appContext.getTempDir() + path);
-		checkDirAndCreate(temp);
-
-		try {
-			file.transferTo(temp);
-
-			// 根据临时文件生成略缩图
-			String dest = root + basePath + path;
-			ImageUtils.scale(temp.getAbsolutePath(), dest, width, height);
-
-		} catch (Exception e) {
-			throw e;
-		} finally {
-			temp.delete();
-		}
-		return basePath + path;
-	}
-
-	@Override
-	public String storeScale(File file, String basePath, int maxWidth) throws Exception {
-		String root = getRoot();
-		String path = FileNameUtils.genPathAndFileName(getExt(file.getName()));
-
-		String dest = root + basePath + path;
-		ImageUtils.scaleImageByWidth(file.getAbsolutePath(), dest, maxWidth);
-
-		return basePath + path;
-	}
-
-	@Override
-	public String storeScale(File file, String basePath, int width, int height) throws Exception {
-		String root = getRoot();
-		String path = FileNameUtils.genPathAndFileName(getExt(file.getName()));
-
-		String dest = root + basePath + path;
-		ImageUtils.scale(file.getAbsolutePath(), dest, width, height);
-		return basePath + path;
-	}
-
-	@Override
-	public int[] imageSize(String storePath) {
-		String root = getRoot();
-
-		File dest = new File(root + storePath);
-		int[] ret = new int[2];
-
-		try {
-			// 读入文件
-			BufferedImage src = ImageIO.read(dest);
-			int w = src.getWidth();
-			int h = src.getHeight();
-
-			ret = new int[] {w, h};
-
-		} catch (IOException e) {
-			e.printStackTrace();
-		}
-
-		return ret;
-	}
-
-	@Override
-	public void deleteFile(String storePath) {
-		String root = getRoot();
-
-		File file = new File(root + storePath);
-
-		// 文件存在, 且不是目录
-		if (file.exists() && !file.isDirectory()) {
-			file.delete();
-			log.info("fileRepo delete " + storePath);
-		}
-	}
-	
 }

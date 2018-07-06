@@ -22,7 +22,7 @@ $(document).ready(function() {
 	$('a[nav]').each(function(){  
         var $this = $(this);
         if($this[0].href == String(window.location)){  
-            $this.closest('li').addClass("active");  
+            $this.closest('li').addClass("active-menu");
         }  
     });
 
