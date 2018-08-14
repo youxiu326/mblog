@@ -9,7 +9,7 @@
                 <input type="hidden" name="id" value="${view.id}"/>
                 <input type="hidden" name="authorId" value="${view.authorId}"/>
             </#if>
-            <input type="hidden" name="thumbnail" value="${view.thumbnail}"/>
+            <input type="hidden" id="thumbnail" name="thumbnail" value="${view.thumbnail}"/>
 
             <div class="form-group">
                 <input type="text" class="form-control" name="title" maxlength="128" data-required value="${view.title}" placeholder="请输入标题">

@@ -172,12 +172,6 @@
 				<artifactId>core</artifactId>
 				<version>${project.version}</version>
 			</dependency>
-			<dependency>
-				<groupId>com.mtons.mblog</groupId>
-				<artifactId>plugins</artifactId>
-				<version>${project.version}</version>
-			</dependency>
-
 			<!-- shiro -->
 			<dependency>
 				<groupId>org.apache.shiro</groupId>
