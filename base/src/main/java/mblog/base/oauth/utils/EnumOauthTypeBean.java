@@ -3,7 +3,8 @@ package mblog.base.oauth.utils;
 public enum EnumOauthTypeBean {
   TYPE_DOUBAN("豆瓣登录", 3), 
   TYPE_QQ("QQ登录", 2), 
-  TYPE_SINA("微博登录", 1);
+  TYPE_SINA("微博登录", 1),
+  TYPE_GITHUB("github登录", 4);
   
   private String description;
   private int value;

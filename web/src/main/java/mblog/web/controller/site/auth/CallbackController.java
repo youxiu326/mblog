@@ -1,9 +1,6 @@
 package mblog.web.controller.site.auth;
 
-import mblog.base.oauth.APIConfig;
-import mblog.base.oauth.OauthDouban;
-import mblog.base.oauth.OauthQQ;
-import mblog.base.oauth.OauthSina;
+import mblog.base.oauth.*;
 import mblog.base.oauth.utils.OpenOauthBean;
 import mblog.base.oauth.utils.TokenUtil;
 import mblog.base.context.AppContext;
@@ -33,6 +30,8 @@ import org.springframework.web.bind.annotation.RequestMapping;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import java.io.IOException;
+import java.io.UnsupportedEncodingException;
 
 /**
  * 第三方登录回调
@@ -192,6 +191,80 @@ public class CallbackController extends BaseController {
     }
 
     /**
+     * 跳转到github授权页面
+     * @param request
+     * @param response
+     */
+    @RequestMapping("/call_github")
+    public void callGithub(HttpServletRequest request, HttpServletResponse response) {
+        //设置github的相关
+        APIConfig.getInstance().setOpenid_github(appContext.getConfig().get(SiteConfig.GITHUB_CLIENT_ID));
+        APIConfig.getInstance().setOpenkey_github(appContext.getConfig().get(SiteConfig.GITHUB_SECRET_KEY));
+        APIConfig.getInstance().setRedirect_github(appContext.getConfig().get(SiteConfig.SITE_OAUTH_GITHUB));
+
+        try {
+            response.setContentType("text/html;charset=utf-8");
+            String state = TokenUtil.randomState();
+            request.getSession().setAttribute(SESSION_STATE, state);
+            response.sendRedirect(OauthGithub.me().getAuthorizeUrl(state));
+        } catch (UnsupportedEncodingException e) {
+            e.printStackTrace();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+    }
+
+    /**
+     * github回调
+     * @param code
+     * @param state
+     * @param request
+     * @param model
+     * @return
+     */
+    @RequestMapping("/github")
+    public String callback4Github(String code, String state, HttpServletRequest request, ModelMap model) {
+        // -- 类似于预防crsf攻击
+        String session_state = (String) request.getSession().getAttribute(SESSION_STATE);
+        // 取消了授权
+        if (StringUtils.isBlank(state) || StringUtils.isBlank(session_state) || !state.equals(session_state) || StringUtils.isBlank(code)) {
+            throw new MtonsException("缺少必要的参数");
+        }
+        request.getSession().removeAttribute(SESSION_STATE);
+
+        OpenOauthBean openOauthBean = null;
+        try {
+            //通过code获取openid和用户信息
+            openOauthBean = OauthGithub.me().getUserBeanByCode(code);
+        } catch (Exception e) {
+            throw new MtonsException("解析信息时发生错误");
+        }
+
+        OpenOauthVO openOauth = new OpenOauthVO();
+        openOauth.setOauthCode(code);
+        openOauth.setAccessToken(openOauthBean.getAccessToken());
+        openOauth.setExpireIn(openOauthBean.getNickname());
+        //openid
+        openOauth.setOauthUserId(openOauthBean.getOauthUserId());
+        openOauth.setOauthType(openOauthBean.getOauthType());
+        openOauth.setUsername(openOauthBean.getUsername());
+        openOauth.setNickname(openOauthBean.getNickname());
+        openOauth.setAvatar(openOauthBean.getAvatar());
+
+        // 判断是否存在绑定此accessToken的用户
+        OpenOauthVO thirdToken = openOauthService.getOauthByOauthUserId(openOauth.getOauthUserId());
+
+        if (thirdToken == null) {
+            model.put("open", openOauth);
+            return view(Views.OAUTH_REGISTER);
+        }
+        String username = userService.get(thirdToken.getUserId()).getUsername();
+        return login(username, thirdToken.getAccessToken(), request);
+
+
+    }
+
+    /**
      * 跳转到豆瓣授权界面
      * @param request
      * @param response
@@ -261,7 +334,7 @@ public class CallbackController extends BaseController {
     }
 
     /**
-     * 执行第三方绑定
+     * 执行第三方注册绑定
      * @param openOauth
      * @param request
      * @return
