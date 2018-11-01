@@ -2,7 +2,9 @@ package mblog.base.oauth;
 
 import com.alibaba.fastjson.JSON;
 import com.alibaba.fastjson.JSONObject;
+import mblog.base.oauth.utils.EnumOauthTypeBean;
 import mblog.base.oauth.utils.OathConfig;
+import mblog.base.oauth.utils.OpenOauthBean;
 import mblog.base.oauth.utils.TokenUtil;
 import java.io.IOException;
 import java.io.UnsupportedEncodingException;
@@ -53,9 +55,10 @@ public class OauthGithub
     params.put("code", code);
     params.put("client_id", getClientId());
     params.put("client_secret", getClientSecret());
-    params.put("grant_type", "authorization_code");
-    params.put("redirect_uri", getRedirectUri());
-    String token = TokenUtil.getAccessToken(super.doPost("https://github.com/login/oauth/access_token", params));
+//    params.put("grant_type", "authorization_code");
+//    params.put("redirect_uri", getRedirectUri());
+    Map headers = new HashMap();headers.put("Accept", "application/json");
+    String token = TokenUtil.getAccessToken(super.doPost("https://github.com/login/oauth/access_token", params,headers));
     LOGGER.debug(token);
     return token;
   }
@@ -82,5 +85,32 @@ public class OauthGithub
     dataMap.put("access_token", accessToken);
     LOGGER.debug(dataMap);
     return dataMap;
+  }
+
+  public OpenOauthBean getUserBeanByCode(String code)
+          throws Exception
+  {
+    OpenOauthBean openOauthBean = null;
+    JSONObject userInfo = me().getUserInfoByCode(code);
+
+    if (userInfo!=null) {
+      openOauthBean = new OpenOauthBean();
+      String openid = userInfo.getString("node_id");
+      String accessToken = userInfo.getString("access_token");
+      String nickname = userInfo.getString("name");
+      String photoUrl = userInfo.getString("avatar_url");
+
+      openOauthBean.setOauthCode(code);
+      openOauthBean.setAccessToken(accessToken);
+      openOauthBean.setExpireIn("");
+      openOauthBean.setOauthUserId(openid);
+      openOauthBean.setOauthType(EnumOauthTypeBean.TYPE_GITHUB.getValue());
+      openOauthBean.setUsername("GITHUB" + openid.getBytes().hashCode());
+      openOauthBean.setNickname(nickname);
+      openOauthBean.setAvatar(photoUrl);
+    } else {
+      throw new Exception();
+    }
+    return openOauthBean;
   }
 }
