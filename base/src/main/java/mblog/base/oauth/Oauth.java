@@ -22,6 +22,11 @@ public class Oauth
   {
     return HttpKit.post(url, params);
   }
+
+  protected String doPost(String url, Map<String, String> params,Map<String,String> headers) throws IOException, KeyManagementException, NoSuchAlgorithmException, NoSuchProviderException
+  {
+    return HttpKit.post(url, params,headers);
+  }
   
   protected String doGet(String url, Map<String, String> params) throws IOException, KeyManagementException, NoSuchAlgorithmException, NoSuchProviderException
   {

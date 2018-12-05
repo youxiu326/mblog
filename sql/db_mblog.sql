@@ -74,6 +74,10 @@ INSERT INTO `mto_config` VALUES (13, 'qq_app_key', '0', '');
 INSERT INTO `mto_config` VALUES (14, 'site_oauth_weibo', '0', '');
 INSERT INTO `mto_config` VALUES (15, 'weibo_client_id', '0', '');
 INSERT INTO `mto_config` VALUES (16, 'weibo_client_sercret', '0', '');
+INSERT INTO `mto_config` VALUES (24, 'github_client_id', '0', '');
+INSERT INTO `mto_config` VALUES (25, 'github_secret_key', '0', '');
+INSERT INTO `mto_config` VALUES (26, 'site_oauth_github', '0', '');
+
 COMMIT;
 
 -- ----------------------------
