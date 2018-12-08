@@ -10,7 +10,7 @@
     <![endif]-->
     <meta name="baidu-site-verification" content="2nXjznVkpe" />
 
-    <title>${title?default(site_name)}</title>
+    <title>${title?default("youxiu326的个人博客")}</title>
     <meta name="keywords" content="mtons, ${keywords?default(site_keywords)}">
     <meta name="description" content="${description?default(site_description)}">
 

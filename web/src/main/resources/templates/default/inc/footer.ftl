@@ -5,8 +5,10 @@
         </div>
         <div class="footer-col footer-col-copy">
             <ul class="footer-nav hidden-xs">
-                <li class="menu-item"><a href="${base}/about">关于我们</a></li>
-                <li class="menu-item"><a href="${base}/joinus">联系我们</a></li>
+            	<li class="menu-item"><a href="https://github.com/youxiu3226" target="_Blank">GitHub</a></li>
+            	<li class="menu-item"><a href="https://blog.csdn.net/youxiu326" target="_Blank">CSDN</a></li>
+                <li class="menu-item"><a href="${base}/joinus">联系博主</a></li>
+                <li class="menu-item"><a href="${base}/about">开源博客</a></li>
                 <li class="menu-item"><a href="${base}/faqs">常见问题</a></li>
                 <li>
                     <script>
@@ -21,13 +23,8 @@
                 </li>
             </ul>
             <div class="copyright">
-				<span>${site_copyright}. ${site_icp}</span>
+				<!--<span>${site_copyright}. ${site_icp}</span>-->
 			</div>
-        </div>
-        <div class="footer-col footer-col-sns hidden-xs hidden-sm">
-            <div class="footer-sns">
-                <span>Powered By <a href="http://mtons.com/?copyright" target="_blank">Mtons</a></span>
-            </div>
         </div>
     </div>
 </footer>

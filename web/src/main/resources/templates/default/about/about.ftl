@@ -1,6 +1,6 @@
 <#include "/default/utils/ui.ftl"/>
 
-<@layout "关于我们">
+<@layout "开源博客">
 
 <div class="row main">
     <div class="col-xs-12 col-md-9 side-left topics-show">

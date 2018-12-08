@@ -23,9 +23,9 @@ spring:
 
     datasource:
         driver-class-name: com.mysql.jdbc.Driver
-        url: jdbc:mysql://localhost/db_mblog?useSSL=false&characterEncoding=utf8
+        url: jdbc:mysql://39.108.85.204/db_mblog?useSSL=false&characterEncoding=utf8
         username: root
-        password: root
+        password: zz123456.ZZ
 
     jpa:
         database: mysql
@@ -41,12 +41,12 @@ spring:
 
     servlet:
         multipart:
-            max-file-size: 5MB
+            max-file-size: 8MB
 
     mail:
-        host: smtp.mtons.com
-        username: example@mtons.com
-        password: Example2018
+        host: smtp.163.com
+        username: youxiu326@163.com
+        password: zz123456ZZ
         port: 25
         properties:
             mail.smtp.auth: true
@@ -55,5 +55,5 @@ spring:
 site:
     theme: card
     store:
-      root: d:/data/mblog/
+      root: /java/data/mblog/
       size: 2

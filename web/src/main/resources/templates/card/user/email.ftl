@@ -18,7 +18,8 @@
 				<div class="form-group">
 					<label class="control-label col-lg-3" for="email">修改邮箱地址</label>
 					<div class="col-lg-4">
-						<input type="text" class="form-control" name="email" value="${profile.email}" maxlength="64" data-required data-conditional="email" data-description="email" data-describedby="message">
+						<!--<input type="text" class="form-control" name="email" value="${profile.email}" maxlength="64" data-required data-conditional="email" data-description="email" data-describedby="message">-->
+						<input type="text" class="form-control" name="email" value="youxiu326@163.com" maxlength="64" data-required data-conditional="email" data-description="email" data-describedby="message">
 						<p class="help-block">修改后将会重新发送验证邮件.</p>
 					</div>
 				</div>

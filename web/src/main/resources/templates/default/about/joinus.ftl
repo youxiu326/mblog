@@ -1,6 +1,6 @@
 <#include "/default/utils/ui.ftl"/>
 
-<@layout "加入我们">
+<@layout "联系博主">
 
 <div class="row main">
     <div class="col-xs-12 col-md-9 side-left topics-show">
@@ -10,19 +10,14 @@
 
                 <h1 class="panel-title topic-title">加入我们</h1>
 
-                <div class="meta inline-block">
-                    <a class="author" href="#">官方团队</a>
-                </div>
                 <div class="clearfix"></div>
             </div>
 
             <div class="content-body entry-content panel-body ">
                 <div class="markdown-body" id="emojify">
-                    <p><strong>联系我们</strong></p>
-                    <p>友情链接交换、意见反馈、商业合作, 您可以 <a target="_blank" href="http://mail.qq.com/cgi-bin/qm_share?t=qm_mailme&email=AGxhbmdoc3VAZm94bWFpbC5jb20" style="text-decoration:none;"><img src="http://rescdn.qqmail.com/zh_CN/htmledition/images/function/qm_open/ico_mailme_01.png"/></a></p>
-                    <p><strong>加入我们</strong><br/></p>
-                    <p>如果你和我们有一样的梦想、有激情，别犹豫，加入我们的开源事业。</p>
-                    <p>QQ群：378433412 <a target="_blank" href="http://shang.qq.com/wpa/qunwpa?idkey=a26a98f0ba0d5886fe79adac4977b0b42b7ade6f9a10404074d12251ebcca3a8"><img border="0" src="http://pub.idqqimg.com/wpa/images/channel.png" alt="Mtons" title="Mtons"></a></p>
+                    <p><strong>联系我</strong></p>
+                    <p>有问题讨论，可以 <a target="_blank" href="http://mail.qq.com/cgi-bin/qm_share?t=qm_mailme&email=youxiu326@foxmail.com" style="text-decoration:none;"><img src="http://rescdn.qqmail.com/zh_CN/htmledition/images/function/qm_open/ico_mailme_01.png"/></a></p>
+                    <p>QQ群交流，可以<a target="_blank" href="http://shang.qq.com/wpa/qunwpa?idkey=9668ffd1e63fc6eb8704ebc17b8cecbf6cce77481b92c419f58d246cf3a43a0b"><img border="0" src="http://pub.idqqimg.com/wpa/images/channel.png" alt="youxiu326交流群" title="youxiu326交流群"></a></p>
 				</div>
             </div>
             <div class="panel-footer operate">
