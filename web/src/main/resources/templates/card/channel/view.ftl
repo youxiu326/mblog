@@ -1,6 +1,6 @@
 <#include "/default/utils/ui.ftl"/>
 
-<#assign title = view.title + ' - ' + site_name />
+<#assign title = view.title + ' - ' + "blog.youxiu326.com" />
 <#assign keywords = view.keywords?default(site_keywords) />
 <#assign description = view.description?default(site_description) />
 

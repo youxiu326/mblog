@@ -53,7 +53,7 @@ spring:
 
 # site.theme: [default|card]
 site:
-    theme: card
+    theme: default
     store:
       root: /java/data/mblog/
       size: 2
