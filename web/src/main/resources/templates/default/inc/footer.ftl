@@ -9,7 +9,7 @@
             	<li class="menu-item"><a href="https://blog.csdn.net/youxiu326" target="_Blank">CSDN</a></li>
                 <li class="menu-item"><a href="${base}/joinus">联系博主</a></li>
                 <li class="menu-item"><a href="${base}/about">开源博客</a></li>
-                <li class="menu-item"><a href="${base}/faqs">常见问题</a></li>
+                <li class="menu-item"><a href="${base}/faqs">友情链接</a></li>
                 <li>
                     <script>
                         var _hmt = _hmt || [];
